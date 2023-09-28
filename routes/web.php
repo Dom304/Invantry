@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('public.public_loginPage');
+    return view('public.public_signUpPage');
 });
