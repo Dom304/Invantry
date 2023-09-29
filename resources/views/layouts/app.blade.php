@@ -14,8 +14,13 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    <link rel="stylesheet" href={{ asset('css/app.css') }} />
+    <script src="{{ mix('js/manifest.js') }}" defer></script>
+    <script src="{{ mix('js/vendor.js') }}" defer></script>
     <script src={{ asset('js/app.js') }}></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href={{ asset('css/app.css') }} />
+    
 </head>
 <body>
     <div id="app">
