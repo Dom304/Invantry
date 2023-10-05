@@ -21,3 +21,4 @@ Route::get('/home', function() {
 Route::get('/', [AuthManager::class, 'signUp'])->name('signUp');
 Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+
