@@ -3,17 +3,19 @@
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
     <div class="create-acc">CREATE YOUR ACCOUNT</div>
-    <input type="text" class="username-input" placeholder="Username/Email address">
+    <form action="{{route('signUp.post')}}" method="POST">
+        @csrf
+    <input type="text" class="username-input" placeholder="Name" name="name">
     <div class="password-container">
-        <input type="password" id="passwordField" class="password-input" placeholder="Password">
-        <span id="togglePassword" class="password-icon">👁</span>
+        <input type="email" id="emailField" class="password-input" placeholder="Email" name="email">
+
     </div>
     <div class="password-container">
-        <input type="password" id="confirmPasswordField" class="password-input" placeholder="Confirm Password">
-        <span id="toggleConfirmPassword" class="password-icon">👁</span>
+        <input type="password" id="passwordField" class="password-input" placeholder="Password" name="password">
     </div>
     <button class="action-btn continue-btn">Continue</button>
-    <div class="log-in">ALREADY HAVE AN ACCOUNT? <a href="#" class="log-in-link">LOG IN</a></div>
+    </form>
+    <div class="log-in">ALREADY HAVE AN ACCOUNT? <a href="/login" class="log-in-link">LOG IN</a></div>
 </div>
 
 <style>
@@ -151,7 +153,7 @@
     }
 </style>
 
-<script>
+<!-- <script>
     function togglePasswordField(fieldId, iconId) {
         const passwordField = document.getElementById(fieldId);
         const icon = document.getElementById(iconId);
@@ -172,5 +174,5 @@
     document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
         togglePasswordField('confirmPasswordField', 'toggleConfirmPassword');
     });
-</script>
+</script> -->
 

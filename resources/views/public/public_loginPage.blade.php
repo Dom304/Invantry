@@ -3,13 +3,15 @@
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
     <div class="welcome-back">WELCOME BACK</div>
-    <input type="text" class="username-input" placeholder="Username/Email address">
+    <form action="{{route('login')}}" method="POST">
+    @csrf
+    <input type="email" class="username-input" placeholder="Email address" name="email">
     <div class="password-container">
-        <input type="password" id="passwordField" class="password-input" placeholder="Password">
-        <span id="togglePassword" class="password-icon">👁</span>
+        <input type="password" id="passwordField" class="password-input" placeholder="Password" name="password">
     </div>
     <button class="action-btn continue-btn">Continue</button>
-    <div class="sign-up">DON'T HAVE AN ACCOUNT? <a href="#" class="sign-up-link">SIGN UP</a></div>
+    </form>
+    <div class="sign-up">DON'T HAVE AN ACCOUNT? <a href="/" class="sign-up-link">SIGN UP</a></div>
 </div>
 
 <style>
