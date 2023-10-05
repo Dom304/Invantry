@@ -149,3 +149,118 @@ $font-path: 'fonts'; // Define base font path as a variable
 .password-icon.active {
     color: gray;
 }
+
+  // ====================== //
+ //   HOMEPAGE STYLING     //
+// ====================== //
+
+/* TOOLBAR */
+.top-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.website-name {
+    font-weight: bold;
+}
+
+.search-container {
+    flex-grow: 2;
+    padding: 0 1rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.cart-container {
+    display: flex;
+    align-items: center;
+}
+
+.cart-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* Left Window */
+.left-window {
+    width: 20%;
+    height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
+    overflow-y: scroll;
+    padding: 1rem;
+    border-right: 1px solid #ccc;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.stores-btn,
+.playlist-btn {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.playlist-search-bar {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Middle Window */
+.middle-window {
+    width: 60%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    padding: 1rem;
+    border-right: 1px solid #ccc;
+}
+
+.store {
+    margin-bottom: 2rem;
+}
+
+.store-name {
+    font-weight: bold;
+}
+
+/* Right Window */
+.right-window {
+    width: 20%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    padding: 1rem;
+}
