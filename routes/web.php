@@ -13,11 +13,17 @@ use App\Http\Controllers\AuthManager;
 |
 */
 
-Route::get('/login', [AuthManager::class, 'login'])->name('login');
-Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
-Route::get('/home', function() {
+// Uncomment this after testing is done
+// Route::get('/login', [AuthManager::class, 'login'])->name('login');
+// Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
+Route::get('/home', function () {
     return view('welcome');
 })->name('home');
 Route::get('/', [AuthManager::class, 'signUp'])->name('signUp');
 Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+
+// Testing purposes only
+Route::get('/login', function () {
+    return view('public/test');
+})->name('login');
