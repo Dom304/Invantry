@@ -12040,7 +12040,7 @@ textarea.form-control-lg {
 }
 
 .sign-up-link {
-  color: #007BFF;
+  color: #007bff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -12050,7 +12050,7 @@ textarea.form-control-lg {
 }
 
 .action-btn {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 16px 20px;
@@ -12074,7 +12074,8 @@ textarea.form-control-lg {
   margin-top: 25px;
 }
 
-.username-input, .password-input {
+.username-input,
+.password-input {
   padding: 20px 20px;
   border-radius: 4px;
   border: 1px solid #ddd;
@@ -12094,7 +12095,8 @@ textarea.form-control-lg {
   color: #aaa;
 }
 
-.username-input::placeholder, .password-input::placeholder {
+.username-input::placeholder,
+.password-input::placeholder {
   color: #aaa;
 }
 
@@ -12162,9 +12164,15 @@ textarea.form-control-lg {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   cursor: pointer;
+}
+
+.page-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /* Left Window */
@@ -12173,6 +12181,7 @@ textarea.form-control-lg {
   height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
   overflow-y: scroll;
   padding: 1rem;
+  padding-top: 31px;
   border-right: 1px solid #ccc;
 }
 
@@ -12188,9 +12197,13 @@ textarea.form-control-lg {
   padding: 0.5rem;
   margin-bottom: 1rem;
   border: none;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   cursor: pointer;
+}
+
+#stores-user-btn {
+  margin-bottom: 5rem;
 }
 
 .playlist-search-bar {
@@ -12201,20 +12214,42 @@ textarea.form-control-lg {
   border: 1px solid #ccc;
 }
 
+#playlist-search-bar-input {
+  margin-bottom: 5rem;
+}
+
 /* Middle Window */
 .middle-window {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   width: 60%;
   height: calc(100vh - 4rem);
   overflow-y: scroll;
   padding: 1rem;
   border-right: 1px solid #ccc;
 }
-
-.store {
-  margin-bottom: 2rem;
+.middle-window a {
+  text-decoration: none;
+  color: black;
 }
 
-.store-name {
+.store {
+  width: calc(50% - 1rem);
+  height: 115px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.store:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.store .store-name {
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
