@@ -16,6 +16,9 @@ use App\Http\Controllers\AuthManager;
 Route::get('/', function () {
     return view('user.user_viewStoresPage');
 });
+
+//Remember to uncomment the code below
+
 /*
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
