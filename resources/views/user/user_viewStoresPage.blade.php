@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="app">
+        <homepage></homepage> <!-- This is your Vue component -->
+    </div>
     
 <div class="top-toolbar">
     <div class="logo-container">
@@ -191,3 +194,5 @@
 </div>
 
 @endsection
+
+<script src="{{ mix('js/app.js') }}"></script> <!-- Make sure this points to your compiled app.js -->
