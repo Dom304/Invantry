@@ -5,18 +5,7 @@
         <homepage></homepage> <!-- This is your Vue component -->
     </div>
     
-<div class="top-toolbar">
-    <div class="logo-container">
-        <img src="{{ asset('images/Button_backpack_logo.png') }}" alt="Website Logo" class="logo">
-        <span class="website-name">Invantry</span>
-    </div>
-    <div class="search-container">
-        <input type="text" placeholder="Search..." class="search-bar">
-    </div>
-    <div class="cart-container">
-        <button class="cart-btn">Cart</button>
-    </div>
-</div>
+
 
 <div class="page-content">
         
