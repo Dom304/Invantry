@@ -214,7 +214,7 @@ $font-path: "fonts"; // Define base font path as a variable
 
 /* Left Window */
 .left-window {
-    width: 20%;
+    width: 273px;
     height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
     overflow-y: scroll;
     padding: 1rem;
@@ -222,38 +222,6 @@ $font-path: "fonts"; // Define base font path as a variable
     border-right: 1px solid #ccc;
 }
 
-.username {
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.stores-btn,
-.playlist-btn {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-#stores-user-btn {
-    margin-bottom: 5rem;
-}
-
-.playlist-search-bar {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-#playlist-search-bar-input {
-    margin-bottom: 5rem;
-}
 
 /* Middle Window */
 .middle-window {
@@ -282,7 +250,7 @@ $font-path: "fonts"; // Define base font path as a variable
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
         transform: translateY(-0.25rem);
