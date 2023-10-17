@@ -16832,10 +16832,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    //METHODS USED BY HEADER
     onCartClick: function onCartClick() {
       // Define what happens when the cart is clicked
       console.log('Cart clicked!'); // Placeholder action
-    }
+    } // METHODS USED BY SIDE WINDOW
   }
 });
 
@@ -16952,13 +16953,14 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   }, null, -1 /* HOISTED */);
 });
 var _hoisted_7 = [_hoisted_6];
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"left-window\" data-v-7f033e59><div class=\"user-info\" data-v-7f033e59><span class=\"username\" data-v-7f033e59>USERNAME</span></div><button class=\"stores-btn\" id=\"stores-user-btn\" data-v-7f033e59>Stores</button><div class=\"playlist-search-container\" data-v-7f033e59><input type=\"text\" placeholder=\"Search Collections...\" class=\"playlist-search-bar\" id=\"playlist-search-bar-input\" data-v-7f033e59></div><button class=\"playlist-btn\" data-v-7f033e59>Going Gym</button></div>", 1);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" HEADER / TOP TOOLBAR CONTENT "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "cart-button",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.onCartClick && $options.onCartClick.apply($options, arguments);
     })
-  }, _hoisted_7)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Other homepage content goes here ")]);
+  }, _hoisted_7)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" SIDE WINDOW CONTENT "), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Other homepage content goes here ")]);
 }
 
 /***/ }),
@@ -19084,7 +19086,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-7f033e59] {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 10px 30px;\n    background-color: #fff;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n}\n.logo[data-v-7f033e59] {\n    max-height: 30px; \n    width: auto;\n    margin-right: 40px;\n}\n.app-name[data-v-7f033e59] {\n    margin-top: 10px; \n    margin-right: 40px; \n    font-size: 1.5em;\n}\n.search-container[data-v-7f033e59] {\n    flex-grow: 2; /* Lets search container to take up more space */\n    display: flex;\n    align-items: center;\n}\n.search-input[data-v-7f033e59] {\n    width: 100%;\n    padding: 10px;\n    border: 1px solid #ccc;\n}\n.cart-container[data-v-7f033e59] {\n    margin-left: 20px;\n}\n.cart-button[data-v-7f033e59] {\n    background-color: transparent;\n    border: none;\n    cursor: pointer;\n    padding: 5px;\n}\n.cart-button img[data-v-7f033e59] {\n    width: 30px; \n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n/*TOP TOOLBAR*/\n.header[data-v-7f033e59] {\n    display: flex;\n    width: auto;\n    justify-content: space-between;\n    align-items: center;\n    padding: 10px 30px;\n    background-color: #fff;\n    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);\n}\n.logo[data-v-7f033e59] {\n    max-height: 30px; \n    width: auto;\n    margin-right: 30px;\n}\n.app-name[data-v-7f033e59] {\n    margin-top: 10px; \n    margin-right: 60px; \n    font-size: 1.5em;\n}\n.search-container[data-v-7f033e59] {\n    flex-grow: 2; /* Lets search container to take up more space */\n    margin-right: 220px;\n    display: flex;\n    align-items: center;\n}\n.search-input[data-v-7f033e59] {\n    width: 100%;\n    padding: 10px;\n    border: 1px solid #ccc;\n}\n.cart-container[data-v-7f033e59] {\n    margin-left: 20px;\n}\n.cart-button[data-v-7f033e59] {\n    background-color: transparent;\n    border: none;\n    cursor: pointer;\n    padding: 5px;\n}\n.cart-button img[data-v-7f033e59] {\n    width: 30px; \n    height: auto;\n}\n\n/*SIDE WINDOW*/\n.left-window[data-v-7f033e59] {\n    margin-top: 67px;\n    width: 273px; /* Adjust width as needed */\n    background-color: #fff; /* Adjust color as needed */\n    padding: 20px;\n    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);\n    height: 100vh; /* Makes it full height */\n    overflow-y: auto; /* Allows scrolling */\n    position: fixed;/*  Keeps it in place */\n    top: 0;\n    left: 0;\n    z-index: 1000; /* Adjust as needed to ensure it's above other content */\n}\n\n/* Additional styles for children elements if needed */\n.left-window .user-info[data-v-7f033e59] {\n    display: flex; /* Establishes a flex context for its children */\n    justify-content: center; /* Centers children horizontally */\n    align-items: center; /* Centers children vertically */\n    height: 50px; /* Give it a height, or it will be as tall as its content */\n    margin-bottom: 20px; /* Adjust as needed */\n}\n.left-window .username[data-v-7f033e59] {\n    font-size: 1.2em; /* Adjust as needed */\n    color: #333; /* Adjust color as needed */\n}\n.left-window button[data-v-7f033e59] {\n    width: 100%;\n    padding: 10px;\n    margin-bottom: 10px; /* Adjust as needed */\n    background-color: #333; /* Adjust color as needed */\n    color: white; /* Adjust color as needed */\n    border: none;\n    cursor: pointer;\n    text-align: left;\n}\n.left-window .playlist-search-container[data-v-7f033e59] {\n    margin-bottom: 20px; /* Adjust as needed */\n}\n.left-window .playlist-search-bar[data-v-7f033e59] {\n    width: 100%;\n    padding: 10px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
