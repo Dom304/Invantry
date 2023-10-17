@@ -18,6 +18,10 @@
         <!-- SIDE WINDOW CONTENT -->
         <div class="left-window">
           <div class="user-info">
+            <div class="user-img">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            
               <span class="username">USERNAME</span>
           </div>
           <button class="stores-btn" id="stores-user-btn">Stores</button>
