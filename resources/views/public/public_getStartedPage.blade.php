@@ -26,20 +26,25 @@
         font-size: 2em;
         font-weight: bold;
         margin-top: -60px;
+        font-family: 'Recharge', Arial, sans-serif;
     }
 
     .description {
         text-align: center;
         font-size: .5em;
         margin-top: 10px;
+        color: gray;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
     }
 
     .get-started {
         text-align: center;
-        font-size: 1em;
+        font-size: .85em;
         font-weight: bold;
         margin-top: 60px;
-        cursor: default; 
+        cursor: default;
+        color: gray;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
     }
 
     .action-btn {
