@@ -22431,7 +22431,7 @@ readers do not read off random characters that represent icons */
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 1.2em;
-  color: darkgray;
+  background-color: darkgrey;
 }
 
 .password-icon.active {

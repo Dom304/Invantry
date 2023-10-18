@@ -99,10 +99,25 @@ export default {
 
 .left-window .user-info {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 50px;
   margin-bottom: 20px;
+}
+.user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+
+  i {
+    font-size: 30px;
+    color: white;
+  }
 }
 
 .left-window .username {
