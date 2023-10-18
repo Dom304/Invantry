@@ -52,4 +52,14 @@ class AuthManager extends Controller
         Auth::logout();
         return redirect(route('login'));
     }
+    
+    function authenticate_role() {
+        $userRole = auth()->user()->user_role;
+
+        if ($userRole === User::ROLE_ADMIN) {
+        } elseif ($userRole === User::ROLE_MODERATOR) {
+        } elseif ($userRole === User::ROLE_MANAGER) {
+        } else {
+        }
+    }
 }
