@@ -14,6 +14,13 @@ use App\Http\Controllers\ItemController;
 |
 */
 
+Route::get('/', function () {
+    return view('user.user_viewStoresPage');
+});
+
+//Remember to uncomment the code below
+
+/*
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 Route::get('/home', function () {
@@ -23,4 +30,6 @@ Route::post('/home', [ItemController::class, 'insertItem'])->name('insert.post')
 Route::get('/', [AuthManager::class, 'signUp'])->name('signUp');
 Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+*/
+
 
