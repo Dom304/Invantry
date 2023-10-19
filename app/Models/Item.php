@@ -23,5 +23,10 @@ class Item extends Model
     {
         return $this->belongsTo(Store::class, 'store_id');
     }
+
+    public function collections()
+{
+    return $this->belongsToMany(Collection::class, 'collection_items', 'item_id', 'collection_id');
+}
 }
 

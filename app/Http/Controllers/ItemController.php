@@ -1,20 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Store;
+use App\Models\Collection;
 
 class ItemController extends Controller
 {
     public function index($storeName)
     {
+    $user = Auth::user();
     $store = Store::where('store_name', $storeName)->firstOrFail();
     $items = Item::where('store_id', $store->id)->get();
-
-    return view('user.user_storePage', compact('store','items'));
+    $collections = $user->collections;
+    return view('user.user_storePage', compact('store','items', 'collections'));
     }
 
     public function insertItem(Request $request)
