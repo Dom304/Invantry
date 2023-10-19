@@ -37,20 +37,6 @@
       >
         Users (mod)
       </button>
-      <button 
-        class="menu-btn" 
-        :class="{ active: activeButton === 'usersAdmin' }" 
-        @click="setActive('usersAdmin')"
-      >
-        Users (admin)
-      </button>
-      <button 
-        class="menu-btn" 
-        :class="{ active: activeButton === 'allStores' }" 
-        @click="setActive('allStores')"
-      >
-        All Stores (admin)
-      </button>
   
       <div class="collection-search-container">
         <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input">

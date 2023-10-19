@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header">
+<div class="admin-header">
     <div class="left-section-header">
       <div class="Invantry-logo">   
         <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
@@ -12,17 +12,17 @@
     <div class="right-section-header">
       <div class="user-name"> Hi, admin_name.</div>
     </div>
-  </div>
+</div>
 
-    <div class="page-content">
-        <div class="left-window">
-            <button>Button 1</button>
-            <button>Button 2</button>
-            <button>Button 3</button>
-        </div>
+<div class="admin-page-content">
+    <div class="left-window-admin-dashboard">
+        <admin-left-window></admin-left-window>
+     </div>
     
-        <div class="middle-window">
-            <!-- Main content goes here -->
-        </div>
+    <div class="right-window-admin-dashboard">
+        <admin-users-window></admin-main-window>
+        <admin-stores-window></admin-stores-window>
     </div>
+</div>
+
 @endsection

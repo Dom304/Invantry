@@ -22296,13 +22296,6 @@ readers do not read off random characters that represent icons */
   content: "\f3f6";
 }
 
-.testing-sass {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border: 2px solid #333;
-  color: #333;
-}
-
 @font-face {
   font-family: "Recharge";
   src: url("/fonts/recharge bd.otf?921982bb9dce7941838fe0fe93ddd9bf") format("opentype");
@@ -22520,6 +22513,10 @@ readers do not read off random characters that represent icons */
   color: black;
 }
 
+.middle-window-admin-dashboard {
+  display: flex;
+}
+
 .store-card {
   display: flex;
   align-items: center;
@@ -22677,4 +22674,33 @@ readers do not read off random characters that represent icons */
 .right-section-header {
   display: flex;
   align-items: center;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.admin-page-content {
+  display: flex;
+  width: 100%;
+}
+
+.left-window-admin-dashboard {
+  width: 15%;
+  height: calc(100vh - 4rem);
+  padding: 1rem;
+  padding-top: 1rem;
+  padding-top: 31px;
+  border-right: 1px solid #ccc;
+}
+
+.right-window-admin-dashboard {
+  width: 100%;
+  margin: 30px 0 0 30px;
+  height: calc(100vh - 4rem);
 }

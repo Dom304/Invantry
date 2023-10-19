@@ -13,12 +13,7 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
-.testing-sass {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border: 2px solid #333;
-    color: #333;
-}
+$dark-grey: #2a2a2b;
 
 // ====================== //
 //   LOGIN PAGE STYLING   //
@@ -245,6 +240,10 @@ $font-path: "fonts"; // Define base font path as a variable
     }
 }
 
+.middle-window-admin-dashboard {
+    display: flex;
+}
+
 .store-card {
     display: flex;
     align-items: center;
@@ -412,4 +411,36 @@ $font-path: "fonts"; // Define base font path as a variable
 .right-section-header {
     display: flex;
     align-items: center;
+}
+
+// ============================= //
+//   Admin Dashboard Styling     //
+// ============================= //
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.admin-page-content {
+    display: flex;
+    width: 100%;
+}
+
+.left-window-admin-dashboard {
+    width: 15%;
+    height: calc(100vh - 4rem);
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-top: 31px;
+    border-right: 1px solid #ccc;
+}
+
+.right-window-admin-dashboard {
+    width: 100%;
+    margin: 30px 0 0 30px;
+    height: calc(100vh - 4rem);
 }
