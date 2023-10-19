@@ -6,7 +6,7 @@ import Homepage from './components/Homepage.vue'; // path to Homepage.vue
 import adminLeftWindowComponent from './components/adminLeftWindow.vue';
 import AdminStoresWindow from './components/AdminStoresWindow.vue';
 import AdminUsersWindow from './components/AdminUsersWindow.vue';
-import { AdminDashboardEventBus } from './AdminDashboardEventBus.js';
+// import { AdminDashboardEventBus } from './AdminDashboardEventBus.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = createApp({});

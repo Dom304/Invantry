@@ -17342,7 +17342,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_adminLeftWindow_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/adminLeftWindow.vue */ "./resources/js/components/adminLeftWindow.vue");
 /* harmony import */ var _components_AdminStoresWindow_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AdminStoresWindow.vue */ "./resources/js/components/AdminStoresWindow.vue");
 /* harmony import */ var _components_AdminUsersWindow_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/AdminUsersWindow.vue */ "./resources/js/components/AdminUsersWindow.vue");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './AdminDashboardEventBus.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -17351,6 +17350,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
 
 
 
+// import { AdminDashboardEventBus } from './AdminDashboardEventBus.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
