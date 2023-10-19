@@ -14,7 +14,7 @@ use App\Http\Controllers\AuthManager;
 */
 
 Route::get('/', function () {
-    return view('user.user_viewStoresPage');
+    return view('user.user_viewCartPage');
 });
 
 //Remember to uncomment the code below
