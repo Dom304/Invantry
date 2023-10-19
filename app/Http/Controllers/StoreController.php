@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Store;
+use App\Models\Collection;
+
 
 class StoreController extends Controller
 {
+
+    public function index()
+    {
+    $user = Auth::user();
+    $collection = Collection::all();
+    $stores = Store::all();
+
+    return view('user.user_viewStoresPage', compact('stores', 'collections', 'user'));
+    }
+
     public function createStore(Request $request)
     {
         $request->validate([

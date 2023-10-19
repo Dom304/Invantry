@@ -9,13 +9,15 @@ class Collection extends Model
 {
     use HasFactory;
 
+    protected $table = 'collections'; 
+
     protected $fillable = [
         'user_id',
         'collection_name',
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsToMany(User::class);
     }
 }

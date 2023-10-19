@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Store;
 
 class ItemController extends Controller
 {
+    public function index($storeName)
+    {
+    $store = Store::where('store_name', $storeName)->firstOrFail();
+    $items = Item::where('store_id', $store->id)->get();
+
+    return view('user.user_storePage', compact('store','items'));
+    }
+
     public function insertItem(Request $request)
     {
         $request->validate([
