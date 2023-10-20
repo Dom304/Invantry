@@ -1,10 +1,11 @@
-
 @extends('layouts.app')
 
 @section('content')
     <div id="app">
         <homepage></homepage> <!-- This is your Vue component -->
     </div>
+    
+
 
 <div class="page-content">
         
@@ -19,6 +20,7 @@
         @foreach($collections as $col)
         <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
         @endforeach
+        
     </div>
 
     <div class="middle-window">
@@ -42,6 +44,7 @@
         <!-- Content will be dynamically populated or can remain empty -->
     </div>
 
+</div>
 </div>
 
 @endsection
