@@ -15,7 +15,9 @@
         <div class="playlist-search-container">
             <input type="text" placeholder="Search Playlists..." class="playlist-search-bar" id="playlist-search-bar-input">
         </div>
-        <button class="playlist-btn">Going Gym</button>
+        @foreach($collections as $col)
+        <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
+        @endforeach
     </div>
 
     <div class="middle-window">
@@ -28,7 +30,7 @@
             <div class="store-info">
                 <span class="store-name">{{ $item->item_name }}</span>
                 <span class="store-subtext">{{ $item->item_description }}</span>
-                <span class="store-subtext">{{ $item->item_price }}</span>
+                <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             </div>
         </a>
         @endforeach

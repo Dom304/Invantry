@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Collection;
+use App\Models\User;
 
 
 class StoreController extends Controller
@@ -14,8 +15,8 @@ class StoreController extends Controller
     public function index()
     {
     $user = Auth::user();
-    $collection = Collection::all();
     $stores = Store::all();
+    $collections = $user->collections;
 
     return view('user.user_viewStoresPage', compact('stores', 'collections', 'user'));
     }
