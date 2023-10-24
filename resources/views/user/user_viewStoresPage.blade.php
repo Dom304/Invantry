@@ -21,7 +21,7 @@
         <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
         @endforeach
         
-    </div>
+    </div> 
 
     <div class="middle-window">
     @foreach($stores as $store)
@@ -30,10 +30,12 @@
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
+            
             <div class="store-info">
                 <span class="store-name">{{ $store->store_name }}</span>
                 <span class="store-subtext">{{ $store->store_description }}</span>
             </div>
+            
         </a>
         @endforeach
     </div>

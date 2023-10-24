@@ -12,7 +12,7 @@
         :class="{ active: activeButton === 'stores' }" 
         @click="setActive('stores')"
       >
-        Stores
+        Stores (buyer)
       </button>
   
       <!-- New Buttons -->
