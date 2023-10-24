@@ -14,7 +14,7 @@ class StoreController extends Controller
     public function index()
     {
     $user = Auth::user();
-    $collection = Collection::all();
+    $collections = Collection::all();
     $stores = Store::all();
 
     return view('user.user_viewStoresPage', compact('stores', 'collections', 'user'));
