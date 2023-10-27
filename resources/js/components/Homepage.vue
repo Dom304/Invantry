@@ -15,7 +15,7 @@ export default {
   name: 'Homepage',
   components: {
     AppHeader,
-    //SideWindow,
+    SideWindow,
   },
   methods: {
     handleCartClicked() {
