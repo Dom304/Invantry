@@ -16920,13 +16920,24 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SideWindow',
   data: function data() {
     return {
-      activeButton: '' // Keeps track of the currently active button
+      activeButton: '',
+      // Keeps track of the currently active button
+      collections: []
     };
+  },
+  mounted: function mounted() {
+    this.fetchCollections(); // We're telling our magic to fetch the collections!
   },
 
   methods: {
     setActive: function setActive(buttonName) {
       this.activeButton = buttonName; // Sets the active button based on the clicked button
+    },
+    fetchCollections: function fetchCollections() {
+      var _this = this;
+      axios.get('/api/all-collections-for-website').then(function (response) {
+        _this.collections = response.data; // We're putting our collections into the magic bag!
+      });
     }
   }
 });
@@ -17150,7 +17161,7 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
     id: "collection-search-bar-input"
   })], -1 /* HOISTED */);
 });
-
+var _hoisted_4 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
@@ -17194,14 +17205,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.setActive('allStores');
     })
-  }, "All Stores (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Collection Search "), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
-      active: $data.activeButton === 'goingGym'
-    }]),
-    onClick: _cache[6] || (_cache[6] = function ($event) {
-      return $options.setActive('goingGym');
-    })
-  }, "Going Gym", 2 /* CLASS */)]);
+  }, "All Stores (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Collection Search "), _hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.collections, function (col) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: col.id,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
+        active: $data.activeButton === col.collection_name
+      }]),
+      onClick: function onClick($event) {
+        return $options.setActive(col.collection_name);
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.collection_name), 11 /* TEXT, CLASS, PROPS */, _hoisted_4);
+  }), 128 /* KEYED_FRAGMENT */))]);
 }
 
 /***/ }),
