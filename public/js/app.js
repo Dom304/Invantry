@@ -16939,6 +16939,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/all-collections-for-website').then(function (response) {
         _this.collections = response.data; // We're putting our collections into the magic bag!
+
+        console.log(response.data);
       });
     }
   }
