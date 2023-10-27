@@ -22,7 +22,15 @@
       <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input">
     </div>
     
-    <button class="menu-btn" :class="{ active: activeButton === 'goingGym' }" @click="setActive('goingGym')">Going Gym</button>
+
+    <button 
+      v-for="col in collections" 
+      :key="col.id"
+      class="menu-btn" 
+      :class="{ active: activeButton === col.collection_name }" 
+      @click="setActive(col.collection_name)">
+      {{ col.collection_name }}
+    </button>
 
   </div>
 </template>
@@ -33,11 +41,21 @@ export default {
   data() {
     return {
       activeButton: '', // Keeps track of the currently active button
+      collections: [],
     };
+  },
+  mounted() {
+    this.fetchCollections();  // We're telling our magic to fetch the collections!
   },
   methods: {
     setActive(buttonName) {
       this.activeButton = buttonName; // Sets the active button based on the clicked button
+    },
+    fetchCollections() {
+      axios.get('/api/all-collections-for-website')
+        .then(response => {
+          this.collections = response.data; // We're putting our collections into the magic bag!
+        });
     },
   },
 }
