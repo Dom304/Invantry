@@ -16916,6 +16916,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SideWindow',
   data: function data() {
@@ -16935,7 +16937,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchCollections: function fetchCollections() {
       var _this = this;
-      axios.get('/api/all-collections-for-website').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/all-collections-for-website').then(function (response) {
         _this.collections = response.data; // We're putting our collections into the magic bag!
       });
     }
