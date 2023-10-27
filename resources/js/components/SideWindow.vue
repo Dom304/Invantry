@@ -57,6 +57,9 @@ export default {
       axios.get('/api/all-collections-for-website')
         .then(response => {
           this.collections = response.data; // We're putting our collections into the magic bag!
+          
+          console.log(response.data);
+
         });
     },
   },
