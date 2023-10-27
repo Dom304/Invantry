@@ -16854,10 +16854,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Homepage',
   components: {
-    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-    //SideWindow,
+    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    SideWindow: _SideWindow_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-
   methods: {
     handleCartClicked: function handleCartClicked() {
       console.log('Cart clicked!'); // Placeholder action
@@ -17153,56 +17152,56 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
 });
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'stores'
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.setActive('stores');
     })
-  }, " Stores (buyer) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Stores (buyer)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'myStore'
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.setActive('myStore');
     })
-  }, " My Store (manager) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "My Store (manager)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'requests'
     }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.setActive('requests');
     })
-  }, " Requests (mod) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Requests (mod)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'usersMod'
     }]),
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.setActive('usersMod');
     })
-  }, " Users (mod) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Users (mod)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'usersAdmin'
     }]),
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.setActive('usersAdmin');
     })
-  }, " Users (admin) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Users (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'allStores'
     }]),
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.setActive('allStores');
     })
-  }, " All Stores (admin) ", 2 /* CLASS */), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "All Stores (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Collection Search "), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'goingGym'
     }]),
     onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.setActive('goingGym');
     })
-  }, " Going Gym ", 2 /* CLASS */)]);
+  }, "Going Gym", 2 /* CLASS */)]);
 }
 
 /***/ }),
@@ -19286,7 +19285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/*SIDE WINDOW*/\n.left-window[data-v-7b764952] {\n  margin-top: 67px;\n  width: 273px;\n  background-color: #fff;\n  padding: 20px;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);\n  height: 100vh;\n  overflow-y: auto;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}\n.left-window .user-info[data-v-7b764952] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 50px;\n  margin-bottom: 20px;\n}\n.left-window .username[data-v-7b764952] {\n  font-size: 1.2em;\n  color: #333;\n}\n.left-window button.menu-btn[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n  margin-bottom: 10px;\n  background-color: rgb(233, 233, 233); /* default background color */\n  color: black; /* default text color */\n  border: none;\n  cursor: pointer;\n  text-align: left;\n  font-weight: bold; /* make text bold */\n}\n.left-window button.menu-btn.active[data-v-7b764952] {\n  background-color: #333; /* active background color */\n  color: white; /* active text color */\n}\n.left-window .collection-search-container[data-v-7b764952] {\n  margin-bottom: 20px;\n}\n.left-window .collection-search-bar[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* Side Window Styling */\n.left-window[data-v-7b764952] {\n  margin-top: 67px;\n  width: 273px;\n  background-color: #fff;\n  padding: 20px;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);\n  height: 100vh;\n  overflow-y: auto;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}\n.left-window .user-info[data-v-7b764952] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 50px;\n  margin-bottom: 20px;\n}\n.left-window .username[data-v-7b764952] {\n  font-size: 1.2em;\n  color: #333;\n}\n.left-window button.menu-btn[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n  margin-bottom: 10px;\n  background-color: rgb(233, 233, 233);\n  color: black;\n  border: none;\n  cursor: pointer;\n  text-align: left;\n  font-weight: bold;\n}\n.left-window button.menu-btn.active[data-v-7b764952] {\n  background-color: #333;\n  color: white;\n}\n.left-window .collection-search-container[data-v-7b764952] {\n  margin-bottom: 20px;\n}\n.left-window .collection-search-bar[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
