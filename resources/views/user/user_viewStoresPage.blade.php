@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="app">
+    {{--<div id="app">
         <homepage></homepage> <!-- This is your Vue component -->
-    </div>
+    </div>--}}
     
 
 
@@ -11,12 +11,19 @@
         
     <div class="left-window">
         <div class="user-info">
+            <div class="user-img">
+                <i class="fa-solid fa-user"></i>
+            </div>
             <span class="username">Hello {{ $user->name }}!</span>
         </div>
-        <button class="stores-btn" id="stores-user-btn">Stores</button>
-        <div class="playlist-search-container">
-            <input type="text" placeholder="Search Playlists..." class="playlist-search-bar" id="playlist-search-bar-input">
+        <button class="menu-btn" id="stores-user-btn">Stores (user)</button>
+        
+        <!-- Collection Search -->
+        <div class="collection-search-container">
+            <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input">
         </div>
+
+        <!-- Fetch Users collections -->
         @foreach($collections as $col)
         <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
         @endforeach

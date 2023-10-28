@@ -7,16 +7,26 @@
 
 <div class="page-content">
         
-    <div class="left-window">
+<div class="left-window">
         <div class="user-info">
-            <span class="username">Username</span>
+            <div class="user-img">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <span class="username">Hello {{ $user->name }}!</span>
         </div>
-        <button class="stores-btn" id="stores-user-btn">Stores</button>
-        <div class="playlist-search-container">
-            <input type="text" placeholder="Search Playlists..." class="playlist-search-bar" id="playlist-search-bar-input">
+        <button class="menu-btn" id="stores-user-btn">Stores (user)</button>
+        
+        <!-- Collection Search -->
+        <div class="collection-search-container">
+            <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input">
         </div>
-        <button class="playlist-btn">Going Gym</button>
-    </div>
+
+        <!-- Fetch Users collections -->
+        @foreach($collections as $col)
+        <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
+        @endforeach
+        
+    </div> 
 
     <div class="middle-window">
     @foreach($items as $item)

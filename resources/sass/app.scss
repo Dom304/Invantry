@@ -220,13 +220,20 @@ $font-path: "fonts"; // Define base font path as a variable
 
 /* Left Window */
 .left-window {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // horizontally centered
+    justify-content: center; // vertically centered
     width: 273px;
-    height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
+    height: calc(100vh - 4rem); // subtracting the height of the top toolbar
     overflow-y: scroll;
     padding: 1rem;
     padding-top: 31px;
     border-right: 1px solid #ccc;
 }
+
+
+
 
 
 /* Middle Window */

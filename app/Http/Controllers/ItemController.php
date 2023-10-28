@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Store;
+use App\Models\Collection;
 
 class ItemController extends Controller
 {
@@ -13,8 +15,11 @@ class ItemController extends Controller
     {
     $store = Store::where('store_name', $storeName)->firstOrFail();
     $items = Item::where('store_id', $store->id)->get();
+    $user = Auth::user();
+    $collections = Collection::all();
+    $stores = Store::all();
 
-    return view('user.user_storePage', compact('store','items'));
+    return view('user.user_storePage', compact('store','items', 'stores', 'collections', 'user'));
     }
 
     public function insertItem(Request $request)
