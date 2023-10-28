@@ -16854,9 +16854,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Homepage',
   components: {
-    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SideWindow: _SideWindow_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    //SideWindow,
   },
+
   methods: {
     handleCartClicked: function handleCartClicked() {
       console.log('Cart clicked!'); // Placeholder action
