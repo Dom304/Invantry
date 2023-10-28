@@ -18,7 +18,7 @@ use App\Http\Controllers\CollectionItemController;
 
 /*
 Route::get('/', function () {
-    return view('user.user_viewCartPage');
+    return view('user.user_viewStoresPage');
 });
 */
 
