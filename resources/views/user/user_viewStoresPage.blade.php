@@ -3,6 +3,8 @@
 @section('content')
 
 <script>
+
+    //For filtering collections in left window
     function filterCollections() {
         const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
         const collectionItems = document.querySelectorAll('.collection-btn');
@@ -16,13 +18,30 @@
             }
         });
     }
+
+    //For filtering stores in the middle window
+    function filterStores() {
+        const searchInput = document.querySelector('.search-input').value.toLowerCase();
+        const storeCards = document.querySelectorAll('.store-card');
+
+        storeCards.forEach(card => {
+            const storeName = card.querySelector('.store-name').textContent.toLowerCase();
+            const storeDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            if (storeName.includes(searchInput) || storeDescription.includes(searchInput)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
 </script>
 
 <div class="top-toolbar">
     <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
       <h1 class="app-name">Invantry</h1>
       <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" @click="onCartClick">
