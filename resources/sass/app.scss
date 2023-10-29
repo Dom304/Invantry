@@ -262,8 +262,8 @@ $font-path: "fonts";
         }
     }
     
-
-    #menu-btn {
+    //User
+    #user-btn {
         width: 100%;
         padding: 10px;
         margin-bottom: 10px;
@@ -274,9 +274,77 @@ $font-path: "fonts";
         text-align: left;
         font-weight: bold;
     }
-    #menu-btn:hover {
+    #user-btn:hover {
         background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
     }
+    #user-btn.active {
+        background-color: black;
+        color: white;
+
+        //send to homepage (user_viewStoresPage.blade.php)
+
+    }
+
+    //Manager
+    #manager-btn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgb(233, 233, 233);
+        color: black;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-weight: bold;
+    }
+    #manager-btn:hover {
+        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
+    }
+    #manager-btn.active {
+        background-color: black;
+        color: white;
+    }
+
+    //Moderator
+    #mod-btn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgb(233, 233, 233);
+        color: black;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-weight: bold;
+    }
+    #mod-btn:hover {
+        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
+    }
+    #mod-btn.active {
+        background-color: black;
+        color: white;
+    }
+
+    //Administrator
+    #admin-btn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgb(233, 233, 233);
+        color: black;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-weight: bold;
+    }
+    #admin-btn:hover {
+        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
+    }
+    #admin-btn.active {
+        background-color: black;
+        color: white;
+    }
+    
     
     .collection-search-bar {
         width: 100%;

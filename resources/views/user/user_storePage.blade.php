@@ -35,6 +35,32 @@
         });
     }
 
+    
+
+    function toggleActiveState(buttonId, viewName) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the clicked button
+        document.getElementById(buttonId).classList.add('active');
+        
+        // Fetch and display the relevant view
+        // Check the buttonId and take action accordingly
+        if (buttonId === 'user-btn') {
+            //redirectToHomepage();
+            window.location.href = '/home';
+        } else if (buttonId === 'manager-btn') {
+            // Do something for manager-btn
+        } else if (buttonId === 'admin-btn') {
+            // Do something for admin-btn
+        } else if (buttonId === 'mod-btn') {
+            // Do something for mod-btn
+        } else {
+            // Optional: handle other cases or do nothing
+        }
+    }
+
+
 </script>
 
 <div class="top-toolbar">
@@ -62,12 +88,10 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        <button class="menu-btn" id="menu-btn">Stores (user)</button>
-        <button class="menu-btn" id="menu-btn">My Store (manager)</button>
-        <button class="menu-btn" id="menu-btn">Users (admin)</button>
-        <button class="menu-btn" id="menu-btn">All Stores (admin)</button>
-        <button class="menu-btn" id="menu-btn">Requests (moderator)</button>
-        <button class="menu-btn" id="menu-btn">Users (moderator)</button>
+        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (user)</button>
+        <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         
         <!-- Collection Search -->
         <div class="collection-search-container">
@@ -79,7 +103,7 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
         
-    </div> 
+    </div>  
 
     <div class="middle-window">
     @foreach($items as $item)
