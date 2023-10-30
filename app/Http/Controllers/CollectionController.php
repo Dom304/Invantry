@@ -27,4 +27,13 @@ class CollectionController extends Controller
 
         return redirect()->route('collections.index')->with('success', 'Collection created successfully.');
     }
+
+    
+    //Method to return collections as json object
+    public function getAllCollectionsForWebsite() {
+    $collections = Collection::all();
+    return response()->json($collections);
 }
+
+}
+

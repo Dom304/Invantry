@@ -34,7 +34,7 @@ class AuthManager extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
        $data['name'] = $request->name;
@@ -51,5 +51,15 @@ class AuthManager extends Controller
         Session::flush();
         Auth::logout();
         return redirect(route('login'));
+    }
+    
+    function authenticate_role() {
+        $userRole = auth()->user()->user_role;
+
+        if ($userRole === User::ROLE_ADMIN) {
+        } elseif ($userRole === User::ROLE_MODERATOR) {
+        } elseif ($userRole === User::ROLE_MANAGER) {
+        } else {
+        }
     }
 }

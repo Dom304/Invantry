@@ -3,8 +3,6 @@
 @section('content')
 
 <script>
-
-    //For filtering collections in left window
     function filterCollections() {
         const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
         const collectionItems = document.querySelectorAll('.collection-btn');
@@ -19,20 +17,15 @@
         });
     }
 
-    //For filtering stores in the middle window
-    function filterStores() {
-        const searchInput = document.querySelector('.search-input').value.toLowerCase();
-        const storeCards = document.querySelectorAll('.store-card');
-
-        storeCards.forEach(card => {
-            const storeName = card.querySelector('.store-name').textContent.toLowerCase();
-            const storeDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
-            if (storeName.includes(searchInput) || storeDescription.includes(searchInput)) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+    function toggleActiveState(buttonId, viewName) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the clicked button
+        document.getElementById(buttonId).classList.add('active');
+        
+        // Fetch and display the relevant view
+        fetchView(viewName);
     }
 
     function toggleActiveState(buttonId, viewName) {
@@ -57,14 +50,15 @@
         }
     }
 
-    
+
+
 </script>
 
 <div class="top-toolbar">
     <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
       <h1 class="app-name">Invantry</h1>
       <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" />
       </div>
       <div class="cart-container">
         <button class="cart-button" @click="onCartClick">
@@ -102,30 +96,9 @@
         
     </div> 
 
-    <div class="middle-window">
-    @foreach($stores as $store)
-        <!-- href="/stores/store-name" -->
-        <a href="/store/{{ $store->store_name }}" class="store-card">
-            <div class="store-logo">
-                <img src="{{ $store->store_logo }}" alt="Store Logo">
-            </div>
-            
-            <div class="store-info">
-                <span class="store-name">{{ $store->store_name }}</span>
-                <span class="store-subtext">{{ $store->store_description }}</span>
-            </div>
-            
-        </a>
-        @endforeach
-    </div>
-        
-       
+    <div class="middle-window"></div>
 
-    <div class="right-window">
-        <!-- Content will be dynamically populated or can remain empty -->
-    </div>
-
-</div>
+    <div class="right-window"></div>
 </div>
 
 @endsection

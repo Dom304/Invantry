@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,8 +16,11 @@ class ItemController extends Controller
     $user = Auth::user();
     $store = Store::where('store_name', $storeName)->firstOrFail();
     $items = Item::where('store_id', $store->id)->get();
+    $user = Auth::user();
     $collections = $user->collections;
-    return view('user.user_storePage', compact('store','items', 'collections'));
+    $stores = Store::all();
+
+    return view('user.user_storePage', compact('store','items', 'stores', 'collections', 'user'));
     }
 
     public function insertItem(Request $request)
