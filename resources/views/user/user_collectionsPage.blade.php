@@ -16,21 +16,19 @@
         <div class="playlist-search-container">
             <input type="text" placeholder="Search Playlists..." class="playlist-search-bar" id="playlist-search-bar-input">
         </div>
-        @foreach($collections as $col)
-        <button href="/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</button>
-        @endforeach
+        
     </div>
 
     <div class="middle-window">
-    @foreach($CollItems as $item)
+    @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/col/{{ $item->item_id }}" class="store-card">
+        <a href="/home" class="store-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
             <div class="store-info">
-                <span class="store-name"></span>
-                <span class="store-subtext"></span>
+                <span class="store-name">{{ $item->item->item_name }}</span>
+                <span class="store-subtext">{{ $item->item->item_description }}</span>
             </div>
         </a>
         @endforeach

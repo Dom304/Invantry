@@ -6,16 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CollectionItem;
 use App\Models\Collection;
+use App\Models\Item;
 class CollectionItemController extends Controller
 {
     public function index($collName)
     {
-    // $collections = Collection::where('store_name', $storeName)->firstOrFail();
-    // $items = Item::where('store_id', $store->id)->get();
-    $collections = Collection::all();
-    $collItems = CollectionItem::all();
+        $collection = Collection::where('collection_name', $collName)->first();
+
+        if (!$collection) {
+            return view('user.user_viewStorePage');
+        }
+    $items = $collection->items;
     
-    return view('user.user_collectionsPage', compact('collItems', 'collections'));
+    return view('user.user_collectionsPage', compact('items'));
     }
 
     public function store(Request $request)
