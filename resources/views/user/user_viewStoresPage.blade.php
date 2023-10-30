@@ -26,7 +26,7 @@
         <!-- href="/stores/store-name" -->
         <a href="/store/{{ $store->store_name }}" class="store-card">
             <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+                <img src="{{ $store->store_logo }}" alt="Store Logo">
             </div>
             <div class="store-info">
                 <span class="store-name">{{ $store->store_name }}</span>
