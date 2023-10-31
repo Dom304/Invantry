@@ -24,59 +24,5 @@
     },
   }
   </script>
-  
-  <style scoped>
-/*TOP TOOLBAR*/
-.header {
-  display: flex;
-  width: auto;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-  max-height: 30px; 
-  width: auto;
-  margin-right: 30px; 
-}
-
-.app-name {
-  margin-top: 10px; 
-  margin-right: 60px; 
-  font-size: 1.5em; 
-}
-
-.search-container {
-  flex-grow: 2;
-  margin-right: 220px;
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc; 
-}
-
-.cart-container {
-  margin-left: 20px; 
-}
-
-.cart-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.cart-button img {
-  width: 30px; 
-  height: auto;
-}
-</style>
 
   

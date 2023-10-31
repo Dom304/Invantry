@@ -19,7 +19,7 @@ use App\Http\Controllers\CartController;
 
 /*
 Route::get('/', function () {
-    return view('user.user_viewStoresPage');
+    return view('admin.admin_dashboard');
 });
 */
 

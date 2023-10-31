@@ -10,6 +10,7 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
+$dark-grey : #2a2a2b;
 // ====================== //
 // BASE STYLES
 // ====================== //
@@ -144,12 +145,13 @@ $font-path: "fonts";
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 1.2em;
-    color: darkgray;
 
-    &.active {
-        color: gray;
-    }
+    background-color: darkgrey;
 }
+
+    // &.active {
+    //     color: gray;
+    // }
 
 // ====================== //
 // HOMEPAGE STYLING
@@ -228,8 +230,6 @@ $font-path: "fonts";
         }
     }
 }
-
-
 
 /* Left Window */
 .left-window {
@@ -355,13 +355,7 @@ $font-path: "fonts";
 
     
     }
-    
-
 }
-
-
-
-
 
 /* Middle Window */
 .middle-window {
@@ -378,6 +372,10 @@ $font-path: "fonts";
         text-decoration: none;
         color: black;
     }
+}
+
+.middle-window-admin-dashboard {
+    display: flex;
 }
 
 .store-card {
@@ -466,6 +464,126 @@ $font-path: "fonts";
     padding: 1rem;
 }
 
+// ====================== //
+//   Header Styling        //
+// ====================== //
+.header {
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    max-height: 30px;
+    width: auto;
+    margin-right: 30px;
+}
+
+.app-name {
+    margin-top: 10px;
+    margin-right: 60px;
+    font-size: 1.5em;
+}
+
+.search-container {
+    flex-grow: 2;
+    margin-right: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.cart-container {
+    margin-left: 20px;
+}
+
+.cart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.cart-button img {
+    width: 30px;
+    height: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-section-header {
+    display: flex;
+    align-items: center;
+}
+
+.Invantry-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .logo-header {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Recharge", Arial, sans-serif;
+    }
+
+    .logo {
+        width: auto;
+        max-height: 30px;
+        margin: 0;
+    }
+}
+
+.right-section-header {
+    display: flex;
+    align-items: center;
+}
+
+// ============================= //
+//   Admin Dashboard Styling     //
+// ============================= //
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.admin-page-content {
+    display: flex;
+    width: 100%;
+}
+
+.left-window-admin-dashboard {
+    width: 15%;
+    height: calc(100vh - 4rem);
+    padding: 1rem;
+    padding-top: 1rem;
+    padding-top: 31px;
+    border-right: 1px solid #ccc;
+}
+
+.right-window-admin-dashboard {
+    width: 100%;
+    margin: 30px 0 0 30px;
+    height: calc(100vh - 4rem);
+}
 /*Cart Page window*/
 .cart-item {
     border-bottom: 1px solid #ccc;
