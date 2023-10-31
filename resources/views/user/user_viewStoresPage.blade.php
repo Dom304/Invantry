@@ -51,6 +51,8 @@
             // Do something for admin-btn
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
+        } else if (buttonId === 'cart-btn'){
+            window.location.href = 'cart';
         } else {
             // Optional: handle other cases or do nothing
         }
@@ -62,10 +64,10 @@
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
         <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
-    </div>
-    <div class="cart-container">
+      </div>
+      <div class="cart-container">
         <button class="cart-button" @click="onCartClick">
-            <img src="/images/cart_icon.png" alt="Cart" />
+          <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
     </div>
 </div>
@@ -82,11 +84,18 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (user)</button>
+        @if(auth()->user()->role == 'buyer')
+        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        @endif
+        @if(auth()->user()->role == 'manager')
         <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        @endif
+        @if(auth()->user()->role == 'admin')
         <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        @endif
+        @if(auth()->user()->role == 'moderator')
         <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
-
+        
         <!-- Collection Search -->
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
@@ -104,7 +113,7 @@
         <!-- href="/stores/store-name" -->
         <a href="/store/{{ $store->store_name }}" class="store-card">
             <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+                <img src="{{ $store->store_logo }}" alt="Store Logo">
             </div>
 
             <div class="store-info">

@@ -15,11 +15,11 @@ class ItemController extends Controller
     $user = Auth::user();
     $store = Store::where('store_name', $storeName)->firstOrFail();
     $items = Item::where('store_id', $store->id)->get();
-    $collections = $user->collections;    $user = Auth::user();
     $collections = Collection::all();
+    $collections = $user->collections; 
     $stores = Store::all();
 
-    return view('user.user_storePage', compact('store','items', 'collections', 'stores', 'collections', 'user'));
+    return view('user.user_storePage', compact('store','items', 'collections', 'stores', 'user'));
     }
 
     public function insertItem(Request $request)

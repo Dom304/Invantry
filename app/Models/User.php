@@ -16,6 +16,19 @@ class User extends Authenticatable
     const ROLE_MOD = "moderator";
     const ROLE_ADMIN = "admin";
 
+    public function isAdmin(){
+    return $this->role === 'admin';
+    }
+    public function isBuyer(){
+    return $this->role === 'buyer';
+    }
+    public function isModerator(){
+    return $this->role === 'moderator';
+    }
+    public function isManager(){
+    return $this->role === 'manager';
+    }
+
     
     /**
      * The attributes that are mass assignable.

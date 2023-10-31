@@ -55,6 +55,8 @@
             // Do something for admin-btn
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
+        } else if (buttonId === 'cart-btn'){
+            window.location.href = '/cart';
         } else {
             // Optional: handle other cases or do nothing
         }
@@ -70,7 +72,7 @@
       <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
-        <button class="cart-button" @click="onCartClick">
+        <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
           <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
       </div>
@@ -88,10 +90,18 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (user)</button>
+        @if(auth()->user()->role == 'buyer')
+        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        @endif
+        @if(auth()->user()->role == 'manager')
         <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        @endif
+        @if(auth()->user()->role == 'admin')
         <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        @endif
+        @if(auth()->user()->role == 'moderator')
         <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        @endif
         
         <!-- Collection Search -->
         <div class="collection-search-container">

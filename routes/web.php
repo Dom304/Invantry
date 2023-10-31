@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CollectionItemController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +32,8 @@ Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 Route::get('/', [AuthManager::class, 'signUp'])->name('signUp');
 Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add/{product}', 'CartController@addToCart')->name('cart.add');
+Route::put('/cart/update/{cart}', 'CartController@updateCart')->name('cart.update');
+Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('cart.remove');
