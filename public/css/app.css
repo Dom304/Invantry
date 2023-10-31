@@ -22594,3 +22594,41 @@ readers do not read off random characters that represent icons */
   overflow-y: scroll;
   padding: 1rem;
 }
+
+/*Cart Page window*/
+.cart-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+.cart-item .item-name {
+  font-size: 1.5em;
+}
+.cart-item .item-description {
+  color: #666;
+}
+.cart-item .item-quantity,
+.cart-item .item-price {
+  font-weight: bold;
+}
+
+.total-price {
+  margin: 20px 0;
+  font-size: 1.4em;
+  text-align: right;
+}
+
+.checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  text-align: center;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.checkout-btn:hover {
+  background-color: #0056b3;
+}
