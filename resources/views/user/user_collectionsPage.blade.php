@@ -76,24 +76,19 @@
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
         </div>
-
-        <!-- Fetch Users collections -->
-        @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
-        @endforeach
         
-    </div> 
+    </div>
 
     <div class="middle-window">
-    @foreach($CollItems as $item)
+    @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/col/{{ $item->item_id }}" class="store-card">
+        <a href="/home" class="store-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
             <div class="store-info">
-                <span class="store-name"></span>
-                <span class="store-subtext"></span>
+                <span class="store-name">{{ $item->item->item_name }}</span>
+                <span class="store-subtext">{{ $item->item->item_description }}</span>
             </div>
         </a>
         @endforeach

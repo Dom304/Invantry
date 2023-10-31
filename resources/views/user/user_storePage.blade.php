@@ -97,13 +97,10 @@
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
         </div>
-
-        <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <a href="/collection/{{ $col->collection_name }}" class="playlist-btn">{{$col->collection_name}}</a>
         @endforeach
-        
-    </div>  
+    </div>
 
     <div class="middle-window">
     @foreach($items as $item)
@@ -115,7 +112,7 @@
             <div class="store-info">
                 <span class="store-name">{{ $item->item_name }}</span>
                 <span class="store-subtext">{{ $item->item_description }}</span>
-                <span class="store-subtext">{{ $item->item_price }}</span>
+                <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             </div>
         </a>
         @endforeach

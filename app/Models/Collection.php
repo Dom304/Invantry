@@ -16,8 +16,13 @@ class Collection extends Model
         'collection_name',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+    return $this->belongsTo(User::class);
+    }
+    
+    public function items()
+    {
+    return $this->belongsToMany(Item::class, 'collection_items', 'collection_id', 'item_id');
     }
 }
