@@ -106,7 +106,7 @@
         
     </div> 
 
-    <div class="middle-window">
+    <div class="cart-middle-window">
 
         <div class="cart-window" role="region" aria-label="Shopping Cart">
 
@@ -118,6 +118,8 @@
         </div>
         <div class="product-quantity">Quantity: 2</div>
         <div class="product-price">$9.99 each</div>
+        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
+
     </div>
 
     <!-- Sample cart product #2 -->
@@ -128,6 +130,8 @@
         </div>
         <div class="product-quantity">Quantity: 1</div>
         <div class="product-price">$19.99 each</div>
+        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
+
     </div>
 
     <!-- Cart Total -->
