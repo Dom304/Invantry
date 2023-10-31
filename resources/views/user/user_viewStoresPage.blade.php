@@ -95,7 +95,8 @@
         @endif
         @if(auth()->user()->role == 'moderator')
         <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
-        
+        @endif
+
         <!-- Collection Search -->
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
@@ -124,7 +125,10 @@
         </a>
         @endforeach
 
-        <button> Random Button </button>
+        <button> Manager Button </button>
+        <button> Mod Button </button>
+        <button> Admin Button </button>
+
     </div>
 
 
