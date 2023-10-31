@@ -61,7 +61,8 @@ class StoreController extends Controller
 }
 
     public function dashboard(){
-        return view('admin.admin_dashboard');
+        $user = Auth::user();
+        return view('admin.admin_dashboard', compact('user'));
     }
 
 }

@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="right-section-header">
-    <div class="user-name"> Hi, admin_name.</div>
+    <div class="user-name"> Hi, {{$user->name}}.</div>
   </div>
 </div>
 
