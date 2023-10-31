@@ -15,6 +15,7 @@ class StoreController extends Controller
     public function index()
     {
     $user = Auth::user();
+    $collections = Collection::all();
     $stores = Store::all();
     $collections = $user->collections;
 
