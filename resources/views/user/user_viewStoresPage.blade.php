@@ -48,7 +48,7 @@
         } else if (buttonId === 'manager-btn') {
             // Do something for manager-btn
         } else if (buttonId === 'admin-btn') {
-            // Do something for admin-btn
+            window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
         } else if (buttonId === 'cart-btn'){
