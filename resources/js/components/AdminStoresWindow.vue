@@ -16,7 +16,7 @@
                         <option>Choose action</option>
                     </select>
                 </div>
-                <span>Selected 4 of 123 items</span>
+                <span>Selected 2 of 2 items</span>
             </div>
             <a class="button link">
                 <span>Filters</span>
@@ -232,7 +232,7 @@ export default {
                         }
                     }
 
-                    input[type="checkbox"]:checked + .checkmark {
+                    input[type="checkbox"]:checked+.checkmark {
                         background-color: #007bff;
                         color: #fff;
                         border-color: #007bff;

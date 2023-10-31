@@ -16,7 +16,7 @@
                         <option>Choose action</option>
                     </select>
                 </div>
-                <span>Selected 4 of 123 items</span>
+                <span>Selected 4 of 4 items</span>
             </div>
             <a class="button link">
                 <span>Filters</span>
@@ -77,16 +77,47 @@
                         <td>Labuhan Deli</td>
                     </tr>
                     <!-- ... other rows similarly formatted ... -->
+                    <tr class="selected">
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" checked />
+                                <span class="checkmark"></span>
+                            </div>
+                        </td>
+                        <td>3</td>
+                        <td>Heck3</td>
+                        <td>Guy</td>
+                        <td>Sir</td>
+                        <td>MrSir3@weebly.com</td>
+                        <td>+1 919 623 3472</td>
+                        <td>Raleigh, NC</td>
+                    </tr>
+
+                    <tr class="selected">
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" checked />
+                                <span class="checkmark"></span>
+                            </div>
+                        </td>
+                        <td>4</td>
+                        <td>iAMDOM</td>
+                        <td>Dominique</td>
+                        <td>Simmons</td>
+                        <td>ptroctor1@weebly.com</td>
+                        <td>+1 336 635 8631</td>
+                        <td>Greensboro, NC</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <section class="table-footer grid">
-            <span>Displaying 1-10 of 123 items</span>
+            <span>Displaying 1-10 of 4 items</span>
             <div class="paging grid">
                 <span>
                     Page
-                    <input type="number" value="1"> of 13
+                    <input type="number" value="1"> of 1
                 </span>
                 <div class="button icon">
                     <i class="fa-solid fa-angle-left"></i>
@@ -232,7 +263,7 @@ export default {
                         }
                     }
 
-                    input[type="checkbox"]:checked + .checkmark {
+                    input[type="checkbox"]:checked+.checkmark {
                         background-color: #007bff;
                         color: #fff;
                         border-color: #007bff;
