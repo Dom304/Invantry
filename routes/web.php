@@ -37,3 +37,6 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add/{product}', 'CartController@addToCart')->name('cart.add');
 Route::put('/cart/update/{cart}', 'CartController@updateCart')->name('cart.update');
 Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('cart.remove');
+
+//delete after
+Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
