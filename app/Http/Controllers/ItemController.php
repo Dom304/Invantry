@@ -16,7 +16,7 @@ class ItemController extends Controller
     $store = Store::where('store_name', $storeName)->firstOrFail();
     $items = Item::where('store_id', $store->id)->get();
     $collections = $user->collections;
-    return view('user.user_storePage', compact('store','items', 'collections'));
+    return view('user.user_storePage', compact('store','items', 'collections', 'user'));
     }
 
     public function insertItem(Request $request)

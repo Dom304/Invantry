@@ -88,10 +88,18 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (user)</button>
+        @if(auth()->user()->role == 'buyer')
+        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        @endif
+        @if(auth()->user()->role == 'manager')
         <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        @endif
+        @if(auth()->user()->role == 'admin')
         <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        @endif
+        @if(auth()->user()->role == 'moderator')
         <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        @endif
         
         <!-- Collection Search -->
         <div class="collection-search-container">
