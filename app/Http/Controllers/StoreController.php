@@ -59,4 +59,10 @@ class StoreController extends Controller
 
     return redirect()->back()->with('error', 'Invalid role selection.');
 }
+
+    public function dashboard(){
+        $user = Auth::user();
+        return view('admin.admin_dashboard', compact('user'));
+    }
+
 }

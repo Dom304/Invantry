@@ -40,3 +40,5 @@ Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('car
 
 //delete after
 Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
+
+Route::get('/adminDashboard', [StoreController::class, 'dashboard'])->name('adminDashboard');

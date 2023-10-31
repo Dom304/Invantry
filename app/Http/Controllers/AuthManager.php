@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthManager extends Controller
 {
@@ -33,7 +34,7 @@ class AuthManager extends Controller
             }
             if (auth()->user()->isAdmin()) {
                 // change to admin page
-                return redirect()->intended(route('home'));
+                return redirect()->intended(route('adminDashboard'));
             }
         }
         return redirect(route('login'))->with("error", "Login Failed");

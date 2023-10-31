@@ -55,6 +55,12 @@
           <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
       </div>
+      <div>
+        <form method="GET" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 </div>
 
 
@@ -69,7 +75,7 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        @if(auth()->user()->role == 'buyer')
+        @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')        
         <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
         @endif
         @if(auth()->user()->role == 'manager')
