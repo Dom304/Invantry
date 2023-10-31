@@ -41,4 +41,9 @@ class StoreController extends Controller
 
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
+
+    public function dashboard(){
+        return view('admin.admin_dashboard');
+    }
+
 }

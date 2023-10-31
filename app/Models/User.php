@@ -17,16 +17,16 @@ class User extends Authenticatable
     const ROLE_ADMIN = "admin";
 
     public function isAdmin(){
-    return $this->role === 'admin';
+        return $this->role === 'admin';
     }
     public function isBuyer(){
-    return $this->role === 'buyer';
+        return $this->role === 'buyer';
     }
     public function isModerator(){
-    return $this->role === 'moderator';
+        return $this->role === 'moderator';
     }
     public function isManager(){
-    return $this->role === 'manager';
+        return $this->role === 'manager';
     }
 
     
