@@ -106,7 +106,38 @@
         
     </div> 
 
-    <div class="middle-window"></div>
+    <div class="middle-window">
+
+        <div class="cart-window" role="region" aria-label="Shopping Cart">
+
+    <!-- Sample cart product #1 -->
+    <div class="cart-product">
+        <div class="product-details">
+            <div class="product-name">Product Name 1</div>
+            <div class="product-description">Short description of the product</div>
+        </div>
+        <div class="product-quantity">Quantity: 2</div>
+        <div class="product-price">$9.99 each</div>
+    </div>
+
+    <!-- Sample cart product #2 -->
+    <div class="cart-product">
+        <div class="product-details">
+            <div class="product-name">Product Name 2</div>
+            <div class="product-description">Another description of the product</div>
+        </div>
+        <div class="product-quantity">Quantity: 1</div>
+        <div class="product-price">$19.99 each</div>
+    </div>
+
+    <!-- Cart Total -->
+    <div class="cart-total">Total: $39.97</div>
+
+    <!-- Proceed to Checkout Button -->
+    <button class="proceed-checkout" aria-label="Proceed to checkout">Proceed to Checkout</button>
+</div>
+
+    </div>
 
     <div class="right-window"></div>
 </div>
