@@ -69,7 +69,7 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        @if(auth()->user()->role == 'buyer')
+        @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')        
         <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
         @endif
         @if(auth()->user()->role == 'manager')
