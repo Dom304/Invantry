@@ -1,80 +1,104 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="app">
-    <homepage></homepage> 
-</div>
-
-<div class="page-content">
-    
-    <div class="left-window">
-    </div>
-
-    <div class="middle-window">
-        <!-- Cart items (hardcoded for demonstration) -->
-        <div class="cart-item" data-price="20" data-quantity="2">
-            <h2 class="item-name">Item One</h2>
-            <p class="item-description">Description for item one.</p>
-            <p class="item-quantity">Quantity: 2</p>
-            <p class="item-price">$20</p>
-        </div>
-        <div class="cart-item" data-price="15" data-quantity="3">
-            <h2 class="item-name">Item Two</h2>
-            <p class="item-description">Description for item two.</p>
-            <p class="item-quantity">Quantity: 3</p>
-            <p class="item-price">$15</p>
-        </div>
-        <div class="cart-item" data-price="10" data-quantity="1">
-            <h2 class="item-name">Item Three</h2>
-            <p class="item-description">Description for item three.</p>
-            <p class="item-quantity">Quantity: 1</p>
-            <p class="item-price">$10</p>
-        </div>
-
-        <!-- Total price container -->
-        <div class="total-price">
-            Total: <span>$0</span>
-        </div>
-
-        <!-- Proceed to checkout button -->
-        <button class="checkout-btn">Proceed to Checkout</button>
-    </div>
-
-    <div class="right-window">
-        <!-- Content will be dynamically populated or can remain empty -->
-    </div>
-
-</div>
 
 <script>
-(function calculateTotal() {
-    let total = 0;
-    const cartItems = document.querySelectorAll('.cart-item');
-    
-    if (cartItems.length === 0) {
-        console.error("No cart items found!");
-        return;
+    function filterCollections() {
+        const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
+        const collectionItems = document.querySelectorAll('.collection-btn');
+
+        collectionItems.forEach(item => {
+            const collectionName = item.getAttribute('data-collection-name').toLowerCase();
+            if (collectionName.includes(searchInput)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
     }
 
-    cartItems.forEach(function (item) {
-        const price = Number(item.dataset.price);
-        const quantity = Number(item.dataset.quantity);
+    function toggleActiveState(buttonId, viewName) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the clicked button
+        document.getElementById(buttonId).classList.add('active');
+        
+        // Fetch and display the relevant view
+        fetchView(viewName);
+    }
 
-        if (isNaN(price) || isNaN(quantity)) {
-            console.error("Invalid price or quantity!", item);
-            return; // This will skip to the next iteration in forEach loop
+    function toggleActiveState(buttonId, viewName) {
+        // Remove active class from all buttons
+        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to the clicked button
+        document.getElementById(buttonId).classList.add('active');
+        
+        // Fetch and display the relevant view
+        // Check the buttonId and take action accordingly
+        if (buttonId === 'user-btn') {
+            window.location.href = '/home';
+        } else if (buttonId === 'manager-btn') {
+            // Do something for manager-btn
+        } else if (buttonId === 'admin-btn') {
+            // Do something for admin-btn
+        } else if (buttonId === 'mod-btn') {
+            // Do something for mod-btn
+        } else {
+            // Optional: handle other cases or do nothing
         }
-
-        total += price * quantity;
-    });
-
-    const totalPriceElement = document.querySelector('.total-price span');
-    if (!totalPriceElement) {
-        console.error("Total price container not found!");
-        return;
     }
 
-    totalPriceElement.innerText = '$' + total.toFixed(2);
-})(); // Call the function immediately
+
+
 </script>
+
+<div class="top-toolbar">
+    <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+      <h1 class="app-name">Invantry</h1>
+      <div class="search-container">
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" />
+      </div>
+      <div class="cart-container">
+        <button class="cart-button" @click="onCartClick">
+          <img src="/images/cart_icon.png" alt="Cart" /> 
+        </button>
+      </div>
+</div>
+
+
+<div class="page-content">
+
+
+        
+    <div class="left-window">
+        <div class="user-info">
+            <span class="user-img">
+                <i class="fa-solid fa-user"></i>
+            </span>
+            <span class="username">{{ $user->name }}</span>
+        </div>
+        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (user)</button>
+        <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        
+        <!-- Collection Search -->
+        <div class="collection-search-container">
+            <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
+        </div>
+
+        <!-- Fetch Users collections -->
+        @foreach($collections as $col)
+        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        @endforeach
+        
+    </div> 
+
+    <div class="middle-window"></div>
+
+    <div class="right-window"></div>
+</div>
+
 @endsection

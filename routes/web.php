@@ -16,6 +16,12 @@ use App\Http\Controllers\CollectionItemController;
 |
 */
 
+/*
+Route::get('/', function () {
+    return view('user.user_viewStoresPage');
+});
+*/
+
 Route::get('/home', [StoreController::class, 'index'])->name('home');
 Route::get('/store/{storeName}', [ItemController::class, 'index']);
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index']);
@@ -25,4 +31,3 @@ Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 Route::get('/', [AuthManager::class, 'signUp'])->name('signUp');
 Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
-
