@@ -20,7 +20,9 @@
   </div>
 
   <div class="right-window-admin-dashboard">
-    <admin-users-window></admin-main-window>
+    <!-- <admin-users-window></admin-main-window> -->
+    <user-table></user-table>
+    <store-table></store-table>
   </div>
 </div>
 

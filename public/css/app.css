@@ -22800,7 +22800,7 @@ readers do not read off random characters that represent icons */
 
 .right-window-admin-dashboard {
   width: 100%;
-  margin: 30px 0 0 30px;
+  margin: 30px;
   height: calc(100vh - 4rem);
 }
 
