@@ -42,6 +42,24 @@ class StoreController extends Controller
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
+    public function updateRole(Request $request)
+{
+    $user = auth()->user(); // Get the currently authenticated user.
+
+    // Check which button was clicked to determine the new role.
+    $newRole = $request->input('role');
+
+    // Ensure the new role is valid.
+    if (in_array($newRole, [User::ROLE_BUYER, User::ROLE_MANAGER, User::ROLE_MOD, User::ROLE_ADMIN])) {
+        $user->role = $newRole;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Your role has been updated successfully.');
+    }
+
+    return redirect()->back()->with('error', 'Invalid role selection.');
+}
+
     public function dashboard(){
         return view('admin.admin_dashboard');
     }
