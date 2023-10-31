@@ -22594,6 +22594,11 @@ readers do not read off random characters that represent icons */
 
 /* Middle Window */
 .middle-window {
+  /*
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -22800,6 +22805,27 @@ readers do not read off random characters that represent icons */
 }
 
 /*Cart Page window*/
+.cart-middle-window {
+  /*
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  */
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 60%;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+}
+.cart-middle-window a {
+  text-decoration: none;
+  color: black;
+}
+
 .cart-window {
   padding: 20px;
 }
@@ -22809,6 +22835,15 @@ readers do not read off random characters that represent icons */
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding: 15px 0;
+}
+.cart-window .cart-product .trash-icon {
+  font-size: 1.2em;
+  color: #a00;
+  margin-left: 50px;
+  cursor: pointer;
+}
+.cart-window .cart-product .trash-icon:hover {
+  color: #d00;
 }
 .cart-window .cart-product .product-details {
   flex: 1;
@@ -22823,7 +22858,7 @@ readers do not read off random characters that represent icons */
 }
 .cart-window .cart-product .product-quantity,
 .cart-window .cart-product .product-price {
-  margin-left: 15px;
+  margin-left: 50px;
   font-weight: bold;
 }
 .cart-window .cart-total {
