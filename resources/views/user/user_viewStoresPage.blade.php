@@ -70,6 +70,12 @@
           <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
     </div>
+    <div>
+        <form method="GET" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 </div>
 
 
