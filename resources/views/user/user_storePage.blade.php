@@ -56,7 +56,7 @@
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
         } else if (buttonId === 'cart-btn'){
-            window.location.href = 'cart';
+            window.location.href = '/cart';
         } else {
             // Optional: handle other cases or do nothing
         }
