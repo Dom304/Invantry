@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CollectionItem;
@@ -11,6 +12,9 @@ class CollectionItemController extends Controller
 {
     public function index($collName)
     {
+        $user = Auth::user();
+        $collections = Collection::all();
+        $collections = $user->collections;
         $collection = Collection::where('collection_name', $collName)->first();
 
         if (!$collection) {
@@ -18,7 +22,7 @@ class CollectionItemController extends Controller
         }
     $items = $collection->items;
     
-    return view('user.user_collectionsPage', compact('items'));
+    return view('user.user_collectionsPage', compact('items', 'user', 'collections'));
     }
 
     public function store(Request $request)

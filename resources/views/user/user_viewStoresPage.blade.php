@@ -52,6 +52,8 @@
             // Do something for admin-btn
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
+        } else if (buttonId === 'cart-btn'){
+            window.location.href = 'cart';
         } else {
             // Optional: handle other cases or do nothing
         }
@@ -67,7 +69,7 @@
         <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
       </div>
       <div class="cart-container">
-        <button class="cart-button" @click="onCartClick">
+        <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
           <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
       </div>
