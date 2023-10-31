@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+//For loading each collection in the left window
+Route::get('/all-collections-for-website', 'CollectionController@getAllCollectionsForWebsite');

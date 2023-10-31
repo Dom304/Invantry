@@ -19,21 +19,23 @@
         });
     }
 
-    //For filtering stores in the middle window
-    function filterStores() {
+    //For filtering store items in middle window
+    function filterItems() {
         const searchInput = document.querySelector('.search-input').value.toLowerCase();
-        const storeCards = document.querySelectorAll('.store-card');
+        const itemCards = document.querySelectorAll('.store-card');
 
-        storeCards.forEach(card => {
-            const storeName = card.querySelector('.store-name').textContent.toLowerCase();
-            const storeDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
-            if (storeName.includes(searchInput) || storeDescription.includes(searchInput)) {
+        itemCards.forEach(card => {
+            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }
         });
     }
+
+    
 
     function toggleActiveState(buttonId, viewName) {
         // Remove active class from all buttons
@@ -45,6 +47,7 @@
         // Fetch and display the relevant view
         // Check the buttonId and take action accordingly
         if (buttonId === 'user-btn') {
+            //redirectToHomepage();
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
             // Do something for manager-btn
@@ -57,14 +60,14 @@
         }
     }
 
-    
+
 </script>
 
 <div class="top-toolbar">
     <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
       <h1 class="app-name">Invantry</h1>
       <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+      <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" @click="onCartClick">
@@ -100,21 +103,20 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
         
-    </div> 
+    </div>  
 
     <div class="middle-window">
-    @foreach($stores as $store)
+    @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/store/{{ $store->store_name }}" class="store-card">
+        <a href="/" class="store-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
-            
             <div class="store-info">
-                <span class="store-name">{{ $store->store_name }}</span>
-                <span class="store-subtext">{{ $store->store_description }}</span>
+                <span class="store-name">{{ $item->item_name }}</span>
+                <span class="store-subtext">{{ $item->item_description }}</span>
+                <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             </div>
-            
         </a>
         @endforeach
     </div>
@@ -125,7 +127,6 @@
         <!-- Content will be dynamically populated or can remain empty -->
     </div>
 
-</div>
 </div>
 
 @endsection

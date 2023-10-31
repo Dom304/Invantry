@@ -16890,9 +16890,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Homepage',
   components: {
-    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    SideWindow: _SideWindow_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    //SideWindow,
   },
+
   methods: {
     handleCartClicked: function handleCartClicked() {
       console.log('Cart clicked!'); // Placeholder action
@@ -16952,17 +16953,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SideWindow',
   data: function data() {
     return {
-      activeButton: '' // Keeps track of the currently active button
+      activeButton: '',
+      // Keeps track of the currently active button
+      collections: []
     };
+  },
+  mounted: function mounted() {
+    this.fetchCollections(); // We're telling our magic to fetch the collections!
   },
 
   methods: {
     setActive: function setActive(buttonName) {
       this.activeButton = buttonName; // Sets the active button based on the clicked button
+    },
+    fetchCollections: function fetchCollections() {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/all-collections-for-website').then(function (response) {
+        _this.collections = response.data; // We're putting our collections into the magic bag!
+
+        console.log(response.data);
+      });
     }
   }
 });
@@ -17248,80 +17264,61 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
     id: "collection-search-bar-input"
   })], -1 /* HOISTED */);
 });
-
+var _hoisted_4 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Menu Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'stores'
     }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.setActive('stores');
     })
-  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Stores (buyer)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'myStore'
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.setActive('myStore');
     })
-  }, " My Store (manager) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "My Store (manager)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'requests'
     }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.setActive('requests');
     })
-  }, " Requests (mod) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Requests (mod)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
       active: $data.activeButton === 'usersMod'
     }]),
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.setActive('usersMod');
     })
-  }, " Users (mod) ", 2 /* CLASS */), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Users (mod)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
-      active: $data.activeButton === 'goingGym'
+      active: $data.activeButton === 'usersAdmin'
     }]),
     onClick: _cache[4] || (_cache[4] = function ($event) {
-      return $options.setActive('goingGym');
+      return $options.setActive('usersAdmin');
     })
-  }, " Going Gym ", 2 /* CLASS */)]);
-}
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/adminLeftWindow.vue?vue&type=template&id=2a83610b":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/adminLeftWindow.vue?vue&type=template&id=2a83610b ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   render: () => (/* binding */ render)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-var _hoisted_1 = {
-  "class": "left-window-container"
-};
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["left-window-btn", {
-      active: _ctx.activeButton === 'usersAdmin'
+  }, "Users (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
+      active: $data.activeButton === 'allStores'
     }]),
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.setActive('usersAdmin');
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $options.setActive('allStores');
     })
-  }, " Users (admin) ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["left-window-btn", {
-      active: _ctx.activeButton === 'allStores'
-    }]),
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.setActive('allStores');
-    })
-  }, " All Stores (admin) ", 2 /* CLASS */)]);
+  }, "All Stores (admin)", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Collection Search "), _hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.collections, function (col) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: col.id,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["menu-btn", {
+        active: $data.activeButton === col.collection_name
+      }]),
+      onClick: function onClick($event) {
+        return $options.setActive(col.collection_name);
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(col.collection_name), 11 /* TEXT, CLASS, PROPS */, _hoisted_4);
+  }), 128 /* KEYED_FRAGMENT */))]);
 }
 
 /***/ }),
@@ -19436,7 +19433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/*SIDE WINDOW*/\n.left-window[data-v-7b764952] {\n  margin-top: 67px;\n  width: 273px;\n  background-color: #fff;\n  padding: 20px;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);\n  height: 100vh;\n  overflow-y: auto;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}\n.left-window .user-info[data-v-7b764952] {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  height: 50px;\n  margin-bottom: 20px;\n}\n.user-img[data-v-7b764952] {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  background-color: #333;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\ni[data-v-7b764952] {\n    font-size: 30px;\n    color: white;\n}\n}\n.left-window .username[data-v-7b764952] {\n  font-size: 1.2em;\n  color: #333;\n}\n.left-window button.menu-btn[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n  margin-bottom: 10px;\n  background-color: rgb(233, 233, 233); /* default background color */\n  color: black; /* default text color */\n  border: none;\n  cursor: pointer;\n  text-align: left;\n  font-weight: bold; /* make text bold */\n}\n.left-window button.menu-btn.active[data-v-7b764952] {\n  background-color: #333; /* active background color */\n  color: white; /* active text color */\n}\n.left-window .collection-search-container[data-v-7b764952] {\n  margin-bottom: 20px;\n}\n.left-window .collection-search-bar[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* Side Window Styling */\n.left-window[data-v-7b764952] {\n  margin-top: 67px;\n  width: 273px;\n  background-color: #fff;\n  padding: 20px;\n  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);\n  height: 100vh;\n  overflow-y: auto;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}\n.left-window .user-info[data-v-7b764952] {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  height: 50px;\n  margin-bottom: 20px;\n}\n.user-img[data-v-7b764952] {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  background-color: #333;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\ni[data-v-7b764952] {\n    font-size: 30px;\n    color: white;\n}\n}\n.left-window .username[data-v-7b764952] {\n  font-size: 1.2em;\n  color: #333;\n}\n.left-window button.menu-btn[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n  margin-bottom: 10px;\n  background-color: rgb(233, 233, 233);\n  color: black;\n  border: none;\n  cursor: pointer;\n  text-align: left;\n  font-weight: bold;\n}\n.left-window button.menu-btn.active[data-v-7b764952] {\n  background-color: #333;\n  color: white;\n}\n.left-window .collection-search-container[data-v-7b764952] {\n  margin-bottom: 20px;\n}\n.left-window .collection-search-bar[data-v-7b764952] {\n  width: 100%;\n  padding: 10px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

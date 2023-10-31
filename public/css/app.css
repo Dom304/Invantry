@@ -22302,6 +22302,13 @@ readers do not read off random characters that represent icons */
   font-weight: normal;
   font-style: normal;
 }
+.testing-sass {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border: 2px solid #333;
+  color: #333;
+}
+
 .image-container {
   height: 100vh;
   display: flex;
@@ -22315,40 +22322,39 @@ readers do not read off random characters that represent icons */
   transform: scale(0.33);
 }
 
-.app-name {
+.app-name,
+.description,
+.welcome-back,
+.sign-up {
   text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  margin-top: -60px;
-  font-family: "Recharge", Arial, sans-serif;
-}
-
-.description {
-  text-align: center;
-  font-size: 0.5em;
-  margin-top: 10px;
-  color: gray;
   font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
+.app-name {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 0.5em;
+  margin-top: 10px;
+  color: gray;
+}
+
 .welcome-back {
-  text-align: center;
   font-size: 0.85em;
   font-weight: bold;
   margin-top: 60px;
   cursor: default;
   color: gray;
-  font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
 .sign-up {
-  text-align: center;
   font-size: 0.75em;
   font-weight: bold;
   margin-top: 30px;
   cursor: default;
   color: gray;
-  font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
 .sign-up-link {
@@ -22356,12 +22362,13 @@ readers do not read off random characters that represent icons */
   text-decoration: none;
   cursor: pointer;
 }
-
 .sign-up-link:hover {
   text-decoration: underline;
 }
 
-.action-btn {
+.action-btn,
+.continue-btn,
+.signup-btn {
   background-color: #007bff;
   color: white;
   border: none;
@@ -22373,17 +22380,10 @@ readers do not read off random characters that represent icons */
   width: 240px;
   text-align: center;
 }
-
-.action-btn:hover {
+.action-btn:hover,
+.continue-btn:hover,
+.signup-btn:hover {
   background-color: #0056b3;
-}
-
-.continue-btn {
-  margin-top: 40px;
-}
-
-.signup-btn {
-  margin-top: 25px;
 }
 
 .username-input,
@@ -22394,6 +22394,13 @@ readers do not read off random characters that represent icons */
   font-size: 1em;
   width: 399px;
 }
+.username-input::-moz-placeholder, .password-input::-moz-placeholder {
+  color: #aaa;
+}
+.username-input::placeholder,
+.password-input::placeholder {
+  color: #aaa;
+}
 
 .username-input {
   margin-top: 60px;
@@ -22401,15 +22408,6 @@ readers do not read off random characters that represent icons */
 
 .password-input {
   padding-right: 40px;
-}
-
-.username-input::-moz-placeholder, .password-input::-moz-placeholder {
-  color: #aaa;
-}
-
-.username-input::placeholder,
-.password-input::placeholder {
-  color: #aaa;
 }
 
 .password-container {
@@ -22434,67 +22432,165 @@ readers do not read off random characters that represent icons */
 /* TOOLBAR */
 .top-toolbar {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #f5f5f5;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
-
-.logo-container {
+.top-toolbar .logo,
+.top-toolbar .app-name,
+.top-toolbar .search-container,
+.top-toolbar .cart-container {
   display: flex;
   align-items: center;
 }
-
-.logo {
-  width: 40px;
-  margin-right: 10px;
+.top-toolbar .logo {
+  max-height: 30px;
+  width: auto;
+  margin-right: 32px;
+  margin-left: 0%;
 }
-
-.website-name {
-  font-weight: bold;
+.top-toolbar .app-name {
+  margin-top: 10px;
+  margin-right: 74px;
+  margin-left: 0%;
+  font-size: 1.5em;
+  font-family: "Recharge", Arial, sans-serif;
 }
-
-.search-container {
-  flex-grow: 2;
-  padding: 0 1rem;
+.top-toolbar .search-container {
+  margin-left: 0%;
+  margin-right: 425px;
+  flex-grow: 6;
+  display: flex;
+  align-items: center;
 }
-
-.search-bar {
+.top-toolbar .search-input {
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
 }
-
-.cart-container {
-  display: flex;
-  align-items: center;
+.top-toolbar .cart-container {
+  margin-left: 0%;
+  margin-right: 0%;
 }
-
-.cart-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+.top-toolbar .cart-container .cart-button {
+  background-color: transparent;
   border: none;
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
+  padding: 5px;
 }
-
-.page-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.top-toolbar .cart-container .cart-button img {
+  width: 30px;
+  height: auto;
 }
 
 /* Left Window */
 .left-window {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 273px;
-  height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
+  height: calc(100vh - 4rem);
   overflow-y: scroll;
   padding: 1rem;
-  padding-top: 31px;
+  background-color: #ffffff;
+  padding-top: 15px;
   border-right: 1px solid #ccc;
+}
+.left-window .user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.left-window .user-info .user-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.left-window .user-info .username {
+  font-size: 1rem;
+}
+.left-window #user-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.left-window #user-btn:hover {
+  background-color: #d0d0d0;
+}
+.left-window #user-btn.active {
+  background-color: black;
+  color: white;
+}
+.left-window #manager-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.left-window #manager-btn:hover {
+  background-color: #d0d0d0;
+}
+.left-window #manager-btn.active {
+  background-color: black;
+  color: white;
+}
+.left-window #mod-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.left-window #mod-btn:hover {
+  background-color: #d0d0d0;
+}
+.left-window #mod-btn.active {
+  background-color: black;
+  color: white;
+}
+.left-window #admin-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.left-window #admin-btn:hover {
+  background-color: #d0d0d0;
+}
+.left-window #admin-btn.active {
+  background-color: black;
+  color: white;
+}
+.left-window .collection-search-bar {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 /* Middle Window */
@@ -22522,8 +22618,7 @@ readers do not read off random characters that represent icons */
   align-items: center;
   width: 100%;
   height: 80px;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  margin-bottom: 0;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22532,6 +22627,26 @@ readers do not read off random characters that represent icons */
 .store-card:hover {
   transform: translateY(-0.25rem);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.store-card {
+  width: calc(50% - 1rem);
+  height: 115px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+.store-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.store-card .store-name {
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .store-logo {
@@ -22564,11 +22679,11 @@ readers do not read off random characters that represent icons */
   color: #666;
 }
 
-.store-card {
-  width: calc(50% - 1rem);
-  height: 115px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+/* Right Window */
+.right-window {
+  width: auto;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 1rem;

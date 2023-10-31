@@ -3,8 +3,6 @@
 @section('content')
 
 <script>
-
-    //For filtering collections in left window
     function filterCollections() {
         const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
         const collectionItems = document.querySelectorAll('.collection-btn');
@@ -15,22 +13,6 @@
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
-            }
-        });
-    }
-
-    //For filtering stores in the middle window
-    function filterStores() {
-        const searchInput = document.querySelector('.search-input').value.toLowerCase();
-        const storeCards = document.querySelectorAll('.store-card');
-
-        storeCards.forEach(card => {
-            const storeName = card.querySelector('.store-name').textContent.toLowerCase();
-            const storeDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
-            if (storeName.includes(searchInput) || storeDescription.includes(searchInput)) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
             }
         });
     }
@@ -57,14 +39,14 @@
         }
     }
 
-    
+
 </script>
 
 <div class="top-toolbar">
     <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
       <h1 class="app-name">Invantry</h1>
       <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" />
       </div>
       <div class="cart-container">
         <button class="cart-button" @click="onCartClick">
@@ -103,18 +85,16 @@
     </div> 
 
     <div class="middle-window">
-    @foreach($stores as $store)
+    @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/store/{{ $store->store_name }}" class="store-card">
+        <a href="/home" class="store-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
-            
             <div class="store-info">
-                <span class="store-name">{{ $store->store_name }}</span>
-                <span class="store-subtext">{{ $store->store_description }}</span>
+                <span class="store-name">{{ $item->item->item_name }}</span>
+                <span class="store-subtext">{{ $item->item->item_description }}</span>
             </div>
-            
         </a>
         @endforeach
     </div>
@@ -125,7 +105,6 @@
         <!-- Content will be dynamically populated or can remain empty -->
     </div>
 
-</div>
 </div>
 
 @endsection
