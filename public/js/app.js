@@ -19823,6 +19823,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'admin-dashboard',
+  props: ['users', 'stores'],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -20039,44 +20040,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'store-table',
+  props: ['stores'],
   data: function data() {
     return {
       isBusy: false,
-      users: [{
-        id: 1,
-        name: 'Best Buy',
-        manager: 'Jon Snow'
-      }, {
-        id: 2,
-        name: 'Get Outdoors',
-        manager: 'Jane Smith'
-      }, {
-        id: 3,
-        name: 'Walmart',
-        manager: 'John Doe'
-      }, {
-        id: 4,
-        name: 'Target',
-        manager: 'Jane Smith'
-      }, {
-        id: 5,
-        name: 'Dicks Sporting Goods',
-        manager: 'Bob Johnson'
-      }],
       fields: [{
         key: 'id',
         label: 'ID'
       }, {
-        key: 'name',
-        label: 'Name'
-      }, {
-        key: 'manager',
-        label: 'Manager'
+        key: 'store_name',
+        label: 'Store Name'
       }, {
         key: 'actions',
         label: 'Actions'
       }]
     };
+  },
+  mounted: function mounted() {
+    // console.log() a message for testing
   },
   methods: {
     deleteUser: function deleteUser(user) {
@@ -20107,24 +20089,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'user-table',
+  props: ['users'],
   data: function data() {
     return {
-      users: [{
-        id: 1,
-        role: 'Admin',
-        name: 'John Doe',
-        email: 'john.doe@example.com'
-      }, {
-        id: 2,
-        role: 'User',
-        name: 'Jane Smith',
-        email: 'jane.smith@example.com'
-      }, {
-        id: 3,
-        role: 'Moderator',
-        name: 'Bob Johnson',
-        email: 'bob.johnson@example.com'
-      }],
       fields: [{
         key: 'id',
         label: 'ID'
@@ -20218,10 +20186,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.currentwindow = 'request';
     })
   }, "Requests")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
-    key: 0
-  })) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
-    key: 1
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add other components as needed with v-else-if conditions ")])], 64 /* STABLE_FRAGMENT */);
+    key: 0,
+    users: $props.users
+  }, null, 8 /* PROPS */, ["users"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+    key: 1,
+    stores: $props.stores
+  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add other components as needed with v-else-if conditions ")])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20571,7 +20541,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $data.users,
+    items: $props.stores,
     busy: $data.isBusy,
     fields: $data.fields
   }, {
@@ -20629,7 +20599,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $data.users,
+    items: $props.users,
     fields: $data.fields
   }, {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {

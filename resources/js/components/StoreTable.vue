@@ -2,7 +2,7 @@
     <div>
       <b-button @click="toggleBusy">Toggle Busy State</b-button>
           
-      <b-table striped hover :items="users" :busy="isBusy" :fields="fields">
+      <b-table striped hover :items="stores" :busy="isBusy" :fields="fields">
         <template #table-busy>
           <div class="text-center text-danger my-2">
             <b-spinner class="align-middle"></b-spinner>
@@ -20,24 +20,23 @@
 <script>
 import { BTable } from 'bootstrap-vue-3';
 export default {
+    name: 'store-table',
+    props: ['stores'],
     data() {
         return {
             isBusy: false,
-            users: [
-                { id: 1, name: 'Best Buy', manager: 'Jon Snow'},
-                { id: 2, name: 'Get Outdoors', manager: 'Jane Smith' },
-                { id: 3, name: 'Walmart', manager: 'John Doe' },
-                { id: 4, name: 'Target', manager: 'Jane Smith' },
-                { id: 5, name: 'Dicks Sporting Goods', manager: 'Bob Johnson'}
-            ],
             fields: [
                 { key: 'id', label: 'ID' },
-                { key: 'name', label: 'Name' },
-                { key: 'manager', label: 'Manager' },
+                { key: 'store_name', label: 'Store Name' },
                 { key: 'actions', label: 'Actions' }
             ]
         }
+    }, 
+
+    mounted() {
+    // console.log() a message for testing
     },
+
     methods: {
         
         deleteUser(user) {

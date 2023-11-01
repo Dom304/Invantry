@@ -12,13 +12,10 @@
 <script>
 import { BTable } from 'bootstrap-vue-3';
 export default {
+    name: 'user-table',
+    props: ['users'],
     data() {
         return {
-            users: [
-                { id: 1, role: 'Admin', name: 'John Doe', email: 'john.doe@example.com' },
-                { id: 2, role: 'User', name: 'Jane Smith', email: 'jane.smith@example.com' },
-                { id: 3, role: 'Moderator', name: 'Bob Johnson', email: 'bob.johnson@example.com' }
-            ],
             fields: [
                 { key: 'id', label: 'ID' },
                 { key: 'role', label: 'Role' },

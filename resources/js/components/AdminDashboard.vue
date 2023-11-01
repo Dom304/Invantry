@@ -6,8 +6,8 @@
     </div>
 
     <div class="right-window-admin-dashboard">
-        <user-table v-if="currentwindow === 'user'"></user-table>
-        <store-table v-else-if="currentwindow === 'store'"></store-table>
+        <user-table v-if="currentwindow === 'user'" :users="users"></user-table>
+        <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
         <!-- Add other components as needed with v-else-if conditions -->
     </div>
 </template>
@@ -18,6 +18,9 @@ import UserTable from "./UserTable.vue";
 
 export default {
     name: 'admin-dashboard',
+    props: [
+        'users',
+        'stores',],
 
     components: {
         StoreTable,

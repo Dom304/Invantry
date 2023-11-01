@@ -15,7 +15,7 @@
 </div>
 
 <div class="admin-page-content">
-<admin-dashboard></admin-dashboard>
+  <admin-dashboard :users="{{ json_encode($users) }}" :stores="{{json_encode($stores)}}"></admin-dashboard>
 </div>
 
 @endsection
