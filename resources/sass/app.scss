@@ -10,7 +10,7 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
-$dark-grey : #2a2a2b;
+$dark-grey: #2a2a2b;
 // ====================== //
 // BASE STYLES
 // ====================== //
@@ -149,9 +149,9 @@ $font-path: "fonts";
     background-color: darkgrey;
 }
 
-    // &.active {
-    //     color: gray;
-    // }
+// &.active {
+//     color: gray;
+// }
 
 // ====================== //
 // HOMEPAGE STYLING
@@ -174,7 +174,6 @@ $font-path: "fonts";
     background-color: #fff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
-
     .logo,
     .app-name,
     .search-container,
@@ -188,7 +187,6 @@ $font-path: "fonts";
         width: auto;
         margin-right: 32px;
         margin-left: 0%;
-        
     }
 
     .app-name {
@@ -216,7 +214,7 @@ $font-path: "fonts";
     .cart-container {
         margin-left: 0%;
         margin-right: 0%;
-        
+
         .cart-button {
             background-color: transparent;
             border: none;
@@ -247,119 +245,56 @@ $font-path: "fonts";
 
     .user-info {
         display: flex; // set the display to flex to align items horizontally
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center; // vertically center-align the child elements
         gap: 10px; // provides some space between the icon and the username
         margin-bottom: 10px;
 
         .user-img {
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem; // adjust the size of the user icon (you can modify this value based on your needs)
         }
-        
+
         .username {
             font-size: 1rem; // adjust this based on your design preference
         }
     }
-    
-    //User
-    #user-btn {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: rgb(233, 233, 233);
-        color: black;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        font-weight: bold;
-    }
-    #user-btn:hover {
-        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
-    }
-    #user-btn.active {
-        background-color: black;
-        color: white;
 
-        //send to homepage (user_viewStoresPage.blade.php)
-
-    }
-
-    //Manager
-    #manager-btn {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: rgb(233, 233, 233);
-        color: black;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        font-weight: bold;
-    }
-    #manager-btn:hover {
-        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
-    }
-    #manager-btn.active {
-        background-color: black;
-        color: white;
-    }
-
-    //Moderator
-    #mod-btn {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: rgb(233, 233, 233);
-        color: black;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        font-weight: bold;
-    }
-    #mod-btn:hover {
-        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
-    }
-    #mod-btn.active {
-        background-color: black;
-        color: white;
-    }
-
-    //Administrator
-    #admin-btn {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: rgb(233, 233, 233);
-        color: black;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        font-weight: bold;
-    }
-    #admin-btn:hover {
-        background-color: darken(rgb(233, 233, 233), 10%); // darken the button's background color by 10%
-    }
-    #admin-btn.active {
-        background-color: black;
-        color: white;
-    }
-    
-    
     .collection-search-bar {
         width: 100%;
         padding: 5px;
         margin-bottom: 10px;
+    }
+}
+// side bar window buttons
+.window-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
 
-    
+    &:hover {
+        background-color: darken(
+            rgb(233, 233, 233),
+            10%
+        ); // darken the button's background color by 10%
+    }
+
+    &.active {
+        background-color: black;
+        color: white;
     }
 }
 
 /* Middle Window */
 .middle-window {
-
     /*
     display: flex;
     flex-direction: column;
@@ -391,7 +326,7 @@ $font-path: "fonts";
     align-items: center;
     width: 100%;
     height: 80px;
-    
+
     //margin-bottom: 1rem;
     margin-bottom: 0;
     //padding: 1rem;
@@ -429,7 +364,6 @@ $font-path: "fonts";
     }
 }
 
-
 .store-logo {
     display: flex;
     align-items: center;
@@ -462,7 +396,6 @@ $font-path: "fonts";
         color: #666;
     }
 }
-
 
 /* Right Window */
 .right-window {
@@ -595,7 +528,6 @@ $font-path: "fonts";
 /*Cart Page window*/
 
 .cart-middle-window {
-
     /*
     display: flex;
     flex-direction: column;
@@ -633,12 +565,12 @@ $font-path: "fonts";
             color: #a00; // Red color to signify delete action
             margin-left: 50px;
             cursor: pointer;
-            
+
             &:hover {
                 color: #d00; // Slightly brighter red on hover
             }
         }
-        
+
         .product-details {
             flex: 1;
 

@@ -12,6 +12,7 @@ import AdminStoresWindow from './components/AdminStoresWindow.vue';
 import AdminUsersWindow from './components/AdminUsersWindow.vue';
 import UserTable from './components/UserTable.vue';
 import StoreTable from './components/StoreTable.vue';
+import AdminDashboard from "./components/AdminDashboard.vue";
 
 // Other imports, if there are any.
 
@@ -30,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('admin-users-window', AdminUsersWindow);
     app.component('user-table', UserTable);
     app.component('store-table', StoreTable);
-
-    // Other global component registrations, if there are any.
+    app.component('admin-dashboard', AdminDashboard);
 
     app.mount('#app'); // This element should be present in the HTML file.
 });

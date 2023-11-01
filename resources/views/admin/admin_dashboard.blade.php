@@ -15,15 +15,7 @@
 </div>
 
 <div class="admin-page-content">
-  <div class="left-window-admin-dashboard">
-    <admin-left-window></admin-left-window>
-  </div>
-
-  <div class="right-window-admin-dashboard">
-    <!-- <admin-users-window></admin-main-window> -->
-    <user-table></user-table>
-    <store-table></store-table>
-  </div>
+<admin-dashboard></admin-dashboard>
 </div>
 
 @endsection

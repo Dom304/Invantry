@@ -19806,6 +19806,36 @@ const replacer = (_key, val) => {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StoreTable.vue */ "./resources/js/components/StoreTable.vue");
+/* harmony import */ var _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserTable.vue */ "./resources/js/components/UserTable.vue");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'admin-dashboard',
+  components: {
+    StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      currentwindow: 'user'
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminStoresWindow.vue?vue&type=script&lang=js":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminStoresWindow.vue?vue&type=script&lang=js ***!
@@ -20011,6 +20041,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      isBusy: false,
       users: [{
         id: 1,
         name: 'Best Buy',
@@ -20048,11 +20079,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    deleteUser: function deleteUser(user) {
+      // handle delete user logic
+    },
     editUser: function editUser(user) {
       // handle edit user logic
     },
-    deleteUser: function deleteUser(user) {
-      // handle delete user logic
+    toggleBusy: function toggleBusy() {
+      this.isBusy = !this.isBusy;
     }
   }
 });
@@ -20143,6 +20177,52 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0 ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "left-window-admin-dashboard"
+};
+var _hoisted_2 = {
+  "class": "right-window-admin-dashboard"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_user_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("user-table");
+  var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "window-btn",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.currentwindow = 'user';
+    })
+  }, "Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "window-btn",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $data.currentwindow = 'store';
+    })
+  }, "Stores"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "window-btn",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $data.currentwindow = 'request';
+    })
+  }, "Requests")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+    key: 0
+  })) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+    key: 1
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add other components as needed with v-else-if conditions ")])], 64 /* STABLE_FRAGMENT */);
+}
 
 /***/ }),
 
@@ -20472,15 +20552,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "text-center text-danger my-2"
+};
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Loading...", -1 /* HOISTED */);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
+  var _component_b_spinner = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-spinner");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
+    onClick: $options.toggleBusy
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Toggle Busy State")];
+    }),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
     items: $data.users,
+    busy: $data.isBusy,
     fields: $data.fields
   }, {
+    "table-busy": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_spinner, {
+        "class": "align-middle"
+      }), _hoisted_2])];
+    }),
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
@@ -20506,7 +20605,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["items", "fields"])]);
+  }, 8 /* PROPS */, ["items", "busy", "fields"])]);
 }
 
 /***/ }),
@@ -20620,6 +20719,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AdminUsersWindow_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/AdminUsersWindow.vue */ "./resources/js/components/AdminUsersWindow.vue");
 /* harmony import */ var _components_UserTable_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/UserTable.vue */ "./resources/js/components/UserTable.vue");
 /* harmony import */ var _components_StoreTable_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/StoreTable.vue */ "./resources/js/components/StoreTable.vue");
+/* harmony import */ var _components_AdminDashboard_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/AdminDashboard.vue */ "./resources/js/components/AdminDashboard.vue");
+
 
 
 
@@ -20651,9 +20752,7 @@ document.addEventListener('DOMContentLoaded', function () {
   app.component('admin-users-window', _components_AdminUsersWindow_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
   app.component('user-table', _components_UserTable_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
   app.component('store-table', _components_StoreTable_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
-
-  // Other global component registrations, if there are any.
-
+  app.component('admin-dashboard', _components_AdminDashboard_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
   app.mount('#app'); // This element should be present in the HTML file.
 });
 
@@ -35326,6 +35425,34 @@ exports["default"] = (sfc, props) => {
 
 /***/ }),
 
+/***/ "./resources/js/components/AdminDashboard.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/AdminDashboard.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AdminDashboard_vue_vue_type_template_id_1d9b30b0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminDashboard.vue?vue&type=template&id=1d9b30b0 */ "./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0");
+/* harmony import */ var _AdminDashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminDashboard.vue?vue&type=script&lang=js */ "./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_AdminDashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_AdminDashboard_vue_vue_type_template_id_1d9b30b0__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/AdminDashboard.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/AdminStoresWindow.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/AdminStoresWindow.vue ***!
@@ -35615,6 +35742,22 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AdminDashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AdminDashboard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AdminDashboard.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/AdminStoresWindow.vue?vue&type=script&lang=js":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/AdminStoresWindow.vue?vue&type=script&lang=js ***!
@@ -35772,6 +35915,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_adminLeftWindow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./adminLeftWindow.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/adminLeftWindow.vue?vue&type=script&lang=js");
  
+
+/***/ }),
+
+/***/ "./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0 ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AdminDashboard_vue_vue_type_template_id_1d9b30b0__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AdminDashboard_vue_vue_type_template_id_1d9b30b0__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AdminDashboard.vue?vue&type=template&id=1d9b30b0 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/AdminDashboard.vue?vue&type=template&id=1d9b30b0");
+
 
 /***/ }),
 
