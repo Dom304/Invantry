@@ -22,7 +22,7 @@
     //For filtering store items in middle window
     function filterItems() {
         const searchInput = document.querySelector('.search-input').value.toLowerCase();
-        const itemCards = document.querySelectorAll('.store-card');
+        const itemCards = document.querySelectorAll('.item-card');
 
         itemCards.forEach(card => {
             const itemName = card.querySelector('.store-name').textContent.toLowerCase();
