@@ -22594,6 +22594,11 @@ readers do not read off random characters that represent icons */
 
 /* Middle Window */
 .middle-window {
+  /*
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -22646,6 +22651,42 @@ readers do not read off random characters that represent icons */
 .store-card .store-name {
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(50% - 1rem);
+  height: 115px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+.item-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.item-card .store-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.item-card .add-to-cart-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #333;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.item-card .add-to-cart-btn:hover {
+  background-color: #555;
 }
 
 .store-logo {
@@ -22800,6 +22841,27 @@ readers do not read off random characters that represent icons */
 }
 
 /*Cart Page window*/
+.cart-middle-window {
+  /*
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  */
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 60%;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+}
+.cart-middle-window a {
+  text-decoration: none;
+  color: black;
+}
+
 .cart-window {
   padding: 20px;
 }
@@ -22809,6 +22871,15 @@ readers do not read off random characters that represent icons */
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding: 15px 0;
+}
+.cart-window .cart-product .trash-icon {
+  font-size: 1.2em;
+  color: #a00;
+  margin-left: 50px;
+  cursor: pointer;
+}
+.cart-window .cart-product .trash-icon:hover {
+  color: #d00;
 }
 .cart-window .cart-product .product-details {
   flex: 1;
@@ -22823,7 +22894,7 @@ readers do not read off random characters that represent icons */
 }
 .cart-window .cart-product .product-quantity,
 .cart-window .cart-product .product-price {
-  margin-left: 15px;
+  margin-left: 50px;
   font-weight: bold;
 }
 .cart-window .cart-total {

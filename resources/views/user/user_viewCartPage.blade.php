@@ -25,18 +25,6 @@
         document.getElementById(buttonId).classList.add('active');
         
         // Fetch and display the relevant view
-        fetchView(viewName);
-    }
-
-    function toggleActiveState(buttonId, viewName) {
-        // Remove active class from all buttons
-        document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to the clicked button
-        document.getElementById(buttonId).classList.add('active');
-        
-        // Fetch and display the relevant view
-        // Check the buttonId and take action accordingly
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
@@ -51,29 +39,22 @@
             // Optional: handle other cases or do nothing
         }
     }
-
-
-
 </script>
 
 <div class="top-toolbar">
     <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
-      <h1 class="app-name">Invantry</h1>
-      <div class="search-container">
+    <h1 class="app-name">Invantry</h1>
+    <div class="search-container">
         <input type="text" placeholder="Search items, products, and stores" class="search-input" />
-      </div>
-      <div class="cart-container">
+    </div>
+    <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
-          <img src="/images/cart_icon.png" alt="Cart" /> 
+            <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
-      </div>
+    </div>
 </div>
 
-
 <div class="page-content">
-
-
-        
     <div class="left-window">
         <div class="user-info">
             <span class="user-img">
@@ -81,17 +62,18 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
+        
         @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')        
-        <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+            <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
         @endif
         @if(auth()->user()->role == 'manager')
-        <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+            <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
         @endif
         @if(auth()->user()->role == 'admin')
-        <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+            <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
         @endif
         @if(auth()->user()->role == 'moderator')
-        <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+            <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         @endif
 
         <!-- Collection Search -->
@@ -101,15 +83,14 @@
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+            <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
-        
     </div> 
 
-    <div class="middle-window">
-
+    <div class="cart-middle-window">
         <div class="cart-window" role="region" aria-label="Shopping Cart">
 
+    
     <!-- Sample cart product #1 -->
     <div class="cart-product">
         <div class="product-details">
@@ -118,6 +99,8 @@
         </div>
         <div class="product-quantity">Quantity: 2</div>
         <div class="product-price">$9.99 each</div>
+        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
+
     </div>
 
     <!-- Sample cart product #2 -->
@@ -128,15 +111,20 @@
         </div>
         <div class="product-quantity">Quantity: 1</div>
         <div class="product-price">$19.99 each</div>
+        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
+
     </div>
+    
 
     <!-- Cart Total -->
+
+
     <div class="cart-total">Total: $39.97</div>
+    
 
-    <!-- Proceed to Checkout Button -->
-    <button class="proceed-checkout" aria-label="Proceed to checkout">Proceed to Checkout</button>
-</div>
-
+            <!-- Proceed to Checkout Button -->
+            <button class="proceed-checkout" aria-label="Proceed to checkout">Proceed to Checkout</button>
+        </div>
     </div>
 
     <div class="right-window"></div>
