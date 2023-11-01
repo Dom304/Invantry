@@ -4,27 +4,26 @@ services:
   mysql:
     image: mysql:latest
     container_name: mysql_database
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: my_laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-    networks:
-      - mynetwork
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin_container
-    env_file:
-      - ./.env
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
     ports:
       - "8080:80"
     depends_on:
       - mysql
-    networks:
-      - mynetwork
 
 volumes:
   mysql_data:
-
-networks:
-  mynetwork:
