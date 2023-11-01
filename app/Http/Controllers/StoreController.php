@@ -14,12 +14,12 @@ class StoreController extends Controller
 
     public function index()
     {
-    $user = Auth::user();
-    $collections = Collection::all();
-    $stores = Store::all();
-    $collections = $user->collections;
+        $user = Auth::user();
+        $collections = Collection::all();
+        $stores = Store::all();
+        $collections = $user->collections;
 
-    return view('user.user_viewStoresPage', compact('stores', 'collections', 'user'));
+        return view('user.user_viewStoresPage', compact('stores', 'collections', 'user'));
     }
 
     public function createStore(Request $request)
@@ -43,26 +43,28 @@ class StoreController extends Controller
     }
 
     public function updateRole(Request $request)
-{
-    $user = auth()->user(); // Get the currently authenticated user.
+    {
+        $user = auth()->user(); // Get the currently authenticated user.
 
-    // Check which button was clicked to determine the new role.
-    $newRole = $request->input('role');
+        // Check which button was clicked to determine the new role.
+        $newRole = $request->input('role');
 
-    // Ensure the new role is valid.
-    if (in_array($newRole, [User::ROLE_BUYER, User::ROLE_MANAGER, User::ROLE_MOD, User::ROLE_ADMIN])) {
-        $user->role = $newRole;
-        $user->save();
+        // Ensure the new role is valid.
+        if (in_array($newRole, [User::ROLE_BUYER, User::ROLE_MANAGER, User::ROLE_MOD, User::ROLE_ADMIN])) {
+            $user->role = $newRole;
+            $user->save();
 
-        return redirect()->back()->with('success', 'Your role has been updated successfully.');
+            return redirect()->back()->with('success', 'Your role has been updated successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Invalid role selection.');
     }
 
-    return redirect()->back()->with('error', 'Invalid role selection.');
-}
-
-    public function dashboard(){
+    public function dashboard()
+    {
         $user = Auth::user();
-        return view('admin.admin_dashboard', compact('user'));
+        $users = User::all();  // Fetch all users, adjust the query as needed.
+        $stores = Store::all();
+        return view('admin.admin_dashboard', compact('user', 'users', 'stores'));
     }
-
 }

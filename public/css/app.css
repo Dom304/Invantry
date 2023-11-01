@@ -22514,82 +22514,29 @@ readers do not read off random characters that represent icons */
 .left-window .user-info .username {
   font-size: 1rem;
 }
-.left-window #user-btn {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: rgb(233, 233, 233);
-  color: black;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-weight: bold;
-}
-.left-window #user-btn:hover {
-  background-color: #d0d0d0;
-}
-.left-window #user-btn.active {
-  background-color: black;
-  color: white;
-}
-.left-window #manager-btn {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: rgb(233, 233, 233);
-  color: black;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-weight: bold;
-}
-.left-window #manager-btn:hover {
-  background-color: #d0d0d0;
-}
-.left-window #manager-btn.active {
-  background-color: black;
-  color: white;
-}
-.left-window #mod-btn {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: rgb(233, 233, 233);
-  color: black;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-weight: bold;
-}
-.left-window #mod-btn:hover {
-  background-color: #d0d0d0;
-}
-.left-window #mod-btn.active {
-  background-color: black;
-  color: white;
-}
-.left-window #admin-btn {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: rgb(233, 233, 233);
-  color: black;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-weight: bold;
-}
-.left-window #admin-btn:hover {
-  background-color: #d0d0d0;
-}
-.left-window #admin-btn.active {
-  background-color: black;
-  color: white;
-}
 .left-window .collection-search-bar {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
+}
+
+.window-btn {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.window-btn:hover {
+  background-color: #d0d0d0;
+}
+.window-btn.active {
+  background-color: black;
+  color: white;
 }
 
 /* Middle Window */
@@ -22836,7 +22783,7 @@ readers do not read off random characters that represent icons */
 
 .right-window-admin-dashboard {
   width: 100%;
-  margin: 30px 0 0 30px;
+  margin: 30px;
   height: calc(100vh - 4rem);
 }
 
