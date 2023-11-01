@@ -15,13 +15,7 @@
 </div>
 
 <div class="admin-page-content">
-  <div class="left-window-admin-dashboard">
-    <admin-left-window></admin-left-window>
-  </div>
-
-  <div class="right-window-admin-dashboard">
-    <admin-users-window></admin-main-window>
-  </div>
+  <admin-dashboard :users="{{ json_encode($users) }}" :stores="{{json_encode($stores)}}"></admin-dashboard>
 </div>
 
 @endsection
