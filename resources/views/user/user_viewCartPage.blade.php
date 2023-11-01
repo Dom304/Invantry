@@ -62,18 +62,17 @@
             </span>
             <span class="username">{{ $user->name }}</span>
         </div>
-        
-        @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')        
-            <button class="menu-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')
+        <button class="window-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
         @endif
         @if(auth()->user()->role == 'manager')
-            <button class="menu-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        <button class="window-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
         @endif
         @if(auth()->user()->role == 'admin')
-            <button class="menu-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        <button class="window-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
         @endif
         @if(auth()->user()->role == 'moderator')
-            <button class="menu-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         @endif
 
         <!-- Collection Search -->
@@ -83,9 +82,10 @@
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-            <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
-    </div> 
+
+    </div>
 
     <div class="cart-middle-window">
         <div class="cart-window" role="region" aria-label="Shopping Cart">
