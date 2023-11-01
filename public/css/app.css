@@ -22583,7 +22583,7 @@ readers do not read off random characters that represent icons */
 .store-card {
   width: calc(50% - 1rem);
   height: 115px;
-  margin-top: 0;
+  margin-top: 1rem;
   margin-bottom: 0;
   padding: 1rem;
   border: 1px solid #ccc;
