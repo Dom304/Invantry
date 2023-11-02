@@ -16,7 +16,7 @@ class CollectionItemController extends Controller
         $collections = Collection::all();
         $collections = $user->collections;
         $collection = Collection::where('collection_name', $collName)->first();
-        $allItems = Item::all();
+        $allItems =Item::all();
 
         if (!$collection) {
             return view('user.user_viewStorePage');
