@@ -22590,13 +22590,49 @@ readers do not read off random characters that represent icons */
   padding: 0.5rem 1rem;
   font-size: 1rem;
   color: white;
-  background-color: #333;
+  background-color: rgb(51, 51, 51);
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 .item-card .add-to-cart-btn:hover {
+  background-color: rgb(61, 189, 32);
+}
+
+.colitem-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 115px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+.colitem-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.colitem-card .store-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.colitem-card .search-colitem-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #333;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.colitem-card .search-colitem-btn:hover {
   background-color: #555;
 }
 
