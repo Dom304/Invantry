@@ -15,8 +15,7 @@ import StoreTable from './components/StoreTable.vue';
 import AdminDashboard from "./components/AdminDashboard.vue";
 import Modal from "./components/Modal.vue";
 import EditModal from "./components/EditModal.vue";
-
-// Other imports, if there are any.
+import UserBtn from "./components/UserBtn.vue";
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = createApp({});
@@ -36,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('admin-dashboard', AdminDashboard);
     app.component('modal', Modal);
     app.component('edit-modal', EditModal);
+    app.component('user-btn', UserBtn);
 
     app.mount('#app'); // This element should be present in the HTML file.
 });
