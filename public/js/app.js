@@ -20245,6 +20245,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'UserMenu',
   props: {
@@ -20256,6 +20258,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    logout: function logout() {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/logout').then(function (response) {
+        window.location.href = '/login';
+      })["catch"](function (error) {
+        console.error('Logout failed:', error);
+      });
+    },
     toggleDropdown: function toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     }
@@ -20388,14 +20397,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentwindow = 'store';
     })
-  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
-      selected: $data.currentwindow === 'request'
-    }]),
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $data.currentwindow = 'request';
-    })
-  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Admins don't have access to requests? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            class=\"window-btn\"\n            :class=\"{ selected: currentwindow === 'request' }\"\n            @click=\"currentwindow = 'request'\"\n        >\n            Requests\n        </button> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
     key: 0,
     users: $props.users,
     "logged-in-user-id": $props.loggedInUserId
@@ -20987,23 +20989,25 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#"
 }, "Settings", -1 /* HOISTED */);
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_6 = {
   "class": "logout-form"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-  method: "GET",
-  action: "{{ route('logout') }}"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "logout-btn"
-}, "Logout")])], -1 /* HOISTED */);
-var _hoisted_7 = [_hoisted_4, _hoisted_5, _hoisted_6];
+}, "Logout", -1 /* HOISTED */);
+var _hoisted_8 = [_hoisted_7];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "user-name-btn",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.toggleDropdown && $options.toggleDropdown.apply($options, arguments);
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Hi, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + " ", 1 /* TEXT */), _hoisted_2]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [].concat(_hoisted_7), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.isDropdownOpen]])]);
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Hi, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + " ", 1 /* TEXT */), _hoisted_2]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.logout && $options.logout.apply($options, arguments);
+    }, ["prevent"]))
+  }, [].concat(_hoisted_8), 32 /* HYDRATE_EVENTS */)])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.isDropdownOpen]])]);
 }
 
 /***/ }),

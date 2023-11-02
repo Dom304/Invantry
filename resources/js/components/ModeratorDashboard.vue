@@ -14,14 +14,13 @@
         >
             Stores
         </button>
-        <!-- Admins don't have access to requests? -->
-        <!-- <button
+        <button
             class="window-btn"
             :class="{ selected: currentwindow === 'request' }"
             @click="currentwindow = 'request'"
         >
             Requests
-        </button> -->
+        </button>
     </div>
 
     <div class="right-window-admin-dashboard">
