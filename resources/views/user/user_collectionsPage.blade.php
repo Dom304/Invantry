@@ -199,7 +199,7 @@ $(document).ready(function() {
        
 
     <div class="right-window">
-    @foreach($items as $item)
+    @foreach($allItems as $item)
     <a href="/" class="item-card">
         <div class="store-logo">
             <!-- NOTE: You might want to link the actual store logo based on the store associated with the item -->

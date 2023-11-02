@@ -16,13 +16,14 @@ class CollectionItemController extends Controller
         $collections = Collection::all();
         $collections = $user->collections;
         $collection = Collection::where('collection_name', $collName)->first();
+        $allItems = Item::all();
 
         if (!$collection) {
             return view('user.user_viewStorePage');
         }
     $items = $collection->items;
     
-    return view('user.user_collectionsPage', compact('items', 'user', 'collections', 'collName'));
+    return view('user.user_collectionsPage', compact('items', 'user', 'collections', 'collName', 'allItems'));
     }
 
     public function store(Request $request)
