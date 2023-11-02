@@ -18,14 +18,18 @@ class CollectionController extends Controller
     
     public function createCollection(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'collection_name' => 'required|string',
-        ]);
+        if (auth()->check()) {
+            $this->validate($request, [
+                'collection_name' => 'required|string',
+            ]);
+        }
 
-        Collection::create($request->all());
+        Collection::create([
+            'user_id' => auth()->user()->id,
+            'collection_name' => $request->input('collection_name'),
+    ]);
 
-        return redirect()->route('collections.index')->with('success', 'Collection created successfully.');
+        return redirect()->route('collections.create')->with('success', 'Collection created successfully.');
     }
 
     

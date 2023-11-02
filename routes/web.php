@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CollectionItemController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CollectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,4 +39,7 @@ Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 
 Route::get('/adminDashboard', [StoreController::class, 'dashboard'])->name('adminDashboard');
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+
+Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
+
 

@@ -103,6 +103,15 @@
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         @endif
 
+        <form action="{{ route('collections.create') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="collection_name">Collection Name:</label>
+            <input type="text" name="collection_name" id='collection_name' class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Collection</button>
+    </form>
+
         <!-- Collection Search -->
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
