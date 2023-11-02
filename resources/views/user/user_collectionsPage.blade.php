@@ -3,6 +3,29 @@
 @section('content')
 
 <script>
+//for right window
+$(document).ready(function() {
+    $.get("/all-items", function(data) {
+        $(".right-window").empty();
+        
+        data.forEach(function(item) {
+            let itemCard = `
+                <div class="store-and-item-container">
+                    <h4 class="store-name">${item.store_name}</h4>
+                    <div class="item-card">
+                        <img src="path_to_placeholder_image" alt="Store Logo">
+                        <h5 class="item-name">${item.item_name}</h5>
+                        <p class="item-description">${item.item_description}</p>
+                        <p class="item-price">${item.item_price}</p>
+                    </div>
+                </div>
+            `;
+            $(".right-window").append(itemCard);
+        });
+    });
+});
+
+
 
     //For filtering store items in middle window
     function filterItems() {
@@ -57,6 +80,41 @@
             // Optional: handle other cases or do nothing
         }
     }
+
+    $(document).ready(function() {
+    // When the search button inside a colitem-card is clicked
+    $(".search-colitem-btn").click(function() {
+            let itemName = $(this).data('item-name');
+            let itemDescription = $(this).data('item-description');
+
+        // AJAX request to fetch matching items
+        $.post("/search-items-matching-description", {
+            itemName: itemName,
+            itemDescription: itemDescription
+        }, function(response) {
+            // Clear the right window
+            $(".right-window").empty();
+
+            // Populate the right window with the fetched items
+            response.forEach(function(item) {
+                let itemCard = `
+                    <div class="store-and-item-container">
+                        <h4 class="store-name">${item.store_name}</h4>
+                        <div class="item-card">
+                            <img src="path_to_placeholder_image" alt="Store Logo">
+                            <h5 class="item-name">${item.item_name}</h5>
+                            <p class="item-description">${item.item_description}</p>
+                            <p class="item-price">${item.item_price}</p>
+                        </div>
+                    </div>
+                `;
+                $(".right-window").append(itemCard);
+            });
+        });
+    });
+});
+
+
 
 
 </script>
@@ -124,24 +182,37 @@
 
 
         @foreach($items as $item)
-        <!-- href="/stores/store-name" -->
-        <a href="/home" class="colitem-card">
-            <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
-            </div>
-            <div class="store-info">
-                <span class="store-name">{{ $item->item_name }}</span>
-                <span class="store-subtext">{{ $item->item_description }}</span>
-            </div>
-            <button class="search-colitem-btn">Search for item</button>
-        </a>
-        @endforeach
+    <div class="colitem-card">
+        <div class="store-logo">
+            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+        </div>
+        <div class="store-info">
+            <span class="store-name">{{ $item->item_name }}</span>
+            <span class="store-subtext">{{ $item->item_description }}</span>
+        </div>
+        <!-- Added a data attribute to the button for easy identification -->
+        <button class="search-colitem-btn" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+    </div>
+@endforeach
     </div>
         
        
 
     <div class="right-window">
-        <!-- Content will be dynamically populated or can remain empty -->
+    @foreach($items as $item)
+    <a href="/" class="item-card">
+        <div class="store-logo">
+            <!-- NOTE: You might want to link the actual store logo based on the store associated with the item -->
+            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+        </div>
+        <div class="store-info">
+            <span class="store-name">{{ $item->item_name }}</span>
+            <span class="store-subtext">{{ $item->item_description }}</span>
+            <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
+        </div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+    </a>
+    @endforeach
     </div>
 
 </div>
