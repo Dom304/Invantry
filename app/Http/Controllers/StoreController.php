@@ -42,6 +42,28 @@ class StoreController extends Controller
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
+    public function deleteUser($id)
+    {
+        // Get the authenticated user's ID
+        $authUserId = auth()->id();
+
+        // Check if the user is trying to delete themselves
+        if ($authUserId == $id) {
+            return redirect()->back()->with('error', 'You cannot delete yourself!');
+        }
+
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found!');
+        }
+
+        // TODO:Perform any pre-deletion tasks here. For example, deleting related entities or files.
+
+        $user->delete();
+
+        return redirect()->route('adminDashboard')->with('success', 'User deleted successfully.');
+    }
+
     public function updateRole(Request $request)
     {
         $user = auth()->user(); // Get the currently authenticated user.

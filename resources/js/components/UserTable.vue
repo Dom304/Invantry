@@ -2,20 +2,34 @@
     <div>
         <b-table striped hover :items="users" :fields="fields">
             <template #cell(actions)="row">
-                <b-button size="sm" @click="editUser(row.item)">Edit</b-button>
-                <b-button size="sm" variant="danger" @click="deleteUser(row.item)">Delete</b-button>
+                <b-button size="sm" @click="showModal = true">Edit</b-button>
+                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="deleteUser(row.item)">Delete</b-button>
             </template>
         </b-table>
+
+
     </div>
+
+    <Modal :show="showModal" @close="showModal = false"></Modal>
 </template>
 
 <script>
 import { BTable } from 'bootstrap-vue-3';
+import Modal from './Modal.vue'
+
 export default {
     name: 'user-table',
-    props: ['users'],
+
+    props: ['users',
+            'loggedInUserId'],
+
+    components: {
+        Modal
+  },
+
     data() {
         return {
+            showModal: false,
             fields: [
                 { key: 'id', label: 'ID' },
                 { key: 'role', label: 'Role' },
@@ -25,13 +39,20 @@ export default {
             ]
         }
     },
+
+    mounted() {
+        console.log(this.loggedInUserId);
+    },
+
     methods: {
         editUser(user) {
             // handle edit user logic
         },
+
         deleteUser(user) {
-            // handle delete user logic
-        }
+            this.selectedUser = user;
+        },
+
     }
 }
 </script>
