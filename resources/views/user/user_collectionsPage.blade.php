@@ -19,6 +19,22 @@
             }
         });
     }
+     //For filtering store items in right window
+     function filterItemsRight() {
+    const searchInput = document.querySelector('.right-search-input').value.toLowerCase();
+    const itemCards = document.querySelectorAll('.item-card');  // Corrected the selector
+
+    itemCards.forEach(card => {
+        const itemName = card.querySelector('.store-name').textContent.toLowerCase();
+        const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
+        if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
+            card.style.display = 'block';  // Changed from 'flex' to 'block' to match the display style of the item cards
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
 
     //For filtering collections in left window
     function filterCollections() {
@@ -125,24 +141,40 @@
 
 
         @foreach($items as $item)
-        <!-- href="/stores/store-name" -->
-        <a href="/home" class="colitem-card">
-            <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
-            </div>
-            <div class="store-info">
-                <span class="store-name">{{ $item->item_name }}</span>
-                <span class="store-subtext">{{ $item->item_description }}</span>
-            </div>
-            <button class="search-colitem-btn">Search for item</button>
-        </a>
-        @endforeach
+    <div class="colitem-card">
+        <div class="store-logo">
+            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+        </div>
+        <div class="store-info">
+            <span class="store-name">{{ $item->item_name }}</span>
+            <span class="store-subtext">{{ $item->item_description }}</span>
+        </div>
+        <!-- Added a data attribute to the button for easy identification -->
+        <button class="search-colitem-btn" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+    </div>
+@endforeach
     </div>
         
        
 
     <div class="right-window">
-        <!-- Content will be dynamically populated or can remain empty -->
+    <div class="search-container">
+      <input type="text" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
+      </div>
+    @foreach($allItems as $item)
+    <a href="/" class="item-card">
+        <div class="store-logo">
+            <!-- NOTE: You might want to link the actual store logo based on the store associated with the item -->
+            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+        </div>
+        <div class="store-info">
+            <span class="store-name">{{ $item->item_name }}</span>
+            <span class="store-subtext">{{ $item->item_description }}</span>
+            <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
+        </div>
+        <button class="add-to-cart-btn">Add to Cart</button>
+    </a>
+    @endforeach
     </div>
 
 </div>
