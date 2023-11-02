@@ -42,6 +42,22 @@ $(document).ready(function() {
             }
         });
     }
+     //For filtering store items in right window
+     function filterItemsRight() {
+    const searchInput = document.querySelector('.search-input').value.toLowerCase();
+    const itemCards = document.querySelectorAll('.right-window .item-card');  // Corrected the selector
+
+    itemCards.forEach(card => {
+        const itemName = card.querySelector('.store-name').textContent.toLowerCase();
+        const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
+        if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
+            card.style.display = 'block';  // Changed from 'flex' to 'block' to match the display style of the item cards
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
 
     function filterCollections() {
         const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
@@ -199,6 +215,9 @@ $(document).ready(function() {
        
 
     <div class="right-window">
+    <div class="search-container">
+      <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItemsRight()" />
+      </div>
     @foreach($allItems as $item)
     <a href="/" class="item-card">
         <div class="store-logo">
