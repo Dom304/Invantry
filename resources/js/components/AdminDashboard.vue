@@ -6,9 +6,8 @@
     </div>
 
     <div class="right-window-admin-dashboard">
-        <user-table v-if="currentwindow === 'user'" :users="users"></user-table>
+        <user-table v-if="currentwindow === 'user'" :users="users" :logged-in-user-id="loggedInUserId"></user-table>
         <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <!-- Add other components as needed with v-else-if conditions -->
     </div>
 </template>
 
@@ -20,11 +19,17 @@ export default {
     name: 'admin-dashboard',
     props: [
         'users',
-        'stores',],
+        'stores',
+        'requests',
+        'loggedInUserId'],
 
     components: {
         StoreTable,
         UserTable
+    },
+
+    mounted() {
+        console.log(this.loggedInUserId);
     },
 
     data() {
