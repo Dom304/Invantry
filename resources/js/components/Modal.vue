@@ -87,6 +87,8 @@
 }
 
 .model-head {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #e5e5e5;
     text-align: center;
@@ -105,6 +107,9 @@
 .model-main-content {
     flex: 1;
     padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .model-foot {

@@ -19892,8 +19892,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'admin-dashboard',
-  props: ['users', 'stores', 'requests', 'loggedInUserId'],
+  name: "admin-dashboard",
+  props: ["users", "stores", "requests", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -19903,7 +19903,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentwindow: 'user'
+      currentwindow: "user"
     };
   }
 });
@@ -20375,28 +20375,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_user_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("user-table");
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'user'
+    }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.currentwindow = 'user';
     })
-  }, "Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
+  }, " Users ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'store'
+    }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentwindow = 'store';
     })
-  }, "Stores"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
+  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'request'
+    }]),
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $data.currentwindow = 'request';
     })
-  }, "Requests")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
     key: 0,
     users: $props.users,
     "logged-in-user-id": $props.loggedInUserId
   }, null, 8 /* PROPS */, ["users", "logged-in-user-id"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
     stores: $props.stores
-  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add your Requests component here ")])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -35182,7 +35188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n        position: fixed;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0;\n        background: rgba(0, 0, 0, 0.5);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        opacity: 0; /* Initially set the overlay to be invisible */\n        pointer-events: none; /* Ensure it doesn't block anything when not shown */\n        transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-04ac6368] {\n        opacity: 1;\n        pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-04ac6368] {\n        background: white;\n        width: 60%;\n        max-width: 600px;\n        padding: 20px;\n        border-radius: 5px;\n        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n        display: flex;\n        flex-direction: column;\n        transform: translateY(-100%); /* Starts off the screen */\n        transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n        transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-04ac6368] {\n        justify-content: space-between;\n        border-bottom: 1px solid #e5e5e5;\n        text-align: center;\n}\n.model-head span[data-v-04ac6368] {\n        cursor: pointer;\n        padding: 5px;\n        display: inline-block;\n}\n.model-head span[data-v-04ac6368]:hover {\n        color: #888;\n}\n.model-main-content[data-v-04ac6368] {\n        flex: 1;\n        padding: 20px 0;\n}\n.model-foot[data-v-04ac6368] {\n        display: flex;\n        justify-content: space-between;\n        padding-top: 20px;\n        border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n        position: fixed;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0;\n        background: rgba(0, 0, 0, 0.5);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        opacity: 0; /* Initially set the overlay to be invisible */\n        pointer-events: none; /* Ensure it doesn't block anything when not shown */\n        transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-04ac6368] {\n        opacity: 1;\n        pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-04ac6368] {\n        background: white;\n        width: 60%;\n        max-width: 600px;\n        padding: 20px;\n        border-radius: 5px;\n        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n        display: flex;\n        flex-direction: column;\n        transform: translateY(-100%); /* Starts off the screen */\n        transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n        transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-04ac6368] {\n        display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-04ac6368] {\n        cursor: pointer;\n        padding: 5px;\n        display: inline-block;\n}\n.model-head span[data-v-04ac6368]:hover {\n        color: #888;\n}\n.model-main-content[data-v-04ac6368] {\n       \n        padding: 20px 20px;\n        justify-content: center;\n        padding: 20px 0;\nform[data-v-04ac6368] {\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n}\n}\n.model-foot[data-v-04ac6368] {\n        display: flex;\n        justify-content: space-between;\n        padding-top: 20px;\n        border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35206,7 +35212,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n    color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n    flex: 1;\n    padding: 20px 0;\n}\n.model-foot[data-v-53ab54d2] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n    color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n    flex: 1;\n    padding: 20px 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.model-foot[data-v-53ab54d2] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

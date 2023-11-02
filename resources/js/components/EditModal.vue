@@ -101,9 +101,11 @@
     }
 
     .model-head {
-        justify-content: space-between;
-        border-bottom: 1px solid #e5e5e5;
-        text-align: center;
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
     }
 
     .model-head span {
@@ -117,8 +119,17 @@
     }
 
     .model-main-content {
-        flex: 1;
+       
+        padding: 20px;
+        justify-content: center;
         padding: 20px 0;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        
+        }
     }
 
     .model-foot {

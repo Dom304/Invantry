@@ -280,11 +280,9 @@ $font-path: "fonts";
     text-align: left;
     font-weight: bold;
 
-    &:hover {
-        background-color: darken(
-            rgb(233, 233, 233),
-            10%
-        ); // darken the button's background color by 10%
+    &:hover,
+    &.selected {
+        background-color: darken(rgb(233, 233, 233), 10%);
     }
 
     &.active {

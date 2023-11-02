@@ -22531,7 +22531,7 @@ readers do not read off random characters that represent icons */
   text-align: left;
   font-weight: bold;
 }
-.window-btn:hover {
+.window-btn:hover, .window-btn.selected {
   background-color: #d0d0d0;
 }
 .window-btn.active {
