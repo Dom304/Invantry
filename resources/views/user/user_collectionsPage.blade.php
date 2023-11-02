@@ -44,8 +44,8 @@ $(document).ready(function() {
     }
      //For filtering store items in right window
      function filterItemsRight() {
-    const searchInput = document.querySelector('.search-input').value.toLowerCase();
-    const itemCards = document.querySelectorAll('.right-window .item-card');  // Corrected the selector
+    const searchInput = document.querySelector('.right-search-input').value.toLowerCase();
+    const itemCards = document.querySelectorAll('.item-card');  // Corrected the selector
 
     itemCards.forEach(card => {
         const itemName = card.querySelector('.store-name').textContent.toLowerCase();
@@ -217,7 +217,7 @@ $(document).ready(function() {
 
     <div class="right-window">
     <div class="search-container">
-      <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItemsRight()" />
+      <input type="text" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
       </div>
     @foreach($allItems as $item)
     <a href="/" class="item-card">
