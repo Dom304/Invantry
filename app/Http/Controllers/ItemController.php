@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Store;
 use App\Models\Collection;
+use App\Models\Cart;
 
 class ItemController extends Controller
 {
@@ -19,7 +20,7 @@ class ItemController extends Controller
     $collections = $user->collections; 
     $stores = Store::all();
 
-    return view('user.user_storePage', compact('store','items', 'collections', 'stores', 'user'));
+    return view('user.user_storePage', compact('store','items', 'collections', 'stores', 'user', 'storeName'));
     }
 
     public function insertItem(Request $request)
@@ -35,6 +36,30 @@ class ItemController extends Controller
         Item::create($request->all());
 
         return redirect()->back()->with('success', 'Item added successfully');
+    }
+
+    public function insertToCart(Request $request, $storeName)
+    {
+        $itemData = $request->all();
+        $store = Store::where('store_name', $storeName)->firstOrFail();
+        $existingCart = Cart::where('user_id', auth()->user()->id)
+        ->where('store_id', $store->id)
+        ->where('item_id', $itemData['item_id'])
+        ->first();
+
+    if ($existingCart) {
+        $existingCart->increment('quantity');
+    } else {
+        Cart::create([
+            'user_id' => auth()->user()->id,
+            'store_id' => $store->id,
+            'item_id' => $itemData['item_id'],
+            'quantity' => 1,
+        ]);
+    }
+
+        return redirect()->route('cart', ['storeName' => $storeName])
+        ->with('success', 'Item added to cart successfully');
     }
 
     public function editItem(Request $request, Item $item)

@@ -92,34 +92,31 @@
 
     
     <!-- Sample cart product #1 -->
+    @foreach($cartItems as $cartItem)
     <div class="cart-product">
         <div class="product-details">
-            <div class="product-name">Product Name 1</div>
-            <div class="product-description">Short description of the product</div>
+            <div class="product-name">{{ $cartItem->item->item_name }}</div>
+            <div class="product-description">{{ $cartItem->item->item_description }}</div>
         </div>
-        <div class="product-quantity">Quantity: 2</div>
-        <div class="product-price">$9.99 each</div>
-        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
-
+        <div class="product-quantity">Quantity: {{ $cartItem->quantity }}</div>
+        <div class="product-price">${{ number_format($cartItem->item->item_price, 2) }} each</div>
+        <form method="POST" action="{{ route('cart.remove', $cartItem->id) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></button>
+        </form>
     </div>
+    @endforeach
 
-    <!-- Sample cart product #2 -->
-    <div class="cart-product">
-        <div class="product-details">
-            <div class="product-name">Product Name 2</div>
-            <div class="product-description">Another description of the product</div>
-        </div>
-        <div class="product-quantity">Quantity: 1</div>
-        <div class="product-price">$19.99 each</div>
-        <i class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></i>
-
-    </div>
-    
 
     <!-- Cart Total -->
+    @php
+    $totalPrice = $cartItems->sum(function ($cartItem) {
+        return $cartItem->quantity * $cartItem->item->item_price;
+    });
+    @endphp 
 
-
-    <div class="cart-total">Total: $39.97</div>
+    <div class="cart-total"> ${{ number_format($totalPrice, 2) }}</div>
     
 
             <!-- Proceed to Checkout Button -->

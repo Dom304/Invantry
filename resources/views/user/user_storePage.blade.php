@@ -124,7 +124,7 @@
     <div class="middle-window">
     @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/" class="item-card">
+        <a class="item-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
@@ -133,7 +133,12 @@
                 <span class="store-subtext">{{ $item->item_description }}</span>
                 <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             </div>
-            <button class="add-to-cart-btn">Add to Cart</button>
+            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
+                @csrf
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
         </a>
     @endforeach
     </div>

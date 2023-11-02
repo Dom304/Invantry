@@ -42,6 +42,28 @@ class StoreController extends Controller
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
+    public function deleteUser($id)
+    {
+        // Get the authenticated user's ID
+        $authUserId = auth()->id();
+
+        // Check if the user is trying to delete themselves
+        if ($authUserId == $id) {
+            return redirect()->back()->with('error', 'You cannot delete yourself!');
+        }
+
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found!');
+        }
+
+        // TODO:Perform any pre-deletion tasks here. For example, deleting related entities or files.
+
+        $user->delete();
+
+        return redirect()->route('adminDashboard')->with('success', 'User deleted successfully.');
+    }
+
     public function updateRole(Request $request)
     {
         $user = auth()->user(); // Get the currently authenticated user.
@@ -60,11 +82,25 @@ class StoreController extends Controller
         return redirect()->back()->with('error', 'Invalid role selection.');
     }
 
-    public function dashboard()
+    public function adminDashboard()
     {
         $user = Auth::user();
         $users = User::all();  // Fetch all users, adjust the query as needed.
         $stores = Store::all();
         return view('admin.admin_dashboard', compact('user', 'users', 'stores'));
+    }
+
+    public function moderatorDashboard()
+    {
+        $user = Auth::user();
+        $users = User::all();  // Fetch all users, adjust the query as needed.
+        $stores = Store::all();
+        return view('moderator.moderator_dashboard', compact('user', 'users', 'stores'));
+    }
+
+    public function returnUsers()
+    {
+        $users = User::all();
+        return response()->json($users);
     }
 }

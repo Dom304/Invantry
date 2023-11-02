@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CollectionItemController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CollectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +18,11 @@ use App\Http\Controllers\CartController;
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('admin.admin_dashboard');
-});
-*/
-
 Route::get('/home', [StoreController::class, 'index'])->name('home');
-Route::get('/store/{storeName}', [ItemController::class, 'index']);
+
+Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store');
+Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
+
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index']);
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
@@ -34,13 +32,14 @@ Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add/{product}', 'CartController@addToCart')->name('cart.add');
-Route::put('/cart/update/{cart}', 'CartController@updateCart')->name('cart.update');
-Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('cart.remove');
-//for right window
-Route::get('/collection/{collName}/search-items-matching-description', [ItemController::class, 'getAllItems']);
+Route::delete('/cart/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 
 //delete after
 Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 
-Route::get('/adminDashboard', [StoreController::class, 'dashboard'])->name('adminDashboard');
+Route::get('/adminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
+Route::get('/moderatorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
+Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+
+Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
+Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');
