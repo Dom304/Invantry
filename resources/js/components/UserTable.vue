@@ -6,13 +6,13 @@
                 <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
             </template>
         </b-table>
-
-
     </div>
 
-    <Modal :show="showModal" :userId="selectedUser.id" @close="showModal = false"></Modal>
+    <Modal :show="showModal" :userId="selectedUser.id" :username="selectedUser.name" @close="showModal = false"
+  @user-deleted-successfully="refreshTable"></Modal>
     <EditModal :show="showEditModal" @close="showEditModal = false" :user-data="selectedUser" @update-user="editUser"></EditModal>
 </template>
+
 
 <script>
 import { BTable } from 'bootstrap-vue-3';
@@ -22,13 +22,12 @@ import EditModal from './EditModal.vue'
 export default {
     name: 'user-table',
 
-    props: ['users',
-            'loggedInUserId'],
+    props: ['users', 'loggedInUserId'],
 
     components: {
         Modal,
         EditModal
-  },
+    },
 
     data() {
         return {
@@ -59,6 +58,15 @@ export default {
             // handle edit user logic
         },
 
+        refreshTable() {
+            axios.get('/refresh')
+                .then(response => {
+                    this.users = response.data;
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the users:", error);
+                });
+        },
     }
 }
 </script>

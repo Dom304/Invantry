@@ -37,9 +37,9 @@ Route::delete('/cart/{cartItem}', [CartController::class, 'remove'])->name('cart
 //delete after
 Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 
-Route::get('/adminDashboard', [StoreController::class, 'dashboard'])->name('adminDashboard');
+Route::get('/adminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
+Route::get('/moderatorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
-
-
+Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');

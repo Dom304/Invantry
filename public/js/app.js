@@ -19892,8 +19892,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'admin-dashboard',
-  props: ['users', 'stores', 'requests', 'loggedInUserId'],
+  name: "admin-dashboard",
+  props: ["users", "stores", "requests", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -19903,7 +19903,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentwindow: 'user'
+      currentwindow: "user"
     };
   }
 });
@@ -20120,6 +20120,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     userId: {
       type: Number
+    },
+    username: {
+      // Adding username as a prop
+      type: String,
+      "default": ''
     }
   },
   methods: {
@@ -20129,9 +20134,9 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser() {
       var _this = this;
       axios["delete"]("/user/".concat(this.userId)).then(function (response) {
-        // Handle success. Maybe show a notification or reload the data table.
-        _this.$emit('user-deleted', _this.userId); // Emit an event indicating the user was deleted.
-        _this.close();
+        console.log("User deleted successfully"); // Use console.log instead of console.success
+        _this.$emit('user-deleted-successfully'); // Emit an event when user is deleted
+        _this.close(); // Close the modal
       })["catch"](function (error) {
         // Handle the error. Maybe show a notification to the user.
         console.error("There was an error deleting the user:", error);
@@ -20234,6 +20239,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=script&lang=js":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'UserMenu',
+  props: {
+    username: String
+  },
+  data: function data() {
+    return {
+      isDropdownOpen: false
+    };
+  },
+  methods: {
+    logout: function logout() {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/logout').then(function (response) {
+        window.location.href = '/login';
+      })["catch"](function (error) {
+        console.error('Logout failed:', error);
+      });
+    },
+    toggleDropdown: function toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserTable.vue?vue&type=script&lang=js":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserTable.vue?vue&type=script&lang=js ***!
@@ -20291,6 +20335,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     editUser: function editUser(user) {
       // handle edit user logic
+    },
+    refreshTable: function refreshTable() {
+      var _this = this;
+      axios.get('/refresh').then(function (response) {
+        _this.users = response.data;
+      })["catch"](function (error) {
+        console.error("There was an error fetching the users:", error);
+      });
     }
   }
 });
@@ -20345,28 +20397,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_user_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("user-table");
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'user'
+    }]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.currentwindow = 'user';
     })
-  }, "Users"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
+  }, " Users ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'store'
+    }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentwindow = 'store';
     })
-  }, "Stores"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "window-btn",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return $data.currentwindow = 'request';
-    })
-  }, "Requests")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Admins don't have access to requests? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            class=\"window-btn\"\n            :class=\"{ selected: currentwindow === 'request' }\"\n            @click=\"currentwindow = 'request'\"\n        >\n            Requests\n        </button> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
     key: 0,
     users: $props.users,
     "logged-in-user-id": $props.loggedInUserId
   }, null, 8 /* PROPS */, ["users", "logged-in-user-id"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
     stores: $props.stores
-  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add your Requests component here ")])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20718,16 +20769,16 @@ var _hoisted_1 = {
   "class": "modal-body"
 };
 var _hoisted_2 = {
-  "class": "model-head"
+  "class": "modal-head"
 };
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Your Modal Title", -1 /* HOISTED */);
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Deletion", -1 /* HOISTED */);
 });
 var _hoisted_4 = {
-  "class": "model-main-content"
+  "class": "modal-main-content"
 };
 var _hoisted_5 = {
-  "class": "model-foot"
+  "class": "modal-foot"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -20740,7 +20791,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.deleteUser && $options.deleteUser.apply($options, arguments);
     })
@@ -20923,6 +20974,57 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914 ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "user-name-dropdown"
+};
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "arrow-down-icon"
+}, null, -1 /* HOISTED */);
+var _hoisted_3 = {
+  "class": "dropdown-content"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "#"
+}, "Profile", -1 /* HOISTED */);
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "#"
+}, "Settings", -1 /* HOISTED */);
+var _hoisted_6 = {
+  "class": "logout-form"
+};
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "logout-btn"
+}, "Logout", -1 /* HOISTED */);
+var _hoisted_8 = [_hoisted_7];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "user-name-btn",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.toggleDropdown && $options.toggleDropdown.apply($options, arguments);
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Hi, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + " ", 1 /* TEXT */), _hoisted_2]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.logout && $options.logout.apply($options, arguments);
+    }, ["prevent"]))
+  }, [].concat(_hoisted_8), 32 /* HYDRATE_EVENTS */)])], 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.isDropdownOpen]])]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserTable.vue?vue&type=template&id=2c449768":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserTable.vue?vue&type=template&id=2c449768 ***!
@@ -20976,10 +21078,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["items", "fields"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
     userId: $data.selectedUser.id,
+    username: $data.selectedUser.name,
     onClose: _cache[1] || (_cache[1] = function ($event) {
       return $data.showModal = false;
-    })
-  }, null, 8 /* PROPS */, ["show", "userId"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
+    }),
+    onUserDeletedSuccessfully: $options.refreshTable
+  }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
     onClose: _cache[2] || (_cache[2] = function ($event) {
       return $data.showEditModal = false;
@@ -21051,6 +21155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AdminDashboard_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/AdminDashboard.vue */ "./resources/js/components/AdminDashboard.vue");
 /* harmony import */ var _components_Modal_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Modal.vue */ "./resources/js/components/Modal.vue");
 /* harmony import */ var _components_EditModal_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/EditModal.vue */ "./resources/js/components/EditModal.vue");
+/* harmony import */ var _components_UserBtn_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/UserBtn.vue */ "./resources/js/components/UserBtn.vue");
 
 
 
@@ -21067,8 +21172,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// Other imports, if there are any.
 
 document.addEventListener('DOMContentLoaded', function () {
   var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
@@ -21088,6 +21191,7 @@ document.addEventListener('DOMContentLoaded', function () {
   app.component('admin-dashboard', _components_AdminDashboard_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
   app.component('modal', _components_Modal_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
   app.component('edit-modal', _components_EditModal_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
+  app.component('user-btn', _components_UserBtn_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
   app.mount('#app'); // This element should be present in the HTML file.
 });
 
@@ -35103,7 +35207,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n        position: fixed;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0;\n        background: rgba(0, 0, 0, 0.5);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        opacity: 0; /* Initially set the overlay to be invisible */\n        pointer-events: none; /* Ensure it doesn't block anything when not shown */\n        transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-04ac6368] {\n        opacity: 1;\n        pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-04ac6368] {\n        background: white;\n        width: 60%;\n        max-width: 600px;\n        padding: 20px;\n        border-radius: 5px;\n        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n        display: flex;\n        flex-direction: column;\n        transform: translateY(-100%); /* Starts off the screen */\n        transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n        transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-04ac6368] {\n        justify-content: space-between;\n        border-bottom: 1px solid #e5e5e5;\n        text-align: center;\n}\n.model-head span[data-v-04ac6368] {\n        cursor: pointer;\n        padding: 5px;\n        display: inline-block;\n}\n.model-head span[data-v-04ac6368]:hover {\n        color: #888;\n}\n.model-main-content[data-v-04ac6368] {\n        flex: 1;\n        padding: 20px 0;\n}\n.model-foot[data-v-04ac6368] {\n        display: flex;\n        justify-content: space-between;\n        padding-top: 20px;\n        border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n        position: fixed;\n        top: 0;\n        left: 0;\n        right: 0;\n        bottom: 0;\n        background: rgba(0, 0, 0, 0.5);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        opacity: 0; /* Initially set the overlay to be invisible */\n        pointer-events: none; /* Ensure it doesn't block anything when not shown */\n        transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-04ac6368] {\n        opacity: 1;\n        pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-04ac6368] {\n        background: white;\n        width: 60%;\n        max-width: 600px;\n        padding: 20px;\n        border-radius: 5px;\n        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n        display: flex;\n        flex-direction: column;\n        transform: translateY(-100%); /* Starts off the screen */\n        transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n        transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-04ac6368] {\n        display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-04ac6368] {\n        cursor: pointer;\n        padding: 5px;\n        display: inline-block;\n}\n.model-head span[data-v-04ac6368]:hover {\n        color: #888;\n}\n.model-main-content[data-v-04ac6368] {\n       \n        padding: 20px;\n        justify-content: center;\n        padding: 20px 0;\nform[data-v-04ac6368] {\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n}\n}\n.model-foot[data-v-04ac6368] {\n        display: flex;\n        justify-content: space-between;\n        padding-top: 20px;\n        border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35127,7 +35231,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n    color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n    flex: 1;\n    padding: 20px 0;\n}\n.model-foot[data-v-53ab54d2] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0; /* Initially set the overlay to be invisible */\n  pointer-events: none; /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n  opacity: 1;\n  pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%); /* Starts off the screen */\n  transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n  transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n  color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.model-foot[data-v-53ab54d2] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36191,6 +36295,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/UserBtn.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/UserBtn.vue ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserBtn_vue_vue_type_template_id_5c6c0914__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserBtn.vue?vue&type=template&id=5c6c0914 */ "./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914");
+/* harmony import */ var _UserBtn_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserBtn.vue?vue&type=script&lang=js */ "./resources/js/components/UserBtn.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_UserBtn_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UserBtn_vue_vue_type_template_id_5c6c0914__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/UserBtn.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/UserTable.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/UserTable.vue ***!
@@ -36423,6 +36555,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/UserBtn.vue?vue&type=script&lang=js":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/UserBtn.vue?vue&type=script&lang=js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserBtn_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserBtn_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserBtn.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/UserTable.vue?vue&type=script&lang=js":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/UserTable.vue?vue&type=script&lang=js ***!
@@ -36627,6 +36775,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StoreTable_vue_vue_type_template_id_1b65e598__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_StoreTable_vue_vue_type_template_id_1b65e598__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./StoreTable.vue?vue&type=template&id=1b65e598 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/StoreTable.vue?vue&type=template&id=1b65e598");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914 ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserBtn_vue_vue_type_template_id_5c6c0914__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserBtn_vue_vue_type_template_id_5c6c0914__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserBtn.vue?vue&type=template&id=5c6c0914 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/UserBtn.vue?vue&type=template&id=5c6c0914");
 
 
 /***/ }),

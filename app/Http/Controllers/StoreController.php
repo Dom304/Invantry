@@ -82,11 +82,25 @@ class StoreController extends Controller
         return redirect()->back()->with('error', 'Invalid role selection.');
     }
 
-    public function dashboard()
+    public function adminDashboard()
     {
         $user = Auth::user();
         $users = User::all();  // Fetch all users, adjust the query as needed.
         $stores = Store::all();
         return view('admin.admin_dashboard', compact('user', 'users', 'stores'));
+    }
+
+    public function moderatorDashboard()
+    {
+        $user = Auth::user();
+        $users = User::all();  // Fetch all users, adjust the query as needed.
+        $stores = Store::all();
+        return view('moderator.moderator_dashboard', compact('user', 'users', 'stores'));
+    }
+
+    public function returnUsers()
+    {
+        $users = User::all();
+        return response()->json($users);
     }
 }
