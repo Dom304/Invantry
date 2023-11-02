@@ -7,13 +7,19 @@
         </div>
         <div class="model-main-content">
           <form @submit.prevent="updateUser">
-            <label for="username">Username:</label>
+            <label for="username">Name</label>
             <input type="text" id="username" v-model="user.username">
   
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <input type="email" id="email" v-model="user.email">
-  
-            <!-- You can add more form fields here for additional user details -->
+
+            <label for="role">Role</label>
+            <select id="role" v-model="user.role">
+                <option value="admin">Admin</option>
+                <option value="moderator">Moderator</option>
+                <option value="user">User</option>
+                <option value="manager">Manager</option>
+            </select>
   
             <button type="submit">Save Changes</button>
           </form>
