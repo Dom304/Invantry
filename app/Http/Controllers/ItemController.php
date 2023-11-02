@@ -62,7 +62,7 @@ class ItemController extends Controller
     //for right window
     public function getAllItems() {
         $allItems = Item::all();
-        return response()->json($allItems);
+        return $allItems;
     }
     
 }

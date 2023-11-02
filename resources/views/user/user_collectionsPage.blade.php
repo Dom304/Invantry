@@ -5,7 +5,7 @@
 <script>
 //for right window
 $(document).ready(function() {
-    $.get("/all-items", function(data) {
+    $.get("/collection/{collName}/search-items-matching-description", function(data) {
         $(".right-window").empty();
         
         data.forEach(function(item) {
@@ -88,7 +88,7 @@ $(document).ready(function() {
             let itemDescription = $(this).data('item-description');
 
         // AJAX request to fetch matching items
-        $.post("/search-items-matching-description", {
+        $.post("/collection/{collName}/search-items-matching-description", {
             itemName: itemName,
             itemDescription: itemDescription
         }, function(response) {

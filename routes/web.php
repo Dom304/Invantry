@@ -38,7 +38,7 @@ Route::post('/cart/add/{product}', 'CartController@addToCart')->name('cart.add')
 Route::put('/cart/update/{cart}', 'CartController@updateCart')->name('cart.update');
 Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('cart.remove');
 //for right window
-Route::get('/all-items', [ItemController::class, 'getAllItems']);
+Route::get('/collection/{collName}/search-items-matching-description', [ItemController::class, 'getAllItems']);
 
 //delete after
 Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
