@@ -17,6 +17,9 @@ class CartController extends Controller
     $stores = Store::all();
     $collections = $user->collections;
 
+    // Assuming each user has one cart
+    //$cartItems = $user->cart->items; // Fetch the items from the user's cart
+
     return view('user.user_viewCartPage', compact('stores', 'collections', 'user'));
     }
 
