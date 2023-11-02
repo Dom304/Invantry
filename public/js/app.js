@@ -20120,6 +20120,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     userId: {
       type: Number
+    },
+    username: {
+      // Adding username as a prop
+      type: String,
+      "default": ''
     }
   },
   methods: {
@@ -20129,9 +20134,9 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser() {
       var _this = this;
       axios["delete"]("/user/".concat(this.userId)).then(function (response) {
-        // Handle success. Maybe show a notification or reload the data table.
-        _this.$emit('user-deleted', _this.userId); // Emit an event indicating the user was deleted.
-        _this.close();
+        console.log("User deleted successfully"); // Use console.log instead of console.success
+        _this.$emit('user-deleted-successfully'); // Emit an event when user is deleted
+        _this.close(); // Close the modal
       })["catch"](function (error) {
         // Handle the error. Maybe show a notification to the user.
         console.error("There was an error deleting the user:", error);
@@ -20330,6 +20335,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     editUser: function editUser(user) {
       // handle edit user logic
+    },
+    refreshTable: function refreshTable() {
+      var _this = this;
+      axios.get('/refresh').then(function (response) {
+        _this.users = response.data;
+      })["catch"](function (error) {
+        console.error("There was an error fetching the users:", error);
+      });
     }
   }
 });
@@ -20756,16 +20769,16 @@ var _hoisted_1 = {
   "class": "modal-body"
 };
 var _hoisted_2 = {
-  "class": "model-head"
+  "class": "modal-head"
 };
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Your Modal Title", -1 /* HOISTED */);
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Deletion", -1 /* HOISTED */);
 });
 var _hoisted_4 = {
-  "class": "model-main-content"
+  "class": "modal-main-content"
 };
 var _hoisted_5 = {
-  "class": "model-foot"
+  "class": "modal-foot"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -20778,7 +20791,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.deleteUser && $options.deleteUser.apply($options, arguments);
     })
@@ -21065,10 +21078,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["items", "fields"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
     userId: $data.selectedUser.id,
+    username: $data.selectedUser.name,
     onClose: _cache[1] || (_cache[1] = function ($event) {
       return $data.showModal = false;
-    })
-  }, null, 8 /* PROPS */, ["show", "userId"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
+    }),
+    onUserDeletedSuccessfully: $options.refreshTable
+  }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
     onClose: _cache[2] || (_cache[2] = function ($event) {
       return $data.showEditModal = false;
@@ -35216,7 +35231,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n    color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n    flex: 1;\n    padding: 20px 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.model-foot[data-v-53ab54d2] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0; /* Initially set the overlay to be invisible */\n  pointer-events: none; /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n  opacity: 1;\n  pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%); /* Starts off the screen */\n  transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n  transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n  color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.model-foot[data-v-53ab54d2] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

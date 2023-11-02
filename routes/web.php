@@ -39,3 +39,5 @@ Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 Route::get('/adminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
 Route::get('/moderatorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+
+Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');

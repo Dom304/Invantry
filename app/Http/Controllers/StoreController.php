@@ -97,4 +97,10 @@ class StoreController extends Controller
         $stores = Store::all();
         return view('moderator.moderator_dashboard', compact('user', 'users', 'stores'));
     }
+
+    public function returnUsers()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
 }
