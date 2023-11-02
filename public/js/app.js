@@ -20117,11 +20117,25 @@ __webpack_require__.r(__webpack_exports__);
     show: {
       type: Boolean,
       "default": false
+    },
+    userId: {
+      type: Number
     }
   },
   methods: {
     close: function close() {
       this.$emit('close');
+    },
+    deleteUser: function deleteUser() {
+      var _this = this;
+      axios["delete"]("/user/".concat(this.userId)).then(function (response) {
+        // Handle success. Maybe show a notification or reload the data table.
+        _this.$emit('user-deleted', _this.userId); // Emit an event indicating the user was deleted.
+        _this.close();
+      })["catch"](function (error) {
+        // Handle the error. Maybe show a notification to the user.
+        console.error("There was an error deleting the user:", error);
+      });
     }
   }
 });
@@ -20246,6 +20260,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      selectedUser: {},
       showModal: false,
       showEditModal: false,
       fields: [{
@@ -20270,11 +20285,12 @@ __webpack_require__.r(__webpack_exports__);
     console.log(this.loggedInUserId);
   },
   methods: {
+    clickedDeleteUser: function clickedDeleteUser(user) {
+      this.selectedUser = user;
+      this.showModal = true;
+    },
     editUser: function editUser(user) {
       // handle edit user logic
-    },
-    deleteUser: function deleteUser(user) {
-      this.selectedUser = user;
     }
   }
 });
@@ -20710,12 +20726,9 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_4 = {
   "class": "model-main-content"
 };
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "model-foot"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", null, "Button 1"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", null, "Button 2")], -1 /* HOISTED */);
-});
-
+var _hoisted_5 = {
+  "class": "model-foot"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -20727,7 +20740,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)]), _hoisted_5])], 2 /* CLASS */);
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {}, undefined, true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.deleteUser && $options.deleteUser.apply($options, arguments);
+    })
+  }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.close && $options.close.apply($options, arguments);
+    })
+  }, "Close")])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -20941,28 +20962,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         key: 0,
         size: "sm",
         variant: "danger",
-        onClick: _cache[1] || (_cache[1] = function ($event) {
-          return $data.showModal = true;
-        })
+        onClick: function onClick($event) {
+          return $options.clickedDeleteUser(row.item);
+        }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Delete")];
         }),
-        _: 1 /* STABLE */
-      })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+        _: 2 /* DYNAMIC */
+      }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["items", "fields"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
-    onClose: _cache[2] || (_cache[2] = function ($event) {
+    userId: $data.selectedUser.id,
+    onClose: _cache[1] || (_cache[1] = function ($event) {
       return $data.showModal = false;
     })
-  }, null, 8 /* PROPS */, ["show"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
+  }, null, 8 /* PROPS */, ["show", "userId"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
-    onClose: _cache[3] || (_cache[3] = function ($event) {
+    onClose: _cache[2] || (_cache[2] = function ($event) {
       return $data.showEditModal = false;
     }),
-    "user-data": _ctx.selectedUser,
+    "user-data": $data.selectedUser,
     onUpdateUser: $options.editUser
   }, null, 8 /* PROPS */, ["show", "user-data", "onUpdateUser"])], 64 /* STABLE_FRAGMENT */);
 }

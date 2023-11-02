@@ -3,14 +3,14 @@
         <b-table striped hover :items="users" :fields="fields">
             <template #cell(actions)="row">
                 <b-button size="sm" @click="showEditModal=true">Edit</b-button>
-                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="showModal = true">Delete</b-button>
+                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
             </template>
         </b-table>
 
 
     </div>
 
-    <Modal :show="showModal" @close="showModal = false"></Modal>
+    <Modal :show="showModal" :userId="selectedUser.id" @close="showModal = false"></Modal>
     <EditModal :show="showEditModal" @close="showEditModal = false" :user-data="selectedUser" @update-user="editUser"></EditModal>
 </template>
 
@@ -32,6 +32,7 @@ export default {
 
     data() {
         return {
+            selectedUser: {},
             showModal: false,
             showEditModal: false,
             fields: [
@@ -49,12 +50,13 @@ export default {
     },
 
     methods: {
-        editUser(user) {
-            // handle edit user logic
+        clickedDeleteUser(user) {
+            this.selectedUser = user;
+            this.showModal = true;
         },
 
-        deleteUser(user) {
-            this.selectedUser = user;
+        editUser(user) {
+            // handle edit user logic
         },
 
     }

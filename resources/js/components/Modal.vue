@@ -9,29 +9,42 @@
               <slot></slot>
           </div>
           <div class="model-foot">
-              <button>Button 1</button>
-              <button>Button 2</button>
+            <button @click="deleteUser">Continue</button>
+        <button @click="close">Close</button>
           </div>
       </div>
   </div>
 </template>
 
-
-
-
-  
   <script>
   export default {
     props: {
       show: {
         type: Boolean,
         default: false
-      }
+      },
+
+      userId: {
+            type: Number,
+        },
     },
     methods: {
       close() {
         this.$emit('close');
-      }
+      },
+
+      deleteUser() {
+            axios.delete(`/user/${this.userId}`)
+                .then(response => {
+                    // Handle success. Maybe show a notification or reload the data table.
+                    this.$emit('user-deleted', this.userId);  // Emit an event indicating the user was deleted.
+                    this.close();
+                })
+                .catch(error => {
+                    // Handle the error. Maybe show a notification to the user.
+                    console.error("There was an error deleting the user:", error);
+                });
+        }
     }
   }
   </script>
