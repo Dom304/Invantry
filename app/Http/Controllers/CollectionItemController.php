@@ -22,7 +22,7 @@ class CollectionItemController extends Controller
         }
     $items = $collection->items;
     
-    return view('user.user_collectionsPage', compact('items', 'user', 'collections'));
+    return view('user.user_collectionsPage', compact('items', 'user', 'collections', 'collName'));
     }
 
     public function store(Request $request)

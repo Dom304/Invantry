@@ -13,6 +13,8 @@ import AdminUsersWindow from './components/AdminUsersWindow.vue';
 import UserTable from './components/UserTable.vue';
 import StoreTable from './components/StoreTable.vue';
 import AdminDashboard from "./components/AdminDashboard.vue";
+import Modal from "./components/Modal.vue";
+import EditModal from "./components/EditModal.vue";
 
 // Other imports, if there are any.
 
@@ -32,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('user-table', UserTable);
     app.component('store-table', StoreTable);
     app.component('admin-dashboard', AdminDashboard);
+    app.component('modal', Modal);
+    app.component('edit-modal', EditModal);
 
     app.mount('#app'); // This element should be present in the HTML file.
 });

@@ -17,14 +17,11 @@ use App\Http\Controllers\CartController;
 |
 */
 
-/*
-Route::get('/', function () {
-    return view('admin.admin_dashboard');
-});
-*/
-
 Route::get('/home', [StoreController::class, 'index'])->name('home');
-Route::get('/store/{storeName}', [ItemController::class, 'index']);
+
+Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store');
+Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
+
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index']);
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
@@ -34,11 +31,11 @@ Route::post('/', [AuthManager::class, 'signUpPost'])->name('signUp.post');
 Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add/{product}', 'CartController@addToCart')->name('cart.add');
-Route::put('/cart/update/{cart}', 'CartController@updateCart')->name('cart.update');
-Route::delete('/cart/remove/{cart}', 'CartController@removeFromCart')->name('cart.remove');
+Route::delete('/cart/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
 
 //delete after
 Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 
 Route::get('/adminDashboard', [StoreController::class, 'dashboard'])->name('adminDashboard');
+Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+

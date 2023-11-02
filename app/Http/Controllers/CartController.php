@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Item;
 use App\Models\Store;
 use App\Models\Collection;
-use App\Models\User;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -16,25 +17,43 @@ class CartController extends Controller
     $collections = Collection::all();
     $stores = Store::all();
     $collections = $user->collections;
+    $cartItems = Cart::with('item')->where('user_id', $user->id)->get();
 
-    // Assuming each user has one cart
-    //$cartItems = $user->cart->items; // Fetch the items from the user's cart
-
-    return view('user.user_viewCartPage', compact('stores', 'collections', 'user'));
+    return view('user.user_viewCartPage', compact('stores', 'collections', 'user', 'cartItems'));
     }
 
-    public function addToCart(Request $request, $productId)
+    public function insert(Request $request, $storeName)
     {
-        // Add a product to the cart
+        $itemData = $request->all();
+        $store = Store::where('store_name', $storeName)->firstOrFail();
+        $existingCart = Cart::where('user_id', auth()->user()->id)
+        ->where('store_id', $store->id)
+        ->where('item_id', $itemData['item_id'])
+        ->first();
+
+    if ($existingCart) {
+        $existingCart->increment('quantity');
+    } else {
+        Cart::create([
+            'user_id' => auth()->user()->id,
+            'store_id' => $store->id,
+            'item_id' => $itemData['item_id'],
+            'quantity' => 1,
+        ]);
     }
 
-    public function updateCart(Request $request, $cartId)
-    {
-        // Update the quantity of a product in the cart
+        return redirect()->route('store', ['storeName' => $storeName])
+        ->with('success', 'Item added to cart successfully');
     }
 
-    public function removeFromCart($cartId)
-    {
-        // Remove a product from the cart
+    public function remove(Cart $cartItem)
+{
+    if (!$cartItem) {
+        return redirect()->route('cart')->with('error', 'Item not found.');
     }
+
+    $cartItem->delete();
+
+    return redirect()->route('cart')->with('success', 'Item removed from the cart');
+}
 }
