@@ -346,6 +346,48 @@ $font-path: "fonts";
     }
 
     .add-to-cart-btn { // New styles for the button
+        
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: white;
+        background-color: rgb(51, 51, 51); // Adjust to your preferred color
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: rgb(61, 189, 32); // Darken the button on hover
+        }
+    }
+}
+
+
+.colitem-card {
+    display: flex;
+    justify-content: space-between; // Add this to space out content and the button
+    align-items: center;
+    width: 100%;
+    height: 115px;
+    margin-top: 0;
+    margin-bottom: 0; 
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .search-colitem-btn { // New styles for the button
         padding: 0.5rem 1rem;
         font-size: 1rem;
         color: white;
@@ -360,7 +402,6 @@ $font-path: "fonts";
         }
     }
 }
-
 
 
 .store-card {

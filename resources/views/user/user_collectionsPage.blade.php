@@ -3,6 +3,23 @@
 @section('content')
 
 <script>
+
+    //For filtering store items in middle window
+    function filterItems() {
+        const searchInput = document.querySelector('.search-input').value.toLowerCase();
+        const itemCards = document.querySelectorAll('.colitem-card');
+
+        itemCards.forEach(card => {
+            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
     function filterCollections() {
         const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
         const collectionItems = document.querySelectorAll('.collection-btn');
@@ -101,9 +118,14 @@
     </div>
 
     <div class="middle-window">
+
+        {{--Displaying the collection name according to what current collections items are displaying--}}
+        <h2>{{ $collName }}</h2>
+
+
         @foreach($items as $item)
         <!-- href="/stores/store-name" -->
-        <a href="/home" class="store-card">
+        <a href="/home" class="colitem-card">
             <div class="store-logo">
                 <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
             </div>
@@ -111,6 +133,7 @@
                 <span class="store-name">{{ $item->item_name }}</span>
                 <span class="store-subtext">{{ $item->item_description }}</span>
             </div>
+            <button class="search-colitem-btn">Search for item</button>
         </a>
         @endforeach
     </div>
