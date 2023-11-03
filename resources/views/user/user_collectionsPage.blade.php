@@ -3,30 +3,6 @@
 @section('content')
 
 <script>
-//for right window
-$(document).ready(function() {
-    $.get("/collection/{collName}/search-items-matching-description", function(data) {
-        $(".right-window").empty();
-        
-        data.forEach(function(item) {
-            let itemCard = `
-                <div class="store-and-item-container">
-                    <h4 class="store-name">${item.store_name}</h4>
-                    <div class="item-card">
-                        <img src="path_to_placeholder_image" alt="Store Logo">
-                        <h5 class="item-name">${item.item_name}</h5>
-                        <p class="item-description">${item.item_description}</p>
-                        <p class="item-price">${item.item_price}</p>
-                    </div>
-                </div>
-            `;
-            $(".right-window").append(itemCard);
-        });
-    });
-});
-
-
-
     //For filtering store items in middle window
     function filterItems() {
         const searchInput = document.querySelector('.search-input').value.toLowerCase();
@@ -37,6 +13,7 @@ $(document).ready(function() {
             const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
+                
             } else {
                 card.style.display = 'none';
             }
@@ -45,18 +22,28 @@ $(document).ready(function() {
      //For filtering store items in right window
      function filterItemsRight() {
     const searchInput = document.querySelector('.right-search-input').value.toLowerCase();
-    const itemCards = document.querySelectorAll('.item-card');  // Corrected the selector
+    const itemCards = document.querySelectorAll('.item-card2');  // Corrected the selector
 
     itemCards.forEach(card => {
         const itemName = card.querySelector('.store-name').textContent.toLowerCase();
         const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
         if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
-            card.style.display = 'block';  // Changed from 'flex' to 'block' to match the display style of the item cards
+            card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
         } else {
             card.style.display = 'none';
         }
     });
 }
+
+function setSearchValueAndFilterRight(itemName) {
+    // Set the search value in the right window search box
+    document.getElementById('right-search-bar').value = itemName;
+
+    // Trigger the filtering for the right window
+    filterItemsRight();
+}
+
+
 
 
     //For filtering collections in left window
@@ -98,38 +85,8 @@ $(document).ready(function() {
         }
     }
 
-    $(document).ready(function() {
-    // When the search button inside a colitem-card is clicked
-    $(".search-colitem-btn").click(function() {
-            let itemName = $(this).data('item-name');
-            let itemDescription = $(this).data('item-description');
 
-        // AJAX request to fetch matching items
-        $.post("/collection/{collName}/search-items-matching-description", {
-            itemName: itemName,
-            itemDescription: itemDescription
-        }, function(response) {
-            // Clear the right window
-            $(".right-window").empty();
 
-            // Populate the right window with the fetched items
-            response.forEach(function(item) {
-                let itemCard = `
-                    <div class="store-and-item-container">
-                        <h4 class="store-name">${item.store_name}</h4>
-                        <div class="item-card">
-                            <img src="path_to_placeholder_image" alt="Store Logo">
-                            <h5 class="item-name">${item.item_name}</h5>
-                            <p class="item-description">${item.item_description}</p>
-                            <p class="item-price">${item.item_price}</p>
-                        </div>
-                    </div>
-                `;
-                $(".right-window").append(itemCard);
-            });
-        });
-    });
-});
 
 
 
@@ -208,7 +165,7 @@ $(document).ready(function() {
             <span class="store-subtext">{{ $item->item_description }}</span>
         </div>
         <!-- Added a data attribute to the button for easy identification -->
-        <button class="search-colitem-btn" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+        <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
     </div>
 @endforeach
     </div>
@@ -217,10 +174,10 @@ $(document).ready(function() {
 
     <div class="right-window">
     <div class="search-container">
-      <input type="text" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
+        <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
       </div>
     @foreach($allItems as $item)
-    <a href="/" class="item-card">
+    <div class="item-card2">
         <div class="store-logo">
             <!-- NOTE: You might want to link the actual store logo based on the store associated with the item -->
             <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
@@ -229,9 +186,10 @@ $(document).ready(function() {
             <span class="store-name">{{ $item->item_name }}</span>
             <span class="store-subtext">{{ $item->item_description }}</span>
             <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
+            <span class="store-subtext">Store Name: {{ $item->store_id }}</span>
         </div>
         <button class="add-to-cart-btn">Add to Cart</button>
-    </a>
+    </div>
     @endforeach
     </div>
 
