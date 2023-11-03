@@ -12,7 +12,9 @@ import AdminStoresWindow from './components/AdminStoresWindow.vue';
 import AdminUsersWindow from './components/AdminUsersWindow.vue';
 import UserTable from './components/UserTable.vue';
 import StoreTable from './components/StoreTable.vue';
+import StoreTable from './components/RequestTable.vue';
 import AdminDashboard from "./components/AdminDashboard.vue";
+import ModeratorDashboard from "./components/ModeratorDashboard.vue";
 import Modal from "./components/Modal.vue";
 import EditModal from "./components/EditModal.vue";
 import UserBtn from "./components/UserBtn.vue";
@@ -32,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('admin-users-window', AdminUsersWindow);
     app.component('user-table', UserTable);
     app.component('store-table', StoreTable);
+    app.component('request-table', RequestTable);
+    app.component('moderator-dashboard', ModeratorDashboard);
     app.component('admin-dashboard', AdminDashboard);
     app.component('modal', Modal);
     app.component('edit-modal', EditModal);
