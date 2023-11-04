@@ -19,5 +19,7 @@
 </div>
 
 <div class="admin-page-content">
-  <admin-dashboard :users="{{ json_encode($users) }}" :stores="{{json_encode($stores)}}" :logged-in-user-id="{{ auth()->id() }}"></admin-dashboard>
+  <moderator-dashboard :users="{{ json_encode($users) }}" :stores="{{json_encode($stores)}}" :logged-in-user-id="{{ auth()->id() }}"></admin-dashboard>
 </div>
+
+@endsection
