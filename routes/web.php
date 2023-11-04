@@ -7,6 +7,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CollectionItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\ManagerRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,9 @@ Route::get('/home', [StoreController::class, 'index'])->name('home');
 Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store');
 Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
 
-Route::get('/collection/{collName}', [CollectionItemController::class, 'index']);
+Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');
+Route::post('/collection/{collName}', [CartController::class, 'insertRight'])->name('cart.add');
+
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
@@ -43,3 +46,6 @@ Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('delet
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
 Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');
+
+Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
+Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');

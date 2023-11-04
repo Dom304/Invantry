@@ -83,4 +83,11 @@ class ItemController extends Controller
 
         return redirect()->back()->with('success', 'Item deleted successfully');
     }
+
+    //for right window
+    public function getAllItems() {
+        $allItems = Item::all();
+        return $allItems;
+    }
+    
 }

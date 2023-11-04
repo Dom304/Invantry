@@ -110,7 +110,7 @@
             <input type="text" name="collection_name" id='collection_name' class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Create Collection</button>
-    </form>
+        </form>
 
         <!-- Collection Search -->
         <div class="collection-search-container">
@@ -122,6 +122,7 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
+        <a href="/manager-request" class="btn btn-primary"> Want to be a Store Manager? </a>
     </div>
 
     <div class="middle-window">
