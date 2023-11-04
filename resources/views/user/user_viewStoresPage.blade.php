@@ -50,7 +50,7 @@
         } else if (buttonId === 'admin-btn') {
             window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
-            // Do something for mod-btn
+            window.location.href = '/ModeratorDashboard';
         } else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
         } else {
@@ -78,7 +78,6 @@
     </div>
 </div>
 
-
 <div class="page-content">
 
 
@@ -91,16 +90,16 @@
             <span class="username">{{ $user->name }}</span>
         </div>
         @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')
-        <button class="window-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        <button class="window-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores</button>
         @endif
         @if(auth()->user()->role == 'manager')
-        <button class="window-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        <button class="window-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store</button>
         @endif
         @if(auth()->user()->role == 'admin')
-        <button class="window-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        <button class="window-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard</button>
         @endif
         @if(auth()->user()->role == 'moderator')
-        <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
 
         <form action="{{ route('collections.create') }}" method="POST">

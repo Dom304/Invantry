@@ -642,70 +642,70 @@ $font-path: "fonts";
         font-size: 24px;
         color: #333;
     }
+}
 
-    .user-name-dropdown {
-        position: relative;
+.user-name-dropdown {
+    position: relative;
 
-        .user-name-btn {
-            background: none;
-            border: none;
-            font-size: 15px;
-            color: #666;
-            cursor: pointer;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s ease; // Transition for smooth background color change
+    .user-name-btn {
+        background: none;
+        border: none;
+        font-size: 15px;
+        color: #666;
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background-color 0.3s ease; // Transition for smooth background color change
 
-            &:hover {
-                color: #000;
-                // Add hover effect to the text
-                span {
-                    text-decoration: underline;
-                }
-            }
-
-            .fa-caret-up {
-                color: red;
+        &:hover {
+            color: #000;
+            // Add hover effect to the text
+            span {
+                text-decoration: underline;
             }
         }
 
-        .dropdown-content {
-            display: flex;
-            position: absolute;
-            right: -25px;
-            top: 138%;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+        .fa-caret-up {
+            color: red;
+        }
+    }
 
-            a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
+    .dropdown-content {
+        display: flex;
+        position: absolute;
+        right: -25px;
+        top: 138%;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+        }
+
+        .logout-form {
+            button.logout-btn {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                text-align: left;
                 display: block;
+                width: 100%;
+                box-sizing: border-box;
 
                 &:hover {
-                    background-color: #f1f1f1;
-                }
-            }
-
-            .logout-form {
-                button.logout-btn {
-                    background-color: #f44336;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    text-align: left;
-                    display: block;
-                    width: 100%;
-                    box-sizing: border-box;
-
-                    &:hover {
-                        background-color: #d32f2f;
-                    }
+                    background-color: #d32f2f;
                 }
             }
         }
