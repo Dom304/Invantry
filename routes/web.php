@@ -42,6 +42,8 @@ Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 
 Route::get('/AdminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
 Route::get('/ModeratorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
+Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptRequest'])->name('manager.request.accept');
+
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');

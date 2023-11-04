@@ -38,7 +38,7 @@ class ManagerRequestController extends Controller
         return redirect()->route('manager.request.create')->with('success', 'Request added successfully');
     }
 
-    public function deleteRequest(ManagerRequest $requestId)
+    public function rejectRequest(ManagerRequest $requestId)
     {
         $requestId->delete();
 
