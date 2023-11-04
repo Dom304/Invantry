@@ -712,6 +712,27 @@ $font-path: "fonts";
     }
 }
 
+.back-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px; // Adjust the space between the icon and text as needed
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+        color: #555; // Darken the color slightly on hover
+        text-decoration: underline; // Underline the text on hover
+    }
+
+    i {
+        font-size: 20px; // You can adjust the size of the arrow icon
+    }
+}
+
 .admin-page-content {
     display: flex;
     width: 100%;
