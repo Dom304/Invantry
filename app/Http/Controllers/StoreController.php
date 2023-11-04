@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Services\StoreService;
 use App\Models\Store;
 use App\Models\Collection;
 use App\Models\User;
@@ -12,6 +13,13 @@ use App\Models\ManagerRequest;
 
 class StoreController extends Controller
 {
+
+    protected $storeService;
+
+    public function __construct(StoreService $storeService)
+    {
+        $this->storeService = $storeService;
+    }
 
     public function index()
     {
@@ -25,13 +33,14 @@ class StoreController extends Controller
 
     public function createStore(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'manager_id' => 'required|exists:users,id',
             'store_name' => 'required|string',
             'store_description' => 'required|string',
         ]);
 
-        Store::create($request->all());
+        $this->storeService->createStore($validatedData);
+
 
         return redirect()->route('stores.index')->with('success', 'Store created successfully.');
     }
@@ -86,7 +95,7 @@ class StoreController extends Controller
     public function adminDashboard()
     {
         $user = Auth::user();
-        $users = User::all();  // Fetch all users, adjust the query as needed.
+        $users = User::all();
         $stores = Store::all();
         return view('admin.admin_dashboard', compact('user', 'users', 'stores'));
     }
@@ -94,7 +103,7 @@ class StoreController extends Controller
     public function moderatorDashboard()
     {
         $user = Auth::user();
-        $users = User::all();  // Fetch all users, adjust the query as needed.
+        $users = User::all();
         $stores = Store::all();
         $manager_requests = ManagerRequest::all();
         return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));

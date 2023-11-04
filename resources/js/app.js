@@ -12,7 +12,7 @@ import AdminStoresWindow from './components/AdminStoresWindow.vue';
 import AdminUsersWindow from './components/AdminUsersWindow.vue';
 import UserTable from './components/UserTable.vue';
 import StoreTable from './components/StoreTable.vue';
-import StoreTable from './components/RequestTable.vue';
+import RequestTable from './components/RequestTable.vue';
 import AdminDashboard from "./components/AdminDashboard.vue";
 import ModeratorDashboard from "./components/ModeratorDashboard.vue";
 import Modal from "./components/Modal.vue";
