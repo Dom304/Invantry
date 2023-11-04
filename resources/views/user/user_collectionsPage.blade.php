@@ -175,11 +175,10 @@ function setSearchValueAndFilterRight(itemName) {
     <div class="right-window">
     <div class="search-container">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
-      </div>
+    </div>
     @foreach($allItems as $item)
     <div class="item-card2">
         <div class="store-logo">
-            <!-- NOTE: You might want to link the actual store logo based on the store associated with the item -->
             <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
         </div>
         <div class="store-info">
@@ -188,10 +187,15 @@ function setSearchValueAndFilterRight(itemName) {
             <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             <span class="store-subtext">Store Name: {{ $item->store_id }}</span>
         </div>
-        <button class="add-to-cart-btn">Add to Cart</button>
+        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
+            @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+        </form>
     </div>
     @endforeach
-    </div>
+</div>
 
 </div>
 

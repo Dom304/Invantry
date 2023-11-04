@@ -23,7 +23,9 @@ Route::get('/home', [StoreController::class, 'index'])->name('home');
 Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store');
 Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
 
-Route::get('/collection/{collName}', [CollectionItemController::class, 'index']);
+Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');
+Route::post('/collection/{collName}', [CartController::class, 'insertRight'])->name('cart.add');
+
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
