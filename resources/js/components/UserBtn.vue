@@ -2,7 +2,7 @@
     <div class="user-name-dropdown">
         <button class="user-name-btn" @click="toggleDropdown">
             Hi, {{ username }}
-            <i class="arrow-down-icon"></i>
+            <i :class="isDropdownOpen ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'"></i>
         </button>
         <div class="dropdown-content" v-show="isDropdownOpen">
             <a href="#">Profile</a>
@@ -30,6 +30,10 @@ export default {
         };
     },
     methods: {
+        toggleDropdown() {
+            this.isDropdownOpen = !this.isDropdownOpen;
+        },
+
         logout() {
             axios.get('/logout')
                 .then(response => {

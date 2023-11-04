@@ -363,12 +363,12 @@ $font-path: "fonts";
 
 .item-card2 {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    width: 100%;  /* Adjusted to take up the full width of its container */
+    width: 100%; /* Adjusted to take up the full width of its container */
     height: 115px;
-    margin-top: 1rem;  /* Adjusted to give space between stacked cards */
-    margin-bottom: 1rem;  /* Adjusted to give space between stacked cards */
+    margin-top: 1rem; /* Adjusted to give space between stacked cards */
+    margin-bottom: 1rem; /* Adjusted to give space between stacked cards */
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
@@ -389,18 +389,17 @@ $font-path: "fonts";
         padding: 0.5rem 1rem;
         font-size: 1rem;
         color: white;
-        background-color: rgb(51, 51, 51); 
+        background-color: rgb(51, 51, 51);
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
         transition: background-color 0.2s;
 
         &:hover {
-            background-color: rgb(61, 189, 32); 
+            background-color: rgb(61, 189, 32);
         }
     }
 }
-
 
 .colitem-card {
     display: flex;
@@ -443,7 +442,6 @@ $font-path: "fonts";
         }
     }
 }
-
 
 .store-card {
     display: flex;
@@ -652,7 +650,7 @@ $font-path: "fonts";
             background: none;
             border: none;
             font-size: 15px;
-            color: #333;
+            color: #666;
             cursor: pointer;
             padding: 10px;
             display: flex;
@@ -661,12 +659,16 @@ $font-path: "fonts";
             transition: background-color 0.3s ease; // Transition for smooth background color change
 
             &:hover {
-                background-color: #f1f1f1; // Change to desired hover background color
+                color: #000;
+                // Add hover effect to the text
+                span {
+                    text-decoration: underline;
+                }
             }
 
-            // i.arrow-down-icon {
-            //     // Add styles for your arrow down icon
-            // }
+            .fa-caret-up {
+                color: red;
+            }
         }
 
         .dropdown-content {
@@ -702,7 +704,7 @@ $font-path: "fonts";
                     box-sizing: border-box;
 
                     &:hover {
-                        background-color: #d32f2f; // Darker red on hover
+                        background-color: #d32f2f;
                     }
                 }
             }

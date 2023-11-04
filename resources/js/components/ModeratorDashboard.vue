@@ -27,7 +27,7 @@
         <user-table v-if="currentwindow === 'user'" :users="users" :logged-in-user-id="loggedInUserId"></user-table>
         <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
         <request-table v-else-if="currentwindow === 'request'" :manager-requests="manager_requests"></request-table>
-        <!-- Add your Requests component here -->
+        <!-- ToDo: Add your Requests component here -->
     </div>
 </template>
 

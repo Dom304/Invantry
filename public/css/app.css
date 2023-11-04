@@ -22858,7 +22858,7 @@ readers do not read off random characters that represent icons */
   background: none;
   border: none;
   font-size: 15px;
-  color: #333;
+  color: #666;
   cursor: pointer;
   padding: 10px;
   display: flex;
@@ -22867,7 +22867,13 @@ readers do not read off random characters that represent icons */
   transition: background-color 0.3s ease;
 }
 .admin-header .user-name-dropdown .user-name-btn:hover {
-  background-color: #f1f1f1;
+  color: #000;
+}
+.admin-header .user-name-dropdown .user-name-btn:hover span {
+  text-decoration: underline;
+}
+.admin-header .user-name-dropdown .user-name-btn .fa-caret-up {
+  color: red;
 }
 .admin-header .user-name-dropdown .dropdown-content {
   display: flex;
