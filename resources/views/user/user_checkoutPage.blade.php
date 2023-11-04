@@ -34,10 +34,8 @@
         } else if (buttonId === 'mod-btn') {
             // Do something for mod-btn
         } else if (buttonId === 'cart-btn'){
-            window.location.href = '/cart';
-        } else if (buttonId === 'checkout-btn'){
-            window.location.href = '/checkout'
-        }else {
+            window.location.href = 'cart';
+        } else {
             // Optional: handle other cases or do nothing
         }
     }
@@ -76,7 +74,7 @@
         @if(auth()->user()->role == 'moderator')
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         @endif
-
+    
         <!-- Collection Search -->
         <div class="collection-search-container">
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
@@ -86,47 +84,19 @@
         @foreach($collections as $col)
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
-
     </div>
-
-    <div class="cart-middle-window">
-        <div class="cart-window" role="region" aria-label="Shopping Cart">
-
-    
-    <!-- Sample cart product #1 -->
-    @foreach($cartItems as $cartItem)
-    <div class="cart-product">
-        <div class="product-details">
-            <div class="product-name">{{ $cartItem->item->item_name }}</div>
-            <div class="product-description">{{ $cartItem->item->item_description }}</div>
-        </div>
-        <div class="product-quantity">Quantity: {{ $cartItem->quantity }}</div>
-        <div class="product-price">${{ number_format($cartItem->item->item_price, 2) }} each</div>
-        <form method="POST" action="{{ route('cart.remove', $cartItem->id) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></button>
-        </form>
-    </div>
-    @endforeach
-
-
-    <!-- Cart Total -->
-    @php
-    $totalPrice = $cartItems->sum(function ($cartItem) {
-        return $cartItem->quantity * $cartItem->item->item_price;
-    });
-    @endphp 
-
-    <div class="cart-total"> ${{ number_format($totalPrice, 2) }}</div>
-    
-
-            <!-- Proceed to Checkout Button -->
-            <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="toggleActiveState('checkout-btn', 'user.user_checkoutPage')">Proceed to Checkout</button>
-        </div>
-    </div>
-
-    <div class="right-window"></div>
 </div>
 
+<div class="container">
+    <h1>Checkout</h1>
+    <ul>
+        @foreach($purchasedItems as $item)
+            <li>{{ $item->item->item_name }} - {{ $item->item->item_price }}</li>
+        @endforeach
+    </ul>
+    <p>{{ $message }}</p>
+</div>     
 @endsection
+
+
+
