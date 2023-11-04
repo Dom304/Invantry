@@ -8,6 +8,7 @@ use App\Http\Controllers\CollectionItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ManagerRequestController;
+use App\Http\Controllers\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,3 +50,6 @@ Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.retu
 
 Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
 Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'checkoutProcess'])->name('checkout.process');
