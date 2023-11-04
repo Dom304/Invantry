@@ -46,6 +46,34 @@ class CartController extends Controller
         ->with('success', 'Item added to cart successfully');
     }
 
+    public function insertRight(Request $request, $collName)
+    {
+        $itemData = $request->all();
+        $collections = Collection::where('collection_name', $collName)->firstOrFail();
+        $existingCart = Cart::where('user_id', auth()->user()->id)
+            ->where('store_id', $collections->id)
+            ->where('item_id', $itemData['item_id'])
+            ->first();
+    
+        if ($existingCart) {
+            $existingCart->increment('quantity');
+        } else {
+            $item = Item::find($itemData['item_id']);
+            $store_id = $item->store_id;
+    
+            Cart::create([
+                'user_id' => auth()->user()->id,
+                'store_id' => $store_id,
+                'item_id' => $itemData['item_id'],
+                'quantity' => 1,
+            ]);
+        }
+    
+        return redirect()->route('collection', ['collName' => $collName])
+            ->with('success', 'Item added to cart successfully');
+    }
+    
+
     public function remove(Cart $cartItem)
 {
     if (!$cartItem) {
