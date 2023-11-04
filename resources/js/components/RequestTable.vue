@@ -2,7 +2,7 @@
     <div>
       <b-button @click="toggleBusy">Toggle Busy State</b-button>
           
-      <b-table striped hover :items="stores" :busy="isBusy" :fields="fields">
+      <b-table striped hover :items="manager_requests" :busy="isBusy" :fields="fields">
         <template #table-busy>
           <div class="text-center text-danger my-2">
             <b-spinner class="align-middle"></b-spinner>
@@ -18,10 +18,14 @@
     </div>
   </template>
 <script>
+
 import { BTable } from 'bootstrap-vue-3';
+import Modal from './Modal.vue'
+import EditModal from './EditModal.vue'
+
 export default {
     name: 'request-table',
-    props: ['manager-requests'],
+    props: ['manager_requests'],
     data() {
         return {
             isBusy: false,
@@ -36,7 +40,7 @@ export default {
     }, 
 
     mounted() {
-    // console.log() a message for testing
+    console.log(this.manager_requests);
     },
 
     methods: {

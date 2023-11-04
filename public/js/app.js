@@ -20196,10 +20196,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
+/* harmony import */ var _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditModal.vue */ "./resources/js/components/EditModal.vue");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'request-table',
-  props: ['manager-requests'],
+  props: ['manager_requests'],
   data: function data() {
     return {
       isBusy: false,
@@ -20222,7 +20226,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    // console.log() a message for testing
+    console.log(this.manager_requests);
   },
   methods: {
     deleteUser: function deleteUser(user) {
@@ -20955,8 +20959,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stores: $props.stores
   }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 2,
-    "manager-requests": $props.manager_requests
-  }, null, 8 /* PROPS */, ["manager-requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ToDo: Add your Requests component here ")])], 64 /* STABLE_FRAGMENT */);
+    manager_requests: $props.manager_requests
+  }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20993,7 +20997,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: _ctx.stores,
+    items: $props.manager_requests,
     busy: $data.isBusy,
     fields: $data.fields
   }, {
