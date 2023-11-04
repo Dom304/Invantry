@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Collection;
 use App\Models\User;
+use App\Models\ManagerRequest;
 
 
 class StoreController extends Controller
@@ -95,7 +96,8 @@ class StoreController extends Controller
         $user = Auth::user();
         $users = User::all();  // Fetch all users, adjust the query as needed.
         $stores = Store::all();
-        return view('moderator.moderator_dashboard', compact('user', 'users', 'stores'));
+        $manager_requests = ManagerRequest::all();
+        return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
     }
 
     public function returnUsers()

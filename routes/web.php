@@ -7,6 +7,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CollectionItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\ManagerRequestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +46,6 @@ Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('delet
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
 Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');
+
+Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
+Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');
