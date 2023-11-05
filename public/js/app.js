@@ -20356,9 +20356,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'store-table',
   props: ['stores'],
+  components: {
+    BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination
+  },
   data: function data() {
     return {
       isBusy: false,
+      currentPage: 1,
+      rowsPerPage: 5,
+      // adjust as needed
+      searchColumn: 'Store Name',
+      // default column to search by
+      searchQuery: '',
       fields: [{
         key: 'id',
         label: 'ID'
@@ -20368,11 +20377,40 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: 'actions',
         label: 'Actions'
-      }]
+      }],
+      columns: ['id', 'store_name'] // column keys for searching
     };
   },
-  mounted: function mounted() {
-    // console.log() a message for testing
+
+  computed: {
+    // get the column options for the search select
+    columnOptions: function columnOptions() {
+      return this.fields.filter(function (f) {
+        return f.key === 'id' || f.key === 'store_name';
+      }).map(function (f) {
+        return f.label;
+      });
+    },
+    // filter the stores based on the search query
+    filteredStores: function filteredStores() {
+      var _this$fields$find,
+        _this = this;
+      if (!this.searchQuery) {
+        return this.stores;
+      }
+      var searchKey = (_this$fields$find = this.fields.find(function (f) {
+        return f.label === _this.searchColumn;
+      })) === null || _this$fields$find === void 0 ? void 0 : _this$fields$find.key;
+      return this.stores.filter(function (store) {
+        var value = String(store[searchKey]).toLowerCase();
+        return value.includes(_this.searchQuery.toLowerCase());
+      });
+    },
+    tablePagination: function tablePagination() {
+      var start = (this.currentPage - 1) * this.rowsPerPage;
+      var end = start + this.rowsPerPage;
+      return this.filteredStores.slice(start, end);
+    }
   },
   methods: {
     deleteUser: function deleteUser(user) {
@@ -20462,9 +20500,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      currentPage: 1,
+      rowsPerPage: 5,
       columns: ['id', 'name', 'role'],
       // column keys for searching
-      searchColumn: 'name',
+      searchColumn: 'Name',
       // default column to search by
       searchQuery: '',
       selectedUser: {},
@@ -20489,13 +20529,26 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    // Generate options from the fields
+    columnOptions: function columnOptions() {
+      return this.fields.filter(function (f) {
+        return f.key === 'id' || f.key === 'name' || f.key === 'role';
+      }).map(function (f) {
+        return f.label;
+      });
+    },
+    // Filter users based on the selected column and search query
     filteredUsers: function filteredUsers() {
-      var _this = this;
+      var _this$fields$find,
+        _this = this;
       if (!this.searchQuery) {
         return this.users;
       }
+      var searchKey = (_this$fields$find = this.fields.find(function (f) {
+        return f.label === _this.searchColumn;
+      })) === null || _this$fields$find === void 0 ? void 0 : _this$fields$find.key;
       return this.users.filter(function (user) {
-        var value = String(user[_this.searchColumn]).toLowerCase();
+        var value = String(user[searchKey]).toLowerCase();
         return value.includes(_this.searchQuery.toLowerCase());
       });
     },
@@ -21287,20 +21340,59 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Loading...", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
+  var _component_b_form_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-select");
+  var _component_b_col = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-col");
+  var _component_b_form_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-input");
+  var _component_b_row = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-row");
+  var _component_b_form_group = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-group");
   var _component_b_spinner = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-spinner");
+  var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
-    onClick: $options.toggleBusy
+  var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
+    label: "Search by:",
+    "class": "mb-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Toggle Busy State")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_row, null, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_col, {
+            cols: "auto"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_select, {
+                modelValue: $data.searchColumn,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+                  return $data.searchColumn = $event;
+                }),
+                options: $options.columnOptions
+              }, null, 8 /* PROPS */, ["modelValue", "options"])];
+            }),
+            _: 1 /* STABLE */
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_col, null, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_input, {
+                modelValue: $data.searchQuery,
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                  return $data.searchQuery = $event;
+                }),
+                type: "search",
+                placeholder: "Search by ".concat($data.searchColumn)
+              }, null, 8 /* PROPS */, ["modelValue", "placeholder"])];
+            }),
+            _: 1 /* STABLE */
+          })];
+        }),
+
+        _: 1 /* STABLE */
+      })];
     }),
+
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Just for testing the toggle busy state "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <b-button @click=\"toggleBusy\">Toggle Busy State</b-button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $props.stores,
+    items: $options.filteredStores,
     busy: $data.isBusy,
     fields: $data.fields
   }, {
@@ -21334,7 +21426,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["items", "busy", "fields"])]);
+  }, 8 /* PROPS */, ["items", "busy", "fields"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_pagination, {
+    modelValue: $data.currentPage,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.currentPage = $event;
+    }),
+    "total-rows": $options.filteredStores.length,
+    "per-page": $data.rowsPerPage,
+    "aria-controls": "my-table"
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]);
 }
 
 /***/ }),
@@ -21429,7 +21529,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
                   return $data.searchColumn = $event;
                 }),
-                options: $data.columns
+                options: $options.columnOptions
               }, null, 8 /* PROPS */, ["modelValue", "options"])];
             }),
             _: 1 /* STABLE */
@@ -21486,12 +21586,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["items", "fields"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_pagination, {
-    modelValue: _ctx.currentPage,
+    modelValue: $data.currentPage,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.currentPage = $event;
+      return $data.currentPage = $event;
     }),
     "total-rows": $options.filteredUsers.length,
-    "per-page": _ctx.rowsPerPage,
+    "per-page": $data.rowsPerPage,
     "aria-controls": "my-table"
   }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,

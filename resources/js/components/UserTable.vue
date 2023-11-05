@@ -1,19 +1,19 @@
 <template>
     <div>
         <b-form-group label="Search by:" class="mb-3">
-            <b-row>
-                <b-col cols="auto">
-                    <b-form-select v-model="searchColumn" :options="columns"></b-form-select>
-                </b-col>
-                <b-col>
-                    <b-form-input
-                        v-model="searchQuery"
-                        type="search"
-                        :placeholder="`Search by ${searchColumn}`"
-                    ></b-form-input>
-                </b-col>
-            </b-row>
-        </b-form-group>
+        <b-row>
+            <b-col cols="auto">
+                <b-form-select v-model="searchColumn" :options="columnOptions"></b-form-select>
+            </b-col>
+            <b-col>
+                <b-form-input
+                    v-model="searchQuery"
+                    type="search"
+                    :placeholder="`Search by ${searchColumn}`"
+                ></b-form-input>
+            </b-col>
+        </b-row>
+    </b-form-group>
 
         <b-table striped hover :items="filteredUsers" :fields="fields">
             <template #cell(actions)="row">
@@ -54,8 +54,10 @@ export default {
 
     data() {
         return {
+            currentPage: 1,
+            rowsPerPage: 5,
             columns: ['id', 'name', 'role'], // column keys for searching
-            searchColumn: 'name', // default column to search by
+            searchColumn: 'Name', // default column to search by
             searchQuery: '',
             selectedUser: {},
             showModal: false,
@@ -71,12 +73,22 @@ export default {
     },
 
     computed: {
-        filteredUsers() {
+
+        // Generate options from the fields
+        columnOptions() {
+            return this.fields
+                .filter(f => f.key === 'id' || f.key === 'name' || f.key === 'role')
+                .map(f => f.label);
+        },
+
+        // Filter users based on the selected column and search query
+       filteredUsers() {
             if (!this.searchQuery) {
                 return this.users;
             }
+            const searchKey = this.fields.find(f => f.label === this.searchColumn)?.key;
             return this.users.filter(user => {
-                const value = String(user[this.searchColumn]).toLowerCase();
+                const value = String(user[searchKey]).toLowerCase();
                 return value.includes(this.searchQuery.toLowerCase());
             });
         },
