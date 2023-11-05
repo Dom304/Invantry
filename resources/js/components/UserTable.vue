@@ -1,13 +1,18 @@
 <template>
     <div>
-        <b-form-group label="Search by:">
-            <b-form-select v-model="searchColumn" :options="columns" class="mb-2"></b-form-select>
-            <b-form-input
-                v-model="searchQuery"
-                type="search"
-                :placeholder="`Search by ${searchColumn}`"
-                class="mb-3"
-            ></b-form-input>
+        <b-form-group label="Search by:" class="mb-3">
+            <b-row>
+                <b-col cols="auto">
+                    <b-form-select v-model="searchColumn" :options="columns"></b-form-select>
+                </b-col>
+                <b-col>
+                    <b-form-input
+                        v-model="searchQuery"
+                        type="search"
+                        :placeholder="`Search by ${searchColumn}`"
+                    ></b-form-input>
+                </b-col>
+            </b-row>
         </b-form-group>
 
         <b-table striped hover :items="filteredUsers" :fields="fields">
