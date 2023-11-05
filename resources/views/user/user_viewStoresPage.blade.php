@@ -106,7 +106,7 @@
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
 
-        <label for="collection-search-bar-input">_____________________________________</label>
+        <label for="collection-search-bar-input">_________________________________</label>
 
         <div class="user-info">
         <span class="user-img">
@@ -126,7 +126,7 @@
 
         <!-- Collection Search -->
         <div class="collection-search-container">
-        <label for="collection-search-bar-input">_____________________________________</label>
+        <label for="collection-search-bar-input">_________________________________</label>
         <div class="user-info">
         <span class="user-img">
                

@@ -172,7 +172,7 @@ $font-path: "fonts";
     align-items: center;
     padding: 10px 30px;
     background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     .logo,
     .app-name,
@@ -242,6 +242,7 @@ $font-path: "fonts";
     background-color: #ffffff;
     padding-top: 15px;
     border-right: 1px solid #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     .user-info {
         display: flex; // set the display to flex to align items horizontally
