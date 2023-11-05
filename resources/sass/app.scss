@@ -412,12 +412,12 @@ $font-path: "fonts";
 
 .item-card2 {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    width: 100%;  /* Adjusted to take up the full width of its container */
+    width: 100%; /* Adjusted to take up the full width of its container */
     height: 115px;
-    margin-top: 1rem;  /* Adjusted to give space between stacked cards */
-    margin-bottom: 1rem;  /* Adjusted to give space between stacked cards */
+    margin-top: 1rem; /* Adjusted to give space between stacked cards */
+    margin-bottom: 1rem; /* Adjusted to give space between stacked cards */
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
@@ -438,18 +438,17 @@ $font-path: "fonts";
         padding: 0.5rem 1rem;
         font-size: 1rem;
         color: white;
-        background-color: rgb(51, 51, 51); 
+        background-color: rgb(51, 51, 51);
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
         transition: background-color 0.2s;
 
         &:hover {
-            background-color: rgb(61, 189, 32); 
+            background-color: rgb(61, 189, 32);
         }
     }
 }
-
 
 .colitem-card {
     display: flex;
@@ -492,7 +491,6 @@ $font-path: "fonts";
         }
     }
 }
-
 
 .store-card {
     display: flex;
@@ -693,69 +691,94 @@ $font-path: "fonts";
         font-size: 24px;
         color: #333;
     }
+}
 
-    .user-name-dropdown {
-        position: relative;
+.user-name-dropdown {
+    position: relative;
 
-        .user-name-btn {
-            background: none;
-            border: none;
-            font-size: 15px;
-            color: #333;
-            cursor: pointer;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s ease; // Transition for smooth background color change
+    .user-name-btn {
+        background: none;
+        border: none;
+        font-size: 15px;
+        color: #666;
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background-color 0.3s ease; // Transition for smooth background color change
+
+        &:hover {
+            color: #000;
+            // Add hover effect to the text
+            span {
+                text-decoration: underline;
+            }
+        }
+
+        .fa-caret-up {
+            color: red;
+        }
+    }
+
+    .dropdown-content {
+        display: flex;
+        position: absolute;
+        right: -25px;
+        top: 138%;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
 
             &:hover {
-                background-color: #f1f1f1; // Change to desired hover background color
+                background-color: #f1f1f1;
             }
-
-            // i.arrow-down-icon {
-            //     // Add styles for your arrow down icon
-            // }
         }
 
-        .dropdown-content {
-            display: flex;
-            position: absolute;
-            right: -25px;
-            top: 138%;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-
-            a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
+        .logout-form {
+            button.logout-btn {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                text-align: left;
                 display: block;
+                width: 100%;
+                box-sizing: border-box;
 
                 &:hover {
-                    background-color: #f1f1f1;
-                }
-            }
-
-            .logout-form {
-                button.logout-btn {
-                    background-color: #f44336;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    text-align: left;
-                    display: block;
-                    width: 100%;
-                    box-sizing: border-box;
-
-                    &:hover {
-                        background-color: #d32f2f; // Darker red on hover
-                    }
+                    background-color: #d32f2f;
                 }
             }
         }
+    }
+}
+
+.back-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px; // Adjust the space between the icon and text as needed
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+        color: #555; // Darken the color slightly on hover
+        text-decoration: underline; // Underline the text on hover
+    }
+
+    i {
+        font-size: 20px; // You can adjust the size of the arrow icon
     }
 }
 

@@ -12,10 +12,11 @@ import AdminStoresWindow from './components/AdminStoresWindow.vue';
 import AdminUsersWindow from './components/AdminUsersWindow.vue';
 import UserTable from './components/UserTable.vue';
 import StoreTable from './components/StoreTable.vue';
-import StoreTable from './components/RequestTable.vue';
+import RequestTable from './components/RequestTable.vue';
 import AdminDashboard from "./components/AdminDashboard.vue";
 import ModeratorDashboard from "./components/ModeratorDashboard.vue";
 import Modal from "./components/Modal.vue";
+import ManagerModal from "./components/ManagerModal.vue";
 import EditModal from "./components/EditModal.vue";
 import UserBtn from "./components/UserBtn.vue";
 
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('admin-dashboard', AdminDashboard);
     app.component('modal', Modal);
     app.component('edit-modal', EditModal);
+    app.component('manager-modal', ManagerModal);
     app.component('user-btn', UserBtn);
 
     app.mount('#app'); // This element should be present in the HTML file.

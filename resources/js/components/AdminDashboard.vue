@@ -14,20 +14,11 @@
         >
             Stores
         </button>
-        <!-- Admins don't have access to requests? -->
-        <!-- <button
-            class="window-btn"
-            :class="{ selected: currentwindow === 'request' }"
-            @click="currentwindow = 'request'"
-        >
-            Requests
-        </button> -->
     </div>
 
     <div class="right-window-admin-dashboard">
         <user-table v-if="currentwindow === 'user'" :users="users" :logged-in-user-id="loggedInUserId"></user-table>
         <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <!-- Add your Requests component here -->
     </div>
 </template>
 
