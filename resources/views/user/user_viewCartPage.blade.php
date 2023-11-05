@@ -54,6 +54,7 @@
     </div>
 </div>
 
+<div class="page-content">
 <div class="left-window">
         <div class="user-info">
             <span class="user-img">
@@ -116,8 +117,6 @@
 
 
     </div>
-
-    
 
     <div class="cart-middle-window">
         <div class="cart-window" role="region" aria-label="Shopping Cart">
