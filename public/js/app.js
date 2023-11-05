@@ -20456,10 +20456,17 @@ __webpack_require__.r(__webpack_exports__);
   props: ['users', 'loggedInUserId'],
   components: {
     Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditModal: _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    EditModal: _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BFormInput: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormInput,
+    BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination
   },
   data: function data() {
     return {
+      columns: ['id', 'name', 'role'],
+      // column keys for searching
+      searchColumn: 'name',
+      // default column to search by
+      searchQuery: '',
       selectedUser: {},
       showModal: false,
       showEditModal: false,
@@ -20481,8 +20488,22 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  mounted: function mounted() {
-    console.log(this.loggedInUserId);
+  computed: {
+    filteredUsers: function filteredUsers() {
+      var _this = this;
+      if (!this.searchQuery) {
+        return this.users;
+      }
+      return this.users.filter(function (user) {
+        var value = String(user[_this.searchColumn]).toLowerCase();
+        return value.includes(_this.searchQuery.toLowerCase());
+      });
+    },
+    paginatedUsers: function paginatedUsers() {
+      var start = (this.currentPage - 1) * this.rowsPerPage;
+      var end = start + this.rowsPerPage;
+      return this.filteredUsers.slice(start, end);
+    }
   },
   methods: {
     clickedDeleteUser: function clickedDeleteUser(user) {
@@ -20493,9 +20514,9 @@ __webpack_require__.r(__webpack_exports__);
       // handle edit user logic
     },
     refreshTable: function refreshTable() {
-      var _this = this;
+      var _this2 = this;
       axios.get('/refresh').then(function (response) {
-        _this.users = response.data;
+        _this2.users = response.data;
       })["catch"](function (error) {
         console.error("There was an error fetching the users:", error);
       });
@@ -21382,20 +21403,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_b_form_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-select");
+  var _component_b_form_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-input");
+  var _component_b_form_group = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-group");
   var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
+  var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
   var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
   var _component_EditModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditModal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
+    label: "Search by:"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_select, {
+        modelValue: $data.searchColumn,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $data.searchColumn = $event;
+        }),
+        options: $data.columns,
+        "class": "mb-2"
+      }, null, 8 /* PROPS */, ["modelValue", "options"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_input, {
+        modelValue: $data.searchQuery,
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return $data.searchQuery = $event;
+        }),
+        type: "search",
+        placeholder: "Search by ".concat($data.searchColumn),
+        "class": "mb-3"
+      }, null, 8 /* PROPS */, ["modelValue", "placeholder"])];
+    }),
+    _: 1 /* STABLE */
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $props.users,
+    items: $options.filteredUsers,
     fields: $data.fields
   }, {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
-        onClick: _cache[0] || (_cache[0] = function ($event) {
+        onClick: _cache[2] || (_cache[2] = function ($event) {
           return $data.showEditModal = true;
         })
       }, {
@@ -21418,17 +21465,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["items", "fields"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+  }, 8 /* PROPS */, ["items", "fields"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_pagination, {
+    modelValue: _ctx.currentPage,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.currentPage = $event;
+    }),
+    "total-rows": $options.filteredUsers.length,
+    "per-page": _ctx.rowsPerPage,
+    "aria-controls": "my-table"
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
     userId: $data.selectedUser.id,
     username: $data.selectedUser.name,
-    onClose: _cache[1] || (_cache[1] = function ($event) {
+    onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showModal = false;
     }),
     onUserDeletedSuccessfully: $options.refreshTable
   }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
-    onClose: _cache[2] || (_cache[2] = function ($event) {
+    onClose: _cache[5] || (_cache[5] = function ($event) {
       return $data.showEditModal = false;
     }),
     "user-data": $data.selectedUser,

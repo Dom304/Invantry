@@ -1,11 +1,28 @@
 <template>
     <div>
-        <b-table striped hover :items="users" :fields="fields">
+        <b-form-group label="Search by:">
+            <b-form-select v-model="searchColumn" :options="columns" class="mb-2"></b-form-select>
+            <b-form-input
+                v-model="searchQuery"
+                type="search"
+                :placeholder="`Search by ${searchColumn}`"
+                class="mb-3"
+            ></b-form-input>
+        </b-form-group>
+
+        <b-table striped hover :items="filteredUsers" :fields="fields">
             <template #cell(actions)="row">
                 <b-button size="sm" @click="showEditModal=true">Edit</b-button>
                 <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
             </template>
         </b-table>
+
+        <b-pagination
+            v-model="currentPage"
+            :total-rows="filteredUsers.length"
+            :per-page="rowsPerPage"
+            aria-controls="my-table"
+        ></b-pagination>
     </div>
 
     <Modal :show="showModal" :userId="selectedUser.id" :username="selectedUser.name" @close="showModal = false"
@@ -13,9 +30,8 @@
     <EditModal :show="showEditModal" @close="showEditModal = false" :user-data="selectedUser" @update-user="editUser"></EditModal>
 </template>
 
-
 <script>
-import { BTable } from 'bootstrap-vue-3';
+import { BTable, BFormInput, BFormGroup, BFormSelect, BPagination } from 'bootstrap-vue-3';
 import Modal from './Modal.vue'
 import EditModal from './EditModal.vue'
 
@@ -26,11 +42,16 @@ export default {
 
     components: {
         Modal,
-        EditModal
+        EditModal,
+        BFormInput,
+        BPagination,
     },
 
     data() {
         return {
+            columns: ['id', 'name', 'role'], // column keys for searching
+            searchColumn: 'name', // default column to search by
+            searchQuery: '',
             selectedUser: {},
             showModal: false,
             showEditModal: false,
@@ -44,8 +65,22 @@ export default {
         }
     },
 
-    mounted() {
-        console.log(this.loggedInUserId);
+    computed: {
+        filteredUsers() {
+            if (!this.searchQuery) {
+                return this.users;
+            }
+            return this.users.filter(user => {
+                const value = String(user[this.searchColumn]).toLowerCase();
+                return value.includes(this.searchQuery.toLowerCase());
+            });
+        },
+
+        paginatedUsers() {
+            const start = (this.currentPage - 1) * this.rowsPerPage;
+            const end = start + this.rowsPerPage;
+            return this.filteredUsers.slice(start, end);
+        },
     },
 
     methods: {
