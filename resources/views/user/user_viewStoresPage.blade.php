@@ -60,7 +60,9 @@
 </script>
 
 <div class="top-toolbar">
-    <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+    <a href="/home">
+        <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+    </a>
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
         <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
@@ -129,7 +131,7 @@
         <div class="user-info">
         <span class="user-img">
                
-            <span class="username">{{ $user->name }}'S COLLECTIONS</span>
+            <span class="username">{{ $user->name }}'s COLLECTIONS</span>
         </div>
         
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">

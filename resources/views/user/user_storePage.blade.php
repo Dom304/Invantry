@@ -66,17 +66,19 @@
 </script>
 
 <div class="top-toolbar">
-    <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
-      <h1 class="app-name">Invantry</h1>
-      <div class="search-container">
-      <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
+    <a href="/home">
+        <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+    </a>
+    <h1 class="app-name">Invantry</h1>
+    <div class="search-container">
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
           <img src="/images/cart_icon.png" alt="Cart" /> 
         </button>
-      </div>
-      <div>
+    </div>
+    <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Logout</button>
@@ -97,22 +99,22 @@
             <span class="username">{{ $user->name }}</span>
         </div>
         @if(auth()->user()->role == 'buyer' || auth()->user()->role == 'moderator')
-        <button class="window-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores (buyer)</button>
+        <button class="window-btn" id="user-btn" onclick="toggleActiveState('user-btn', 'user.user_viewStoresPage')">Stores</button>
         @endif
         @if(auth()->user()->role == 'manager')
-        <button class="window-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store (manager)</button>
+        <button class="window-btn" id="manager-btn" onclick="toggleActiveState('manager-btn', 'manager.manager_dashboard')">My Store</button>
         @endif
         @if(auth()->user()->role == 'admin')
-        <button class="window-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard (admin)</button>
+        <button class="window-btn" id="admin-btn" onclick="toggleActiveState('admin-btn', 'admin.admin_dashboard')">Dashboard</button>
         @endif
         @if(auth()->user()->role == 'moderator')
-        <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
+        <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
 
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
 
-        <label for="collection-search-bar-input">_____________________________________</label>
+        <label for="collection-search-bar-input">_________________________________</label>
 
         <div class="user-info">
         <span class="user-img">
@@ -132,11 +134,11 @@
 
         <!-- Collection Search -->
         <div class="collection-search-container">
-        <label for="collection-search-bar-input">_____________________________________</label>
+        <label for="collection-search-bar-input">_________________________________</label>
         <div class="user-info">
         <span class="user-img">
                
-            <span class="username">{{ $user->name }}'S COLLECTIONS</span>
+            <span class="username">{{ $user->name }}'s COLLECTIONS</span>
         </div>
         
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
