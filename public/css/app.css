@@ -22514,10 +22514,23 @@ readers do not read off random characters that represent icons */
 .left-window .user-info .username {
   font-size: 1rem;
 }
+.left-window .collection-name-bar {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
 .left-window .collection-search-bar {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
+}
+
+.left-window form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .window-btn {
@@ -22537,6 +22550,34 @@ readers do not read off random characters that represent icons */
 .window-btn.active {
   background-color: black;
   color: white;
+}
+
+.collection-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.collection-btn:hover, .collection-btn.selected {
+  background-color: #d0d0d0;
+}
+.collection-btn.active {
+  background-color: black;
+  color: white;
+}
+.collection-btn img.button-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /* Middle Window */

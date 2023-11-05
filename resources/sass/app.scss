@@ -262,12 +262,28 @@ $font-path: "fonts";
         }
     }
 
+    .collection-name-bar {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
     .collection-search-bar {
         width: 100%;
         padding: 5px;
         margin-bottom: 10px;
     }
+
 }
+
+.left-window form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 // side bar window buttons
 .window-btn {
     width: 100%;
@@ -290,6 +306,38 @@ $font-path: "fonts";
         color: white;
     }
 }
+
+.collection-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+
+    &:hover,
+    &.selected {
+        background-color: darken(rgb(233, 233, 233), 10%);
+    }
+
+    &.active {
+        background-color: black;
+        color: white;
+    }
+
+    img.button-image {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+}
+
 
 /* Middle Window */
 .middle-window {

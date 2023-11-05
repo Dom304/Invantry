@@ -105,15 +105,34 @@
 
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="collection_name">Collection Name:</label>
-            <input type="text" name="collection_name" id='collection_name' class="form-control">
+
+        <label for="collection-search-bar-input">_____________________________________</label>
+
+        <div class="user-info">
+        <span class="user-img">
+               
+            <span class="username">COLLECTION CREATION</span>
         </div>
-        <button type="submit" class="btn btn-primary">Create Collection</button>
+
+
+
+        <div class="collection-search-container">
+            <label for="collection_name"></label>
+            <input type="text" placeholder="New Collection Name" name="collection_name" id='collection_name' class="collection-search-bar">
+        </div>
+        <button type="submit" class="window-btn">Create Collection</button>
+
         </form>
 
         <!-- Collection Search -->
         <div class="collection-search-container">
+        <label for="collection-search-bar-input">_____________________________________</label>
+        <div class="user-info">
+        <span class="user-img">
+               
+            <span class="username">{{ $user->name }}'S COLLECTIONS</span>
+        </div>
+        
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
         </div>
 
@@ -122,7 +141,9 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
-        <a href="/manager-request" class="btn btn-primary"> Want to be a Store Manager? </a>
+        <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
+
+
     </div>
 
     <div class="middle-window">
@@ -140,6 +161,8 @@
 
         </a>
         @endforeach
+
+
 
     <!-- <form method="POST" action="{{ route('updateRole') }}">
         @csrf

@@ -117,7 +117,7 @@ function setSearchValueAndFilterRight(itemName) {
 
 
         
-    <div class="left-window">
+<div class="left-window">
         <div class="user-info">
             <span class="user-img">
                 <i class="fa-solid fa-user"></i>
@@ -137,8 +137,36 @@ function setSearchValueAndFilterRight(itemName) {
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard (moderator)</button>
         @endif
 
+        <form action="{{ route('collections.create') }}" method="POST">
+        @csrf
+
+        <label for="collection-search-bar-input">_____________________________________</label>
+
+        <div class="user-info">
+        <span class="user-img">
+               
+            <span class="username">COLLECTION CREATION</span>
+        </div>
+
+
+
+        <div class="collection-search-container">
+            <label for="collection_name"></label>
+            <input type="text" placeholder="New Collection Name" name="collection_name" id='collection_name' class="collection-search-bar">
+        </div>
+        <button type="submit" class="window-btn">Create Collection</button>
+
+        </form>
+
         <!-- Collection Search -->
         <div class="collection-search-container">
+        <label for="collection-search-bar-input">_____________________________________</label>
+        <div class="user-info">
+        <span class="user-img">
+               
+            <span class="username">{{ $user->name }}'S COLLECTIONS</span>
+        </div>
+        
             <input type="text" placeholder="Search Collections..." class="collection-search-bar" id="collection-search-bar-input" oninput="filterCollections()">
         </div>
 
@@ -147,7 +175,12 @@ function setSearchValueAndFilterRight(itemName) {
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
+        <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
+
+
     </div>
+
+    
 
     <div class="middle-window">
 
