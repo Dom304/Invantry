@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Store;
 use App\Models\Collection;
+use App\Models\CollectionItem;
 use App\Models\Cart;
 
 class CartController extends Controller
@@ -46,6 +47,7 @@ class CartController extends Controller
         ->with('success', 'Item added to cart successfully');
     }
 
+    //for inserting item to cart from right window
     public function insertRight(Request $request, $collName)
     {
         $itemData = $request->all();
@@ -72,6 +74,29 @@ class CartController extends Controller
         return redirect()->route('collection', ['collName' => $collName])
             ->with('success', 'Item added to cart successfully');
     }
+
+    //for inserting item to collection from right window
+    public function insertRightCol(Request $request, $collName)
+{
+    $itemData = $request->all();
+    $selectedCollectionId = $request->input('collection_id');
+
+    // Check if the item already exists in the selected collection
+    $existingItemInCollection = CollectionItem::where('collection_id', $selectedCollectionId)
+        ->where('item_id', $itemData['item_id'])
+        ->first();
+
+    if (!$existingItemInCollection) {
+        // If the item doesn't exist in the collection, create a new entry
+        CollectionItem::create([
+            'collection_id' => $selectedCollectionId,
+            'item_id' => $itemData['item_id'],
+        ]);
+    }
+
+    return redirect()->route('collection', ['collName' => $collName])
+        ->with('success', 'Item added to collection successfully');
+}
     
 
     public function remove(Cart $cartItem)
