@@ -15,24 +15,33 @@
         </b-row>
     </b-form-group>
 
-        <b-table striped hover :items="filteredUsers" :fields="fields">
+        <b-table striped hover :items="filteredUsers" :busy="isBusy" :fields="fields">
             <template #cell(actions)="row">
-    <b-button size="sm" @click="editSelectedUser(row.item)">Edit</b-button>
-    <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
-</template>
+                <b-button size="sm" @click="editSelectedUser(row.item)">Edit</b-button>
+                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
+            </template>
         </b-table>
 
-        <b-pagination
-            v-model="currentPage"
+        <b-pagination v-model="currentPage"
             :total-rows="filteredUsers.length"
             :per-page="rowsPerPage"
             aria-controls="my-table"
         ></b-pagination>
     </div>
 
-    <Modal :show="showModal" :userId="selectedUser.id" :username="selectedUser.name" @close="showModal = false"
-  @user-deleted-successfully="refreshTable"></Modal>
-  <EditModal :show="showEditModal" @close="showEditModal = false" :userData="selectedUser" @update-user="editUser"></EditModal>
+    <Modal :show="showModal" 
+               :userId="selectedUser.id" 
+               :username="selectedUser.name" 
+               @close="showModal = false"
+               @user-deleted-successfully="refreshUsers">
+        </Modal>
+
+        <EditModal :show="showEditModal"
+                   @close="showEditModal = false"
+                   :userData="selectedUser"
+                   @user-updated="refreshUsers">
+        </EditModal>
+
 </template>
 
 <script>
@@ -42,8 +51,10 @@ import EditModal from './EditModal.vue'
 
 export default {
     name: 'user-table',
-
-    props: ['users', 'loggedInUserId'],
+    emits:['refresh-users'],
+    props: {'users' : Array,
+            'loggedInUserId' : Number,
+            },
 
     components: {
         Modal,
@@ -60,6 +71,7 @@ export default {
             searchColumn: 'Name', // default column to search by
             searchQuery: '',
             selectedUser: {},
+            isBusy: false,
             showModal: false,
             showEditModal: false,
             fields: [
@@ -100,6 +112,7 @@ export default {
         },
     },
 
+    emits: ['updateUser'],
     methods: {
         clickedDeleteUser(user) {
             this.selectedUser = user;
@@ -107,25 +120,17 @@ export default {
         },
 
         editSelectedUser(user) {
-        this.selectedUser = user;
-        this.showEditModal = true;
+            this.selectedUser = user;
+            this.showEditModal = true;
         },
 
-        editUser(user) {
-            this.refreshTable();
-            console.log("User updated successfully");
+        refreshUsers() {
+            this.$emit('refreshUsers');
         },
 
         refreshTable() {
-            
-            axios.get('/refresh')
-                .then(response => {
-                    this.users = response.data;
-                })
-                .catch(error => {
-                    console.error("There was an error fetching the users:", error);
-                });
-        },
+            this.showModal = false;
+        }
     }
 }
 </script>
