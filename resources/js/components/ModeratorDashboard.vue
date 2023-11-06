@@ -63,7 +63,7 @@ export default {
     },
     data() {
         return {
-            currentwindow: "user",
+            currentwindow: "store",
         };
     },
 };

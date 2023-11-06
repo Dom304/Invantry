@@ -20303,7 +20303,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentwindow: "user"
+      currentwindow: "store"
     };
   }
 });
@@ -20323,51 +20323,81 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManagerModal.vue */ "./resources/js/components/ManagerModal.vue");
-/* harmony import */ var _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditModal.vue */ "./resources/js/components/EditModal.vue");
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'request-table',
-  props: ['manager_requests', 'loggedInUserId'],
+  name: "request-table",
+  props: ["manager_requests", "loggedInUserId"],
   components: {
     ManagerModal: _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditModal: _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    BTable: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BTable,
+    BFormInput: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormInput,
+    BFormGroup: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormGroup,
+    BFormSelect: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormSelect,
+    BRow: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BRow,
+    BCol: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BCol,
+    BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination,
+    BButton: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BButton,
+    BSpinner: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BSpinner
   },
   data: function data() {
     return {
       isBusy: false,
+      currentPage: 1,
+      rowsPerPage: 5,
+      searchColumn: "Store Name",
+      searchQuery: "",
       selectedUser: {},
       showModal: false,
-      showEditModal: false,
       fields: [{
         key: 'id',
-        label: 'ID'
-      }, {
-        key: 'user_id',
-        label: 'User ID'
+        label: 'ID',
+        searchable: true
       }, {
         key: 'store_name',
-        label: 'Store Name'
-      }, {
-        key: 'description',
-        label: 'Proposal'
+        label: 'Store Name',
+        searchable: true
       }, {
         key: 'actions',
-        label: 'Actions'
+        label: 'Actions',
+        searchable: false
       }]
     };
   },
-  mounted: function mounted() {
-    console.log(this.manager_requests);
+  computed: {
+    columnOptions: function columnOptions() {
+      return this.fields.filter(function (f) {
+        return f.searchable;
+      }).map(function (f) {
+        return f.label;
+      });
+    },
+    filteredStores: function filteredStores() {
+      var _this$fields$find,
+        _this = this;
+      if (!this.searchQuery) {
+        return this.manager_requests;
+      }
+      var searchKey = (_this$fields$find = this.fields.find(function (f) {
+        return f.label === _this.searchColumn;
+      })) === null || _this$fields$find === void 0 ? void 0 : _this$fields$find.key;
+      return this.manager_requests.filter(function (request) {
+        var value = String(request[searchKey]).toLowerCase();
+        return value.includes(_this.searchQuery.toLowerCase());
+      });
+    },
+    tablePagination: function tablePagination() {
+      var start = (this.currentPage - 1) * this.rowsPerPage;
+      var end = start + this.rowsPerPage;
+      return this.filteredStores.slice(start, end);
+    }
   },
   methods: {
-    acceptRequest: function acceptRequest(user) {
-      // Rename the method
-      this.selectedUser = user;
+    acceptRequest: function acceptRequest(request) {
+      this.selectedUser = request;
       this.showModal = true;
     },
-    rejectUser: function rejectUser(item) {
+    rejectUser: function rejectUser(request) {
       // Handle the reject action here
     }
   }
@@ -21249,21 +21279,60 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Loading...", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
+  var _component_b_form_select = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-select");
+  var _component_b_col = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-col");
+  var _component_b_form_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-input");
+  var _component_b_row = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-row");
+  var _component_b_form_group = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-form-group");
   var _component_b_spinner = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-spinner");
+  var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
+  var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
   var _component_ManagerModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ManagerModal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
-    onClick: _ctx.toggleBusy
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" For testing toggleBusy state "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <b-button @click=\"toggleBusy\">Toggle Busy State</b-button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
+    label: "Search by:",
+    "class": "mb-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Toggle Busy State")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_row, null, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_col, {
+            cols: "auto"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_select, {
+                modelValue: $data.searchColumn,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+                  return $data.searchColumn = $event;
+                }),
+                options: $options.columnOptions
+              }, null, 8 /* PROPS */, ["modelValue", "options"])];
+            }),
+            _: 1 /* STABLE */
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_col, null, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_input, {
+                modelValue: $data.searchQuery,
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                  return $data.searchQuery = $event;
+                }),
+                type: "search",
+                placeholder: "Search by ".concat($data.searchColumn)
+              }, null, 8 /* PROPS */, ["modelValue", "placeholder"])];
+            }),
+            _: 1 /* STABLE */
+          })];
+        }),
+
+        _: 1 /* STABLE */
+      })];
     }),
+
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $props.manager_requests,
+    items: $options.tablePagination,
     busy: $data.isBusy,
     fields: $data.fields
   }, {
@@ -21287,7 +21356,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return _ctx.deleteUser(row.item);
+          return $options.rejectUser(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21297,11 +21366,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["items", "busy", "fields"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ManagerModal, {
+  }, 8 /* PROPS */, ["items", "busy", "fields"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_pagination, {
+    modelValue: $data.currentPage,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.currentPage = $event;
+    }),
+    "total-rows": $options.filteredStores.length,
+    "per-page": $data.rowsPerPage,
+    "aria-controls": "my-table"
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ManagerModal, {
     show: $data.showModal,
     userId: $data.selectedUser.id,
     username: $data.selectedUser.name,
-    onClose: _cache[0] || (_cache[0] = function ($event) {
+    onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
     onUserDeletedSuccessfully: _ctx.refreshTable

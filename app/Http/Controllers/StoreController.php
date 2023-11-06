@@ -104,6 +104,7 @@ class StoreController extends Controller
     {
         $user = Auth::user();
         $users = User::all();
+        $requests = ManagerRequest::all();
         $stores = Store::all();
         $manager_requests = ManagerRequest::all();
         return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
