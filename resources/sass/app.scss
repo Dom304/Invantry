@@ -1,11 +1,28 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// ====================== //
+// IMPORTS
+// ====================== //
 
-// Variables
-@import 'variables';
+@import url("https://fonts.bunny.net/css?family=Nunito");
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 
-// Bootstrap
-@import 'bootstrap/scss/bootstrap';
+$dark-grey: #2a2a2b;
+// ====================== //
+// BASE STYLES
+// ====================== //
+
+$font-path: "fonts";
+
+@font-face {
+    font-family: "Recharge";
+    src: url("../fonts/recharge bd.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
 
 .testing-sass {
     background-color: #f5f5f5;
@@ -14,25 +31,16 @@
     color: #333;
 }
 
-  // ====================== //
- //   LOGIN PAGE STYLING   //
 // ====================== //
-
-$font-path: 'fonts'; // Define base font path as a variable
-
-@font-face {
-    font-family: 'Recharge';
-    src: url('../fonts/recharge bd.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
+// LOGIN PAGE STYLING
+// ====================== //
 
 .image-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
 }
 
 .centered-image {
@@ -40,54 +48,55 @@ $font-path: 'fonts'; // Define base font path as a variable
     transform: scale(0.33);
 }
 
-.app-name {
+.app-name,
+.description,
+.welcome-back,
+.sign-up {
     text-align: center;
+    font-family: "Panton-LightCaps", Arial, sans-serif;
+}
+
+.app-name {
     font-size: 2em;
     font-weight: bold;
-    margin-top: -60px;
-    font-family: 'Recharge', Arial, sans-serif;
 }
 
 .description {
-    text-align: center;
-    font-size: .5em;
+    font-size: 0.5em;
     margin-top: 10px;
     color: gray;
-    font-family: 'Panton-LightCaps', Arial, sans-serif;
 }
 
 .welcome-back {
-    text-align: center;
-    font-size: .85em;
+    font-size: 0.85em;
     font-weight: bold;
     margin-top: 60px;
     cursor: default;
     color: gray;
-    font-family: 'Panton-LightCaps', Arial, sans-serif;
 }
 
 .sign-up {
-    text-align: center;
-    font-size: .75em;
+    font-size: 0.75em;
     font-weight: bold;
     margin-top: 30px;
     cursor: default;
     color: gray;
-    font-family: 'Panton-LightCaps', Arial, sans-serif;
 }
 
 .sign-up-link {
-    color: #007BFF; 
-    text-decoration: none; 
+    color: #007bff;
+    text-decoration: none;
     cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
-.sign-up-link:hover {
-    text-decoration: underline; 
-}
-
-.action-btn {
-    background-color: #007BFF;
+.action-btn,
+.continue-btn,
+.signup-btn {
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 16px 20px;
@@ -95,28 +104,25 @@ $font-path: 'fonts'; // Define base font path as a variable
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 240px; 
+    width: 240px;
     text-align: center;
+
+    &:hover {
+        background-color: #0056b3;
+    }
 }
 
-.action-btn:hover {
-    background-color: #0056b3;
-}
-
-.continue-btn {
-    margin-top: 40px;
-}
-
-.signup-btn {
-    margin-top: 25px;
-}
-
-.username-input, .password-input {
+.username-input,
+.password-input {
     padding: 20px 20px;
     border-radius: 4px;
     border: 1px solid #ddd;
     font-size: 1em;
-    width: 399px; 
+    width: 399px;
+
+    &::placeholder {
+        color: #aaa;
+    }
 }
 
 .username-input {
@@ -124,11 +130,7 @@ $font-path: 'fonts'; // Define base font path as a variable
 }
 
 .password-input {
-    padding-right: 40px; 
-}
-
-.username-input::placeholder, .password-input::placeholder {
-    color: #aaa;
+    padding-right: 40px;
 }
 
 .password-container {
@@ -143,124 +145,760 @@ $font-path: 'fonts'; // Define base font path as a variable
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 1.2em;
-    color: darkgray;
+
+    background-color: darkgrey;
 }
 
-.password-icon.active {
-    color: gray;
-}
+// &.active {
+//     color: gray;
+// }
 
-  // ====================== //
- //   HOMEPAGE STYLING     //
+// ====================== //
+// HOMEPAGE STYLING
 // ====================== //
 
-/* TOOLBAR */
+.page-content {
+    display: flex;
+}
+
+// ====================== //
+// TOP TOOLBAR STYLING
+// ====================== //
+
 .top-toolbar {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #f5f5f5;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .logo,
+    .app-name,
+    .search-container,
+    .cart-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        max-height: 30px;
+        width: auto;
+        margin-right: 32px;
+        margin-left: 0%;
+    }
+
+    .app-name {
+        margin-top: 10px;
+        margin-right: 74px;
+        margin-left: 0%;
+        font-size: 1.5em;
+        font-family: "Recharge", Arial, sans-serif;
+    }
+
+    .search-container {
+        margin-left: 0%;
+        margin-right: 425px;
+        flex-grow: 6; // Occupy 60% of the width
+        display: flex;
+        align-items: center;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .cart-container {
+        margin-left: 0%;
+        margin-right: 0%;
+
+        .cart-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+
+            img {
+                width: 30px;
+                height: auto;
+            }
+        }
+    }
 }
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    width: 40px;
-    margin-right: 10px;
-}
-
-.website-name {
-    font-weight: bold;
-}
-
-.search-container {
-    flex-grow: 2;
-    padding: 0 1rem;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.cart-container {
-    display: flex;
-    align-items: center;
-}
-
-.cart-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-}
-
-
 
 /* Left Window */
 .left-window {
-    width: 20%;
-    height: calc(100vh - 4rem); /* subtracting the height of the top toolbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center; // horizontally centered
+    //justify-content: center; // vertically centered
+    width: 273px;
+    height: calc(100vh - 4rem); // subtracting the height of the top toolbar
     overflow-y: scroll;
     padding: 1rem;
+    background-color: #ffffff;
+    padding-top: 15px;
     border-right: 1px solid #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .user-info {
+        display: flex; // set the display to flex to align items horizontally
+        flex-direction: column;
+        align-items: center; // vertically center-align the child elements
+        gap: 10px; // provides some space between the icon and the username
+        margin-bottom: 10px;
+
+        .user-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem; // adjust the size of the user icon (you can modify this value based on your needs)
+        }
+
+        .username {
+            font-size: 1rem; // adjust this based on your design preference
+        }
+    }
+
+    .collection-name-bar {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .collection-search-bar {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
 }
 
-.username {
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.stores-btn,
-.playlist-btn {
-    display: block;
+.left-window form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
+}
+
+// side bar window buttons
+.window-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    color: black;
     border: none;
-    background-color: #007BFF;
-    color: white;
     cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+
+    &:hover,
+    &.selected {
+        background-color: darken(rgb(233, 233, 233), 10%);
+    }
+
+    &.active {
+        background-color: black;
+        color: white;
+    }
 }
 
-.playlist-search-bar {
+.collection-btn {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+
+    &:hover,
+    &.selected {
+        background-color: darken(rgb(233, 233, 233), 10%);
+    }
+
+    &.active {
+        background-color: black;
+        color: white;
+    }
+
+    img.button-image {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        object-fit: cover;
+    }
 }
+
 
 /* Middle Window */
 .middle-window {
+    /*
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    */
+    //align-items: center;
+    //flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 60%;
     height: calc(100vh - 4rem);
     overflow-y: scroll;
     padding: 1rem;
     border-right: 1px solid #ccc;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
 }
 
-.store {
-    margin-bottom: 2rem;
+.middle-window-admin-dashboard {
+    display: flex;
 }
 
-.store-name {
-    font-weight: bold;
+.item-card {
+    display: flex;
+    justify-content: space-between; // Add this to space out content and the button
+    align-items: center;
+    width: calc(50% - 1rem);
+    height: 115px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .add-to-cart-btn {
+        // New styles for the button
+
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: white;
+        background-color: rgb(51, 51, 51); // Adjust to your preferred color
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: rgb(61, 189, 32); // Darken the button on hover
+        }
+    }
+}
+
+.item-card2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Adjusted to take up the full width of its container */
+    height: 115px;
+    margin-top: 1rem; /* Adjusted to give space between stacked cards */
+    margin-bottom: 1rem; /* Adjusted to give space between stacked cards */
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .add-to-cart-btn {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: white;
+        background-color: rgb(51, 51, 51);
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: rgb(61, 189, 32);
+        }
+    }
+}
+
+.colitem-card {
+    display: flex;
+    //justify-content: space-between; // Add this to space out content and the button
+    align-items: center;
+    width: 100%;
+    height: 115px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .search-colitem-btn {
+        // New styles for the button
+        margin-left: auto;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        color: white;
+        background-color: #333; // Adjust to your preferred color
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #555; // Darken the button on hover
+        }
+    }
+}
+
+.store-card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+
+    //margin-bottom: 1rem;
+    margin-bottom: 0;
+    //padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+.store-card {
+    width: calc(50% - 1rem);
+    height: 115px;
+    //margin-top: 1rem;
+    margin-top: 1rem;
+    //margin-bottom: 2rem;
+    margin-bottom: 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+}
+
+.store-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.store-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .store-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+    }
+
+    .store-subtext {
+        font-size: 0.875rem;
+        color: #666;
+    }
 }
 
 /* Right Window */
 .right-window {
-    width: 20%;
+    width: auto;
     height: calc(100vh - 4rem);
     overflow-y: scroll;
     padding: 1rem;
+}
+
+// ====================== //
+//   Header Styling        //
+// ====================== //
+.header {
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    max-height: 30px;
+    width: auto;
+    margin-right: 30px;
+}
+
+.app-name {
+    margin-top: 10px;
+    margin-right: 60px;
+    font-size: 1.5em;
+}
+
+.search-container {
+    flex-grow: 2;
+    margin-right: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.cart-container {
+    margin-left: 20px;
+}
+
+.cart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.cart-button img {
+    width: 30px;
+    height: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-section-header {
+    display: flex;
+    align-items: center;
+}
+
+.Invantry-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .logo-header {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Recharge", Arial, sans-serif;
+    }
+
+    .logo {
+        width: auto;
+        max-height: 30px;
+        margin: 0;
+    }
+}
+
+.right-section-header {
+    display: flex;
+    align-items: center;
+}
+
+// ============================= //
+//   Admin Dashboard Styling     //
+// ============================= //
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .left-section-header,
+    .right-section-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .Invantry-logo .logo {
+        height: 50px; // Adjust logo size
+        margin-right: 10px;
+    }
+
+    .logo-header {
+        font-size: 24px;
+        color: #333;
+    }
+}
+
+.user-name-dropdown {
+    position: relative;
+
+    .user-name-btn {
+        background: none;
+        border: none;
+        font-size: 15px;
+        color: #666;
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background-color 0.3s ease; // Transition for smooth background color change
+
+        &:hover {
+            color: #000;
+            // Add hover effect to the text
+            span {
+                text-decoration: underline;
+            }
+        }
+
+        .fa-caret-up {
+            color: red;
+        }
+    }
+
+    .dropdown-content {
+        display: flex;
+        position: absolute;
+        right: -25px;
+        top: 138%;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+        }
+
+        .logout-form {
+            button.logout-btn {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                text-align: left;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+
+                &:hover {
+                    background-color: #d32f2f;
+                }
+            }
+        }
+    }
+}
+
+.back-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px; // Adjust the space between the icon and text as needed
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+        color: #555; // Darken the color slightly on hover
+        text-decoration: underline; // Underline the text on hover
+    }
+
+    i {
+        font-size: 20px; // You can adjust the size of the arrow icon
+    }
+}
+
+.admin-page-content {
+    display: flex;
+    width: 100%;
+
+    .left-window-admin-dashboard {
+        width: 15%;
+        height: calc(100vh - 4rem);
+        padding: 1rem;
+        padding-top: 31px;
+        border-right: 1px solid #ccc;
+    }
+
+    .right-window-admin-dashboard {
+        width: 85%; // Adjusted from 100% to 85% to fit the left window
+        margin: 30px;
+        height: calc(100vh - 4rem);
+    }
+}
+
+// ============================= //
+//       Cart Page window        //
+// ============================= //
+
+.cart-middle-window {
+    /*
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    */
+    //align-items: center;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    padding: 1rem;
+    border-right: 1px solid #ccc;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.cart-window {
+    padding: 20px;
+
+    .cart-product {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+        padding: 15px 0;
+
+        .trash-icon {
+            font-size: 1.2em; // Adjust the size if needed
+            color: #a00; // Red color to signify delete action
+            margin-left: 50px;
+            cursor: pointer;
+
+            &:hover {
+                color: #d00; // Slightly brighter red on hover
+            }
+        }
+
+        .product-details {
+            flex: 1;
+
+            .product-name {
+                font-size: 1.5em;
+                margin-bottom: 8px;
+            }
+
+            .product-description {
+                color: #666;
+                margin-bottom: 8px;
+            }
+        }
+
+        .product-quantity,
+        .product-price {
+            margin-left: 50px;
+            font-weight: bold;
+        }
+    }
+
+    .cart-total {
+        margin: 20px 0;
+        font-size: 1.4em;
+        text-align: right;
+    }
+
+    .proceed-checkout {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+        text-align: center;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
+
+// Sample responsive design for smaller devices
+@media (max-width: 600px) {
+    .cart-product {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
