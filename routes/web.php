@@ -54,7 +54,7 @@ Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptReq
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
-Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.return');
+Route::get('/refresh', [StoreController::class, 'returnUsers'])->name('users.return');
 
 Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
 Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');
@@ -66,3 +66,4 @@ Route::post('/collection/delete/{id}', [CollectionController::class, 'delete'])-
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'checkoutProcess'])->name('checkout.process');
+Route::put('/user/{id}', [StoreController::class, 'updateUser']);
