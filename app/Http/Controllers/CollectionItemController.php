@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CollectionItem;
 use App\Models\Collection;
 use App\Models\Item;
+use App\Models\Store;
 class CollectionItemController extends Controller
 {
     public function index($collName)
@@ -17,9 +18,10 @@ class CollectionItemController extends Controller
         $collections = $user->collections;
         $collection = Collection::where('collection_name', $collName)->first();
         $allItems =Item::all();
+        $stores = Store::all();
 
         if (!$collection) {
-            return view('user.user_viewStorePage');
+            return view('user.user_viewStoresPage', compact('user', 'stores', 'collections', 'collName', 'allItems'));
         }
     $items = $collection->items;
     
