@@ -85,13 +85,40 @@ function setSearchValueAndFilterRight(itemName) {
         }
     }
 
-
+    function confirmDeletion(collectionId) {
+    if(confirm('Are you sure you want to delete this collection?')) {
+        // If the user clicks "Yes", send a POST request to delete the collection
+        fetch('/collection/delete/' + collectionId, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Assuming you have a meta tag for CSRF token
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: collectionId })
+        })
+        .then(response => {
+            if(response.ok) {
+                // If the deletion is successful, you might want to remove the collection from the DOM or refresh the page
+                window.location.reload();
+            } else {
+                alert('There was an error trying to delete the collection.');
+            }
+        });
+    } else {
+        // If the user clicks "No", just return
+        return;
+    }
+}
 
 
 
 
 
 </script>
+
+<head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 
 <div class="top-toolbar">
     <a href="/home">
@@ -188,6 +215,8 @@ function setSearchValueAndFilterRight(itemName) {
 
         {{--Displaying the collection name according to what current collections items are displaying--}}
         <h2>{{ $collName }}</h2>
+        <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button>
+
 
 
         @foreach($items as $item)

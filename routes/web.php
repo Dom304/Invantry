@@ -51,3 +51,7 @@ Route::get('/refresh', [UserController::class, 'returnUsers'])->name('users.retu
 
 Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
 Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');
+
+//for deleting a collection
+Route::post('/collection/delete/{id}', [CollectionController::class, 'delete'])->name('collection.delete');
+
