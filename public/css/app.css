@@ -22436,7 +22436,7 @@ readers do not read off random characters that represent icons */
   align-items: center;
   padding: 10px 30px;
   background-color: #fff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 .top-toolbar .logo,
 .top-toolbar .app-name,
@@ -22497,6 +22497,7 @@ readers do not read off random characters that represent icons */
   background-color: #ffffff;
   padding-top: 15px;
   border-right: 1px solid #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 .left-window .user-info {
   display: flex;
@@ -22514,10 +22515,23 @@ readers do not read off random characters that represent icons */
 .left-window .user-info .username {
   font-size: 1rem;
 }
+.left-window .collection-name-bar {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
 .left-window .collection-search-bar {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
+}
+
+.left-window form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .window-btn {
@@ -22537,6 +22551,34 @@ readers do not read off random characters that represent icons */
 .window-btn.active {
   background-color: black;
   color: white;
+}
+
+.collection-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(233, 233, 233);
+  color: black;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+.collection-btn:hover, .collection-btn.selected {
+  background-color: #d0d0d0;
+}
+.collection-btn.active {
+  background-color: black;
+  color: white;
+}
+.collection-btn img.button-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /* Middle Window */
@@ -22851,14 +22893,15 @@ readers do not read off random characters that represent icons */
   font-size: 24px;
   color: #333;
 }
-.admin-header .user-name-dropdown {
+
+.user-name-dropdown {
   position: relative;
 }
-.admin-header .user-name-dropdown .user-name-btn {
+.user-name-dropdown .user-name-btn {
   background: none;
   border: none;
   font-size: 15px;
-  color: #333;
+  color: #666;
   cursor: pointer;
   padding: 10px;
   display: flex;
@@ -22866,10 +22909,16 @@ readers do not read off random characters that represent icons */
   gap: 10px;
   transition: background-color 0.3s ease;
 }
-.admin-header .user-name-dropdown .user-name-btn:hover {
-  background-color: #f1f1f1;
+.user-name-dropdown .user-name-btn:hover {
+  color: #000;
 }
-.admin-header .user-name-dropdown .dropdown-content {
+.user-name-dropdown .user-name-btn:hover span {
+  text-decoration: underline;
+}
+.user-name-dropdown .user-name-btn .fa-caret-up {
+  color: red;
+}
+.user-name-dropdown .dropdown-content {
   display: flex;
   position: absolute;
   right: -25px;
@@ -22879,16 +22928,16 @@ readers do not read off random characters that represent icons */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.admin-header .user-name-dropdown .dropdown-content a {
+.user-name-dropdown .dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-.admin-header .user-name-dropdown .dropdown-content a:hover {
+.user-name-dropdown .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
-.admin-header .user-name-dropdown .dropdown-content .logout-form button.logout-btn {
+.user-name-dropdown .dropdown-content .logout-form button.logout-btn {
   background-color: #f44336;
   color: white;
   padding: 10px 20px;
@@ -22898,8 +22947,27 @@ readers do not read off random characters that represent icons */
   width: 100%;
   box-sizing: border-box;
 }
-.admin-header .user-name-dropdown .dropdown-content .logout-form button.logout-btn:hover {
+.user-name-dropdown .dropdown-content .logout-form button.logout-btn:hover {
   background-color: #d32f2f;
+}
+
+.back-arrow {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+.back-arrow:hover {
+  color: #555;
+  text-decoration: underline;
+}
+.back-arrow i {
+  font-size: 20px;
 }
 
 .admin-page-content {

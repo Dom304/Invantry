@@ -14,20 +14,22 @@
         >
             Stores
         </button>
-        <!-- Admins don't have access to requests? -->
-        <!-- <button
+        
+        <button
             class="window-btn"
             :class="{ selected: currentwindow === 'request' }"
-            @click="currentwindow = 'request'"
-        >
+            @click="currentwindow = 'request'">
             Requests
-        </button> -->
+        </button>
     </div>
 
     <div class="right-window-admin-dashboard">
         <user-table v-if="currentwindow === 'user'" :users="users" :logged-in-user-id="loggedInUserId"></user-table>
         <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <!-- Add your Requests component here -->
+        <request-table
+            v-else-if="currentwindow === 'request'"
+            :manager_requests="manager_requests"
+        ></request-table>
     </div>
 </template>
 
@@ -35,13 +37,15 @@
 <script>
 import StoreTable from "./StoreTable.vue";
 import UserTable from "./UserTable.vue";
+import RequestTable from "./RequestTable.vue";
 
 export default {
     name: "admin-dashboard",
-    props: ["users", "stores", "requests", "loggedInUserId"],
+    props: ["users", "stores", "requests", "manager_requests", "loggedInUserId"],
     components: {
         StoreTable,
         UserTable,
+        RequestTable,
     },
     mounted() {
         console.log(this.loggedInUserId);

@@ -11,9 +11,10 @@ class CollectionController extends Controller
 {
     public function index()
     {
+    $user = Auth::user();
     $collections = Collection::all();
 
-    return view('user.user_viewStoresPage', compact('collections'));
+    return view('user.user_viewStoresPage', compact('collections', 'user'));
     }
     
     public function createCollection(Request $request)
@@ -31,6 +32,19 @@ class CollectionController extends Controller
 
         return redirect()->route('collections.create')->with('success', 'Collection created successfully.');
     }
+
+    //for deleting a collection
+    public function delete($id)
+{
+    try {
+        $collection = Collection::findOrFail($id);
+        $collection->delete();
+        return response()->json(['success' => 'Collection deleted successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error occurred while deleting collection'], 500);
+    }
+}
+
 
     
     //Method to return collections as json object

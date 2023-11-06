@@ -3,16 +3,16 @@
     <img src="{{ asset('images/Button_backpack_logo.png') }}" alt="Invantry Logo" class="mx-auto d-block centered-image">
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
-    <div class="welcome-back">WELCOME BACK</div>
+    <div class="create-acc">WELCOME BACK</div>
     <form action="{{route('login')}}" method="POST">
     @csrf
     <input type="email" class="username-input" placeholder="Email address" name="email">
     <div class="password-container">
         <input type="password" id="passwordField" class="password-input" placeholder="Password" name="password">
     </div>
-    <button class="action-btn continue-btn">Continue</button>
+    <button class="action-btn login-btn">Continue</button>
     </form>
-    <div class="sign-up">DON'T HAVE AN ACCOUNT? <a href="/" class="sign-up-link">SIGN UP</a></div>
+    <div class="log-in">DON'T HAVE AN ACCOUNT? <a href="/" class="sign-up-link">SIGN UP</a></div>
 </div>
 
 <style>
@@ -94,7 +94,7 @@
         font-size: 1em;
         cursor: pointer;
         transition: background-color 0.3s;
-        width: 240px; 
+        width: 240px;
         text-align: center;
     }
 
