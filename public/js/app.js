@@ -19889,14 +19889,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StoreTable.vue */ "./resources/js/components/StoreTable.vue");
 /* harmony import */ var _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserTable.vue */ "./resources/js/components/UserTable.vue");
+/* harmony import */ var _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RequestTable.vue */ "./resources/js/components/RequestTable.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin-dashboard",
-  props: ["users", "stores", "requests", "loggedInUserId"],
+  props: ["users", "stores", "requests", "manager_requests", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    RequestTable: _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
     console.log(this.loggedInUserId);
@@ -20122,7 +20125,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Number
     },
     username: {
-      // Adding username as a prop
       type: String,
       "default": ''
     }
@@ -20133,14 +20135,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     acceptRequest: function acceptRequest() {
       var _this = this;
-      // Rename the method
-      axios.post("/request/".concat(this.requestId)) // Use POST request for accepting requests
-      .then(function (response) {
+      axios.post("/request/".concat(this.requestId)).then(function (response) {
         console.log("Request accepted successfully");
-        _this.$emit('request-accepted-successfully'); // Emit an event when the request is accepted
-        _this.close(); // Close the modal
+        _this.$emit('request-accepted-successfully');
+        _this.close();
       })["catch"](function (error) {
-        // Handle the error. Maybe show a notification to the user.
         console.error("There was an error accepting the request:", error);
       });
     }
@@ -20552,6 +20551,7 @@ var _hoisted_2 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_user_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("user-table");
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
+  var _component_request_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("request-table");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
       selected: $data.currentwindow === 'user'
@@ -20566,14 +20566,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentwindow = 'store';
     })
-  }, " Stores ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+  }, " Stores ", 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
+      selected: $data.currentwindow === 'request'
+    }]),
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $data.currentwindow = 'request';
+    })
+  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
     key: 0,
     users: $props.users,
     "logged-in-user-id": $props.loggedInUserId
   }, null, 8 /* PROPS */, ["users", "logged-in-user-id"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
     stores: $props.stores
-  }, null, 8 /* PROPS */, ["stores"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
+    key: 2,
+    manager_requests: $props.manager_requests
+  }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20942,16 +20952,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'modal-overlay': true,
       'showing': $props.show
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Change the title to indicate accepting the request "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "aria-hidden": "true",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Update the message ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.acceptRequest && $options.acceptRequest.apply($options, arguments);
     })
-  }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Update the button label "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })

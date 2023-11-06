@@ -2,14 +2,14 @@
     <div :class="{ 'modal-overlay': true, 'showing': show }">
       <div class="modal-body">
         <div class="modal-head">
-          <h5>Accept Request</h5> <!-- Change the title to indicate accepting the request -->
+          <h5>Accept Request</h5> 
           <span aria-hidden="true" @click="close">&times;</span>
         </div>
         <div class="modal-main-content">
-          Are you sure you want to accept the request for {{ username }}? <!-- Update the message -->
+          Are you sure you want to accept the request for {{ username }}? 
         </div>
         <div class="modal-foot">
-          <button @click="acceptRequest">Continue</button> <!-- Update the button label -->
+          <button @click="acceptRequest">Continue</button> 
           <button @click="close">Close</button>
         </div>
       </div>
@@ -26,7 +26,7 @@
       requestId: {
         type: Number,
       },
-      username: { // Adding username as a prop
+      username: { 
         type: String,
         default: ''
       }
@@ -35,15 +35,14 @@
     close() {
       this.$emit('close');
     },
-    acceptRequest() { // Rename the method
-      axios.post(`/request/${this.requestId}`) // Use POST request for accepting requests
+    acceptRequest() { 
+      axios.post(`/request/${this.requestId}`) 
         .then(response => {
           console.log("Request accepted successfully");
-          this.$emit('request-accepted-successfully'); // Emit an event when the request is accepted
-          this.close(); // Close the modal
+          this.$emit('request-accepted-successfully'); 
+          this.close(); 
         })
         .catch(error => {
-          // Handle the error. Maybe show a notification to the user.
           console.error("There was an error accepting the request:", error);
         });
     }

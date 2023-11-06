@@ -45,18 +45,39 @@ class ManagerRequestController extends Controller
         return redirect()->back()->with('success', 'Request deleted successfully');
     }
 
+    // public function acceptRequest(ManagerRequest $requestId)
+    // {
+
+    //     $validatedData = [
+    //         'manager_id' => $requestId->user_id,
+    //         'store_name' => $requestId->store_name,
+    //         'store_description' => $requestId->description,
+    //     ];
+
+    //     $this->storeService->createStore($validatedData);
+    //     $requestId->delete();
+
+    //     return redirect()->back()->with('success', 'Request accepted successfully');
+    // }
     public function acceptRequest(ManagerRequest $requestId)
     {
+    $user = User::find($requestId->user_id);
 
-        $validatedData = [
-            'manager_id' => $requestId->user_id,
-            'store_name' => $requestId->store_name,
-            'store_description' => $requestId->description,
-        ];
-
-        $this->storeService->createStore($validatedData);
-        $requestId->delete();
-
-        return redirect()->back()->with('success', 'Request accepted successfully');
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found');
     }
+
+    $user->update(['role' => 'manager']);
+
+    Store::create([
+        'manager_id' => $user->id,
+        'store_name' => $requestId->store_name,
+        'store_description' => $requestId->description,
+    ]);
+
+    $requestId->delete();
+
+    return redirect()->back()->with('success', 'Request accepted successfully');
+}
+
 }
