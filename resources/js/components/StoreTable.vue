@@ -27,8 +27,8 @@
           </template>
 
           <template #cell(actions)="row">
-              <b-button size="sm" @click="editUser(row.item)">Edit</b-button>
-              <b-button size="sm" variant="danger" @click="deleteUser(row.item)">Delete</b-button>
+              <b-button size="sm" @click="editStore(row.item)">Edit</b-button>
+              <b-button size="sm" variant="danger" @click="deleteStore(row.item)">Delete</b-button>
           </template>
       </b-table>
 
@@ -39,17 +39,33 @@
         aria-controls="my-table"
     ></b-pagination>
 
+    <!-- Todo: -->
+    <!-- <StoreDeleteModal :show="showModal" 
+                    :storeId="selectedStore.id" 
+                    :storeName="selectedStore.name" 
+                    @close="showModal = false"
+                    @store-deleted-successfully="refreshStores">
+  </StoreDeleteModal> -->
+
+  <EditStoreModal :show="showEditModal"
+                  @close="showEditModal = false"
+                  :storeData="selectedStore"
+                  @store-updated="refreshStores">
+  </EditStoreModal>
+
   </div>
 </template>
 
 <script>
 import { BTable, BFormInput, BFormGroup, BFormSelect, BRow, BCol,  BPagination } from 'bootstrap-vue-3';
+import EditStoreModal from './EditStoreModal.vue';
 
 export default {
   name: 'store-table',
   props: ['stores'],
   components: {
         BPagination,
+        EditStoreModal,
   },
 
   data() {
@@ -64,7 +80,9 @@ export default {
               { key: 'store_name', label: 'Store Name' },
               { key: 'actions', label: 'Actions' }
           ],
-          columns: ['id', 'store_name'] // column keys for searching
+          columns: ['id', 'store_name'], // column keys for searching
+          showEditModal: false,
+          selectedStore: {},
       }
   }, 
 
@@ -96,17 +114,33 @@ export default {
     },
 
   methods: {
-      deleteUser(user) {
-          // handle delete user logic
-      },
-      
-      editUser(user) {
-          // handle edit user logic
-      },
+        editStore(store) {
+            this.selectedStore = store;
+            this.showEditModal = true;
+        },
+
+        handleStoreUpdated() {
+            // Refresh your store data here if necessary
+             this.showEditModal = false;
+        },
 
       toggleBusy() {
           this.isBusy = !this.isBusy;
       },
+
+      clickedDeleteStore(store) {
+            this.selectedStore = store;
+            this.showModal = true;
+        },
+
+        editSelectedStore(store) {
+            this.selectedStore = store;
+            this.showEditModal = true;
+        },
+
+        refreshStores() {
+            this.$emit('refreshStores');
+        },
   }
 }
 </script>

@@ -52,6 +52,28 @@ class StoreController extends Controller
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
+    public function updateStore(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'manager_id' => 'required|integer|exists:users,id',
+        ]);
+
+        try {
+            // Find the store by ID
+            $store = Store::findOrFail($id);
+
+            // Update the store's details
+            $store->name = $validatedData['name'];
+            $store->manager_id = $validatedData['manager_id'];
+            $store->save();
+
+            return response()->json(['message' => 'Store updated successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error updating store'], 500);
+        }
+    }
+
     public function deleteUser($id)
     {
         // Get the authenticated user's ID
