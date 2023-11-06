@@ -162,30 +162,6 @@
 
         </a>
         @endforeach
-
-
-
-    <!-- <form method="POST" action="{{ route('updateRole') }}">
-        @csrf
-        @method('PUT')
-        <input type="hidden" name="role" value="manager">
-        <button type="submit">Manager Button</button>
-    </form>
-
-<form method="POST" action="{{ route('updateRole') }}">
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="role" value="moderator">
-    <button type="submit">Mod Button</button>
-</form>
-
-<form method="POST" action="{{ route('updateRole') }}">
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="role" value="admin">
-    <button type="submit">Admin Button</button>
-</form> -->
-
     </div>
 
 
