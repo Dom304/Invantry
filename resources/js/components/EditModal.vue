@@ -6,18 +6,18 @@
           <span aria-hidden="true" @click="close">&times;</span>
         </div>
         <div class="model-main-content">
-          <form @submit.prevent="updateUser">
+          <form @submit.prevent="editUser">
             <label for="username">Name</label>
-            <input type="text" id="username" v-model="user.username">
+            <input type="text" id="username" v-model="updateInfo.name">
   
             <label for="email">Email</label>
-            <input type="email" id="email" v-model="user.email">
+            <input type="email" id="email" v-model="updateInfo.email">
 
             <label for="role">Role</label>
-            <select id="role" v-model="user.role">
+            <select id="role" v-model="updateInfo.role">
                 <option value="admin">Admin</option>
                 <option value="moderator">Moderator</option>
-                <option value="user">User</option>
+                <option value="buyer">Buyer</option>
                 <option value="manager">Manager</option>
             </select>
   
@@ -32,35 +32,55 @@
   </template>
   
   <script>
-  export default {
-    props: {
-      show: {
-        type: Boolean,
-        default: false
-      },
-      userData: { // Assume you are passing the user data as a prop
-        type: Object,
-        default: () => ({})
-      }
+  
+export default {
+  name: 'edit-modal',
+  props: {
+    show: {
+      type: Boolean,
+      default: false
     },
-    data() {
-      return {
-        user: this.userData
-      };
-    },
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-      updateUser() {
-        // Call your API or Vuex action to update the user details here.
-        // For the sake of this example, we're just emitting an event.
-        this.$emit('update-user', this.user);
-        this.close();
+    userData: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data() {
+    return {
+      updateInfo: { ...this.userData }
+    };
+  },
+  watch: {
+    userData: {
+      deep: true,
+      handler(newVal) {
+        this.updateInfo = { ...newVal };
       }
     }
+  },
+  methods: {
+    close() {
+      this.$emit('close');
+    },
+
+    editUser() {
+  console.log(this.updateInfo.id);
+  axios.put(`/user/${this.updateInfo.id}`, {
+      name: this.updateInfo.name,
+      email: this.updateInfo.email,
+      role: this.updateInfo.role,
+  })
+  .then(response => {
+    this.$emit('update-user', this.updateInfo); // Emit an event when user is updated
+    this.close(); // Close the modal
+  })
+  .catch(error => {
+    console.error("There was an error updating the user:", error);
+  });
+},
   }
-  </script>
+}
+</script>
   
   <style scoped>
     .modal-overlay {

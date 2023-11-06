@@ -17,9 +17,9 @@
 
         <b-table striped hover :items="filteredUsers" :fields="fields">
             <template #cell(actions)="row">
-                <b-button size="sm" @click="showEditModal=true">Edit</b-button>
-                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
-            </template>
+    <b-button size="sm" @click="editSelectedUser(row.item)">Edit</b-button>
+    <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
+</template>
         </b-table>
 
         <b-pagination
@@ -32,7 +32,7 @@
 
     <Modal :show="showModal" :userId="selectedUser.id" :username="selectedUser.name" @close="showModal = false"
   @user-deleted-successfully="refreshTable"></Modal>
-    <EditModal :show="showEditModal" @close="showEditModal = false" :user-data="selectedUser" @update-user="editUser"></EditModal>
+  <EditModal :show="showEditModal" @close="showEditModal = false" :userData="selectedUser" @update-user="editUser"></EditModal>
 </template>
 
 <script>
@@ -106,11 +106,18 @@ export default {
             this.showModal = true;
         },
 
+        editSelectedUser(user) {
+        this.selectedUser = user;
+        this.showEditModal = true;
+        },
+
         editUser(user) {
-            // handle edit user logic
+            this.refreshTable();
+            console.log("User updated successfully");
         },
 
         refreshTable() {
+            
             axios.get('/refresh')
                 .then(response => {
                     this.users = response.data;

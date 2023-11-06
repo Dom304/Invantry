@@ -19979,14 +19979,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'edit-modal',
   props: {
     show: {
       type: Boolean,
       "default": false
     },
     userData: {
-      // Assume you are passing the user data as a prop
       type: Object,
       "default": function _default() {
         return {};
@@ -19995,18 +20001,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: this.userData
+      updateInfo: _objectSpread({}, this.userData)
     };
+  },
+  watch: {
+    userData: {
+      deep: true,
+      handler: function handler(newVal) {
+        this.updateInfo = _objectSpread({}, newVal);
+      }
+    }
   },
   methods: {
     close: function close() {
       this.$emit('close');
     },
-    updateUser: function updateUser() {
-      // Call your API or Vuex action to update the user details here.
-      // For the sake of this example, we're just emitting an event.
-      this.$emit('update-user', this.user);
-      this.close();
+    editUser: function editUser() {
+      var _this = this;
+      console.log(this.updateInfo.id);
+      axios.put("/user/".concat(this.updateInfo.id), {
+        name: this.updateInfo.name,
+        email: this.updateInfo.email,
+        role: this.updateInfo.role
+      }).then(function (response) {
+        _this.$emit('update-user', _this.updateInfo); // Emit an event when user is updated
+        _this.close(); // Close the modal
+      })["catch"](function (error) {
+        console.error("There was an error updating the user:", error);
+      });
     }
   }
 });
@@ -20563,8 +20585,13 @@ __webpack_require__.r(__webpack_exports__);
       this.selectedUser = user;
       this.showModal = true;
     },
+    editSelectedUser: function editSelectedUser(user) {
+      this.selectedUser = user;
+      this.showEditModal = true;
+    },
     editUser: function editUser(user) {
-      // handle edit user logic
+      this.refreshTable();
+      console.log("User updated successfully");
     },
     refreshTable: function refreshTable() {
       var _this2 = this;
@@ -20805,8 +20832,8 @@ var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    value: "user"
-  }, "User", -1 /* HOISTED */);
+    value: "buyer"
+  }, "Buyer", -1 /* HOISTED */);
 });
 var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
@@ -20835,26 +20862,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.updateUser && $options.updateUser.apply($options, arguments);
+      return $options.editUser && $options.editUser.apply($options, arguments);
     }, ["prevent"]))
   }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "username",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.user.username = $event;
+      return $data.updateInfo.name = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.username]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "email",
     id: "email",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.user.email = $event;
+      return $data.updateInfo.email = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user.email]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.email]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "role",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.user.role = $event;
+      return $data.updateInfo.role = $event;
     })
-  }, [].concat(_hoisted_12), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role]]), _hoisted_13], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, [].concat(_hoisted_12), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.updateInfo.role]]), _hoisted_13], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[5] || (_cache[5] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
@@ -21562,15 +21589,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
-        onClick: _cache[2] || (_cache[2] = function ($event) {
-          return $data.showEditModal = true;
-        })
+        onClick: function onClick($event) {
+          return $options.editSelectedUser(row.item);
+        }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit")];
         }),
-        _: 1 /* STABLE */
-      }), row.item.id !== $props.loggedInUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_b_button, {
+        _: 2 /* DYNAMIC */
+      }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"]), row.item.id !== $props.loggedInUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_b_button, {
         key: 0,
         size: "sm",
         variant: "danger",
@@ -21587,7 +21614,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["items", "fields"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_pagination, {
     modelValue: $data.currentPage,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.currentPage = $event;
     }),
     "total-rows": $options.filteredUsers.length,
@@ -21597,18 +21624,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     show: $data.showModal,
     userId: $data.selectedUser.id,
     username: $data.selectedUser.name,
-    onClose: _cache[4] || (_cache[4] = function ($event) {
+    onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
     onUserDeletedSuccessfully: $options.refreshTable
   }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
-    onClose: _cache[5] || (_cache[5] = function ($event) {
+    onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showEditModal = false;
     }),
-    "user-data": $data.selectedUser,
+    userData: $data.selectedUser,
     onUpdateUser: $options.editUser
-  }, null, 8 /* PROPS */, ["show", "user-data", "onUpdateUser"])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["show", "userData", "onUpdateUser"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

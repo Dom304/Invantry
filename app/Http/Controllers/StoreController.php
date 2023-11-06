@@ -114,4 +114,30 @@ class StoreController extends Controller
         $users = User::all();
         return response()->json($users);
     }
+
+
+    public function updateUser(Request $request, $userId)
+    {
+
+    $user = User::find($userId);
+
+    if (!$user) {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+
+    // Validate the request data
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'role' => 'required|string|max:255',
+    ]);
+
+    $data['updated_at'] = now();
+
+    $user->update($data);
+
+    return response()->json($user);
+    }
+
+    
 }
