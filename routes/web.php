@@ -24,14 +24,14 @@ Route::get('/home', [StoreController::class, 'index'])->name('home');
 Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store');
 Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
 //for inserting into collection from store page
-Route::post('/store/{storeName}', [CartController::class, 'insertCol'])->name('collection.add');
+Route::post('/store/{storeName}/add-to-collection', [CartController::class, 'insertCol'])->name('collection.add');
 
 
 //for inserting into cart from right window
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');
 Route::post('/collection/{collName}', [CartController::class, 'insertRight'])->name('cart.add');
 //for inserting into collection from right window
-Route::post('/collection/{collName}', [CartController::class, 'insertRightCol'])->name('collection.add');
+Route::post('/collection/{collName}/add-to-collection', [CartController::class, 'insertRightCol'])->name('collection.add');
 
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
