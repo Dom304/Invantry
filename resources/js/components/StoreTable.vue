@@ -18,7 +18,7 @@
       <!-- Just for testing the toggle busy state -->
       <!-- <b-button @click="toggleBusy">Toggle Busy State</b-button> -->
 
-      <b-table striped hover :items="filteredStores" :busy="isBusy" :fields="fields">
+      <b-table striped hover :items="tablePagination" :busy="isBusy" :fields="fields">
           <template #table-busy>
               <div class="text-center text-danger my-2">
                   <b-spinner class="align-middle"></b-spinner>

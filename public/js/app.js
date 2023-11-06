@@ -21480,7 +21480,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Just for testing the toggle busy state "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <b-button @click=\"toggleBusy\">Toggle Busy State</b-button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $options.filteredStores,
+    items: $options.tablePagination,
     busy: $data.isBusy,
     fields: $data.fields
   }, {
@@ -21644,7 +21644,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_table, {
     striped: "",
     hover: "",
-    items: $options.filteredUsers,
+    items: $options.paginatedUsers,
     busy: $data.isBusy,
     fields: $data.fields
   }, {

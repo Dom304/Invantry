@@ -15,7 +15,7 @@
         </b-row>
     </b-form-group>
 
-        <b-table striped hover :items="filteredUsers" :busy="isBusy" :fields="fields">
+        <b-table striped hover :items="paginatedUsers" :busy="isBusy" :fields="fields">
             <template #cell(actions)="row">
                 <b-button size="sm" @click="editSelectedUser(row.item)">Edit</b-button>
                 <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
