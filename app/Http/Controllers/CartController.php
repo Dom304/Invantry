@@ -75,6 +75,30 @@ class CartController extends Controller
             ->with('success', 'Item added to cart successfully');
     }
 
+
+//for inserting item to collection from storePage
+public function insertCol(Request $request, $storeName)
+{
+    $itemData = $request->all();
+    $selectedCollectionId = $request->input('collection_id');
+
+    // Check if the item already exists in the selected collection
+    $existingItemInCollection = CollectionItem::where('collection_id', $selectedCollectionId)
+        ->where('item_id', $itemData['item_id'])
+        ->first();
+
+    if (!$existingItemInCollection) {
+        // If the item doesn't exist in the collection, create a new entry
+        CollectionItem::create([
+            'collection_id' => $selectedCollectionId,
+            'item_id' => $itemData['item_id'],
+        ]);
+    }
+
+    return redirect()->route('store', ['storeName' => $storeName])
+        ->with('success', 'Item added to collection successfully');
+}
+
     //for inserting item to collection from right window
     public function insertRightCol(Request $request, $collName)
 {

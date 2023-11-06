@@ -174,6 +174,17 @@
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="add-to-cart-btn">Add to Cart</button>
             </form>
+            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
+            @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <select name="collection_id" required>
+        @foreach($collections as $collection)
+            <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
+        @endforeach
+    </select>
+    <button type="submit" class="add-to-collection-btn">Add to Collection</button>
+        </form>
         </a>
     @endforeach
     </div>
