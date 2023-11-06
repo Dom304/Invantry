@@ -33,7 +33,7 @@ import UserTable from "./UserTable.vue";
 
 export default {
     name: "admin-dashboard",
-    props: ["initialUsers", "stores", "requests", "loggedInUserId"],
+    props: ["initialUsers", "stores", "loggedInUserId"],
     components: {
         StoreTable,
         UserTable,

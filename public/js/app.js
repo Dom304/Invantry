@@ -19897,7 +19897,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin-dashboard",
-  props: ["initialUsers", "stores", "requests", "loggedInUserId"],
+  props: ["initialUsers", "stores", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
