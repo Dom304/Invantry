@@ -19,6 +19,7 @@ import Modal from "./components/Modal.vue";
 import ManagerModal from "./components/ManagerModal.vue";
 import EditModal from "./components/EditModal.vue";
 import UserBtn from "./components/UserBtn.vue";
+import EditStoreModal from "./components/EditStoreModal.vue";
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = createApp({});
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     app.component('edit-modal', EditModal);
     app.component('manager-modal', ManagerModal);
     app.component('user-btn', UserBtn);
+    app.component('edit-store-modal', EditStoreModal);
 
     app.mount('#app'); // This element should be present in the HTML file.
 });
