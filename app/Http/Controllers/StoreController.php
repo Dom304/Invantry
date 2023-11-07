@@ -97,7 +97,8 @@ class StoreController extends Controller
         $user = Auth::user();
         $users = User::all();
         $stores = Store::all();
-        return view('admin.admin_dashboard', compact('user', 'users', 'stores'));
+        $manager_requests = ManagerRequest::all();
+        return view('admin.admin_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
     }
 
     public function moderatorDashboard()
