@@ -1,29 +1,30 @@
 version: '3.8'
 
 services:
-  mysql:
+  invantry_db:
     image: mysql:latest
-    container_name: mysql_database
+    container_name: invantry_db
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: my_laravel_db
-      MYSQL_USER: laravel_user
-      MYSQL_PASSWORD: laravel_password
+      MYSQL_ROOT_PASSWORD: secret_root_password
+      MYSQL_DATABASE: invantry_db
+      MYSQL_USER: invantry_user
+      MYSQL_PASSWORD: secure_user_password
     ports:
       - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - invantry_mysql_data:/var/lib/mysql
 
-  phpmyadmin:
+  invantry_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin_container
+    container_name: invantry_phpmyadmin
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: invantry_db
       PMA_PORT: 3306
     ports:
       - "8080:80"
     depends_on:
-      - mysql
+      - invantry_db
 
 volumes:
-  mysql_data:
+  invantry_mysql_data:
+

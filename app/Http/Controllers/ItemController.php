@@ -23,6 +23,22 @@ class ItemController extends Controller
     return view('user.user_storePage', compact('store','items', 'collections', 'stores', 'user', 'storeName'));
     }
 
+    public function getStoreItems()
+    {
+    $user = Auth::user(); // Get the currently authenticated user
+    $store = $user->store; // Assuming there is a "store" relationship on the User model
+
+    if (!$store) {
+        // Handle the case where the user doesn't have an associated store
+        return redirect()->route('route_to_handle_no_store_association');
+    }
+
+    // Fetch items for the user's associated store
+    $storeItems = $store->items;
+
+    return view('manager.manager_storeInventoryPage', compact('stores', 'storeItems'));
+    }
+    
     public function insertItem(Request $request)
     {
         $request->validate([

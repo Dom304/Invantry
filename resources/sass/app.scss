@@ -172,7 +172,7 @@ $font-path: "fonts";
     align-items: center;
     padding: 10px 30px;
     background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     .logo,
     .app-name,
@@ -242,6 +242,7 @@ $font-path: "fonts";
     background-color: #ffffff;
     padding-top: 15px;
     border-right: 1px solid #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
     .user-info {
         display: flex; // set the display to flex to align items horizontally
@@ -262,12 +263,28 @@ $font-path: "fonts";
         }
     }
 
+    .collection-name-bar {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
     .collection-search-bar {
         width: 100%;
         padding: 5px;
         margin-bottom: 10px;
     }
+
 }
+
+.left-window form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 // side bar window buttons
 .window-btn {
     width: 100%;
@@ -290,6 +307,38 @@ $font-path: "fonts";
         color: white;
     }
 }
+
+.collection-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(233, 233, 233);
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-weight: bold;
+
+    &:hover,
+    &.selected {
+        background-color: darken(rgb(233, 233, 233), 10%);
+    }
+
+    &.active {
+        background-color: black;
+        color: white;
+    }
+
+    img.button-image {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+}
+
 
 /* Middle Window */
 .middle-window {
@@ -642,73 +691,94 @@ $font-path: "fonts";
         font-size: 24px;
         color: #333;
     }
+}
 
-    .user-name-dropdown {
-        position: relative;
+.user-name-dropdown {
+    position: relative;
 
-        .user-name-btn {
-            background: none;
-            border: none;
-            font-size: 15px;
-            color: #666;
-            cursor: pointer;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s ease; // Transition for smooth background color change
+    .user-name-btn {
+        background: none;
+        border: none;
+        font-size: 15px;
+        color: #666;
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background-color 0.3s ease; // Transition for smooth background color change
+
+        &:hover {
+            color: #000;
+            // Add hover effect to the text
+            span {
+                text-decoration: underline;
+            }
+        }
+
+        .fa-caret-up {
+            color: red;
+        }
+    }
+
+    .dropdown-content {
+        display: flex;
+        position: absolute;
+        right: -25px;
+        top: 138%;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
 
             &:hover {
-                color: #000;
-                // Add hover effect to the text
-                span {
-                    text-decoration: underline;
-                }
-            }
-
-            .fa-caret-up {
-                color: red;
+                background-color: #f1f1f1;
             }
         }
 
-        .dropdown-content {
-            display: flex;
-            position: absolute;
-            right: -25px;
-            top: 138%;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-
-            a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
+        .logout-form {
+            button.logout-btn {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                text-align: left;
                 display: block;
+                width: 100%;
+                box-sizing: border-box;
 
                 &:hover {
-                    background-color: #f1f1f1;
-                }
-            }
-
-            .logout-form {
-                button.logout-btn {
-                    background-color: #f44336;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    text-align: left;
-                    display: block;
-                    width: 100%;
-                    box-sizing: border-box;
-
-                    &:hover {
-                        background-color: #d32f2f;
-                    }
+                    background-color: #d32f2f;
                 }
             }
         }
+    }
+}
+
+.back-arrow {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px; // Adjust the space between the icon and text as needed
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+        color: #555; // Darken the color slightly on hover
+        text-decoration: underline; // Underline the text on hover
+    }
+
+    i {
+        font-size: 20px; // You can adjust the size of the arrow icon
     }
 }
 

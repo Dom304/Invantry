@@ -5,14 +5,6 @@
             <span>Back</span>
         </a>
 
-
-        <!-- <button
-            class="window-btn"
-            :class="{ selected: currentwindow === 'user' }"
-            @click="currentwindow = 'user'">
-            Users
-        </button> -->
-
         <button
             class="window-btn"
             :class="{ selected: currentwindow === 'store' }"
@@ -20,28 +12,13 @@
             Stores
         </button>
 
-        <button
-            class="window-btn"
-            :class="{ selected: currentwindow === 'request' }"
-            @click="currentwindow = 'request'">
-            Requests
-        </button>
     </div>
 
     <div class="right-window-admin-dashboard">
-        <!-- <user-table
-            v-if="currentwindow === 'user'"
-            :users="users"
-            :logged-in-user-id="loggedInUserId"
-        ></user-table> -->
         <store-table
             v-if="currentwindow === 'store'"
             :stores="stores"
         ></store-table>
-        <request-table
-            v-else-if="currentwindow === 'request'"
-            :manager_requests="manager_requests"
-        ></request-table>
     </div>
 </template>
 
@@ -63,7 +40,7 @@ export default {
     },
     data() {
         return {
-            currentwindow: "store",
+            currentwindow: "user",
         };
     },
 };
