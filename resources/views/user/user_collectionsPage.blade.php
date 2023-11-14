@@ -259,7 +259,7 @@ function setSearchValueAndFilterRight(itemName) {
             <span class="store-name">{{ $item->item_name }}</span>
             <span class="store-subtext">{{ $item->item_description }}</span>
             <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
-            <span class="store-subtext">Store Name: {{ $item->store_id }}</span>
+            <span class="store-subtext">Store Name: {{ $item->store->store_name }}</span>
         </div>
         
         <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
