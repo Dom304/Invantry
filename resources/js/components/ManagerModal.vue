@@ -1,20 +1,20 @@
 <template>
-    <div :class="{ 'modal-overlay': true, 'showing': show }">
-      <div class="modal-body">
-        <div class="modal-head">
-          <h5>Accept Request</h5> 
-          <span aria-hidden="true" @click="close">&times;</span>
-        </div>
-        <div class="modal-main-content">
-          Are you sure you want to accept the request for {{ username }}? 
-        </div>
-        <div class="modal-foot">
-          <button @click="acceptRequest">Continue</button> 
-          <button @click="close">Close</button>
-        </div>
+  <div :class="{ 'modal-overlay': true, 'showing': show }">
+    <div class="modal-body">
+      <div class="modal-head">
+        <h5>Accept Request</h5>
+        <span aria-hidden="true" @click="close">&times;</span>
+      </div>
+      <div class="modal-main-content">
+        Are you sure you want to accept the request for {{ username }}?
+      </div>
+      <div class="modal-foot">
+        <button @click="acceptRequest">Continue</button>
+        <button @click="close">Close</button>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {
@@ -35,17 +35,17 @@
     close() {
       this.$emit('close');
     },
-    acceptRequest() { 
-      axios.post(`/request/${this.requestId}`) 
+    acceptRequest() {
+      axios.post(`/request/${this.requestId}`, { userId: this.requestId })
         .then(response => {
           console.log("Request accepted successfully");
-          this.$emit('request-accepted-successfully'); 
-          this.close(); 
-        })
-        .catch(error => {
-          console.error("There was an error accepting the request:", error);
-        });
-    }
+          this.$emit('request-accepted-successfully');
+          this.close();
+    })
+    .catch(error => {
+      console.error("There was an error accepting the request:", error);
+    });
+}
     }
   }
   </script>

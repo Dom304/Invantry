@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ManagerRequest;
+use App\Models\User;
 use App\Services\StoreService;
 
 class ManagerRequestController extends Controller
@@ -59,9 +60,9 @@ class ManagerRequestController extends Controller
 
     //     return redirect()->back()->with('success', 'Request accepted successfully');
     // }
-    public function acceptRequest(ManagerRequest $requestId)
-    {
-    $user = User::find($requestId->user_id);
+    public function acceptRequest(Request $request, ManagerRequest $requestId)
+{
+    $user = User::find($request->input('user_id'));
 
     if (!$user) {
         return redirect()->back()->with('error', 'User not found');

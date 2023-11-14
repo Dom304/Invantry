@@ -24,7 +24,7 @@
           <b-spinner class="align-middle"></b-spinner>
           <strong>Loading...</strong>
         </div>
-      </template>
+      </template> 
 
       <template #cell(actions)="row">
         <b-button size="sm" @click="acceptRequest(row.item)">Accept</b-button>
@@ -40,12 +40,13 @@
     ></b-pagination>
   </div>
   <ManagerModal
-    :show="showModal"
-    :userId="selectedUser.id"
-    :username="selectedUser.name"
-    @close="showModal = false"
-    @user-deleted-successfully="refreshTable"
-  ></ManagerModal>
+      :show="showModal"
+      :userId="selectedUser.id"
+      :username="selectedUser.name"
+      @close="showModal = false"  
+      @user-deleted-successfully="refreshTable"
+      @request-accepted-successfully="closeModal"
+    ></ManagerModal>
 </template>
 
 <script>
@@ -88,7 +89,9 @@ export default {
       showModal: false,
       fields: [
         { key: 'id', label: 'ID', searchable: true },
+        { key: 'user_id', label: 'User', searchable: true },
         { key: 'store_name', label: 'Store Name', searchable: true },
+        { key: 'description', label: 'Proposal', searchable: true },
         { key: 'actions', label: 'Actions', searchable: false }
       ],
     };
@@ -123,6 +126,9 @@ export default {
     acceptRequest(request) {
       this.selectedUser = request;
       this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     },
     rejectUser(request) {
       // Handle the reject action here
