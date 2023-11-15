@@ -338,6 +338,137 @@ $font-path: "fonts";
         object-fit: cover;
     }
 }
+/* Checkout Window Styles */
+.checkout-window {
+    width: 60%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20%;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    .purchased-items {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+
+        li {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .item-detail {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    }
+
+    .price-details {
+        text-align: right;
+
+        p {
+            font-family: 'Courier New', monospace;
+            margin: 0 0 5px;
+        }
+    }
+
+    .delivery-info {
+        font-family: 'Nunito', sans-serif;
+        color: #444;
+        background-color: #f8f8f8;
+        border-left: 4px solid #ff1493;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        font-size: 12px;
+        line-height: 1.5;
+
+        p {
+            margin-bottom: 10px;
+        }
+    }
+
+    .important-notice {
+        color: #d7003d;
+        font-weight: bold;
+        font-size: 14.5px;
+    }
+    
+    .important-notice2 {
+        color: #00d74f;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .delivery-info2 {
+        font-family: 'Nunito', sans-serif;
+        color: #444;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+
+        p {
+            margin-bottom: 10px;
+        }
+    }
+
+    h1 {
+        font-size: 26px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+
+        li {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #0056b3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #003d82;
+        }
+    }
+}
+
 
 
 /* Middle Window */
