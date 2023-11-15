@@ -20,19 +20,28 @@
         });
     }
      //For filtering store items in right window
-     function filterItemsRight() {
+function filterItemsRight() {
     const searchInput = document.querySelector('.right-search-input').value.toLowerCase();
     const itemCards = document.querySelectorAll('.item-card2');  // Corrected the selector
 
-    itemCards.forEach(card => {
-        const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-        const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
-        if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
-            card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
-        } else {
+    // Check if the search input is empty
+    if (searchInput === '') {
+        // If search input is empty, hide all cards
+        itemCards.forEach(card => {
             card.style.display = 'none';
-        }
-    });
+        });
+    } else {
+        // If search input is not empty, proceed with the existing filter logic
+        itemCards.forEach(card => {
+            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
+            if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
+                card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 }
 
 function setSearchValueAndFilterRight(itemName) {
@@ -126,7 +135,7 @@ function setSearchValueAndFilterRight(itemName) {
     </a>
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
@@ -222,7 +231,7 @@ function setSearchValueAndFilterRight(itemName) {
         @foreach($items as $item)
     <div class="colitem-card">
         <div class="store-logo">
-            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+            <img src="{{$item->item_logo}}" alt="Store Logo">
         </div>
         <div class="store-info">
             <span class="store-name">{{ $item->item_name }}</span>
@@ -240,33 +249,36 @@ function setSearchValueAndFilterRight(itemName) {
     <div class="search-container">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
     </div>
+    {{--If the right-search-bar is empty, dont display any cards, otherwise (meaning if there is text in the search box) go through with the following loop that displays the cards--}}
     @foreach($allItems as $item)
     <div class="item-card2">
         <div class="store-logo">
-            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+            <img src="{{$item->item_logo}}" alt="Store Logo">
         </div>
         <div class="store-info">
             <span class="store-name">{{ $item->item_name }}</span>
             <span class="store-subtext">{{ $item->item_description }}</span>
             <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
-            <span class="store-subtext">Store Name: {{ $item->store_id }}</span>
+            <span class="store-subtext">Store Name: {{ $item->store->store_name }}</span>
         </div>
-        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-        </form>
-        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <select name="collection_id" required>
+        
+        <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
+    @csrf
+    <input type="hidden" name="item_id" value="{{ $item->id }}">
+    <select name="collection_id" required>
         @foreach($collections as $collection)
             <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
         @endforeach
     </select>
     <button type="submit" class="add-to-collection-btn">Add to Collection</button>
+</form>
+
+
+        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
+            @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
         </form>
 
         

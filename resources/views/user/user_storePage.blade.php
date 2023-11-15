@@ -71,7 +71,7 @@
     </a>
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
@@ -161,30 +161,33 @@
         <!-- href="/stores/store-name" -->
         <a class="item-card">
             <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+                <img src="{{$item->item_logo}}" alt="Store Logo">
             </div>
             <div class="store-info">
                 <span class="store-name">{{ $item->item_name }}</span>
                 <span class="store-subtext">{{ $item->item_description }}</span>
                 <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
             </div>
+
+            <form method="POST" action="{{ route('store.collection.add', ['storeName' => $storeName]) }}">
+    @csrf
+    <input type="hidden" name="item_id" value="{{ $item->id }}">
+    <select name="collection_id" required>
+        @foreach($collections as $collection)
+            <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
+        @endforeach
+    </select>
+    <button type="submit" class="add-to-collection-btn">Add to Collection</button>
+</form>
+
+
             <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
                 @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="add-to-cart-btn">Add to Cart</button>
             </form>
-            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <select name="collection_id" required>
-        @foreach($collections as $collection)
-            <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
-        @endforeach
-    </select>
-    <button type="submit" class="add-to-collection-btn">Add to Collection</button>
-        </form>
+            
         </a>
     @endforeach
     </div>
