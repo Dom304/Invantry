@@ -33,7 +33,7 @@ class AuthManager extends Controller
             }
             if (auth()->user()->isManager()) {
                 // Change to manager page
-                return redirect()->intended(route('home'));
+                return redirect()->intended(route('managerDashboard'));
             }
             if (auth()->user()->isAdmin()) {
                 return redirect()->intended(route('adminDashboard'));

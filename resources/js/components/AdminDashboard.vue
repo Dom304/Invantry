@@ -49,6 +49,7 @@ export default {
     components: {
         StoreTable,
         UserTable,
+        RequestTable,
     },
 
     created() {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Services\StoreService;
+use App\Models\Item;
 use App\Models\Store;
 use App\Models\Collection;
 use App\Models\User;
@@ -52,26 +53,41 @@ class StoreController extends Controller
         return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
-    public function updateStore(Request $request, $id)
+    public function updateStore(Request $request, Store $store)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'manager_id' => 'required|integer|exists:users,id',
+        $request->validate([
+            'store_name' => 'required|string|max:255',
+            'store_description' => 'required|string',
         ]);
 
-        try {
-            // Find the store by ID
-            $store = Store::findOrFail($id);
+        $store->update([
+            'store_name' => $request->input('store_name'),
+            'store_description' => $request->input('store_description'),
+        ]);
 
-            // Update the store's details
-            $store->name = $validatedData['name'];
-            $store->manager_id = $validatedData['manager_id'];
-            $store->save();
+        return redirect()->route('managerDashboard')->with('success', 'Store information updated successfully!');
+    }
 
-            return response()->json(['message' => 'Store updated successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error updating store'], 500);
-        }
+    public function addItem(Request $request, Store $store)
+    {
+        $request->validate([
+            'item_name' => 'required|string|max:255',
+            'item_description' => 'required|string',
+            'item_quantity' => 'required|integer|min:1',
+            'item_price' => 'required|numeric|min:0.01',
+            'item_logo' => 'required|string',
+        ]);
+
+        // Assuming you have a relationship between Store and Item
+        $item = $store->items()->create([
+            'item_name' => $request->input('item_name'),
+            'item_description' => $request->input('item_description'),
+            'item_quantity' => $request->input('item_quantity'),
+            'item_price' => $request->input('item_price'),
+            'item_logo' => $request->input('item_logo'),
+        ]);
+
+        return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');
     }
 
     public function deleteUser($id)
@@ -117,21 +133,43 @@ class StoreController extends Controller
     public function adminDashboard()
     {
         $user = Auth::user();
+
+        if ($user->isAdmin()) {
         $users = User::all();
         $stores = Store::all();
         $manager_requests = ManagerRequest::all();
-        return view('admin.admin_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
+            return view('admin.admin_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
+        }
+        return redirect()->route('home');
     }
 
     public function moderatorDashboard()
     {
         $user = Auth::user();
+        
+        if ($user->isModerator()) {
         $users = User::all();
         $requests = ManagerRequest::all();
         $stores = Store::all();
         $manager_requests = ManagerRequest::all();
-        return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
+            return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
+        }
+        return redirect()->route('home');
     }
+
+    public function managerDashboard()
+{
+    $user = Auth::user();
+
+    if ($user->isManager()) {
+        $store = $user->store;
+        $items = $store->items; 
+
+        return view('manager.manager_dashboard', compact('user', 'store', 'items'));
+    }
+
+    return redirect()->route('home');
+}
 
     public function returnUsers()
     {
@@ -163,5 +201,6 @@ class StoreController extends Controller
     return response()->json($user);
     }
 
+    
     
 }

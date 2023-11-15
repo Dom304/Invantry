@@ -17,6 +17,7 @@ class Item extends Model
         'item_description',
         'item_quantity',
         'item_price',
+        'item_logo'
     ];
 
     public function store()

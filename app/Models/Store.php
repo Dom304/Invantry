@@ -21,4 +21,9 @@ class Store extends Model
     {
         return $this->belongsTo(User::class, 'manager_id');
     }
+    
+    public function items()
+{
+    return $this->hasMany(Item::class, 'store_id');
+}
 }

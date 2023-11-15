@@ -19902,7 +19902,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ["initialUsers", "stores", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    RequestTable: _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   created: function created() {
     this.users = this.initialUsers;
