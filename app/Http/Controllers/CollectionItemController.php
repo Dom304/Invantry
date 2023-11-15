@@ -27,7 +27,11 @@ class CollectionItemController extends Controller
     
     return view('user.user_collectionsPage', compact('items', 'user', 'collections', 'collName', 'allItems'));
     }
-
+    public function deleteItem($store, $item)
+    {
+        Item::where('store_id', $store)->where('id', $item)->delete();
+            return redirect()->back()->with('success', 'Item deleted successfully');
+    }
     public function store(Request $request)
     {
         $request->validate([
