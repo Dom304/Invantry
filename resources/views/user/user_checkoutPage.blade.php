@@ -128,31 +128,46 @@
 
     </div>
 
-    <div class="container justify-content-center">
-    <h1>Checkout</h1>
+
+
+
+
+
+
+
+
+
+    <div class="checkout-window">
+    <h1>Purchase Summary</h1>
     
     <!-- Display purchased items -->
-    <ul>
+    <!-- Display purchased items -->
+    <ul class="purchased-items">
+        <li>Order Details:</li>
         @foreach($purchasedItems as $item)
-            <li>
-                {{ $item->quantity }} {{  $item->item->item_name }} 
-                - Price: {{ $item->item->item_price * $item->quantity }}
+            <li class="item-detail">
+                {{ $item->quantity }} x {{  $item->item->item_name }} 
+                - Price: ${{ $item->item->item_price * $item->quantity }}
             </li>
         @endforeach
     </ul>
+
 
     <!-- Calculate and display total -->
     @php
         $totalPrice = collect($purchasedItems)->sum(function($item) {
             return $item->quantity * $item->item->item_price;
         });
-        $deliveryFee = 15;
+        $deliveryFee = 15.00;
         $grandTotal = $totalPrice + $deliveryFee;
     @endphp
     
-    <p>Total Price of Items: ${{ $totalPrice }}</p>
-    <p>Delivery Fee: ${{ $deliveryFee }}</p>
-    <p>Total: ${{ $grandTotal }}</p>
+    <div class="price-details">
+        <p>Total Price of Items: ${{ $totalPrice }}</p>
+        <p>Delivery Fee: ${{ $deliveryFee }}</p>
+        <p>Total: ${{ $grandTotal }}</p>
+    </div>
+
 
     <!-- Calculate and display delivery time -->
     @php
@@ -162,11 +177,34 @@
         $deliveryTime = 2 * $uniqueStores + floor($totalItems / 3);
     @endphp
 
-    <p>Estimated Delivery Time: {{ $deliveryTime }} hours</p>
-    <p>***If items are expected to arrive after 10pm or before 8am, they will not arrive until the next day***</p>
 
-    <p>{{ $message }}</p>
-</div>     
+
+    <div class="delivery-info2">
+        <p class="important-notice2">Estimated Delivery Time: <b>{{ $deliveryTime }} hours</b></p>
+    </div>
+
+
+
+    
+
+    <p>***************************************************************************************</p>
+
+
+    <div class="delivery-info2">
+    <p><b>{{ $message }}</b></p>
+    </div>
+
+    <p>***************************************************************************************</p>
+
+    <div class="delivery-info2">
+        <p class="important-notice">Items received after 10pm or before 8am will be delivered the following day</p>
+    </div>
+
+</div>  
+
+<div class="right-window"></div>
+
+
 @endsection
 
 
