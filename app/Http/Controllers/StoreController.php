@@ -171,6 +171,13 @@ class StoreController extends Controller
     return redirect()->route('home');
 }
 
+    public function deleteItem(Store $store, Item $item)
+    {
+        $item->delete();
+
+        return redirect()->route('managerDashboard')->with('success', 'Item deleted successfully!');
+    }
+    
     public function returnUsers()
     {
         $users = User::all();

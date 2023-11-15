@@ -29,6 +29,7 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Item Logo</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,13 @@
                         <td>{{ $item->item_quantity }}</td>
                         <td>${{ $item->item_price }}</td>
                         <td>${{ $item->item_logo }}</td>
+                        <td>
+                        <form action="{{ route('deleteItem', ['store' => $store->id, 'item' => $item->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                        </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
