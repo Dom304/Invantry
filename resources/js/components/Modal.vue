@@ -9,7 +9,7 @@
         Are you sure you want to delete {{ entityData.store_name }}?
       </div>
       <div class="modal-foot">
-        <button @click="test">Continue</button>
+        <button @click="deleteEnity">Continue</button>
         <button @click="close">Close</button>
       </div>
     </div>
@@ -44,11 +44,7 @@ export default {
       this.$emit('close');
     },
 
-    delete() {
-      console.log(this.entityData);
-    },
-
-    test() {
+    deleteEnity() {
       console.log(`clicked`);
       axios.post(`/delete/${this.type}/${this.entityData.id}`, {
         id: this.entityData.id,

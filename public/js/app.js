@@ -20346,10 +20346,7 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('close');
     },
-    "delete": function _delete() {
-      console.log(this.entityData);
-    },
-    test: function test() {
+    deleteEnity: function deleteEnity() {
       var _this = this;
       console.log("clicked");
       axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/delete/".concat(this.type, "/").concat(this.entityData.id), {
@@ -21424,7 +21421,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.entityData.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
-      return $options.test && $options.test.apply($options, arguments);
+      return $options.deleteEnity && $options.deleteEnity.apply($options, arguments);
     })
   }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
