@@ -51,10 +51,9 @@ import EditModal from './EditModal.vue'
 
 export default {
     name: 'user-table',
-    emits:['refresh-users'],
-    props: {'users' : Array,
-            'loggedInUserId' : Number,
-            },
+    emits: ['refreshUsers'],
+    props: {'users' : Array, 'loggedInUserId' : Number},
+    // rest of your component
 
     components: {
         Modal,

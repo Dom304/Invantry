@@ -20734,11 +20734,13 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_name$emits$props$com = {
   name: 'user-table',
-  emits: ['refresh-users'],
+  emits: ['refreshUsers'],
   props: {
     'users': Array,
     'loggedInUserId': Number
   },
+  // rest of your component
+
   components: {
     Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     EditModal: _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
