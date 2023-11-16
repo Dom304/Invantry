@@ -55,17 +55,24 @@ class StoreController extends Controller
 
     public function updateStore(Request $request, Store $store)
     {
-        $request->validate([
-            'store_name' => 'required|string|max:255',
-            'store_description' => 'required|string',
-        ]);
+        $store = Store::findOrFail($request->store_id); // Fetch the store by ID
 
-        $store->update([
-            'store_name' => $request->input('store_name'),
-            'store_description' => $request->input('store_description'),
-        ]);
+        // Validate the manager_id
+        $manager = User::where('id', $request->manager_id)
+                       ->where('role', 'manager')
+                       ->first();
 
-        return redirect()->route('managerDashboard')->with('success', 'Store information updated successfully!');
+        if (!$manager) {
+            return response()->json(['message' => 'Invalid manager ID or the user is not a manager'], 422);
+        }
+
+        // Update store details
+        $store->store_name = $request->name;
+        $store->manager_id = $request->manager_id;
+
+        $store->save();
+
+        return response()->json(['message' => 'Store updated successfully']);
     }
 
     public function addItem(Request $request, Store $store)

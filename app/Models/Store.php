@@ -26,4 +26,5 @@ class Store extends Model
 {
     return $this->hasMany(Item::class, 'store_id');
 }
+
 }

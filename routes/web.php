@@ -51,7 +51,7 @@ Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 Route::get('/AdminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
 Route::get('/ModeratorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
 Route::get('/ManagerDashboard', [StoreController::class, 'managerDashboard'])->name('managerDashboard');
-Route::put('/updateStore/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
+Route::post('/updateStore/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
 Route::post('/addItem/{store}', [StoreController::class, 'addItem'])->name('addItem');
 Route::delete('/deleteItem/{store}/{item}', [StoreController::class, 'deleteItem'])->name('deleteItem');
 Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptRequest'])->name('manager.request.accept');
