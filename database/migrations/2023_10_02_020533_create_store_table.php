@@ -17,7 +17,7 @@ return new class extends Migration
            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
            $table->string('store_name');
            $table->string('store_description');
-           $table->string('store_logo')->nullable;
+           $table->string('store_logo')->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,9 @@
 <template>
     <div class="left-window-admin-dashboard">
+        <a href="/home" class="back-arrow">
+            <i class="fa-solid fa-angle-left"></i>
+            <span>Back</span>
+        </a>
         <button
             class="window-btn"
             :class="{ selected: currentwindow === 'user' }"
@@ -45,7 +49,7 @@ import RequestTable from "./RequestTable.vue";
 
 export default {
     name: "admin-dashboard",
-    props: ["initialUsers", "stores", "loggedInUserId"],
+    props: ["initialUsers", "stores", "manager_requests", "loggedInUserId"],
     components: {
         StoreTable,
         UserTable,
@@ -57,7 +61,7 @@ export default {
     },
 
     mounted() {
-        
+        console.log(this.loggedInUserId);
     },
     data() {
         return {

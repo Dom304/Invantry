@@ -19899,7 +19899,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin-dashboard",
-  props: ["initialUsers", "stores", "loggedInUserId"],
+  props: ["initialUsers", "stores", "manager_requests", "loggedInUserId"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -19908,7 +19908,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.users = this.initialUsers;
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.loggedInUserId);
+  },
   data: function data() {
     return {
       currentwindow: "user",
@@ -20847,14 +20849,20 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "left-window-admin-dashboard"
 };
-var _hoisted_2 = {
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "/home",
+  "class": "back-arrow"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa-solid fa-angle-left"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Back")], -1 /* HOISTED */);
+var _hoisted_3 = {
   "class": "right-window-admin-dashboard"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_user_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("user-table");
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
   var _component_request_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("request-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
       selected: $data.currentwindow === 'user'
     }]),
@@ -20875,7 +20883,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $data.currentwindow = 'request';
     })
-  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
+  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$data.currentwindow === 'user' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_user_table, {
     key: 0,
     users: $data.users,
     "logged-in-user-id": $props.loggedInUserId,
@@ -20886,7 +20894,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stores: $props.stores
   }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 2,
-    manager_requests: _ctx.manager_requests
+    manager_requests: $props.manager_requests
   }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
@@ -21453,7 +21461,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       selected: $data.currentwindow === 'request'
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $data.currentwindow = 'request';
+      $data.currentwindow = 'request';
+      console.log($data.currentwindow);
     })
   }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <user-table\n            v-if=\"currentwindow === 'user'\"\n            :users=\"users\"\n            :logged-in-user-id=\"loggedInUserId\"\n        ></user-table> "), $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 0,
