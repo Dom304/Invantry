@@ -46,7 +46,7 @@
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
-            // Do something for manager-btn
+            window.location.href = '/ManagerDashboard';
         } else if (buttonId === 'admin-btn') {
             window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {

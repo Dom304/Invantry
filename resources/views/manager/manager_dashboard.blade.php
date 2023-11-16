@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="top-toolbar">
+    <a href="/home">
+        <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+    </a>
+    <h1 class="app-name">Invantry</h1>
+    <div class="search-container">
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+      </div>
+    <div>
+        <form method="GET" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+
     <div class="container">
         <h1>Welcome, {{ $user->name }}!</h1>
 

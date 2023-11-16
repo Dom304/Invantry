@@ -30,6 +30,7 @@ Route::post('/store/{storeName}/add-to-collection', [CartController::class, 'ins
 
 //for inserting into cart from right window
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');
+Route::delete('/deleteItem/{store}/{item}', [CollectionItemController::class, 'deleteItem'])->name('deleteItem');
 Route::post('/collection/{collName}', [CartController::class, 'insertRight'])->name('cart.add');
 //for inserting into collection from right window
 Route::post('/collection/{collName}/add-to-collection', [CartController::class, 'insertRightCol'])->name('collection.add');

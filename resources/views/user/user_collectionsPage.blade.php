@@ -239,6 +239,11 @@ function setSearchValueAndFilterRight(itemName) {
         </div>
         <!-- Added a data attribute to the button for easy identification -->
         <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+        <form action="{{ route('deleteItem', ['store' => $item->store_id, 'item' => $item->id]) }}" method="post" class="delete-form">
+            @csrf
+            @method('delete')
+            <button type="submit" class="delete-colitem-btn">Delete</button>
+        </form>
     </div>
 @endforeach
     </div>
