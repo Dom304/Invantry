@@ -162,7 +162,7 @@
 
         </a>
         @endforeach
-<!-- 
+ 
         <form method="POST" action="{{ route('updateRole') }}">
         @csrf
         @method('PUT')
@@ -183,7 +183,7 @@
     <input type="hidden" name="role" value="admin">
     <button type="submit">Admin Button</button>
 </form>
-    </div> -->
+    </div> 
 
 
 

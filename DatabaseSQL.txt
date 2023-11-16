@@ -23,7 +23,7 @@ INSERT INTO `items` (`id`, `store_id`, `item_name`, `item_description`, `item_qu
 (3, 11, 'Apple Airpods', 'HIGH-QUALITY SOUND — Powered by the Apple H1 headphone chip', 1, 99.99, '../images/item-images/AppleAirpods.png', NULL, NULL),
 (4, 11, 'LG instaview Refrigerator', 'Ultra‑Large Capacity, 27 cu. ft. with Edge‑to‑Edge InstaView® Design', 1, 1299.49, '../images/item-images/LGFridge.png', NULL, NULL),
 (5, 11, 'Grand Theft Auto V', 'Includes the complete Grand Theft Auto V story experience', 1, 69.99, '../images/item-images/GTA5.png', NULL, NULL),
-(6, 11, 'lenovo 14" FHD Ideapad 3 Laptop', '11th Gen Intel Core i3-1115G4, 2 Cores & 4 Threads', 1, 429.99, '../images/item-images/LenovoLaptop.png', NULL, NULL),
+(6, 11, 'lenovo 14\" FHD Ideapad 3 Laptop', '11th Gen Intel Core i3-1115G4, 2 Cores & 4 Threads', 1, 429.99, '../images/item-images/LenovoLaptop.png', NULL, NULL),
 (7, 11, 'OtterBox iPhone 15 Pro Symmetry Series Case', 'Ultra-sleek, stylish and trendy iPhone 15 Pro case for MagSafe', 1, 39.29, '../images/item-images/iPhoneCase.png', NULL, NULL),
 (8, 11, 'OtterBox Galaxy S23 Ultra Defender Series Case', 'Multi-layer defense: solid inner shell and soft outer cover', 1, 39.29, '../images/item-images/SamsungCase.png', NULL, NULL),
 (9, 11, 'Call of Duty Modern Warfare III', 'Pre-Order and Receive Early access to the Open Beta', 1, 69.99, '../images/item-images/COD.png', NULL, NULL),
@@ -81,7 +81,7 @@ INSERT INTO `items` (`id`, `store_id`, `item_name`, `item_description`, `item_qu
 (61, 17, 'Mountain Bike', '17-inch aluminum mountain frame with high-performance suspension fork effectively absorb bumps and thumps', 1, 399.00, '../images/item-images/Bike.png', NULL, NULL),
 (62, 17, 'Sports Bike', 'The drivetrain features 165 mm one-piece crank with a 36T chainring', 1, 259.99, '../images/item-images/SportBike.png', NULL, NULL),
 (63, 17, 'Nike Sweatshirt', 'CLASSIC STYLE, WARM COVERAGE: Wear it alone or as a layer', 1, 69.99, '../images/item-images/NikeSweatshirt.png', NULL, NULL),
-(64, 17, 'Lawn Chair', 'Oversized Camping Folding Chair Size is 25.20" L x 36.61" W x 39.37"H, Weight is 13.2lbs', 1, 30.39, '../images/item-images/Chair.png', NULL, NULL),
+(64, 17, 'Lawn Chair', 'Oversized Camping Folding Chair Size is 25.20\" L x 36.61\" W x 39.37\"H, Weight is 13.2lbs', 1, 30.39, '../images/item-images/Chair.png', NULL, NULL),
 (65, 17, 'Multi-Purpose Utility Tool', 'Ready for Anything: You never know when you need a screwdriver, plier or knife, etc.', 1, 109.99, '../images/item-images/Utility.png', NULL, NULL),
 (66, 18, 'Can Of Paint', 'Paint + Primer for Interior and Exterior', 1, 11.49, '../images/item-images/Paint.png', NULL, NULL),
 (67, 18, 'DEWALT 20-volt Max Power Drill', 'Ergonomic comfort grip handle provides ideal balance and tool control', 1, 91.29, '../images/item-images/Drill.png', NULL, NULL),
@@ -89,8 +89,18 @@ INSERT INTO `items` (`id`, `store_id`, `item_name`, `item_description`, `item_qu
 (69, 18, 'GE Refresh 60-Watt LED Bulbs', 'Rated to last 13.7 years based on 3 hours per day use. Dimmable and works with most dimmer switches', 1, 16.55, '../images/item-images/Bulbs.png', NULL, NULL),
 (70, 18, 'Box Of Nails', 'For general construction, carpentry, framing and box making', 1, 8.59, '../images/item-images/Nails.png', NULL, NULL),
 (71, 18, 'Irwin Hammer', 'Designed to have same stiking effect as a 28oz hammer', 1, 20.99, '../images/item-images/Hammer.png', NULL, NULL),
-(72, 18, 'Lawn Chair', 'Oversized Camping Folding Chair Size is 25.20" L x 36.61" W x 39.37"H, Weight is 13.2lbs', 1, 35.39, '../images/item-images/Chair.png', NULL, NULL),
-(73, 18, 'Craftman 1100 Lumens Utility Light', 'Built with premium long lasting led chips that offer bright cool white light.', 1, 84.99, '../images/item-images/Light.png', NULL, NULL);
+(72, 18, 'Lawn Chair', 'Oversized Camping Folding Chair Size is 25.20\" L x 36.61\" W x 39.37\"H, Weight is 13.2lbs', 1, 35.39, '../images/item-images/Chair.png', NULL, NULL),
+(73, 18, 'Craftman 1100 Lumens Utility Light', 'Built with premium long lasting led chips that offer bright cool white light.', 1, 84.99, '../images/item-images/Light.png', NULL, NULL),
+(74, 19, 'Gatorade Whey Protein Bars', 'The protein bar used by the NFL, NBA, NBA, and MLB is now available to you. With a mix of carbs and protein', 1, 2.99, '../images/item-images/ProteinBar.png', NULL, NULL),
+(77, 19, 'Dymatize ISO100 Hydrolyzed Protein Powder', 'Scientifically formulated with fast-digesting hydrolyzed whey protein isolate', 1, 32.99, '../images/item-images/Protein.png', NULL, NULL),
+(78, 19, 'BlenderBottle Shaker Bottle Pro Series', 'Patented mixing system uses 316 surgical-grade stainless steel BlenderBall wire whisk found only in BlenderBottle brand shaker cups', 1, 15.50, '../images/item-images/Blender.png', NULL, NULL),
+(79, 19, 'HELIMIX 2.0 Vortex Blender Shaker Bottle', 'Helimix uses a patented vortex blender design that doesn\'t require anything but a few good shakes', 1, 21.99, '../images/item-images/TwistBlender.png', NULL, NULL),
+(80, 19, 'Bucked Up Pre-Workout Powder, Increased Energy', 'Heavily dosed prime ingredients and full transparency make Woke AF a must for experienced athletes', 1, 52.99, '../images/item-images/BuckedUp.png', NULL, NULL),
+(81, 19, 'C4 Original Pre Workout Powder', 'America\'s Number 1 Selling Pre-Workout Brand has been trusted since 2011 with over 2 billion servings sold', 1, 23.25, '../images/item-images/C4.png', NULL, NULL),
+(82, 19, 'GHOST ENERGY Sugar-Free Energy Drink', 'Energy & Focus & No Artificial Colors - 200mg Natural Caffeine, L-Carnitine & Taurine - Gluten-Free & Vegan', 1, 3.29, '../images/item-images/Ghost.png', NULL, NULL),
+(83, 19, 'Bang Energy, Sugar-Free Energy Drink', 'Bang Energy is designed to help you maximize your potential by fueling your body to keep you movin’.', 1, 2.59, '../images/item-images/Bang.png', NULL, NULL),
+(84, 19, 'Bucked Up Creatine Monohydrate', '50 Servings/250g per Bottle - Powder is Unflavored, Vegetarian & Non GMO', 1, 18.95, '../images/item-images/Creatine.png', NULL, NULL),
+(85, 19, 'Under Armour Undeniable 5.0 Duffle', '100% Polyester, UA Storm technology delivers an element-battling, highly water-repellent finish', 1, 37.95, '../images/item-images/UABag.png', NULL, NULL);
 
 -- Collection inputs:
 INSERT INTO `collections` (`id`, `user_id`, `collection_name`, `created_at`, `updated_at`) VALUES
