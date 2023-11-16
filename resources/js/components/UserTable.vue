@@ -29,7 +29,7 @@
         ></b-pagination>
     </div>
 
-    <Modal :show="showModal" 
+        <Modal :show="showModal" 
                :userId="selectedUser.id" 
                :username="selectedUser.name" 
                @close="showModal = false"
@@ -52,8 +52,11 @@ import EditModal from './EditModal.vue'
 export default {
     name: 'user-table',
     emits: ['refreshUsers'],
-    props: {'users' : Array, 'loggedInUserId' : Number},
-    // rest of your component
+    props: {
+    users: Array,
+    loggedInUserId: Number,
+    isBusy: Boolean,
+    },
 
     components: {
         Modal,
@@ -66,11 +69,10 @@ export default {
         return {
             currentPage: 1,
             rowsPerPage: 5,
-            columns: ['id', 'name', 'role'], // column keys for searching
+            columns: ['id', 'name', 'role'],
             searchColumn: 'Name', // default column to search by
             searchQuery: '',
             selectedUser: {},
-            isBusy: false,
             showModal: false,
             showEditModal: false,
             fields: [
@@ -126,10 +128,6 @@ export default {
         refreshUsers() {
             this.$emit('refreshUsers');
         },
-
-        refreshTable() {
-            this.showModal = false;
-        }
     }
 }
 </script>

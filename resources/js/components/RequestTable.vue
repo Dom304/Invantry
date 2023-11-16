@@ -34,7 +34,7 @@
 
     <b-pagination
         v-model="currentPage"
-        :total-rows="filteredStores.length"
+        :total-rows="filteredRequests.length"
         :per-page="rowsPerPage"
         aria-controls="my-table"
     ></b-pagination>
@@ -85,7 +85,7 @@ export default {
       rowsPerPage: 5,
       searchColumn: "Store Name",
       searchQuery: "",
-      selectedUser: {},
+      selectedRequest: {},
       showModal: false,
       fields: [
         { key: 'id', label: 'ID', searchable: true },
@@ -94,6 +94,7 @@ export default {
         { key: 'description', label: 'Proposal', searchable: true },
         { key: 'actions', label: 'Actions', searchable: false }
       ],
+      columns: [],
     };
   },
 
@@ -104,7 +105,7 @@ export default {
         .map(f => f.label);
     },
 
-    filteredStores() {
+    filteredRequests() {
       if (!this.searchQuery) {
         return this.manager_requests;
       }
@@ -118,13 +119,13 @@ export default {
     tablePagination() {
       const start = (this.currentPage - 1) * this.rowsPerPage;
       const end = start + this.rowsPerPage;
-      return this.filteredStores.slice(start, end);
+      return this.filteredRequests.slice(start, end);
     },
   },
 
   methods: {
     acceptRequest(request) {
-      this.selectedUser = request;
+      this.selectedRequest = request;
       this.showModal = true;
     },
     
@@ -132,7 +133,7 @@ export default {
       this.showModal = false;
     },
 
-    rejectUser(request) {
+    rejectRequest(request) {
       // Handle the reject action here
     },
 
@@ -144,4 +145,3 @@ export default {
   },
 };
 </script>
-

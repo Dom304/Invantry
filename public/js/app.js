@@ -19899,7 +19899,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin-dashboard",
-  props: ["initialUsers", "stores", "loggedInUserId"],
+  props: ["initialUsers", "stores", "loggedInUserId", "managerRequests"],
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -19908,11 +19908,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     this.users = this.initialUsers;
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.loggedInUserId);
+    console.log(this.managerRequests);
+    console.log(this.users);
+  },
   data: function data() {
     return {
       currentwindow: "user",
-      users: []
+      users: [],
+      isFetchingUsers: false,
+      managerRequests: []
     };
   },
   methods: {
@@ -19923,30 +19929,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
+              _this.isFetchingUsers = true;
+              _context.prev = 1;
+              _context.next = 4;
               return axios.get('/refresh');
-            case 3:
+            case 4:
               response = _context.sent;
               // Update the users data property with the new data
               _this.users = response.data;
-              _context.next = 10;
+              _context.next = 11;
               break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
               console.error("Error fetching users:", _context.t0);
-            case 10:
-              _context.prev = 10;
-              if (_this.$refs.userTable) {
-                _this.$refs.userTable.isBusy = false; // Set the table to not busy after fetching data
-              }
-              return _context.finish(10);
-            case 13:
+            case 11:
+              _context.prev = 11;
+              _this.isFetchingUsers = false;
+              return _context.finish(11);
+            case 14:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7, 10, 13]]);
+        }, _callee, null, [[1, 8, 11, 14]]);
       }))();
     }
   }
@@ -20439,7 +20444,7 @@ __webpack_require__.r(__webpack_exports__);
       rowsPerPage: 5,
       searchColumn: "Store Name",
       searchQuery: "",
-      selectedUser: {},
+      selectedRequest: {},
       showModal: false,
       fields: [{
         key: 'id',
@@ -20461,7 +20466,8 @@ __webpack_require__.r(__webpack_exports__);
         key: 'actions',
         label: 'Actions',
         searchable: false
-      }]
+      }],
+      columns: []
     };
   },
   computed: {
@@ -20472,7 +20478,7 @@ __webpack_require__.r(__webpack_exports__);
         return f.label;
       });
     },
-    filteredStores: function filteredStores() {
+    filteredRequests: function filteredRequests() {
       var _this$fields$find,
         _this = this;
       if (!this.searchQuery) {
@@ -20489,18 +20495,18 @@ __webpack_require__.r(__webpack_exports__);
     tablePagination: function tablePagination() {
       var start = (this.currentPage - 1) * this.rowsPerPage;
       var end = start + this.rowsPerPage;
-      return this.filteredStores.slice(start, end);
+      return this.filteredRequests.slice(start, end);
     }
   },
   methods: {
     acceptRequest: function acceptRequest(request) {
-      this.selectedUser = request;
+      this.selectedRequest = request;
       this.showModal = true;
     },
     closeModal: function closeModal() {
       this.showModal = false;
     },
-    rejectUser: function rejectUser(request) {
+    rejectRequest: function rejectRequest(request) {
       // Handle the reject action here
     },
     refreshTable: function refreshTable() {
@@ -20736,11 +20742,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   name: 'user-table',
   emits: ['refreshUsers'],
   props: {
-    'users': Array,
-    'loggedInUserId': Number
+    users: Array,
+    loggedInUserId: Number,
+    isBusy: Boolean
   },
-  // rest of your component
-
   components: {
     Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     EditModal: _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -20752,12 +20757,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       currentPage: 1,
       rowsPerPage: 5,
       columns: ['id', 'name', 'role'],
-      // column keys for searching
       searchColumn: 'Name',
       // default column to search by
       searchQuery: '',
       selectedUser: {},
-      isBusy: false,
       showModal: false,
       showEditModal: false,
       fields: [{
@@ -20819,9 +20822,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   },
   refreshUsers: function refreshUsers() {
     this.$emit('refreshUsers');
-  },
-  refreshTable: function refreshTable() {
-    this.showModal = false;
   }
 }), _name$emits$props$com);
 
@@ -20901,13 +20901,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     users: $data.users,
     "logged-in-user-id": $props.loggedInUserId,
     ref: "userTable",
+    "is-busy": $data.isFetchingUsers,
     onRefreshUsers: $options.fetchUsers
-  }, null, 8 /* PROPS */, ["users", "logged-in-user-id", "onRefreshUsers"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+  }, null, 8 /* PROPS */, ["users", "logged-in-user-id", "is-busy", "onRefreshUsers"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
     stores: $props.stores
   }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 2,
-    manager_requests: _ctx.manager_requests
+    manager_requests: $data.managerRequests
   }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
@@ -21586,7 +21587,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return $options.rejectUser(row.item);
+          return _ctx.rejectUser(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21601,13 +21602,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.currentPage = $event;
     }),
-    "total-rows": $options.filteredStores.length,
+    "total-rows": $options.filteredRequests.length,
     "per-page": $data.rowsPerPage,
     "aria-controls": "my-table"
   }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ManagerModal, {
     show: $data.showModal,
-    userId: $data.selectedUser.id,
-    username: $data.selectedUser.name,
+    userId: _ctx.selectedUser.id,
+    username: _ctx.selectedUser.name,
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
@@ -21973,7 +21974,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     striped: "",
     hover: "",
     items: $options.paginatedUsers,
-    busy: $data.isBusy,
+    busy: $props.isBusy,
     fields: $data.fields
   }, {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
