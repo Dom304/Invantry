@@ -21569,6 +21569,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
+        style: {
+          "margin-right": "5px"
+        },
         onClick: function onClick($event) {
           return $options.acceptRequest(row.item);
         }
@@ -21797,6 +21800,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
+        style: {
+          "margin-right": "5px"
+        },
         onClick: function onClick($event) {
           return $options.editStore(row.item);
         }

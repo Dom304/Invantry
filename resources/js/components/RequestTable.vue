@@ -27,7 +27,7 @@
       </template> 
 
       <template #cell(actions)="row">
-        <b-button size="sm" @click="acceptRequest(row.item)">Accept</b-button>
+        <b-button size="sm" style="margin-right: 5px;" @click="acceptRequest(row.item)">Accept</b-button>
         <b-button size="sm" variant="danger" @click="rejectUser(row.item)">Reject</b-button>
       </template>
     </b-table>

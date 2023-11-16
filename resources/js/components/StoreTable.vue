@@ -27,7 +27,7 @@
           </template>
 
           <template #cell(actions)="row">
-              <b-button size="sm" @click="editStore(row.item)">Edit</b-button>
+              <b-button size="sm" style="margin-right: 5px;" @click="editStore(row.item)">Edit</b-button>
               <b-button size="sm" variant="danger" @click="deleteStore(row.item)">Delete</b-button>
           </template>
       </b-table>
