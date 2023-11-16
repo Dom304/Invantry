@@ -23,7 +23,8 @@
         <button
             class="window-btn"
             :class="{ selected: currentwindow === 'request' }"
-            @click="currentwindow = 'request'">
+            @click="currentwindow = 'request'; console.log(currentwindow)"
+            >
             Requests
         </button>
     </div>

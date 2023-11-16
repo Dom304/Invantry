@@ -155,11 +155,14 @@
 
     <!-- Calculate and display total -->
     @php
-        $totalPrice = collect($purchasedItems)->sum(function($item) {
-            return $item->quantity * $item->item->item_price;
-        });
-        $deliveryFee = 15.00;
-        $grandTotal = $totalPrice + $deliveryFee;
+    $totalPrice = collect($purchasedItems)->sum(function($item) {
+        return $item->quantity * $item->item->item_price;
+    });
+
+    $uniqueStores = collect($purchasedItems)->pluck('item.store_id')->unique()->count();
+    $deliveryFee = 15.00 + (5 * ($uniqueStores - 1));
+
+    $grandTotal = $totalPrice + $deliveryFee;
     @endphp
     
     <div class="price-details">

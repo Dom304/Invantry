@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('item_description');
             $table->unsignedBigInteger('item_quantity')->unsigned();
             $table->double('item_price', 15, 2);
-            $table->string('item_logo');
+            $table->string('item_logo')->nullable();
             $table->timestamps();
         });
     }

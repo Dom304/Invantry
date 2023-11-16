@@ -161,7 +161,7 @@
         <!-- href="/stores/store-name" -->
         <a class="item-card">
             <div class="store-logo">
-                <img src="{{$item->item_logo}}" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Item Logo">
             </div>
             <div class="store-info">
                 <span class="item-name">{{ $item->item_name }}</span>

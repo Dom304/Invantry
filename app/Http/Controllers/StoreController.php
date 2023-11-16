@@ -54,19 +54,25 @@ class StoreController extends Controller
     }
 
     public function updateStore(Request $request, Store $store)
-    {
-        $request->validate([
-            'store_name' => 'required|string|max:255',
-            'store_description' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'store_name' => 'required|string|max:255',
+        'store_description' => 'required|string',
+        'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
 
-        $store->update([
-            'store_name' => $request->input('store_name'),
-            'store_description' => $request->input('store_description'),
-        ]);
+    $store->update([
+        'store_name' => $request->input('store_name'),
+        'store_description' => $request->input('store_description'),
+    ]);
 
-        return redirect()->route('managerDashboard')->with('success', 'Store information updated successfully!');
+    if ($request->hasFile('store_logo')) {
+        $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
+        $store->update(['store_logo' => $storeLogoPath]);
     }
+
+    return redirect()->route('managerDashboard')->with('success', 'Store information updated successfully!');
+}
 
     public function addItem(Request $request, Store $store)
     {
@@ -75,16 +81,17 @@ class StoreController extends Controller
             'item_description' => 'required|string',
             'item_quantity' => 'required|integer|min:1',
             'item_price' => 'required|numeric|min:0.01',
-            'item_logo' => 'required|string',
+            'item_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Assuming you have a relationship between Store and Item
+        $itemLogoPath = $request->file('item_logo')->store('item_logos', 'public');
+
         $item = $store->items()->create([
             'item_name' => $request->input('item_name'),
             'item_description' => $request->input('item_description'),
             'item_quantity' => $request->input('item_quantity'),
             'item_price' => $request->input('item_price'),
-            'item_logo' => $request->input('item_logo'),
+            'item_logo' => $itemLogoPath,
         ]);
 
         return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');
