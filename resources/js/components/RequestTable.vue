@@ -127,12 +127,20 @@ export default {
       this.selectedUser = request;
       this.showModal = true;
     },
+    
     closeModal() {
       this.showModal = false;
     },
+
     rejectUser(request) {
       // Handle the reject action here
     },
+
+    refreshTable() {
+        // Implement the logic to refresh the table data.
+        // This might involve fetching new data or updating the existing data.
+    },
+
   },
 };
 </script>

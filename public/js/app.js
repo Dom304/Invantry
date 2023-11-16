@@ -20492,6 +20492,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     rejectUser: function rejectUser(request) {
       // Handle the reject action here
+    },
+    refreshTable: function refreshTable() {
+      // Implement the logic to refresh the table data.
+      // This might involve fetching new data or updating the existing data.
     }
   }
 });
@@ -21587,7 +21591,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
-    onUserDeletedSuccessfully: _ctx.refreshTable,
+    onUserDeletedSuccessfully: $options.refreshTable,
     onRequestAcceptedSuccessfully: $options.closeModal
   }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
