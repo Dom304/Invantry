@@ -518,8 +518,17 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
+    .item-name {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .item-subtext {
+        font-size: 10px;
+    }
+
+    .item-price {
+        font-size: 12px;
         font-weight: bold;
     }
 
@@ -560,8 +569,17 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
+    .item-name2 {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .item-subtext2 {
+        font-size: 10px;
+    }
+
+    .item-price2 {
+        font-size: 12px;
         font-weight: bold;
     }
 
@@ -600,9 +618,13 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
-        font-weight: bold;
+    .colitem-name {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .colitem-subtext {
+        font-size: 12px;
     }
 
     .search-colitem-btn {
