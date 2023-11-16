@@ -164,9 +164,9 @@
             <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Item Logo">
             </div>
             <div class="store-info">
-                <span class="store-name">{{ $item->item_name }}</span>
-                <span class="store-subtext">{{ $item->item_description }}</span>
-                <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
+                <span class="item-name">{{ $item->item_name }}</span>
+                <span class="item-subtext">{{ $item->item_description }}</span>
+                <span class="item-price">${{ number_format($item->item_price, 2) }}</span>
             </div>
 
             <form method="POST" action="{{ route('store.collection.add', ['storeName' => $storeName]) }}">

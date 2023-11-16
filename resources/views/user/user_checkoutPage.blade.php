@@ -203,6 +203,11 @@
         <p class="important-notice">Items received after 10pm or before 8am will be delivered the following day</p>
     </div>
 
+    <!-- Continue Shopping Button -->
+    <div class="continue-shopping">
+        <button type="button" onclick="window.location.href='/home'">Continue Shopping</button>
+    </div>
+
 </div>  
 
 <div class="right-window"></div>
