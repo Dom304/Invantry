@@ -9,6 +9,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ManagerRequestController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\GenericDeleteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +58,11 @@ Route::post('/addItem/{store}', [StoreController::class, 'addItem'])->name('addI
 Route::delete('/deleteItem/{store}/{item}', [StoreController::class, 'deleteItem'])->name('deleteItem');
 Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptRequest'])->name('manager.request.accept');
 
-Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+Route::post('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
+Route::post('/store/{store}', [StoreController::class, 'deleteStore'])->name('deleteStore');
+
+//Using this route for deleting any entity
+Route::post('/delete/{type}/{id}', [GenericDeleteController::class, 'delete'])->name('generic.delete');
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
 Route::get('/refresh', [StoreController::class, 'returnUsers'])->name('users.return');

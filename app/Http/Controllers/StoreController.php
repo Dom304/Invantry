@@ -119,6 +119,19 @@ class StoreController extends Controller
         return redirect()->route('adminDashboard')->with('success', 'User deleted successfully.');
     }
 
+    public function deleteStore($request)
+    {
+        $store = Store::find($storeId);
+
+        if (!$store) {
+            return response()->json(['message' => 'Store not found'], 404);
+        }
+
+        $store->delete();
+
+        return response()->json(['message' => 'Store deleted successfully']);
+    }
+
     public function updateRole(Request $request)
     {
         $user = auth()->user(); // Get the currently authenticated user.

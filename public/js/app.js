@@ -20321,17 +20321,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'delete-modal',
+  emits: ['close', 'deleted-successfully'],
   props: {
     show: {
       type: Boolean,
       "default": false
     },
-    userId: {
-      type: Number
+    entityData: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
     },
-    username: {
-      // Adding username as a prop
+    type: {
       type: String,
       "default": ''
     }
@@ -20340,15 +20346,21 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('close');
     },
-    deleteUser: function deleteUser() {
+    "delete": function _delete() {
+      console.log(this.entityData);
+    },
+    test: function test() {
       var _this = this;
-      axios["delete"]("/user/".concat(this.userId)).then(function (response) {
-        console.log("User deleted successfully"); // Use console.log instead of console.success
-        _this.$emit('user-deleted-successfully'); // Emit an event when user is deleted
-        _this.close(); // Close the modal
+      console.log("clicked");
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/delete/".concat(this.type, "/").concat(this.entityData.id), {
+        id: this.entityData.id,
+        type: this.type
+      }).then(function (response) {
+        console.log("".concat(_this.type, " deleted successfully"));
+        _this.$emit('deleted-successfully');
+        _this.close();
       })["catch"](function (error) {
-        // Handle the error. Maybe show a notification to the user.
-        console.error("There was an error deleting the user:", error);
+        console.error("There was an error deleting the ".concat(_this.type, ":"), error);
       });
     }
   }
@@ -20559,6 +20571,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditStoreModal.vue */ "./resources/js/components/EditStoreModal.vue");
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20566,7 +20580,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ['stores'],
   components: {
     BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination,
-    EditStoreModal: _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    EditStoreModal: _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -20590,6 +20605,7 @@ __webpack_require__.r(__webpack_exports__);
       columns: ['id', 'store_name'],
       // column keys for searching
       showEditModal: false,
+      showModal: false,
       selectedStore: {}
     };
   },
@@ -20635,7 +20651,8 @@ __webpack_require__.r(__webpack_exports__);
     toggleBusy: function toggleBusy() {
       this.isBusy = !this.isBusy;
     },
-    clickedDeleteStore: function clickedDeleteStore(store) {
+    deleteStore: function deleteStore(store) {
+      console.log('deleteStore', store);
       this.selectedStore = store;
       this.showModal = true;
     },
@@ -21405,9 +21422,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.entityData.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
-      return $options.deleteUser && $options.deleteUser.apply($options, arguments);
+      return $options.test && $options.test.apply($options, arguments);
     })
   }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
@@ -21726,6 +21743,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
   var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
+  var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
   var _component_EditStoreModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditStoreModal");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
     label: "Search by:",
@@ -21794,7 +21812,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return _ctx.deleteStore(row.item);
+          return $options.deleteStore(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21812,9 +21830,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "total-rows": $options.filteredStores.length,
     "per-page": $data.rowsPerPage,
     "aria-controls": "my-table"
-  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <StoreDeleteModal :show=\"showModal\" \n                    :storeId=\"selectedStore.id\" \n                    :storeName=\"selectedStore.name\" \n                    @close=\"showModal = false\"\n                    @store-deleted-successfully=\"refreshStores\">\n  </StoreDeleteModal> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditStoreModal, {
-    show: $data.showEditModal,
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    show: $data.showModal,
+    type: 'store',
+    entityData: $data.selectedStore,
     onClose: _cache[3] || (_cache[3] = function ($event) {
+      return $data.showModal = false;
+    }),
+    onDeletedSuccessfully: $options.refreshStores
+  }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditStoreModal, {
+    show: $data.showEditModal,
+    onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showEditModal = false;
     }),
     storeData: $data.selectedStore,

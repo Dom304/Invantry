@@ -40,12 +40,12 @@
     ></b-pagination>
 
     <!-- Todo: -->
-    <!-- <StoreDeleteModal :show="showModal" 
-                    :storeId="selectedStore.id" 
-                    :storeName="selectedStore.name" 
+    <Modal :show="showModal" 
+                    :type="'store'"
+                    :entityData="selectedStore"
                     @close="showModal = false"
-                    @store-deleted-successfully="refreshStores">
-  </StoreDeleteModal> -->
+                    @deleted-successfully="refreshStores">
+    </Modal>
 
   <EditStoreModal :show="showEditModal"
                   @close="showEditModal = false"
@@ -59,6 +59,7 @@
 <script>
 import { BTable, BFormInput, BFormGroup, BFormSelect, BRow, BCol,  BPagination } from 'bootstrap-vue-3';
 import EditStoreModal from './EditStoreModal.vue';
+import Modal from './Modal.vue';
 
 export default {
   name: 'store-table',
@@ -66,6 +67,7 @@ export default {
   components: {
         BPagination,
         EditStoreModal,
+        Modal,
   },
 
   data() {
@@ -82,6 +84,7 @@ export default {
           ],
           columns: ['id', 'store_name'], // column keys for searching
           showEditModal: false,
+          showModal: false,
           selectedStore: {},
       }
   }, 
@@ -128,7 +131,8 @@ export default {
           this.isBusy = !this.isBusy;
       },
 
-      clickedDeleteStore(store) {
+      deleteStore(store) {
+            console.log('deleteStore', store);
             this.selectedStore = store;
             this.showModal = true;
         },
