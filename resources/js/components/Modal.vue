@@ -6,10 +6,10 @@
         <span aria-hidden="true" @click="close">&times;</span>
       </div>
       <div class="modal-main-content">
-        Are you sure you want to delete {{ username }}?
+        Are you sure you want to delete {{ entityData.store_name }}?
       </div>
       <div class="modal-foot">
-        <button @click="deleteUser">Continue</button>
+        <button @click="deleteEnity">Continue</button>
         <button @click="close">Close</button>
       </div>
     </div>
@@ -17,35 +17,47 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  name: 'delete-modal',
+  emits: ['close', 'deleted-successfully'],
   props: {
     show: {
       type: Boolean,
       default: false
     },
-    userId: {
-      type: Number,
+
+    entityData: {
+      type: Object,
+      default: () => ({})
     },
-    username: { // Adding username as a prop
+
+    type: {
       type: String,
       default: ''
     }
   },
+
   methods: {
     close() {
       this.$emit('close');
     },
-    deleteUser() {
-      axios.delete(`/user/${this.userId}`)
-        .then(response => {
-          console.log("User deleted successfully"); // Use console.log instead of console.success
-          this.$emit('user-deleted-successfully'); // Emit an event when user is deleted
-          this.close(); // Close the modal
-        })
-        .catch(error => {
-          // Handle the error. Maybe show a notification to the user.
-          console.error("There was an error deleting the user:", error);
-        });
+
+    deleteEnity() {
+      console.log(`clicked`);
+      axios.post(`/delete/${this.type}/${this.entityData.id}`, {
+        id: this.entityData.id,
+        type: this.type,
+      })
+      .then(response => {
+        console.log(`${this.type} deleted successfully`);
+        this.$emit('deleted-successfully');
+        this.close();
+      })
+      .catch(error => {
+        console.error(`There was an error deleting the ${this.type}:`, error);
+      });
     }
   }
 }

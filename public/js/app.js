@@ -19899,7 +19899,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "admin-dashboard",
-  props: ["initialUsers", "stores", "manager_requests", "loggedInUserId"],
+  props: {
+    initialUsers: Array,
+    users: Array,
+    initialStores: Array,
+    initialRequests: Array,
+    loggedInUserId: Number
+  },
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -19907,14 +19913,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.users = this.initialUsers;
+    this.stores = this.initialStores;
+    this.managerRequests = this.initialRequests;
   },
-  mounted: function mounted() {
-    console.log(this.loggedInUserId);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       currentwindow: "user",
-      users: []
+      users: [],
+      stores: [],
+      managerRequests: [],
+      isFetchingUsers: false,
+      isFetchingRequests: false,
+      isFetchingStore: false
     };
   },
   methods: {
@@ -19925,30 +19936,107 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios.get('/refresh');
-            case 3:
+              _this.isFetchingUsers = true;
+              _context.prev = 1;
+              _context.next = 4;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'users'
+                }
+              });
+            case 4:
               response = _context.sent;
               // Update the users data property with the new data
               _this.users = response.data;
-              _context.next = 10;
+              _context.next = 11;
               break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
+            case 8:
+              _context.prev = 8;
+              _context.t0 = _context["catch"](1);
               console.error("Error fetching users:", _context.t0);
-            case 10:
-              _context.prev = 10;
-              if (_this.$refs.userTable) {
-                _this.$refs.userTable.isBusy = false; // Set the table to not busy after fetching data
-              }
-              return _context.finish(10);
-            case 13:
+            case 11:
+              _context.prev = 11;
+              _this.isFetchingUsers = false;
+              return _context.finish(11);
+            case 14:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7, 10, 13]]);
+        }, _callee, null, [[1, 8, 11, 14]]);
+      }))();
+    },
+    fetchStores: function fetchStores() {
+      var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log("fetching stores");
+              _this2.isFetchingStore = true;
+              _context2.prev = 2;
+              _context2.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'stores'
+                }
+              });
+            case 5:
+              response = _context2.sent;
+              // Update the users data property with the new data
+              _this2.stores = response.data;
+              _context2.next = 12;
+              break;
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](2);
+              console.error("Error fetching stores:", _context2.t0);
+            case 12:
+              _context2.prev = 12;
+              _this2.isFetchingStore = false;
+              return _context2.finish(12);
+            case 15:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[2, 9, 12, 15]]);
+      }))();
+    },
+    fetchRequests: function fetchRequests() {
+      var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log("fetching requests");
+              _this3.isFetchingRequests = true;
+              _context3.prev = 2;
+              _context3.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'manager_requests'
+                }
+              });
+            case 5:
+              response = _context3.sent;
+              // Update the users data property with the new data
+              _this3.managerRequests = response.data;
+              _context3.next = 12;
+              break;
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](2);
+              console.error("Error fetching requests:", _context3.t0);
+            case 12:
+              _context3.prev = 12;
+              _this3.isFetchingRequests = false;
+              return _context3.finish(12);
+            case 15:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[2, 9, 12, 15]]);
       }))();
     }
   }
@@ -20156,16 +20244,19 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/store/".concat(_this.updateInfo.id), {
-                name: _this.updateInfo.name,
-                manager_id: _this.updateInfo.manager_id
+              _this.close();
+              axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/updateStore/".concat(_this.updateInfo.id), {
+                store_name: _this.updateInfo.store_name,
+                manager_id: _this.updateInfo.manager_id,
+                store_id: _this.updateInfo.id,
+                store_description: _this.updateInfo.store_description
               }).then(function (response) {
                 _this.$emit('storeUpdated');
-                _this.close();
               })["catch"](function (error) {
+                _this.close();
                 console.error("There was an error updating the store:", error);
               });
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -20276,18 +20367,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     show: {
       type: Boolean,
       "default": false
     },
-    requestId: {
-      type: Number
-    },
-    username: {
-      type: String,
-      "default": ''
+    request: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
     }
   },
   methods: {
@@ -20296,8 +20388,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     acceptRequest: function acceptRequest() {
       var _this = this;
-      axios.post("/request/".concat(this.requestId), {
-        userId: this.requestId
+      console.log("Accepting request...", this.request);
+      // You can destructure the request object to get specific fields if needed
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/request/".concat(this.request.id), {
+        request: this.request
       }).then(function (response) {
         console.log("Request accepted successfully");
         _this.$emit('request-accepted-successfully');
@@ -20322,17 +20416,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'delete-modal',
+  emits: ['close', 'deleted-successfully'],
   props: {
     show: {
       type: Boolean,
       "default": false
     },
-    userId: {
-      type: Number
+    entityData: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
     },
-    username: {
-      // Adding username as a prop
+    type: {
       type: String,
       "default": ''
     }
@@ -20341,15 +20441,18 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('close');
     },
-    deleteUser: function deleteUser() {
+    deleteEnity: function deleteEnity() {
       var _this = this;
-      axios["delete"]("/user/".concat(this.userId)).then(function (response) {
-        console.log("User deleted successfully"); // Use console.log instead of console.success
-        _this.$emit('user-deleted-successfully'); // Emit an event when user is deleted
-        _this.close(); // Close the modal
+      console.log("clicked");
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/delete/".concat(this.type, "/").concat(this.entityData.id), {
+        id: this.entityData.id,
+        type: this.type
+      }).then(function (response) {
+        console.log("".concat(_this.type, " deleted successfully"));
+        _this.$emit('deleted-successfully');
+        _this.close();
       })["catch"](function (error) {
-        // Handle the error. Maybe show a notification to the user.
-        console.error("There was an error deleting the user:", error);
+        console.error("There was an error deleting the ".concat(_this.type, ":"), error);
       });
     }
   }
@@ -20371,24 +20474,120 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StoreTable.vue */ "./resources/js/components/StoreTable.vue");
 /* harmony import */ var _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserTable.vue */ "./resources/js/components/UserTable.vue");
 /* harmony import */ var _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RequestTable.vue */ "./resources/js/components/RequestTable.vue");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "moderator-dashboard",
-  props: ["users", "stores", "manager_requests", "loggedInUserId"],
+  props: {
+    users: Array,
+    initialStores: Array,
+    initialRequests: Array,
+    loggedInUserId: Number
+  },
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     RequestTable: _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
+  created: function created() {
+    this.users = this.initialUsers;
+    this.stores = this.initialStores;
+    this.managerRequests = this.initialRequests;
+  },
   mounted: function mounted() {
-    console.log(this.loggedInUserId);
+    // console.log(this.managerRequests);
   },
   data: function data() {
     return {
-      currentwindow: "store"
+      currentwindow: "store",
+      users: [],
+      stores: [],
+      managerRequests: [],
+      isFetchingUsers: false,
+      isFetchingRequests: false,
+      isFetchingStore: false
     };
+  },
+  methods: {
+    fetchStores: function fetchStores() {
+      var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              console.log("fetching stores");
+              _this.isFetchingStore = true;
+              _context.prev = 2;
+              _context.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'stores'
+                }
+              });
+            case 5:
+              response = _context.sent;
+              // Update the users data property with the new data
+              _this.stores = response.data;
+              _context.next = 12;
+              break;
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](2);
+              console.error("Error fetching stores:", _context.t0);
+            case 12:
+              _context.prev = 12;
+              _this.isFetchingStore = false;
+              return _context.finish(12);
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[2, 9, 12, 15]]);
+      }))();
+    },
+    fetchRequests: function fetchRequests() {
+      var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log("fetching requests");
+              _this2.isFetchingRequests = true;
+              _context2.prev = 2;
+              _context2.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'manager_requests'
+                }
+              });
+            case 5:
+              response = _context2.sent;
+              // Update the users data property with the new data
+              _this2.managerRequests = response.data;
+              _context2.next = 12;
+              break;
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](2);
+              console.error("Error fetching requests:", _context2.t0);
+            case 12:
+              _context2.prev = 12;
+              _this2.isFetchingRequests = false;
+              return _context2.finish(12);
+            case 15:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, null, [[2, 9, 12, 15]]);
+      }))();
+    }
   }
 });
 
@@ -20407,13 +20606,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManagerModal.vue */ "./resources/js/components/ManagerModal.vue");
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "request-table",
-  props: ["manager_requests", "loggedInUserId"],
+  emits: ['refreshRequests'],
+  props: {
+    managerRequests: Array,
+    isBusy: Boolean
+  },
   components: {
     ManagerModal: _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     BTable: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BTable,
     BFormInput: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormInput,
     BFormGroup: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormGroup,
@@ -20426,20 +20632,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
-      searchColumn: "Store Name",
+      searchColumn: "User ID",
+      // Set the default search column here
       searchQuery: "",
-      selectedUser: {},
+      selectedRequest: {},
       showModal: false,
+      showDeleteModal: false,
       fields: [{
         key: 'id',
         label: 'ID',
         searchable: true
       }, {
         key: 'user_id',
-        label: 'User',
+        label: 'User ID',
         searchable: true
       }, {
         key: 'store_name',
@@ -20447,13 +20654,13 @@ __webpack_require__.r(__webpack_exports__);
         searchable: true
       }, {
         key: 'description',
-        label: 'Proposal',
+        label: 'Description',
         searchable: true
       }, {
         key: 'actions',
-        label: 'Actions',
-        searchable: false
-      }]
+        label: 'Actions'
+      }],
+      columns: []
     };
   },
   computed: {
@@ -20464,40 +20671,42 @@ __webpack_require__.r(__webpack_exports__);
         return f.label;
       });
     },
-    filteredStores: function filteredStores() {
+    filteredRequests: function filteredRequests() {
       var _this$fields$find,
         _this = this;
       if (!this.searchQuery) {
-        return this.manager_requests;
+        return this.managerRequests;
       }
       var searchKey = (_this$fields$find = this.fields.find(function (f) {
         return f.label === _this.searchColumn;
       })) === null || _this$fields$find === void 0 ? void 0 : _this$fields$find.key;
-      return this.manager_requests.filter(function (request) {
-        var value = String(request[searchKey]).toLowerCase();
+      return this.managerRequests.filter(function (request) {
+        var _request$searchKey;
+        var value = String((_request$searchKey = request[searchKey]) !== null && _request$searchKey !== void 0 ? _request$searchKey : '').toLowerCase();
         return value.includes(_this.searchQuery.toLowerCase());
       });
     },
     tablePagination: function tablePagination() {
       var start = (this.currentPage - 1) * this.rowsPerPage;
-      var end = start + this.rowsPerPage;
-      return this.filteredStores.slice(start, end);
+      return this.filteredRequests.slice(start, start + this.rowsPerPage);
     }
   },
   methods: {
     acceptRequest: function acceptRequest(request) {
-      this.selectedUser = request;
+      this.selectedRequest = request;
       this.showModal = true;
     },
     closeModal: function closeModal() {
       this.showModal = false;
+      this.$emit("refreshRequests");
     },
-    rejectUser: function rejectUser(request) {
-      // Handle the reject action here
+    rejectRequest: function rejectRequest(request) {
+      this.selectedRequest = request;
+      this.showDeleteModal = true;
     },
-    refreshTable: function refreshTable() {
-      // Implement the logic to refresh the table data.
-      // This might involve fetching new data or updating the existing data.
+    refreshRequests: function refreshRequests() {
+      this.showModal = false;
+      this.$emit("refreshRequests");
     }
   }
 });
@@ -20560,45 +20769,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditStoreModal.vue */ "./resources/js/components/EditStoreModal.vue");
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'store-table',
-  props: ['stores'],
+  emits: ['refreshStores'],
+  props: {
+    stores: Array,
+    isBusy: Boolean
+  },
   components: {
     BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination,
-    EditStoreModal: _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    EditStoreModal: _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
-      // adjust as needed
+      columns: ['id', 'store_name'],
       searchColumn: 'Store Name',
-      // default column to search by
       searchQuery: '',
+      showEditModal: false,
+      showModal: false,
+      selectedStore: {},
       fields: [{
         key: 'id',
         label: 'ID'
       }, {
+        key: 'manager_id',
+        label: 'Manager ID'
+      }, {
         key: 'store_name',
         label: 'Store Name'
       }, {
+        key: 'store_description',
+        label: 'Description'
+      }, {
         key: 'actions',
         label: 'Actions'
-      }],
-      columns: ['id', 'store_name'],
-      // column keys for searching
-      showEditModal: false,
-      selectedStore: {}
+      }]
     };
   },
   computed: {
     // get the column options for the search select
     columnOptions: function columnOptions() {
       return this.fields.filter(function (f) {
-        return f.key === 'id' || f.key === 'store_name';
+        return f.key === 'id' || f.key === 'store_name' || f.key === 'manager_id';
       }).map(function (f) {
         return f.label;
       });
@@ -20636,7 +20856,8 @@ __webpack_require__.r(__webpack_exports__);
     toggleBusy: function toggleBusy() {
       this.isBusy = !this.isBusy;
     },
-    clickedDeleteStore: function clickedDeleteStore(store) {
+    deleteStore: function deleteStore(store) {
+      console.log('deleteStore', store);
       this.selectedStore = store;
       this.showModal = true;
     },
@@ -20646,6 +20867,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     refreshStores: function refreshStores() {
       this.$emit('refreshStores');
+      console.log('storeTable: refreshStores');
     }
   }
 });
@@ -20721,10 +20943,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_name$emits$props$com = {
   name: 'user-table',
-  emits: ['refresh-users'],
+  emits: ['refreshUsers'],
   props: {
-    'users': Array,
-    'loggedInUserId': Number
+    users: Array,
+    loggedInUserId: Number,
+    isBusy: Boolean
   },
   components: {
     Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -20737,12 +20960,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       currentPage: 1,
       rowsPerPage: 5,
       columns: ['id', 'name', 'role'],
-      // column keys for searching
       searchColumn: 'Name',
       // default column to search by
       searchQuery: '',
       selectedUser: {},
-      isBusy: false,
       showModal: false,
       showEditModal: false,
       fields: [{
@@ -20804,9 +21025,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   },
   refreshUsers: function refreshUsers() {
     this.$emit('refreshUsers');
-  },
-  refreshTable: function refreshTable() {
-    this.showModal = false;
   }
 }), _name$emits$props$com);
 
@@ -20892,14 +21110,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     users: $data.users,
     "logged-in-user-id": $props.loggedInUserId,
     ref: "userTable",
+    "is-busy": $data.isFetchingUsers,
     onRefreshUsers: $options.fetchUsers
-  }, null, 8 /* PROPS */, ["users", "logged-in-user-id", "onRefreshUsers"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+  }, null, 8 /* PROPS */, ["users", "logged-in-user-id", "is-busy", "onRefreshUsers"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
-    stores: $props.stores
-  }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
+    stores: $data.stores,
+    "is-busy": $data.isFetchingStore,
+    onRefreshStores: $options.fetchStores
+  }, null, 8 /* PROPS */, ["stores", "is-busy", "onRefreshStores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 2,
-    manager_requests: $props.manager_requests
-  }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+    "manager-requests": $data.managerRequests,
+    "is-busy": $data.isFetchingRequests,
+    onRefreshRequests: $options.fetchRequests
+  }, null, 8 /* PROPS */, ["manager-requests", "is-busy", "onRefreshRequests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21150,15 +21373,20 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 });
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+    "for": "description"
+  }, "Description", -1 /* HOISTED */);
+});
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "manager_id"
   }, "Manager ID", -1 /* HOISTED */);
 });
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "submit"
   }, "Save Changes", -1 /* HOISTED */);
 });
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "model-foot"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21173,25 +21401,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.close && $options.close.apply($options, arguments);
     })
   }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.editStore && $options.editStore.apply($options, arguments);
     }, ["prevent"]))
   }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "storename",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.updateInfo.name = $event;
+      return $data.updateInfo.store_name = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    id: "description",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.updateInfo.store_description = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_description]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     id: "manager_id",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.updateInfo.manager_id = $event;
     })
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.manager_id, void 0, {
     number: true
-  }]]), _hoisted_7], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[4] || (_cache[4] = function () {
+  }]]), _hoisted_8], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[5] || (_cache[5] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
   }, "Cancel")])])], 2 /* CLASS */);
@@ -21357,7 +21591,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.request.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.acceptRequest && $options.acceptRequest.apply($options, arguments);
     })
@@ -21412,9 +21646,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.entityData.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
-      return $options.deleteUser && $options.deleteUser.apply($options, arguments);
+      return $options.deleteEnity && $options.deleteEnity.apply($options, arguments);
     })
   }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
@@ -21453,7 +21687,7 @@ var _hoisted_3 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
   var _component_request_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("request-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            class=\"window-btn\"\n            :class=\"{ selected: currentwindow === 'user' }\"\n            @click=\"currentwindow = 'user'\">\n            Users\n        </button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n                class=\"window-btn\"\n                :class=\"{ selected: currentwindow === 'user' }\"\n                @click=\"currentwindow = 'user'\">\n                Users\n        </button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
       selected: $data.currentwindow === 'store'
     }]),
@@ -21465,16 +21699,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       selected: $data.currentwindow === 'request'
     }]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      $data.currentwindow = 'request';
-      console.log($data.currentwindow);
+      return $data.currentwindow = 'request';
     })
-  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <user-table\n            v-if=\"currentwindow === 'user'\"\n            :users=\"users\"\n            :logged-in-user-id=\"loggedInUserId\"\n        ></user-table> "), $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <user-table\n                v-if=\"currentwindow === 'user'\"\n                :users=\"users\"\n                :logged-in-user-id=\"loggedInUserId\"\n        ></user-table> "), $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 0,
-    stores: $props.stores
-  }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
+    stores: $data.stores,
+    onRefreshStores: $options.fetchStores
+  }, null, 8 /* PROPS */, ["stores", "onRefreshStores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 1,
-    manager_requests: $props.manager_requests
-  }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+    "manager-requests": $data.managerRequests,
+    onRefreshRequests: $options.fetchRequests
+  }, null, 8 /* PROPS */, ["manager-requests", "onRefreshRequests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21508,7 +21743,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
   var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
   var _component_ManagerModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ManagerModal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" For testing toggleBusy state "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <b-button @click=\"toggleBusy\">Toggle Busy State</b-button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
+  var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
     label: "Search by:",
     "class": "mb-3"
   }, {
@@ -21552,7 +21788,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     striped: "",
     hover: "",
     items: $options.tablePagination,
-    busy: $data.isBusy,
+    busy: $props.isBusy,
     fields: $data.fields
   }, {
     "table-busy": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21563,6 +21799,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
+        style: {
+          "margin-right": "5px"
+        },
         onClick: function onClick($event) {
           return $options.acceptRequest(row.item);
         }
@@ -21575,7 +21814,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return $options.rejectUser(row.item);
+          return $options.rejectRequest(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21590,19 +21829,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.currentPage = $event;
     }),
-    "total-rows": $options.filteredStores.length,
+    "total-rows": $options.filteredRequests.length,
     "per-page": $data.rowsPerPage,
     "aria-controls": "my-table"
   }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ManagerModal, {
     show: $data.showModal,
-    userId: $data.selectedUser.id,
-    username: $data.selectedUser.name,
+    request: $data.selectedRequest,
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
-    onUserDeletedSuccessfully: $options.refreshTable,
-    onRequestAcceptedSuccessfully: $options.closeModal
-  }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
+    onRequestAcceptedSuccessfully: $options.refreshRequests
+  }, null, 8 /* PROPS */, ["show", "request", "onRequestAcceptedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    show: $data.showDeleteModal,
+    type: 'request',
+    entityData: $data.selectedRequest,
+    onClose: _cache[4] || (_cache[4] = function ($event) {
+      return $data.showDeleteModal = false;
+    }),
+    onDeletedSuccessfully: $options.refreshRequests
+  }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21734,6 +21979,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-button");
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
   var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
+  var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
   var _component_EditStoreModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditStoreModal");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
     label: "Search by:",
@@ -21790,6 +22036,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
+        style: {
+          "margin-right": "5px"
+        },
         onClick: function onClick($event) {
           return $options.editStore(row.item);
         }
@@ -21802,7 +22051,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return _ctx.deleteStore(row.item);
+          return $options.deleteStore(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21820,9 +22069,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "total-rows": $options.filteredStores.length,
     "per-page": $data.rowsPerPage,
     "aria-controls": "my-table"
-  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <StoreDeleteModal :show=\"showModal\" \n                    :storeId=\"selectedStore.id\" \n                    :storeName=\"selectedStore.name\" \n                    @close=\"showModal = false\"\n                    @store-deleted-successfully=\"refreshStores\">\n  </StoreDeleteModal> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditStoreModal, {
-    show: $data.showEditModal,
+  }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Todo: "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    show: $data.showModal,
+    type: 'store',
+    entityData: $data.selectedStore,
     onClose: _cache[3] || (_cache[3] = function ($event) {
+      return $data.showModal = false;
+    }),
+    onDeletedSuccessfully: $options.refreshStores
+  }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditStoreModal, {
+    show: $data.showEditModal,
+    onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showEditModal = false;
     }),
     storeData: $data.selectedStore,
@@ -21950,12 +22207,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     striped: "",
     hover: "",
     items: $options.paginatedUsers,
-    busy: $data.isBusy,
+    busy: $props.isBusy,
     fields: $data.fields
   }, {
     "cell(actions)": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (row) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_button, {
         size: "sm",
+        style: {
+          "margin-right": "5px"
+        },
         onClick: function onClick($event) {
           return $options.editSelectedUser(row.item);
         }
@@ -36155,7 +36415,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-82a087be] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-82a087be] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-82a087be] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-82a087be] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-82a087be] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-82a087be] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-82a087be]:hover {\n    color: #888;\n}\n.model-main-content[data-v-82a087be] {\n    padding: 20px;\n    justify-content: center;\n    padding: 20px 0;\nform[data-v-82a087be] {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n}\n}\n.model-foot[data-v-82a087be] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-82a087be] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0;\n    pointer-events: none;\n    transition: opacity 0.3s;\n}\n.modal-overlay.showing[data-v-82a087be] {\n    opacity: 1;\n    pointer-events: auto;\n}\n.modal-body[data-v-82a087be] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%);\n    transition: transform 0.3s ease-out;\n}\n.modal-overlay.showing .modal-body[data-v-82a087be] {\n    transform: translateY(0);\n}\n.model-head[data-v-82a087be] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-82a087be] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-82a087be]:hover {\n    color: #888;\n}\n.model-main-content[data-v-82a087be] {\n    padding: 20px;\n    justify-content: center;\n    padding: 20px 0;\nform[data-v-82a087be] {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n}\n}\n.model-foot[data-v-82a087be] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36179,7 +36439,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-f1a89a2a] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-f1a89a2a] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-f1a89a2a] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-f1a89a2a] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-f1a89a2a] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-f1a89a2a] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-f1a89a2a]:hover {\n    color: #888;\n}\n.model-main-content[data-v-f1a89a2a] {\n    flex: 1;\n    padding: 20px 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.model-foot[data-v-f1a89a2a] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n  ", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-f1a89a2a] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  /* Initially set the overlay to be invisible */\n  pointer-events: none;\n  /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s;\n  /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-f1a89a2a] {\n  opacity: 1;\n  pointer-events: auto;\n  /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-f1a89a2a] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%);\n  /* Starts off the screen */\n  transition: transform 0.3s ease-out;\n  /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-f1a89a2a] {\n  transform: translateY(0);\n  /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-f1a89a2a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-f1a89a2a] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-f1a89a2a]:hover {\n  color: #888;\n}\n.model-main-content[data-v-f1a89a2a] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.model-foot[data-v-f1a89a2a] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -3,7 +3,7 @@
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
     <div class="create-acc">CREATE YOUR ACCOUNT</div>
-    <form action="{{route('signUp.post')}}" method="POST">
+    <form id="signup-form" action="{{route('signUp.post')}}" method="POST">
         @csrf
     <input type="text" class="username-input" placeholder="Name" name="name">
     <div class="password-container">
@@ -27,6 +27,13 @@
     @font-face {
         font-family: 'Panton-LightCaps';
         src: url('{{ asset('fonts/panton/Panton-LightCaps.otf') }}') format('opentype');
+    }
+
+    #signup-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-container {

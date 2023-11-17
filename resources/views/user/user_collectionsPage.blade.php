@@ -95,6 +95,7 @@ function setSearchValueAndFilterRight(itemName) {
     }
 
     function confirmDeletion(collectionId) {
+        console.log(collectionId);
     if(confirm('Are you sure you want to delete this collection?')) {
         // If the user clicks "Yes", send a POST request to delete the collection
         fetch('/collection/delete/' + collectionId, {
@@ -210,8 +211,18 @@ function setSearchValueAndFilterRight(itemName) {
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">
+                {{ $col->collection_name }}
+            </a>
+            <!-- Styling the button to look like small red text -->
+            <button onclick="confirmDeletion('{{ $col->id }}')" class="delete-collection-btn">
+                Delete this collection?
+            </button>
+        </div>
         @endforeach
+
+
 
         <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
 
@@ -224,7 +235,7 @@ function setSearchValueAndFilterRight(itemName) {
 
         {{--Displaying the collection name according to what current collections items are displaying--}}
         <h2>{{ $collName }}</h2>
-        <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button>
+        <!-- <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button> -->
 
 
 

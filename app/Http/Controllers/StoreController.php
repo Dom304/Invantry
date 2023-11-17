@@ -46,33 +46,28 @@ class StoreController extends Controller
         return redirect()->route('stores.index')->with('success', 'Store created successfully.');
     }
 
-    public function deleteStore(Store $store)
-    {
-        $store->delete();
-
-        return redirect()->back()->with('success', 'Store deleted successfully');
-    }
-
     public function updateStore(Request $request, Store $store)
-{
-    $request->validate([
-        'store_name' => 'required|string|max:255',
-        'store_description' => 'required|string',
-        'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-    ]);
+    {
+        $request->validate([
+            'store_name' => 'required|string|max:255',
+            'manager_id' => 'required|exists:users,id|exists:users,id,role,manager',
+            'store_description' => 'required|string',
+            'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
 
-    $store->update([
-        'store_name' => $request->input('store_name'),
-        'store_description' => $request->input('store_description'),
-    ]);
+        $store->update([
+            'store_name' => $request->input('store_name'),
+            'manager_id' => $request->input('manager_id'),
+            'store_description' => $request->input('store_description'),
+        ]);
 
-    if ($request->hasFile('store_logo')) {
-        $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
-        $store->update(['store_logo' => $storeLogoPath]);
+        if ($request->hasFile('store_logo')) {
+            $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
+            $store->update(['store_logo' => $storeLogoPath]);
+        }
+
+        return response()->json(['message' => 'Store updated successfully']);
     }
-
-    return redirect()->route('managerDashboard')->with('success', 'Store information updated successfully!');
-}
 
     public function addItem(Request $request, Store $store)
     {
@@ -151,6 +146,19 @@ class StoreController extends Controller
         return redirect()->route('adminDashboard')->with('success', 'User deleted successfully.');
     }
 
+    public function deleteStore($request)
+    {
+        $store = Store::find($storeId);
+
+        if (!$store) {
+            return response()->json(['message' => 'Store not found'], 404);
+        }
+
+        $store->delete();
+
+        return response()->json(['message' => 'Store deleted successfully']);
+    }
+
     public function updateRole(Request $request)
     {
         $user = auth()->user(); // Get the currently authenticated user.
@@ -174,9 +182,9 @@ class StoreController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-        $users = User::all();
-        $stores = Store::all();
-        $manager_requests = ManagerRequest::all();
+            $users = User::all();
+            $stores = Store::all();
+            $manager_requests = ManagerRequest::all();
             return view('admin.admin_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
         }
         return redirect()->route('home');
@@ -185,30 +193,32 @@ class StoreController extends Controller
     public function moderatorDashboard()
     {
         $user = Auth::user();
-        
+
         if ($user->isModerator()) {
-        $users = User::all();
-        $requests = ManagerRequest::all();
-        $stores = Store::all();
-        $manager_requests = ManagerRequest::all();
+            $users = User::all();
+            $requests = ManagerRequest::all();
+            $stores = Store::all();
+            $manager_requests = ManagerRequest::all();
+            $manager_requests = ManagerRequest::all();
+
             return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
         }
         return redirect()->route('home');
     }
 
     public function managerDashboard()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if ($user->isManager()) {
-        $store = $user->store;
-        $items = $store->items; 
+        if ($user->isManager()) {
+            $store = $user->store;
+            $items = $store->items;
 
-        return view('manager.manager_dashboard', compact('user', 'store', 'items'));
+            return view('manager.manager_dashboard', compact('user', 'store', 'items'));
+        }
+
+        return redirect()->route('home');
     }
-
-    return redirect()->route('home');
-}
 
     public function deleteItem(Store $store, Item $item)
     {
@@ -216,37 +226,56 @@ class StoreController extends Controller
 
         return redirect()->route('managerDashboard')->with('success', 'Item deleted successfully!');
     }
-    
+
     public function returnUsers()
     {
         $users = User::all();
         return response()->json($users);
     }
 
+    public function refreshTable(Request $request)
+    {
+        $type = $request->input('type');
+
+        switch ($type) {
+            case 'users':
+                $users = User::all();
+                return response()->json($users);
+            case 'stores':
+                $stores = Store::all();
+                return response()->json($stores);
+            case 'manager_requests':
+                $manager_requests = ManagerRequest::all();
+                return response()->json($manager_requests);
+            case 'items':
+                $store = Auth::user()->store;
+                $items = $store->items;
+                return response()->json($items);
+            default:
+                return response()->json(['error' => 'Invalid type']);
+        }
+    }
 
     public function updateUser(Request $request, $userId)
     {
 
-    $user = User::find($userId);
+        $user = User::find($userId);
 
-    if (!$user) {
-        return response()->json(['error' => 'User not found'], 404);
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Validate the request data
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'role' => 'required|string|max:255',
+        ]);
+
+        $data['updated_at'] = now();
+
+        $user->update($data);
+
+        return response()->json($user);
     }
-
-    // Validate the request data
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'role' => 'required|string|max:255',
-    ]);
-
-    $data['updated_at'] = now();
-
-    $user->update($data);
-
-    return response()->json($user);
-    }
-
-    
-    
 }

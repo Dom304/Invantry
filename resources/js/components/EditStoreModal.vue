@@ -9,7 +9,10 @@
             <div class="model-main-content">
                 <form @submit.prevent="editStore">
                     <label for="storename">Store Name</label>
-                    <input type="text" id="storename" v-model="updateInfo.name">
+                    <input type="text" id="storename" v-model="updateInfo.store_name">
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" v-model="updateInfo.store_description">
 
                     <label for="manager_id">Manager ID</label>
                     <input type="number" id="manager_id" v-model.number="updateInfo.manager_id">
@@ -62,15 +65,18 @@ export default {
         },
 
         async editStore() {
-            axios.put(`/store/${this.updateInfo.id}`, {
-                name: this.updateInfo.name,
+            this.close();
+            axios.post(`/updateStore/${this.updateInfo.id}`, {
+                store_name: this.updateInfo.store_name,
                 manager_id: this.updateInfo.manager_id,
+                store_id: this.updateInfo.id,
+                store_description: this.updateInfo.store_description,
             })
             .then(response => {
                 this.$emit('storeUpdated');
-                this.close();
             })
             .catch(error => {
+                this.close();
                 console.error("There was an error updating the store:", error);
             });
         },
@@ -89,14 +95,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0; /* Initially set the overlay to be invisible */
-    pointer-events: none; /* Ensure it doesn't block anything when not shown */
-    transition: opacity 0.3s; /* Transition effect for fade-in */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
 }
 
 .modal-overlay.showing {
     opacity: 1;
-    pointer-events: auto; /* Restore pointer events when modal is shown */
+    pointer-events: auto;
 }
 
 .modal-body {
@@ -108,12 +114,12 @@ export default {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    transform: translateY(-100%); /* Starts off the screen */
-    transition: transform 0.3s ease-out; /* Transition effect for sliding in */
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
 }
 
 .modal-overlay.showing .modal-body {
-    transform: translateY(0); /* Modal slides into its natural position when opened */
+    transform: translateY(0);
 }
 
 .model-head {

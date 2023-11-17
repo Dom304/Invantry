@@ -15,11 +15,16 @@
   <div class="right-section-header">
     <user-btn :username="{{ json_encode($user->name) }}"></user-btn>
   </div>
-  
+
 </div>
 
 <div class="admin-page-content">
-  <moderator-dashboard :users="{{ json_encode($users) }}" :stores="{{json_encode($stores)}}" :logged-in-user-id="{{ auth()->id() }}" :manager_requests="{{ json_encode($manager_requests) }}"></moderator-dashboard>
+  <moderator-dashboard 
+    :initial-users="{{ json_encode($users) }}" 
+    :initial-stores="{{json_encode($stores)}}" 
+    :logged-in-user-id="{{ auth()->id() }}" 
+    :initial-requests="{{ json_encode($manager_requests) }}">
+  </moderator-dashboard>
 </div>
 
 @endsection

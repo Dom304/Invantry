@@ -32,12 +32,10 @@
                 :users="users" 
                 :logged-in-user-id="loggedInUserId" 
                 ref="userTable"
+                :is-busy="isFetchingUsers"
                 @refresh-users="fetchUsers"></user-table>
-        <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <request-table
-            v-else-if="currentwindow === 'request'"
-            :manager_requests="manager_requests"
-        ></request-table>
+        <store-table v-else-if="currentwindow === 'store'" :stores="stores" :is-busy="isFetchingStore" @refresh-stores="fetchStores"></store-table>
+        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" :is-busy="isFetchingRequests" @refresh-requests="fetchRequests"></request-table>
     </div>
 </template>
 
@@ -49,7 +47,13 @@ import RequestTable from "./RequestTable.vue";
 
 export default {
     name: "admin-dashboard",
-    props: ["initialUsers", "stores", "manager_requests", "loggedInUserId"],
+    props: {
+        initialUsers: Array,
+        users: Array,
+        initialStores: Array,
+        initialRequests: Array,
+        loggedInUserId: Number,
+    },
     components: {
         StoreTable,
         UserTable,
@@ -58,34 +62,67 @@ export default {
 
     created() {
         this.users = this.initialUsers;
+        this.stores = this.initialStores;
+        this.managerRequests = this.initialRequests;
     },
 
     mounted() {
-        console.log(this.loggedInUserId);
+        
     },
+    
     data() {
         return {
             currentwindow: "user",
             users: [],
+            stores: [],
+            managerRequests: [],
+            isFetchingUsers: false,
+            isFetchingRequests: false,
+            isFetchingStore: false,
         };
     },
     methods: {
-        
-        async fetchUsers() {
+    async fetchUsers() {
+        this.isFetchingUsers = true;
         try {
-             // Fetch the updated users data from the database
-             let response = await axios.get('/refresh');
-              // Update the users data property with the new data
+            let response = await axios.get('/refresh', { params: { type: 'users' } });
+            // Update the users data property with the new data
             this.users = response.data;
-             } catch (error) {
-                   console.error("Error fetching users:", error);
-             } finally {
-                 if (this.$refs.userTable) {
-                     this.$refs.userTable.isBusy = false; // Set the table to not busy after fetching data
-                }
-            }
-        },
-
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        } finally {
+            this.isFetchingUsers = false;
+        }
     },
+
+    async fetchStores() {
+        console.log("fetching stores");
+        this.isFetchingStore = true;
+        try {
+            let response = await axios.get('/refresh', { params: { type: 'stores' } });
+            // Update the users data property with the new data
+            this.stores = response.data;
+        } catch (error) {
+            console.error("Error fetching stores:", error);
+        } finally {
+            this.isFetchingStore = false;
+        }
+    },
+
+        async fetchRequests() {
+            console.log("fetching requests");
+            this.isFetchingRequests = true;
+        try {
+            let response = await axios.get('/refresh', { params: { type: 'manager_requests' } });
+            // Update the users data property with the new data
+            this.managerRequests = response.data;
+        } catch (error) {
+            console.error("Error fetching requests:", error);
+        } finally {
+            this.isFetchingRequests = false;
+        }
+        },
+}
+
 };
 </script>
