@@ -47,7 +47,6 @@
         .then(function (response) {
             // handle success
             console.log(response);
-            window.location.href = '/checkout';
         })
         .catch(function (error) {
             // handle error
