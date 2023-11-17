@@ -15,6 +15,7 @@ class Store extends Model
         'manager_id',
         'store_name',
         'store_description',
+        'store_logo',
     ];
 
     public function manager()

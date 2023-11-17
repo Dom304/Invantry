@@ -98,10 +98,8 @@
     }
 </style>
 
-<div class="top-toolbar">
-    <a href="/home">
+<!-- <div class="top-toolbar">
         <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
-    </a>
     <h1 class="app-name">Inventory</h1>
     <div class="search-container">
         <h2>Store: {{ $store->store_name }}</h2>
@@ -112,7 +110,7 @@
             <button type="submit">Logout</button>
         </form>
     </div>
-</div>
+</div> -->
 
 <div class="container">
     <h1>Welcome, {{ $user->name }}!</h1>
@@ -122,13 +120,13 @@
     @method('PUT')
 
     <label for="store_name">Store Name:</label>
-    <input type="text" name="store_name" value="{{ $store->store_name }}" required>
+    <input type="text" id="store_name" value="{{ $store->store_name }}" required>
 
     <label for="store_description">Store Description:</label>
-    <textarea name="store_description" rows="3" required>{{ $store->store_description }}</textarea>
+    <textarea id="store_description" rows="3" required>{{ $store->store_description }}</textarea>
 
     <label for="store_logo">Update Store Picture:</label>
-    <input type="file" name="store_logo" accept="image/*">
+    <input type="file" id="store_logo" accept="image/*">
 
     <button type="submit">Update Store</button>
 </form>
@@ -168,16 +166,16 @@
     <form action="{{ route('addItem', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <label for="item_name">Item Name:</label>
-        <input type="text" name="item_name" required>
+        <input type="text" id="item_name" required>
 
         <label for="item_description">Item Description:</label>
-        <textarea name="item_description" rows="3" required></textarea>
+        <textarea id="item_description" rows="3" required></textarea>
 
         <label for="item_quantity">Quantity:</label>
-        <input type="number" name="item_quantity" required>
+        <input type="number" id="item_quantity" required>
 
         <label for="item_price">Price:</label>
-        <input type="number" name="item_price" step="0.01" required>
+        <input type="number" id="item_price" step="0.01" required>
 
         <label for="item_logo">Item Logo</label>
         <input type="file" name="item_logo" accept="image/*" required>
