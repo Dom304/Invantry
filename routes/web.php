@@ -79,5 +79,6 @@ Route::post('/collection/delete/{id}', [CollectionController::class, 'delete'])-
 
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('/checkout', [CheckoutController::class, 'checkoutProcess'])->name('checkout.process');
+//route for processing checkout
+Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 Route::put('/user/{id}', [StoreController::class, 'updateUser']);

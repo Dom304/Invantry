@@ -41,6 +41,19 @@
             // Optional: handle other cases or do nothing
         }
     }
+
+    function proceedToCheckout() {
+    axios.post('/checkout')
+        .then(function (response) {
+            // handle success
+            console.log(response);
+            window.location.href = '/checkout';
+        })
+        .catch(function (error) {
+            // handle error
+            console.error(error);
+        });
+}
 </script>
 
 <div class="top-toolbar">
@@ -158,11 +171,9 @@
     @endphp 
 
     <div class="cart-total"> ${{ number_format($totalPrice, 2) }}</div>
-    
-
             <!-- Proceed to Checkout Button -->
-            <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="toggleActiveState('checkout-btn', 'user.user_checkoutPage')">Proceed to Checkout</button>
-        </div>
+                <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
     </div>
 
     <div class="right-window"></div>

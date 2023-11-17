@@ -28,6 +28,6 @@ class CheckoutController extends Controller
         Cart::where('user_id', auth()->user()->id)->delete();
 
         // Redirect back to the checkout page with a success message
-        return redirect()->route('user.user_checkoutPage')->with('success', 'Order successfully processed!');
+        return response()->json(['message' => 'Order successfully processed!']);
     }
 }
