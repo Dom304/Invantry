@@ -34,8 +34,8 @@
                 ref="userTable"
                 :is-busy="isFetchingUsers"
                 @refresh-users="fetchUsers"></user-table>
-        <store-table v-else-if="currentwindow === 'store'" :stores="stores" @refresh-stores="fetchStores"></store-table>
-        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" @refresh-requests="fetchRequests"></request-table>
+        <store-table v-else-if="currentwindow === 'store'" :stores="stores" :is-busy="isFetchingStore" @refresh-stores="fetchStores"></store-table>
+        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" :is-busy="isFetchingRequests" @refresh-requests="fetchRequests"></request-table>
     </div>
 </template>
 
@@ -50,8 +50,8 @@ export default {
     props: {
         initialUsers: Array,
         users: Array,
-        stores: Array,
-        managerRequests: Array,
+        initialStores: Array,
+        initialRequests: Array,
         loggedInUserId: Number,
     },
     components: {
@@ -62,25 +62,30 @@ export default {
 
     created() {
         this.users = this.initialUsers;
+        this.stores = this.initialStores;
+        this.managerRequests = this.initialRequests;
     },
 
     mounted() {
-        console.log(this.managerRequests);
+        
     },
     
     data() {
         return {
             currentwindow: "user",
             users: [],
+            stores: [],
+            managerRequests: [],
             isFetchingUsers: false,
+            isFetchingRequests: false,
+            isFetchingStore: false,
         };
     },
     methods: {
     async fetchUsers() {
         this.isFetchingUsers = true;
-
         try {
-            let response = await axios.get('/refresh');
+            let response = await axios.get('/refresh', { params: { type: 'users' } });
             // Update the users data property with the new data
             this.users = response.data;
         } catch (error) {
@@ -91,31 +96,31 @@ export default {
     },
 
     async fetchStores() {
-            console.log("fetching stores");
+        console.log("fetching stores");
 
-            // try {
-            //     let response = await axios.get('/refresh');
-            //     // Update the users data property with the new data
-            //     this.users = response.data;
-            // } catch (error) {
-            //     console.error("Error fetching users:", error);
-            // } finally {
-            //     this.isFetchingUsers = false;
-            // }
-        },
+        try {
+            let response = await axios.get('/refresh', { params: { type: 'stores' } });
+            // Update the users data property with the new data
+            this.stores = response.data;
+        } catch (error) {
+            console.error("Error fetching stores:", error);
+        } finally {
+            this.isFetchingUsers = false;
+        }
+    },
 
         async fetchRequests() {
             console.log("fetching requests");
 
-            // try {
-            //     let response = await axios.get('/refresh');
-            //     // Update the users data property with the new data
-            //     this.users = response.data;
-            // } catch (error) {
-            //     console.error("Error fetching users:", error);
-            // } finally {
-            //     this.isFetchingUsers = false;
-            // }
+        try {
+            let response = await axios.get('/refresh', { params: { type: 'manager_requests' } });
+            // Update the users data property with the new data
+            this.managerRequests = response.data;
+        } catch (error) {
+            console.error("Error fetching requests:", error);
+        } finally {
+            this.isFetchingUsers = false;
+        }
         },
 }
 

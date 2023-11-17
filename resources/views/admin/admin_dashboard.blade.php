@@ -18,9 +18,9 @@
 <div class="admin-page-content">
   <admin-dashboard 
     :initial-users="{{ json_encode($users) }}" 
-    :stores="{{json_encode($stores)}}" 
+    :initial-stores="{{json_encode($stores)}}" 
     :logged-in-user-id="{{ auth()->id() }}" 
-    :manager-requests="{{ json_encode($manager_requests) }}">
+    :initial-requests="{{ json_encode($manager_requests) }}">
   </admin-dashboard>
 </div>
 

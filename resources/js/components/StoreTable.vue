@@ -64,7 +64,11 @@ import Modal from './Modal.vue';
 export default {
   name: 'store-table',
   emits: ['refreshStores'],
-  props: ['stores'],
+  props: {
+    stores: Array,
+    isBusy: Boolean,
+  },
+  
   components: {
         BPagination,
         EditStoreModal,
@@ -147,6 +151,7 @@ export default {
 
         refreshStores() {
             this.$emit('refreshStores');
+            console.log('storeTable: refreshStores');
         },
   }
 }

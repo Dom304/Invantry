@@ -68,7 +68,7 @@ Route::post('/store/{store}', [StoreController::class, 'deleteStore'])->name('de
 Route::post('/delete/{type}/{id}', [GenericDeleteController::class, 'delete'])->name('generic.delete');
 
 Route::post('/home', [CollectionController::class, 'createCollection'])->name('collections.create');
-Route::get('/refresh', [StoreController::class, 'returnUsers'])->name('users.return');
+Route::get('/refresh', [StoreController::class, 'refreshTable'])->name('users.refreshTable');
 
 Route::get('/manager-request', [ManagerRequestController::class, 'create'])->name('manager.request.create');
 Route::post('/manager-request', [ManagerRequestController::class, 'store'])->name('manager.request.store');

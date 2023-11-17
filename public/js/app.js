@@ -19902,8 +19902,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     initialUsers: Array,
     users: Array,
-    stores: Array,
-    managerRequests: Array,
+    initialStores: Array,
+    initialRequests: Array,
     loggedInUserId: Number
   },
   components: {
@@ -19913,15 +19913,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.users = this.initialUsers;
+    this.stores = this.initialStores;
+    this.managerRequests = this.initialRequests;
   },
-  mounted: function mounted() {
-    console.log(this.managerRequests);
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       currentwindow: "user",
       users: [],
-      isFetchingUsers: false
+      stores: [],
+      managerRequests: [],
+      isFetchingUsers: false,
+      isFetchingRequests: false,
+      isFetchingStore: false
     };
   },
   methods: {
@@ -19935,7 +19939,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _this.isFetchingUsers = true;
               _context.prev = 1;
               _context.next = 4;
-              return axios.get('/refresh');
+              return axios.get('/refresh', {
+                params: {
+                  type: 'users'
+                }
+              });
             case 4:
               response = _context.sent;
               // Update the users data property with the new data
@@ -19958,49 +19966,75 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     fetchStores: function fetchStores() {
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               console.log("fetching stores");
-
-              // try {
-              //     let response = await axios.get('/refresh');
-              //     // Update the users data property with the new data
-              //     this.users = response.data;
-              // } catch (error) {
-              //     console.error("Error fetching users:", error);
-              // } finally {
-              //     this.isFetchingUsers = false;
-              // }
-            case 1:
+              _context2.prev = 1;
+              _context2.next = 4;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'stores'
+                }
+              });
+            case 4:
+              response = _context2.sent;
+              // Update the users data property with the new data
+              _this2.stores = response.data;
+              _context2.next = 11;
+              break;
+            case 8:
+              _context2.prev = 8;
+              _context2.t0 = _context2["catch"](1);
+              console.error("Error fetching stores:", _context2.t0);
+            case 11:
+              _context2.prev = 11;
+              _this2.isFetchingUsers = false;
+              return _context2.finish(11);
+            case 14:
             case "end":
               return _context2.stop();
           }
-        }, _callee2);
+        }, _callee2, null, [[1, 8, 11, 14]]);
       }))();
     },
     fetchRequests: function fetchRequests() {
+      var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               console.log("fetching requests");
-
-              // try {
-              //     let response = await axios.get('/refresh');
-              //     // Update the users data property with the new data
-              //     this.users = response.data;
-              // } catch (error) {
-              //     console.error("Error fetching users:", error);
-              // } finally {
-              //     this.isFetchingUsers = false;
-              // }
-            case 1:
+              _context3.prev = 1;
+              _context3.next = 4;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'manager_requests'
+                }
+              });
+            case 4:
+              response = _context3.sent;
+              // Update the users data property with the new data
+              _this3.managerRequests = response.data;
+              _context3.next = 11;
+              break;
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](1);
+              console.error("Error fetching requests:", _context3.t0);
+            case 11:
+              _context3.prev = 11;
+              _this3.isFetchingUsers = false;
+              return _context3.finish(11);
+            case 14:
             case "end":
               return _context3.stop();
           }
-        }, _callee3);
+        }, _callee3, null, [[1, 8, 11, 14]]);
       }))();
     }
   }
@@ -20544,7 +20578,8 @@ __webpack_require__.r(__webpack_exports__);
   emits: ['refreshRequests'],
   props: {
     managerRequests: Array,
-    loggedInUserId: Number
+    loggedInUserId: Number,
+    isBusy: Boolean
   },
   components: {
     ManagerModal: _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -20706,7 +20741,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'store-table',
   emits: ['refreshStores'],
-  props: ['stores'],
+  props: {
+    stores: Array,
+    isBusy: Boolean
+  },
   components: {
     BPagination: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BPagination,
     EditStoreModal: _EditStoreModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -20794,6 +20832,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     refreshStores: function refreshStores() {
       this.$emit('refreshStores');
+      console.log('storeTable: refreshStores');
     }
   }
 });
@@ -21040,13 +21079,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onRefreshUsers: $options.fetchUsers
   }, null, 8 /* PROPS */, ["users", "logged-in-user-id", "is-busy", "onRefreshUsers"])) : $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 1,
-    stores: $props.stores,
+    stores: $data.stores,
+    "is-busy": $data.isFetchingStore,
     onRefreshStores: $options.fetchStores
-  }, null, 8 /* PROPS */, ["stores", "onRefreshStores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
+  }, null, 8 /* PROPS */, ["stores", "is-busy", "onRefreshStores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 2,
-    "manager-requests": $props.managerRequests,
+    "manager-requests": $data.managerRequests,
+    "is-busy": $data.isFetchingRequests,
     onRefreshRequests: $options.fetchRequests
-  }, null, 8 /* PROPS */, ["manager-requests", "onRefreshRequests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["manager-requests", "is-busy", "onRefreshRequests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

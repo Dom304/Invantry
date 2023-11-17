@@ -61,6 +61,7 @@ export default {
   props: {
     managerRequests: Array,
     loggedInUserId: Number,
+    isBusy: Boolean,
   },
 
   components: {

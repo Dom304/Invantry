@@ -201,6 +201,28 @@ class StoreController extends Controller
         return response()->json($users);
     }
 
+    public function refreshTable(Request $request)
+    {
+        $type = $request->input('type');
+
+        switch ($type) {
+            case 'users':
+                $users = User::all();
+                return response()->json($users);
+            case 'stores':
+                $stores = Store::all();
+                return response()->json($stores);
+            case 'manager_requests':
+                $manager_requests = ManagerRequest::all();
+                return response()->json($manager_requests);
+            case 'items':
+                $store = Auth::user()->store;
+                $items = $store->items;
+                return response()->json($items);
+            default:
+                return response()->json(['error' => 'Invalid type']);
+        }
+    }
 
     public function updateUser(Request $request, $userId)
     {
