@@ -9,7 +9,10 @@
             <div class="model-main-content">
                 <form @submit.prevent="editStore">
                     <label for="storename">Store Name</label>
-                    <input type="text" id="storename" v-model="updateInfo.name">
+                    <input type="text" id="storename" v-model="updateInfo.store_name">
+
+                    <label for="description">Description</label>
+                    <input type="text" id="description" v-model="updateInfo.store_description">
 
                     <label for="manager_id">Manager ID</label>
                     <input type="number" id="manager_id" v-model.number="updateInfo.manager_id">
@@ -63,9 +66,10 @@ export default {
 
         async editStore() {
             axios.post(`/updateStore/${this.updateInfo.id}`, {
-                name: this.updateInfo.name,
+                store_name: this.updateInfo.store_name,
                 manager_id: this.updateInfo.manager_id,
-                store_id: this.updateInfo.id
+                store_id: this.updateInfo.id,
+                store_description: this.updateInfo.store_description,
             })
             .then(response => {
                 this.$emit('storeUpdated');
