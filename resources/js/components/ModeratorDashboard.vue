@@ -28,8 +28,8 @@
             :users="users"
             :logged-in-user-id="loggedInUserId"
         ></user-table> -->
-        <store-table v-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests"></request-table>
+        <store-table v-if="currentwindow === 'store'" :stores="stores" @refresh-stores="fetchStores"></store-table>
+        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" @refresh-requests="fetchRequests"></request-table>
     </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
     props: {
         users: Array,
         stores: Array,
-        managerRequests: Array, // Correct format
+        managerRequests: Array,
         loggedInUserId: Number,
     },
 
@@ -52,13 +52,51 @@ export default {
         UserTable,
         RequestTable,
     },
+
+    created() {
+        this.users = this.initialUsers;
+    },
+
     mounted() {
         console.log(this.managerRequests);
     },
+
     data() {
         return {
             currentwindow: "store",
+            users: [],
+            isFetchingUsers: false,
         };
     },
+
+    methods: {
+        async fetchStores() {
+            console.log("fetching stores");
+
+            // try {
+            //     let response = await axios.get('/refresh');
+            //     // Update the users data property with the new data
+            //     this.users = response.data;
+            // } catch (error) {
+            //     console.error("Error fetching users:", error);
+            // } finally {
+            //     this.isFetchingUsers = false;
+            // }
+        },
+
+        async fetchRequests() {
+            console.log("fetching requests");
+
+            // try {
+            //     let response = await axios.get('/refresh');
+            //     // Update the users data property with the new data
+            //     this.users = response.data;
+            // } catch (error) {
+            //     console.error("Error fetching users:", error);
+            // } finally {
+            //     this.isFetchingUsers = false;
+            // }
+        },
+    }
 };
 </script>

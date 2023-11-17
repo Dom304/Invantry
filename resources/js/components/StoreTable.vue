@@ -63,6 +63,7 @@ import Modal from './Modal.vue';
 
 export default {
   name: 'store-table',
+  emits: ['refreshStores'],
   props: ['stores'],
   components: {
         BPagination,
@@ -74,18 +75,20 @@ export default {
       return {
           isBusy: false,
           currentPage: 1,
-          rowsPerPage: 5, // adjust as needed
-          searchColumn: 'Store Name', // default column to search by
+          rowsPerPage: 5,
+          columns: ['id', 'store_name'],
+          searchColumn: 'Store Name',
           searchQuery: '',
-          fields: [
-              { key: 'id', label: 'ID' },
-              { key: 'store_name', label: 'Store Name' },
-              { key: 'actions', label: 'Actions' }
-          ],
-          columns: ['id', 'store_name'], // column keys for searching
           showEditModal: false,
           showModal: false,
           selectedStore: {},
+          fields: [
+              { key: 'id', label: 'ID' },
+              { key: 'manager_id', label: 'Manager ID'},
+              { key: 'store_name', label: 'Store Name' },
+              { key: 'store_description', label: 'Description'},
+              { key: 'actions', label: 'Actions' }
+          ]
       }
   }, 
 
@@ -93,7 +96,7 @@ export default {
           // get the column options for the search select
         columnOptions() { 
             return this.fields
-                .filter(f => f.key === 'id' || f.key === 'store_name')
+                .filter(f => f.key === 'id' || f.key === 'store_name' || f.key === 'manager_id')
                 .map(f => f.label);
         },
 

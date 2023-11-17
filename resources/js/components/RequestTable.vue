@@ -29,7 +29,7 @@
       aria-controls="my-table"></b-pagination>
   </div>
   <ManagerModal :show="showModal" :request="selectedRequest" @close="showModal = false"
-    @user-deleted-successfully="refreshTable" @request-accepted-successfully="closeModal">
+    @user-deleted-successfully="refreshRequests" @request-accepted-successfully="closeModal">
   </ManagerModal>
 
   <Modal :show="showDeleteModal" 
@@ -57,10 +57,12 @@ import Modal from "./Modal.vue";
 
 export default {
   name: "request-table",
+  emits: ['refreshRequests'],
   props: {
     managerRequests: Array,
     loggedInUserId: Number,
   },
+
   components: {
     ManagerModal,
     Modal,
@@ -74,6 +76,7 @@ export default {
     BButton,
     BSpinner
   },
+
   data() {
     return {
       isBusy: false,
@@ -121,14 +124,15 @@ export default {
     },
     closeModal() {
       this.showModal = false;
+      this.$emit("refreshRequests");
     },
     rejectRequest(request) {
       this.selectedRequest = request;
       this.showDeleteModal = true;
     },
-    refreshTable() {
+    refreshRequests() {
       // Add logic to refresh table, possibly fetching data again
-      console.log("Refresh table");
+      this.$emit("refreshRequests");
     },
   },
 };

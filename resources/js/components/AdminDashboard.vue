@@ -34,10 +34,8 @@
                 ref="userTable"
                 :is-busy="isFetchingUsers"
                 @refresh-users="fetchUsers"></user-table>
-        <store-table v-else-if="currentwindow === 'store'" :stores="stores"></store-table>
-        <request-table v-else-if="currentwindow === 'request'"
-            :manager_requests="managerRequests"
-        ></request-table>
+        <store-table v-else-if="currentwindow === 'store'" :stores="stores" @refresh-stores="fetchStores"></store-table>
+        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" @refresh-requests="fetchRequests"></request-table>
     </div>
 </template>
 
@@ -49,7 +47,13 @@ import RequestTable from "./RequestTable.vue";
 
 export default {
     name: "admin-dashboard",
-    props: ["initialUsers", "stores", "loggedInUserId", "managerRequests"],
+    props: {
+        initialUsers: Array,
+        users: Array,
+        stores: Array,
+        managerRequests: Array,
+        loggedInUserId: Number,
+    },
     components: {
         StoreTable,
         UserTable,
@@ -61,9 +65,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.loggedInUserId);
         console.log(this.managerRequests);
-        console.log(this.users);
     },
     
     data() {
@@ -71,7 +73,6 @@ export default {
             currentwindow: "user",
             users: [],
             isFetchingUsers: false,
-            managerRequests: [],
         };
     },
     methods: {
@@ -88,6 +89,34 @@ export default {
             this.isFetchingUsers = false;
         }
     },
+
+    async fetchStores() {
+            console.log("fetching stores");
+
+            // try {
+            //     let response = await axios.get('/refresh');
+            //     // Update the users data property with the new data
+            //     this.users = response.data;
+            // } catch (error) {
+            //     console.error("Error fetching users:", error);
+            // } finally {
+            //     this.isFetchingUsers = false;
+            // }
+        },
+
+        async fetchRequests() {
+            console.log("fetching requests");
+
+            // try {
+            //     let response = await axios.get('/refresh');
+            //     // Update the users data property with the new data
+            //     this.users = response.data;
+            // } catch (error) {
+            //     console.error("Error fetching users:", error);
+            // } finally {
+            //     this.isFetchingUsers = false;
+            // }
+        },
 }
 
 };

@@ -47,7 +47,7 @@ class StoreController extends Controller
     }
 
     public function updateStore(Request $request, Store $store)
-{
+    {
     $request->validate([
         'store_name' => 'required|string|max:255',
         'store_description' => 'required|string',
