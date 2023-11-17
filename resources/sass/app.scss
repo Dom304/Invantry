@@ -338,6 +338,22 @@ $font-path: "fonts";
         object-fit: cover;
     }
 }
+
+.delete-collection-btn {
+    background: none;
+    border: none;
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: small;
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+        color: darkred;
+    }
+}
+
 /* Checkout Window Styles */
 .checkout-window {
     width: 60%;
