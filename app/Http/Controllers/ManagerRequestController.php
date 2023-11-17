@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ManagerRequest;
 use App\Models\User;
+use App\Models\Store;
 use App\Services\StoreService;
+use Illuminate\Support\Facades\Log;
 
 class ManagerRequestController extends Controller
 {
@@ -60,25 +62,43 @@ class ManagerRequestController extends Controller
 
     //     return redirect()->back()->with('success', 'Request accepted successfully');
     // }
-    public function acceptRequest(Request $request, ManagerRequest $requestId)
-{
-    $user = User::find($request->input('user_id'));
+    public function acceptRequest(Request $request)
+    {
 
-    if (!$user) {
-        return redirect()->back()->with('error', 'User not found');
+        // Retrieve the manager request data sent from the frontend
+        $requestData = $request->input('request');
+        Log::info('Request Data:', $requestData);
+        // Find the user who made the manager request
+        $user = User::find($requestData['user_id']);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Check if the user is already a manager
+        if ($user->role === 'manager') {
+            return response()->json(['error' => 'User is already a manager'], 400);
+        }
+
+        // Update the user's role to 'manager'
+        $user->update(['role' => 'manager']);
+
+        // Create a new store with details from the manager request
+        Store::create([
+            'manager_id' => $user->id,
+            'store_name' => $requestData['store_name'],
+            'store_description' => $requestData['description'],
+            'store_logo' => null, // Or a default value if you have one
+        ]);
+
+
+        // Optionally, find and delete the manager request from the database
+        // This assumes that the ID of the manager request is also sent in the requestData
+        $managerRequest = ManagerRequest::find($requestData['id']);
+        if ($managerRequest) {
+            $managerRequest->delete();
+        }
+
+        return response()->json(['success' => 'Request accepted successfully']);
     }
-
-    $user->update(['role' => 'manager']);
-
-    Store::create([
-        'manager_id' => $user->id,
-        'store_name' => $requestId->store_name,
-        'store_description' => $requestId->description,
-    ]);
-
-    $requestId->delete();
-
-    return redirect()->back()->with('success', 'Request accepted successfully');
-}
-
 }

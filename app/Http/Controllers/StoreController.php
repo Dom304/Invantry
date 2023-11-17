@@ -52,8 +52,8 @@ class StoreController extends Controller
 
         // Validate the manager_id
         $manager = User::where('id', $request->manager_id)
-                       ->where('role', 'manager')
-                       ->first();
+            ->where('role', 'manager')
+            ->first();
 
         if (!$manager) {
             return response()->json(['message' => 'Invalid manager ID or the user is not a manager'], 422);
@@ -148,9 +148,9 @@ class StoreController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-        $users = User::all();
-        $stores = Store::all();
-        $manager_requests = ManagerRequest::all();
+            $users = User::all();
+            $stores = Store::all();
+            $manager_requests = ManagerRequest::all();
             return view('admin.admin_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
         }
         return redirect()->route('home');
@@ -159,30 +159,32 @@ class StoreController extends Controller
     public function moderatorDashboard()
     {
         $user = Auth::user();
-        
+
         if ($user->isModerator()) {
-        $users = User::all();
-        $requests = ManagerRequest::all();
-        $stores = Store::all();
-        $manager_requests = ManagerRequest::all();
+            $users = User::all();
+            $requests = ManagerRequest::all();
+            $stores = Store::all();
+            $manager_requests = ManagerRequest::all();
+            $manager_requests = ManagerRequest::all();
+
             return view('moderator.moderator_dashboard', compact('user', 'users', 'stores', 'manager_requests'));
         }
         return redirect()->route('home');
     }
 
     public function managerDashboard()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if ($user->isManager()) {
-        $store = $user->store;
-        $items = $store->items; 
+        if ($user->isManager()) {
+            $store = $user->store;
+            $items = $store->items;
 
-        return view('manager.manager_dashboard', compact('user', 'store', 'items'));
+            return view('manager.manager_dashboard', compact('user', 'store', 'items'));
+        }
+
+        return redirect()->route('home');
     }
-
-    return redirect()->route('home');
-}
 
     public function deleteItem(Store $store, Item $item)
     {
@@ -190,7 +192,7 @@ class StoreController extends Controller
 
         return redirect()->route('managerDashboard')->with('success', 'Item deleted successfully!');
     }
-    
+
     public function returnUsers()
     {
         $users = User::all();
@@ -201,26 +203,23 @@ class StoreController extends Controller
     public function updateUser(Request $request, $userId)
     {
 
-    $user = User::find($userId);
+        $user = User::find($userId);
 
-    if (!$user) {
-        return response()->json(['error' => 'User not found'], 404);
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Validate the request data
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'role' => 'required|string|max:255',
+        ]);
+
+        $data['updated_at'] = now();
+
+        $user->update($data);
+
+        return response()->json($user);
     }
-
-    // Validate the request data
-    $data = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'role' => 'required|string|max:255',
-    ]);
-
-    $data['updated_at'] = now();
-
-    $user->update($data);
-
-    return response()->json($user);
-    }
-
-    
-    
 }

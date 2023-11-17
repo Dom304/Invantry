@@ -1,19 +1,12 @@
 <template>
   <div>
-    <!-- For testing toggleBusy state -->
-    <!-- <b-button @click="toggleBusy">Toggle Busy State</b-button> -->
-
     <b-form-group label="Search by:" class="mb-3">
       <b-row>
         <b-col cols="auto">
           <b-form-select v-model="searchColumn" :options="columnOptions"></b-form-select>
         </b-col>
         <b-col>
-          <b-form-input
-            v-model="searchQuery"
-            type="search"
-            :placeholder="`Search by ${searchColumn}`"
-          ></b-form-input>
+          <b-form-input v-model="searchQuery" type="search" :placeholder="`Search by ${searchColumn}`"></b-form-input>
         </b-col>
       </b-row>
     </b-form-group>
@@ -24,7 +17,7 @@
           <b-spinner class="align-middle"></b-spinner>
           <strong>Loading...</strong>
         </div>
-      </template> 
+      </template>
 
       <template #cell(actions)="row">
         <b-button size="sm" style="margin-right: 5px;" @click="acceptRequest(row.item)">Accept</b-button>
@@ -32,21 +25,12 @@
       </template>
     </b-table>
 
-    <b-pagination
-        v-model="currentPage"
-        :total-rows="filteredRequests.length"
-        :per-page="rowsPerPage"
-        aria-controls="my-table"
-    ></b-pagination>
+    <b-pagination v-model="currentPage" :total-rows="filteredRequests.length" :per-page="rowsPerPage"
+      aria-controls="my-table"></b-pagination>
   </div>
-  <ManagerModal
-      :show="showModal"
-      :userId="selectedUser.id"
-      :username="selectedUser.name"
-      @close="showModal = false"  
-      @user-deleted-successfully="refreshTable"
-      @request-accepted-successfully="closeModal"
-    ></ManagerModal>
+  <ManagerModal :show="showModal" :request="selectedRequest" @close="showModal = false"
+    @user-deleted-successfully="refreshTable" @request-accepted-successfully="closeModal">
+  </ManagerModal>
 </template>
 
 <script>
@@ -65,7 +49,10 @@ import ManagerModal from "./ManagerModal.vue";
 
 export default {
   name: "request-table",
-  props: ["manager_requests", "loggedInUserId"],
+  props: {
+    managerRequests: Array,
+    loggedInUserId: Number,
+  },
   components: {
     ManagerModal,
     BTable,
@@ -83,16 +70,16 @@ export default {
       isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
-      searchColumn: "Store Name",
+      searchColumn: "User ID", // Set the default search column here
       searchQuery: "",
       selectedRequest: {},
       showModal: false,
       fields: [
         { key: 'id', label: 'ID', searchable: true },
-        { key: 'user_id', label: 'User', searchable: true },
+        { key: 'user_id', label: 'User ID', searchable: true },
         { key: 'store_name', label: 'Store Name', searchable: true },
-        { key: 'description', label: 'Proposal', searchable: true },
-        { key: 'actions', label: 'Actions', searchable: false }
+        { key: 'description', label: 'Description', searchable: true },
+        { key: 'actions', label: 'Actions' }
       ],
       columns: [],
     };
@@ -100,48 +87,37 @@ export default {
 
   computed: {
     columnOptions() {
-      return this.fields
-        .filter(f => f.searchable)
-        .map(f => f.label);
+      return this.fields.filter(f => f.searchable).map(f => f.label);
     },
-
     filteredRequests() {
       if (!this.searchQuery) {
-        return this.manager_requests;
+        return this.managerRequests;
       }
       const searchKey = this.fields.find(f => f.label === this.searchColumn)?.key;
-      return this.manager_requests.filter(request => {
-        const value = String(request[searchKey]).toLowerCase();
+      return this.managerRequests.filter(request => {
+        const value = String(request[searchKey] ?? '').toLowerCase();
         return value.includes(this.searchQuery.toLowerCase());
       });
     },
-
     tablePagination() {
       const start = (this.currentPage - 1) * this.rowsPerPage;
-      const end = start + this.rowsPerPage;
-      return this.filteredRequests.slice(start, end);
+      return this.filteredRequests.slice(start, start + this.rowsPerPage);
     },
   },
-
   methods: {
     acceptRequest(request) {
       this.selectedRequest = request;
       this.showModal = true;
     },
-    
     closeModal() {
       this.showModal = false;
     },
-
     rejectRequest(request) {
-      // Handle the reject action here
+      this.showModal = true;
     },
-
     refreshTable() {
-        // Implement the logic to refresh the table data.
-        // This might involve fetching new data or updating the existing data.
+      // Add logic to refresh table, possibly fetching data again
     },
-
   },
 };
 </script>

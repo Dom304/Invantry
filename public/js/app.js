@@ -20286,12 +20286,11 @@ __webpack_require__.r(__webpack_exports__);
       type: Boolean,
       "default": false
     },
-    requestId: {
-      type: Number
-    },
-    username: {
-      type: String,
-      "default": ''
+    request: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
     }
   },
   methods: {
@@ -20300,8 +20299,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     acceptRequest: function acceptRequest() {
       var _this = this;
-      axios.post("/request/".concat(this.requestId), {
-        userId: this.requestId
+      console.log("Accepting request...", this.request);
+      // You can destructure the request object to get specific fields if needed
+      axios.post("/request/".concat(this.request.id), {
+        request: this.request
       }).then(function (response) {
         console.log("Request accepted successfully");
         _this.$emit('request-accepted-successfully');
@@ -20389,14 +20390,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "moderator-dashboard",
-  props: ["users", "stores", "manager_requests", "loggedInUserId"],
+  props: {
+    users: Array,
+    stores: Array,
+    managerRequests: Array,
+    // Correct format
+    loggedInUserId: Number
+  },
   components: {
     StoreTable: _StoreTable_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     UserTable: _UserTable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     RequestTable: _RequestTable_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
-    console.log(this.loggedInUserId);
+    console.log(this.managerRequests);
   },
   data: function data() {
     return {
@@ -20424,7 +20431,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "request-table",
-  props: ["manager_requests", "loggedInUserId"],
+  props: {
+    managerRequests: Array,
+    loggedInUserId: Number
+  },
   components: {
     ManagerModal: _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     BTable: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BTable,
@@ -20442,7 +20452,8 @@ __webpack_require__.r(__webpack_exports__);
       isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
-      searchColumn: "Store Name",
+      searchColumn: "User ID",
+      // Set the default search column here
       searchQuery: "",
       selectedRequest: {},
       showModal: false,
@@ -20452,7 +20463,7 @@ __webpack_require__.r(__webpack_exports__);
         searchable: true
       }, {
         key: 'user_id',
-        label: 'User',
+        label: 'User ID',
         searchable: true
       }, {
         key: 'store_name',
@@ -20460,12 +20471,11 @@ __webpack_require__.r(__webpack_exports__);
         searchable: true
       }, {
         key: 'description',
-        label: 'Proposal',
+        label: 'Description',
         searchable: true
       }, {
         key: 'actions',
-        label: 'Actions',
-        searchable: false
+        label: 'Actions'
       }],
       columns: []
     };
@@ -20482,20 +20492,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this$fields$find,
         _this = this;
       if (!this.searchQuery) {
-        return this.manager_requests;
+        return this.managerRequests;
       }
       var searchKey = (_this$fields$find = this.fields.find(function (f) {
         return f.label === _this.searchColumn;
       })) === null || _this$fields$find === void 0 ? void 0 : _this$fields$find.key;
-      return this.manager_requests.filter(function (request) {
-        var value = String(request[searchKey]).toLowerCase();
+      return this.managerRequests.filter(function (request) {
+        var _request$searchKey;
+        var value = String((_request$searchKey = request[searchKey]) !== null && _request$searchKey !== void 0 ? _request$searchKey : '').toLowerCase();
         return value.includes(_this.searchQuery.toLowerCase());
       });
     },
     tablePagination: function tablePagination() {
       var start = (this.currentPage - 1) * this.rowsPerPage;
-      var end = start + this.rowsPerPage;
-      return this.filteredRequests.slice(start, end);
+      return this.filteredRequests.slice(start, start + this.rowsPerPage);
     }
   },
   methods: {
@@ -20507,11 +20517,10 @@ __webpack_require__.r(__webpack_exports__);
       this.showModal = false;
     },
     rejectRequest: function rejectRequest(request) {
-      // Handle the reject action here
+      this.showModal = true;
     },
     refreshTable: function refreshTable() {
-      // Implement the logic to refresh the table data.
-      // This might involve fetching new data or updating the existing data.
+      // Add logic to refresh table, possibly fetching data again
     }
   }
 });
@@ -21367,7 +21376,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.username) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to accept the request for " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.request.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.acceptRequest && $options.acceptRequest.apply($options, arguments);
     })
@@ -21482,8 +21491,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stores: $props.stores
   }, null, 8 /* PROPS */, ["stores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 1,
-    manager_requests: $props.manager_requests
-  }, null, 8 /* PROPS */, ["manager_requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
+    "manager-requests": $props.managerRequests
+  }, null, 8 /* PROPS */, ["manager-requests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -21517,7 +21526,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
   var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
   var _component_ManagerModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ManagerModal");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" For testing toggleBusy state "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <b-button @click=\"toggleBusy\">Toggle Busy State</b-button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
     label: "Search by:",
     "class": "mb-3"
   }, {
@@ -21607,14 +21616,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-controls": "my-table"
   }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ManagerModal, {
     show: $data.showModal,
-    userId: _ctx.selectedUser.id,
-    username: _ctx.selectedUser.name,
+    request: $data.selectedRequest,
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
     onUserDeletedSuccessfully: $options.refreshTable,
     onRequestAcceptedSuccessfully: $options.closeModal
-  }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["show", "request", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -36206,7 +36214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-f1a89a2a] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0; /* Initially set the overlay to be invisible */\n    pointer-events: none; /* Ensure it doesn't block anything when not shown */\n    transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-f1a89a2a] {\n    opacity: 1;\n    pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-f1a89a2a] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%); /* Starts off the screen */\n    transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-f1a89a2a] {\n    transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-f1a89a2a] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-f1a89a2a] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-f1a89a2a]:hover {\n    color: #888;\n}\n.model-main-content[data-v-f1a89a2a] {\n    flex: 1;\n    padding: 20px 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.model-foot[data-v-f1a89a2a] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n  ", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-f1a89a2a] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  /* Initially set the overlay to be invisible */\n  pointer-events: none;\n  /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s;\n  /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-f1a89a2a] {\n  opacity: 1;\n  pointer-events: auto;\n  /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-f1a89a2a] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%);\n  /* Starts off the screen */\n  transition: transform 0.3s ease-out;\n  /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-f1a89a2a] {\n  transform: translateY(0);\n  /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-f1a89a2a] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-f1a89a2a] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-f1a89a2a]:hover {\n  color: #888;\n}\n.model-main-content[data-v-f1a89a2a] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.model-foot[data-v-f1a89a2a] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -13,17 +13,11 @@
             Users
         </button> -->
 
-        <button
-            class="window-btn"
-            :class="{ selected: currentwindow === 'store' }"
-            @click="currentwindow = 'store'">
+        <button class="window-btn" :class="{ selected: currentwindow === 'store' }" @click="currentwindow = 'store'">
             Stores
         </button>
 
-        <button
-            class="window-btn"
-            :class="{ selected: currentwindow === 'request' }"
-            @click="currentwindow = 'request'">
+        <button class="window-btn" :class="{ selected: currentwindow === 'request' }" @click="currentwindow = 'request'">
             Requests
         </button>
     </div>
@@ -34,14 +28,8 @@
             :users="users"
             :logged-in-user-id="loggedInUserId"
         ></user-table> -->
-        <store-table
-            v-if="currentwindow === 'store'"
-            :stores="stores"
-        ></store-table>
-        <request-table
-            v-else-if="currentwindow === 'request'"
-            :manager_requests="manager_requests"
-        ></request-table>
+        <store-table v-if="currentwindow === 'store'" :stores="stores"></store-table>
+        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests"></request-table>
     </div>
 </template>
 
@@ -52,14 +40,20 @@ import RequestTable from "./RequestTable.vue";
 
 export default {
     name: "moderator-dashboard",
-    props: ["users", "stores", "manager_requests", "loggedInUserId"],
+    props: {
+        users: Array,
+        stores: Array,
+        managerRequests: Array, // Correct format
+        loggedInUserId: Number,
+    },
+
     components: {
         StoreTable,
         UserTable,
         RequestTable,
     },
     mounted() {
-        console.log(this.loggedInUserId);
+        console.log(this.managerRequests);
     },
     data() {
         return {

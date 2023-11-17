@@ -56,7 +56,10 @@ Route::get('/ManagerDashboard', [StoreController::class, 'managerDashboard'])->n
 Route::post('/updateStore/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
 Route::post('/addItem/{store}', [StoreController::class, 'addItem'])->name('addItem');
 Route::delete('/deleteItem/{store}/{item}', [StoreController::class, 'deleteItem'])->name('deleteItem');
+
+// Check this route in your web.php file
 Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptRequest'])->name('manager.request.accept');
+
 
 Route::post('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');
 Route::post('/store/{store}', [StoreController::class, 'deleteStore'])->name('deleteStore');
