@@ -142,8 +142,9 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
-        <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
-
+        @if(auth()->user()->role == 'buyer')
+        <a href="/manager-request" class="apply-btn"> Store manager? Click here.</a>
+        @endif
 
     </div>
 
@@ -152,7 +153,7 @@
         <!-- href="/stores/store-name" -->
         <a href="/store/{{ $store->store_name }}" class="store-card">
             <div class="store-logo">
-                <img src="{{ $store->store_logo }}" alt="Store Logo">
+            <img src="{{ asset('storage/' . $store->store_logo) }}" alt="Item Logo">
             </div>
 
             <div class="store-info">
@@ -162,7 +163,7 @@
 
         </a>
         @endforeach
-<!-- 
+ 
         <form method="POST" action="{{ route('updateRole') }}">
         @csrf
         @method('PUT')
@@ -183,7 +184,7 @@
     <input type="hidden" name="role" value="admin">
     <button type="submit">Admin Button</button>
 </form>
-    </div> -->
+    </div> 
 
 
 

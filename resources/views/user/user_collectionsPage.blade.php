@@ -9,8 +9,8 @@
         const itemCards = document.querySelectorAll('.colitem-card');
 
         itemCards.forEach(card => {
-            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            const itemName = card.querySelector('.colitem-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.colitem-subtext').textContent.toLowerCase();
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
                 
@@ -33,8 +33,8 @@ function filterItemsRight() {
     } else {
         // If search input is not empty, proceed with the existing filter logic
         itemCards.forEach(card => {
-            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
+            const itemName = card.querySelector('.item-name2').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.store-info .item-subtext2').textContent.toLowerCase();  // Corrected the selector
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
             } else {
@@ -234,15 +234,16 @@ function setSearchValueAndFilterRight(itemName) {
             <img src="{{$item->item_logo}}" alt="Store Logo">
         </div>
         <div class="store-info">
-            <span class="store-name">{{ $item->item_name }}</span>
-            <span class="store-subtext">{{ $item->item_description }}</span>
+            <span class="colitem-name">{{ $item->item_name }}</span>
+            <span class="colitem-subtext">{{ $item->item_description }}</span>
         </div>
         <!-- Added a data attribute to the button for easy identification -->
         <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
-        <form action="{{ route('deleteItem', ['store' => $item->store_id, 'item' => $item->id]) }}" method="post" class="delete-form">
+        <form method="post" action="{{ route('collection.item.delete', ['collName' => $collName, 'itemId' => $item->id]) }}">
             @csrf
-            @method('delete')
-            <button type="submit" class="delete-colitem-btn">Delete</button>
+            @method('DELETE')
+
+            <button type="submit">Delete</button>
         </form>
     </div>
 @endforeach
@@ -261,10 +262,10 @@ function setSearchValueAndFilterRight(itemName) {
             <img src="{{$item->item_logo}}" alt="Store Logo">
         </div>
         <div class="store-info">
-            <span class="store-name">{{ $item->item_name }}</span>
-            <span class="store-subtext">{{ $item->item_description }}</span>
-            <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
-            <span class="store-subtext">Store Name: {{ $item->store->store_name }}</span>
+            <span class="item-name2">{{ $item->item_name }}</span>
+            <span class="item-subtext2">{{ $item->item_description }}</span>
+            <span class="item-price2">${{ number_format($item->item_price, 2) }}</span>
+            <span class="item-subtext2">Available at <b>{{ $item->store->store_name }}</b></span>
         </div>
         
         <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
