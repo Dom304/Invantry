@@ -20485,8 +20485,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "moderator-dashboard",
   props: {
     users: Array,
-    stores: Array,
-    managerRequests: Array,
+    initialStores: Array,
+    initialRequests: Array,
     loggedInUserId: Number
   },
   components: {
@@ -20496,62 +20496,96 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.users = this.initialUsers;
+    this.stores = this.initialStores;
+    this.managerRequests = this.initialRequests;
   },
   mounted: function mounted() {
-    console.log(this.managerRequests);
+    // console.log(this.managerRequests);
   },
   data: function data() {
     return {
       currentwindow: "store",
       users: [],
-      isFetchingUsers: false
+      stores: [],
+      managerRequests: [],
+      isFetchingUsers: false,
+      isFetchingRequests: false,
+      isFetchingStore: false
     };
   },
   methods: {
     fetchStores: function fetchStores() {
+      var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               console.log("fetching stores");
-
-              // try {
-              //     let response = await axios.get('/refresh');
-              //     // Update the users data property with the new data
-              //     this.users = response.data;
-              // } catch (error) {
-              //     console.error("Error fetching users:", error);
-              // } finally {
-              //     this.isFetchingUsers = false;
-              // }
-            case 1:
+              _this.isFetchingStore = true;
+              _context.prev = 2;
+              _context.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'stores'
+                }
+              });
+            case 5:
+              response = _context.sent;
+              // Update the users data property with the new data
+              _this.stores = response.data;
+              _context.next = 12;
+              break;
+            case 9:
+              _context.prev = 9;
+              _context.t0 = _context["catch"](2);
+              console.error("Error fetching stores:", _context.t0);
+            case 12:
+              _context.prev = 12;
+              _this.isFetchingStore = false;
+              return _context.finish(12);
+            case 15:
             case "end":
               return _context.stop();
           }
-        }, _callee);
+        }, _callee, null, [[2, 9, 12, 15]]);
       }))();
     },
     fetchRequests: function fetchRequests() {
+      var _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               console.log("fetching requests");
-
-              // try {
-              //     let response = await axios.get('/refresh');
-              //     // Update the users data property with the new data
-              //     this.users = response.data;
-              // } catch (error) {
-              //     console.error("Error fetching users:", error);
-              // } finally {
-              //     this.isFetchingUsers = false;
-              // }
-            case 1:
+              _this2.isFetchingRequests = true;
+              _context2.prev = 2;
+              _context2.next = 5;
+              return axios.get('/refresh', {
+                params: {
+                  type: 'manager_requests'
+                }
+              });
+            case 5:
+              response = _context2.sent;
+              // Update the users data property with the new data
+              _this2.managerRequests = response.data;
+              _context2.next = 12;
+              break;
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](2);
+              console.error("Error fetching requests:", _context2.t0);
+            case 12:
+              _context2.prev = 12;
+              _this2.isFetchingRequests = false;
+              return _context2.finish(12);
+            case 15:
             case "end":
               return _context2.stop();
           }
-        }, _callee2);
+        }, _callee2, null, [[2, 9, 12, 15]]);
       }))();
     }
   }
@@ -21653,7 +21687,7 @@ var _hoisted_3 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_store_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("store-table");
   var _component_request_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("request-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n            class=\"window-btn\"\n            :class=\"{ selected: currentwindow === 'user' }\"\n            @click=\"currentwindow = 'user'\">\n            Users\n        </button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button\n                class=\"window-btn\"\n                :class=\"{ selected: currentwindow === 'user' }\"\n                @click=\"currentwindow = 'user'\">\n                Users\n        </button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["window-btn", {
       selected: $data.currentwindow === 'store'
     }]),
@@ -21667,13 +21701,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $data.currentwindow = 'request';
     })
-  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <user-table\n            v-if=\"currentwindow === 'user'\"\n            :users=\"users\"\n            :logged-in-user-id=\"loggedInUserId\"\n        ></user-table> "), $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
+  }, " Requests ", 2 /* CLASS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <user-table\n                v-if=\"currentwindow === 'user'\"\n                :users=\"users\"\n                :logged-in-user-id=\"loggedInUserId\"\n        ></user-table> "), $data.currentwindow === 'store' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_store_table, {
     key: 0,
-    stores: $props.stores,
+    stores: $data.stores,
     onRefreshStores: $options.fetchStores
   }, null, 8 /* PROPS */, ["stores", "onRefreshStores"])) : $data.currentwindow === 'request' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_request_table, {
     key: 1,
-    "manager-requests": $props.managerRequests,
+    "manager-requests": $data.managerRequests,
     onRefreshRequests: $options.fetchRequests
   }, null, 8 /* PROPS */, ["manager-requests", "onRefreshRequests"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64 /* STABLE_FRAGMENT */);
 }
