@@ -22725,10 +22725,10 @@ readers do not read off random characters that represent icons */
   justify-content: space-between;
   align-items: center;
   width: calc(50% - 1rem);
-  height: 115px;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 1rem;
+  height: auto;
+  margin-top: 0.5rem; /* Adjusted to give space between stacked cards */
+  margin-bottom: 0.5rem; /* Adjusted to give space between stacked cards */
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22738,29 +22738,56 @@ readers do not read off random characters that represent icons */
   transform: translateY(-0.25rem);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.item-card .item-name {
+.item-card .item-info .item-name {
   font-size: 14px;
   font-weight: 600;
 }
-.item-card .item-subtext {
+.item-card .item-info .item-subtext {
   font-size: 10px;
 }
-.item-card .item-price {
+.item-card .item-info .item-price {
   font-size: 12px;
   font-weight: bold;
 }
-.item-card .add-to-cart-btn {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+.item-card .test select {
+  width: 8.6rem;
+  font-size: 12px;
+  color: rgb(42, 42, 42);
+  background-color: rgb(226, 226, 226);
+  border: none;
+}
+.item-card .test .add-to-collection-btn {
+  margin-top: 0.2rem;
+  right: 60px;
+  height: auto;
+  width: 8.6rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 12px;
   color: white;
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(44, 124, 228);
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
-.item-card .add-to-cart-btn:hover {
-  background-color: rgb(61, 189, 32);
+.item-card .test .add-to-collection-btn:hover {
+  background-color: rgb(22, 29, 128);
+}
+.item-card .test .add-to-cart-btn {
+  padding: 0.5rem 1rem;
+  height: auto;
+  width: 8.6rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 12px;
+  color: white;
+  background-color: rgb(80, 220, 48);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.item-card .test .add-to-cart-btn:hover {
+  background-color: rgb(38, 124, 18);
 }
 
 .item-card2 {

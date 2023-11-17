@@ -25,8 +25,8 @@
         const itemCards = document.querySelectorAll('.item-card');
 
         itemCards.forEach(card => {
-            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            const itemName = card.querySelector('.item-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.item-subtext').textContent.toLowerCase();
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
             } else {
@@ -163,13 +163,22 @@
             <div class="store-logo">
             <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Item Logo">
             </div>
-            <div class="store-info">
+            <div class="item-info">
                 <span class="item-name">{{ $item->item_name }}</span>
                 <span class="item-subtext">{{ $item->item_description }}</span>
                 <span class="item-price">${{ number_format($item->item_price, 2) }}</span>
             </div>
 
-            <form method="POST" action="{{ route('store.collection.add', ['storeName' => $storeName]) }}">
+
+     <div class = "test">
+     <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
+                @csrf
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
+
+    <form method="POST" action="{{ route('store.collection.add', ['storeName' => $storeName]) }}">
     @csrf
     <input type="hidden" name="item_id" value="{{ $item->id }}">
     <select name="collection_id" required>
@@ -181,12 +190,9 @@
 </form>
 
 
-            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
-                @csrf
-                <input type="hidden" name="item_id" value="{{ $item->id }}">
-                <input type="hidden" name="quantity" value="1">
-                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-            </form>
+            
+
+</div>
             
         </a>
     @endforeach
