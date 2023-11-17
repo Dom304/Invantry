@@ -21,7 +21,7 @@
 
       <template #cell(actions)="row">
         <b-button size="sm" style="margin-right: 5px;" @click="acceptRequest(row.item)">Accept</b-button>
-        <b-button size="sm" variant="danger" @click="rejectUser(row.item)">Reject</b-button>
+        <b-button size="sm" variant="danger" @click="rejectRequest(row.item)">Reject</b-button>
       </template>
     </b-table>
 
@@ -31,6 +31,13 @@
   <ManagerModal :show="showModal" :request="selectedRequest" @close="showModal = false"
     @user-deleted-successfully="refreshTable" @request-accepted-successfully="closeModal">
   </ManagerModal>
+
+  <Modal :show="showDeleteModal" 
+    :type="'request'"
+    :entityData="selectedRequest"
+    @close="showDeleteModal = false"
+    @deleted-successfully="refreshTable">
+  </Modal>
 </template>
 
 <script>
@@ -46,6 +53,7 @@ import {
   BSpinner
 } from "bootstrap-vue-3";
 import ManagerModal from "./ManagerModal.vue";
+import Modal from "./Modal.vue";
 
 export default {
   name: "request-table",
@@ -55,6 +63,7 @@ export default {
   },
   components: {
     ManagerModal,
+    Modal,
     BTable,
     BFormInput,
     BFormGroup,
@@ -74,6 +83,7 @@ export default {
       searchQuery: "",
       selectedRequest: {},
       showModal: false,
+      showDeleteModal: false,
       fields: [
         { key: 'id', label: 'ID', searchable: true },
         { key: 'user_id', label: 'User ID', searchable: true },
@@ -113,10 +123,12 @@ export default {
       this.showModal = false;
     },
     rejectRequest(request) {
-      this.showModal = true;
+      this.selectedRequest = request;
+      this.showDeleteModal = true;
     },
     refreshTable() {
       // Add logic to refresh table, possibly fetching data again
+      console.log("Refresh table");
     },
   },
 };

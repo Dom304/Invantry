@@ -21,6 +21,9 @@ class GenericDeleteController extends Controller
             case 'store':
                 $model = Store::find($id);
                 break;
+            case 'request':
+                $model = ManagerRequest::find($id);
+                break;
             // ... other cases for different types
             default:
                 return response()->json(['message' => 'Invalid type specified'], 400);

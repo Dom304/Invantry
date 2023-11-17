@@ -20280,6 +20280,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     show: {
@@ -20301,7 +20303,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       console.log("Accepting request...", this.request);
       // You can destructure the request object to get specific fields if needed
-      axios.post("/request/".concat(this.request.id), {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/request/".concat(this.request.id), {
         request: this.request
       }).then(function (response) {
         console.log("Request accepted successfully");
@@ -20427,6 +20429,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ManagerModal.vue */ "./resources/js/components/ManagerModal.vue");
+/* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20437,6 +20441,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     ManagerModal: _ManagerModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Modal: _Modal_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     BTable: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BTable,
     BFormInput: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormInput,
     BFormGroup: bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__.BFormGroup,
@@ -20457,6 +20462,7 @@ __webpack_require__.r(__webpack_exports__);
       searchQuery: "",
       selectedRequest: {},
       showModal: false,
+      showDeleteModal: false,
       fields: [{
         key: 'id',
         label: 'ID',
@@ -20517,10 +20523,12 @@ __webpack_require__.r(__webpack_exports__);
       this.showModal = false;
     },
     rejectRequest: function rejectRequest(request) {
-      this.showModal = true;
+      this.selectedRequest = request;
+      this.showDeleteModal = true;
     },
     refreshTable: function refreshTable() {
       // Add logic to refresh table, possibly fetching data again
+      console.log("Refresh table");
     }
   }
 });
@@ -21532,6 +21540,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_b_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-table");
   var _component_b_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("b-pagination");
   var _component_ManagerModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ManagerModal");
+  var _component_Modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Modal");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_b_form_group, {
     label: "Search by:",
     "class": "mb-3"
@@ -21602,7 +21611,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         size: "sm",
         variant: "danger",
         onClick: function onClick($event) {
-          return _ctx.rejectUser(row.item);
+          return $options.rejectRequest(row.item);
         }
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21628,7 +21637,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     onUserDeletedSuccessfully: $options.refreshTable,
     onRequestAcceptedSuccessfully: $options.closeModal
-  }, null, 8 /* PROPS */, ["show", "request", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, ["show", "request", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    show: $data.showDeleteModal,
+    type: 'request',
+    entityData: $data.selectedRequest,
+    onClose: _cache[4] || (_cache[4] = function ($event) {
+      return $data.showDeleteModal = false;
+    }),
+    onDeletedSuccessfully: $options.refreshTable
+  }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
