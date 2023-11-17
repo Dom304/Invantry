@@ -54,6 +54,8 @@ Route::get('/ManagerDashboard', [StoreController::class, 'managerDashboard'])->n
 Route::put('/updateStore/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
 Route::post('/addItem/{store}', [StoreController::class, 'addItem'])->name('addItem');
 Route::delete('/deleteItem/{store}/{item}', [StoreController::class, 'deleteItem'])->name('deleteItem');
+Route::get('/store/{store}/item/{item}/edit', [StoreController::class, 'edit'])->name('editItem');
+Route::put('/store/{store}/item/{item}', [StoreController::class, 'update'])->name('updateItem');
 Route::post('/request/{requestId}', [ManagerRequestController::class, 'acceptRequest'])->name('manager.request.accept');
 
 Route::delete('/user/{id}', [StoreController::class, 'deleteUser'])->name('deleteUser');

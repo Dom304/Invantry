@@ -97,6 +97,38 @@ class StoreController extends Controller
         return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');
     }
 
+    public function edit($store_id, $item_id)
+    {
+    $store = Store::findOrFail($store_id);
+    $item = Item::findOrFail($item_id);
+
+    return view('user.user_edit-item', ['store' => $store, 'item' => $item]);
+    }
+
+    public function update(Request $request, Store $store, Item $item)
+{
+    $request->validate([
+        'item_name' => 'required|string|max:255',
+        'item_description' => 'required|string',
+        'item_quantity' => 'required|integer|min:1',
+        'item_price' => 'required|numeric|min:0.01',
+        'item_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+    if ($request->hasFile('item_logo')) {
+        $itemLogoPath = $request->file('item_logo')->store('item_logos', 'public');
+        $item->update(['item_logo' => $itemLogoPath]);
+    }
+
+    $item->update([
+        'item_name' => $request->input('item_name'),
+        'item_description' => $request->input('item_description'),
+        'item_quantity' => $request->input('item_quantity'),
+        'item_price' => $request->input('item_price'),
+    ]);
+
+    return redirect()->route('managerDashboard')->with('success', 'Item updated successfully');
+}
+
     public function deleteUser($id)
     {
         // Get the authenticated user's ID
