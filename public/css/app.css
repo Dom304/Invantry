@@ -22767,11 +22767,11 @@ readers do not read off random characters that represent icons */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* Adjusted to take up the full width of its container */
-  height: 115px;
-  margin-top: 1rem; /* Adjusted to give space between stacked cards */
-  margin-bottom: 1rem; /* Adjusted to give space between stacked cards */
-  padding: 1rem;
+  width: auto; /* Adjusted to take up the full width of its container */
+  height: auto;
+  margin-top: 0.5rem; /* Adjusted to give space between stacked cards */
+  margin-bottom: 0.5rem; /* Adjusted to give space between stacked cards */
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22781,29 +22781,67 @@ readers do not read off random characters that represent icons */
   transform: translateY(-0.25rem);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.item-card2 .item-name2 {
+.item-card2 .item-info2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.item-card2 .item-info2 .item-name2 {
   font-size: 14px;
   font-weight: 600;
 }
-.item-card2 .item-subtext2 {
+.item-card2 .item-info2 .item-subtext2 {
   font-size: 10px;
 }
-.item-card2 .item-price2 {
+.item-card2 .item-info2 .item-price2 {
   font-size: 12px;
   font-weight: bold;
 }
-.item-card2 .add-to-cart-btn {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+.item-card2 .test1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 150px;
+}
+.item-card2 .test1 select {
+  width: 8.6rem;
+  font-size: 12px;
+  color: rgb(42, 42, 42);
+  background-color: rgb(226, 226, 226);
+  border: none;
+}
+.item-card2 .test1 .add-to-collection-btn {
+  margin-top: 0.2rem;
+  right: 60px;
+  height: auto;
+  width: 8.6rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 12px;
   color: white;
-  background-color: rgb(51, 51, 51);
+  background-color: rgb(44, 124, 228);
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
-.item-card2 .add-to-cart-btn:hover {
-  background-color: rgb(61, 189, 32);
+.item-card2 .test1 .add-to-collection-btn:hover {
+  background-color: rgb(22, 29, 128);
+}
+.item-card2 .test1 .add-to-cart-btn {
+  padding: 0.5rem 1rem;
+  height: auto;
+  width: 8.6rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 12px;
+  color: white;
+  background-color: rgb(80, 220, 48);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.item-card2 .test1 .add-to-cart-btn:hover {
+  background-color: rgb(38, 124, 18);
 }
 
 .colitem-card {
@@ -22919,6 +22957,13 @@ readers do not read off random characters that represent icons */
   padding: 1rem;
 }
 
+.right-window2 {
+  width: 700px;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
 .header {
   display: flex;
   width: auto;
@@ -22946,6 +22991,14 @@ readers do not read off random characters that represent icons */
   margin-right: 220px;
   display: flex;
   align-items: center;
+}
+
+.search-container2 {
+  flex-grow: 2;
+  margin-right: 220px;
+  display: flex;
+  align-items: center;
+  width: auto;
 }
 
 .search-input {

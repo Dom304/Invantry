@@ -34,7 +34,7 @@ function filterItemsRight() {
         // If search input is not empty, proceed with the existing filter logic
         itemCards.forEach(card => {
             const itemName = card.querySelector('.item-name2').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-info .item-subtext2').textContent.toLowerCase();  // Corrected the selector
+            const itemDescription = card.querySelector('.item-info2 .item-subtext2').textContent.toLowerCase();  // Corrected the selector
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
             } else {
@@ -238,7 +238,7 @@ function setSearchValueAndFilterRight(itemName) {
             <span class="colitem-subtext">{{ $item->item_description }}</span>
         </div>
         <!-- Added a data attribute to the button for easy identification -->
-        <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+        <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search</button>
         <form method="post" action="{{ route('collection.item.delete', ['collName' => $collName, 'itemId' => $item->id]) }}">
             @csrf
             @method('DELETE')
@@ -251,8 +251,8 @@ function setSearchValueAndFilterRight(itemName) {
         
        
 
-    <div class="right-window">
-    <div class="search-container">
+    <div class="right-window2">
+    <div class="search-container2">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
     </div>
     {{--If the right-search-bar is empty, dont display any cards, otherwise (meaning if there is text in the search box) go through with the following loop that displays the cards--}}
@@ -261,13 +261,23 @@ function setSearchValueAndFilterRight(itemName) {
         <div class="store-logo">
             <img src="{{$item->item_logo}}" alt="Store Logo">
         </div>
-        <div class="store-info">
+        <div class="item-info2">
             <span class="item-name2">{{ $item->item_name }}</span>
             <span class="item-subtext2">{{ $item->item_description }}</span>
             <span class="item-price2">${{ number_format($item->item_price, 2) }}</span>
             <span class="item-subtext2">Available at <b>{{ $item->store->store_name }}</b></span>
         </div>
         
+
+        <div class = "test1">
+
+        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
+            @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+        </form>
+
         <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
     @csrf
     <input type="hidden" name="item_id" value="{{ $item->id }}">
@@ -279,15 +289,7 @@ function setSearchValueAndFilterRight(itemName) {
     <button type="submit" class="add-to-collection-btn">Add to Collection</button>
 </form>
 
-
-        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-        </form>
-
-        
+</div>
 
 
     </div>
