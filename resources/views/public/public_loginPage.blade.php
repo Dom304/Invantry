@@ -4,7 +4,7 @@
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
     <div class="create-acc">WELCOME BACK</div>
-    <form action="{{route('login')}}" method="POST">
+    <form id="login-form" action="{{route('login')}}" method="POST">
     @csrf
     <input type="email" class="username-input" placeholder="Email address" name="email">
     <div class="password-container">
@@ -24,6 +24,13 @@
     @font-face {
         font-family: 'Panton-LightCaps';
         src: url('{{ asset('fonts/panton/Panton-LightCaps.otf') }}') format('opentype');
+    }
+
+    #login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-container {
