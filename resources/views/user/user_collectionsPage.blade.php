@@ -253,8 +253,8 @@ function setSearchValueAndFilterRight(itemName) {
         <form method="post" action="{{ route('collection.item.delete', ['collName' => $collName, 'itemId' => $item->id]) }}">
             @csrf
             @method('DELETE')
-
-            <button type="submit">Delete</button>
+            
+            <button type="submit" button class="search-colitem-btn">Delete</button>
         </form>
     </div>
 @endforeach

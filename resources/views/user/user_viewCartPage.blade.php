@@ -43,6 +43,8 @@
     }
 
     function proceedToCheckout() {
+
+    window.location.href = '/checkout'
     axios.post('/checkout')
         .then(function (response) {
             // handle success
