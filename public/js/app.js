@@ -19973,32 +19973,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               console.log("fetching stores");
-              _context2.prev = 1;
-              _context2.next = 4;
+              _this2.isFetchingStore = true;
+              _context2.prev = 2;
+              _context2.next = 5;
               return axios.get('/refresh', {
                 params: {
                   type: 'stores'
                 }
               });
-            case 4:
+            case 5:
               response = _context2.sent;
               // Update the users data property with the new data
               _this2.stores = response.data;
-              _context2.next = 11;
+              _context2.next = 12;
               break;
-            case 8:
-              _context2.prev = 8;
-              _context2.t0 = _context2["catch"](1);
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](2);
               console.error("Error fetching stores:", _context2.t0);
-            case 11:
-              _context2.prev = 11;
-              _this2.isFetchingUsers = false;
-              return _context2.finish(11);
-            case 14:
+            case 12:
+              _context2.prev = 12;
+              _this2.isFetchingStore = false;
+              return _context2.finish(12);
+            case 15:
             case "end":
               return _context2.stop();
           }
-        }, _callee2, null, [[1, 8, 11, 14]]);
+        }, _callee2, null, [[2, 9, 12, 15]]);
       }))();
     },
     fetchRequests: function fetchRequests() {
@@ -20009,32 +20010,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               console.log("fetching requests");
-              _context3.prev = 1;
-              _context3.next = 4;
+              _this3.isFetchingRequests = true;
+              _context3.prev = 2;
+              _context3.next = 5;
               return axios.get('/refresh', {
                 params: {
                   type: 'manager_requests'
                 }
               });
-            case 4:
+            case 5:
               response = _context3.sent;
               // Update the users data property with the new data
               _this3.managerRequests = response.data;
-              _context3.next = 11;
+              _context3.next = 12;
               break;
-            case 8:
-              _context3.prev = 8;
-              _context3.t0 = _context3["catch"](1);
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](2);
               console.error("Error fetching requests:", _context3.t0);
-            case 11:
-              _context3.prev = 11;
-              _this3.isFetchingUsers = false;
-              return _context3.finish(11);
-            case 14:
+            case 12:
+              _context3.prev = 12;
+              _this3.isFetchingRequests = false;
+              return _context3.finish(12);
+            case 15:
             case "end":
               return _context3.stop();
           }
-        }, _callee3, null, [[1, 8, 11, 14]]);
+        }, _callee3, null, [[2, 9, 12, 15]]);
       }))();
     }
   }
@@ -20242,6 +20244,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
+              _this.close();
               axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/updateStore/".concat(_this.updateInfo.id), {
                 store_name: _this.updateInfo.store_name,
                 manager_id: _this.updateInfo.manager_id,
@@ -20249,11 +20252,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
                 store_description: _this.updateInfo.store_description
               }).then(function (response) {
                 _this.$emit('storeUpdated');
-                _this.close();
               })["catch"](function (error) {
+                _this.close();
                 console.error("There was an error updating the store:", error);
               });
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -20578,7 +20581,6 @@ __webpack_require__.r(__webpack_exports__);
   emits: ['refreshRequests'],
   props: {
     managerRequests: Array,
-    loggedInUserId: Number,
     isBusy: Boolean
   },
   components: {
@@ -20596,7 +20598,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
       searchColumn: "User ID",
@@ -20670,7 +20671,7 @@ __webpack_require__.r(__webpack_exports__);
       this.showDeleteModal = true;
     },
     refreshRequests: function refreshRequests() {
-      // Add logic to refresh table, possibly fetching data again
+      this.showModal = false;
       this.$emit("refreshRequests");
     }
   }
@@ -21753,7 +21754,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     striped: "",
     hover: "",
     items: $options.tablePagination,
-    busy: $data.isBusy,
+    busy: $props.isBusy,
     fields: $data.fields
   }, {
     "table-busy": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21803,16 +21804,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
-    onUserDeletedSuccessfully: $options.refreshRequests,
-    onRequestAcceptedSuccessfully: $options.closeModal
-  }, null, 8 /* PROPS */, ["show", "request", "onUserDeletedSuccessfully", "onRequestAcceptedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
+    onRequestAcceptedSuccessfully: $options.refreshRequests
+  }, null, 8 /* PROPS */, ["show", "request", "onRequestAcceptedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showDeleteModal,
     type: 'request',
     entityData: $data.selectedRequest,
     onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showDeleteModal = false;
     }),
-    onDeletedSuccessfully: _ctx.refreshTable
+    onDeletedSuccessfully: $options.refreshRequests
   }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
 

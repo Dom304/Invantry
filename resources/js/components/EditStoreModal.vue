@@ -65,6 +65,7 @@ export default {
         },
 
         async editStore() {
+            this.close();
             axios.post(`/updateStore/${this.updateInfo.id}`, {
                 store_name: this.updateInfo.store_name,
                 manager_id: this.updateInfo.manager_id,
@@ -73,9 +74,9 @@ export default {
             })
             .then(response => {
                 this.$emit('storeUpdated');
-                this.close();
             })
             .catch(error => {
+                this.close();
                 console.error("There was an error updating the store:", error);
             });
         },

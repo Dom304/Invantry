@@ -97,7 +97,7 @@ export default {
 
     async fetchStores() {
         console.log("fetching stores");
-
+        this.isFetchingStore = true;
         try {
             let response = await axios.get('/refresh', { params: { type: 'stores' } });
             // Update the users data property with the new data
@@ -105,13 +105,13 @@ export default {
         } catch (error) {
             console.error("Error fetching stores:", error);
         } finally {
-            this.isFetchingUsers = false;
+            this.isFetchingStore = false;
         }
     },
 
         async fetchRequests() {
             console.log("fetching requests");
-
+            this.isFetchingRequests = true;
         try {
             let response = await axios.get('/refresh', { params: { type: 'manager_requests' } });
             // Update the users data property with the new data
@@ -119,7 +119,7 @@ export default {
         } catch (error) {
             console.error("Error fetching requests:", error);
         } finally {
-            this.isFetchingUsers = false;
+            this.isFetchingRequests = false;
         }
         },
 }

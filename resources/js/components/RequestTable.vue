@@ -29,14 +29,14 @@
       aria-controls="my-table"></b-pagination>
   </div>
   <ManagerModal :show="showModal" :request="selectedRequest" @close="showModal = false"
-    @user-deleted-successfully="refreshRequests" @request-accepted-successfully="closeModal">
+    @request-accepted-successfully="refreshRequests">
   </ManagerModal>
 
   <Modal :show="showDeleteModal" 
     :type="'request'"
     :entityData="selectedRequest"
     @close="showDeleteModal = false"
-    @deleted-successfully="refreshTable">
+    @deleted-successfully="refreshRequests">
   </Modal>
 </template>
 
@@ -60,7 +60,6 @@ export default {
   emits: ['refreshRequests'],
   props: {
     managerRequests: Array,
-    loggedInUserId: Number,
     isBusy: Boolean,
   },
 
@@ -80,7 +79,6 @@ export default {
 
   data() {
     return {
-      isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
       searchColumn: "User ID", // Set the default search column here
@@ -132,7 +130,7 @@ export default {
       this.showDeleteModal = true;
     },
     refreshRequests() {
-      // Add logic to refresh table, possibly fetching data again
+      this.showModal = false;
       this.$emit("refreshRequests");
     },
   },
