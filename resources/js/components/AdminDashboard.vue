@@ -1,9 +1,9 @@
 <template>
     <div class="left-window-admin-dashboard">
-        <a href="/home" class="back-arrow">
+        <!-- <a href="/home" class="back-arrow">
             <i class="fa-solid fa-angle-left"></i>
             <span>Back</span>
-        </a>
+        </a> -->
         <button
             class="window-btn"
             :class="{ selected: currentwindow === 'user' }"
