@@ -26,20 +26,29 @@
         </div>
         <button class="action-btn continue-btn" @click="login">Continue</button>
         <div class="log-in">DON'T HAVE AN ACCOUNT? <a href="/signUp" class="sign-up-link">SIGN UP</a></div>
+        <Toast />
     </div>
+    
 </template>
 
 
   
 <script>
+import axios from 'axios';
+import Toast from 'primevue/toast';
+
 export default {
     name: 'Login',
+    components: {
+        Toast,
+    },
     data() {
         return {
             email: '',
             password: '',
             passwordFieldType: 'password',
             isPasswordVisible: false,
+            showToast: false,
         };
     },
     computed: {
@@ -64,12 +73,35 @@ export default {
                 password: this.password
             })
             .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
+                if (response.data.success) {
+                    window.location.href = response.data.redirect;
+                } else {
+                    console.error("Login failed");
+                    this.$toast.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: response.data.message || 'Login failed. Please try again.',
+                        life: 60000
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                let errorMessage = error.response && error.response.data && error.response.data.message
+                                ? error.response.data.message
+                                : "An unknown error occurred";
+                this.$toast.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: errorMessage,
+                    life: 60000
                 });
+            });
         }
+
+
+
+
     },
 };
 </script>

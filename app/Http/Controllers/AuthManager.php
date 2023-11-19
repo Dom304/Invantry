@@ -25,22 +25,21 @@ class AuthManager extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $redirectRoute = route('home'); // default redirect
             if (auth()->user()->isBuyer()) {
-                return redirect()->intended(route('home'));
+                $redirectRoute = route('home');
+            } elseif (auth()->user()->isModerator()) {
+                $redirectRoute = route('moderatorDashboard');
+            } elseif (auth()->user()->isManager()) {
+                $redirectRoute = route('managerDashboard');
+            } elseif (auth()->user()->isAdmin()) {
+                $redirectRoute = route('adminDashboard');
             }
-            if (auth()->user()->isModerator()) {
-                return redirect()->intended(route('moderatorDashboard'));
-            }
-            if (auth()->user()->isManager()) {
-                // Change to manager page
-                return redirect()->intended(route('managerDashboard'));
-            }
-            if (auth()->user()->isAdmin()) {
-                return redirect()->intended(route('adminDashboard'));
-            }
+    
+            return response()->json(['success' => true, 'redirect' => $redirectRoute]);
         }
-
-        return redirect(route('home'))->with("error", "Login Failed"); 
+    
+        return response()->json(['success' => false, 'message' => "Login Failed"], 401);
     }
 
 

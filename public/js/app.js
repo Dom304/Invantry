@@ -20328,14 +20328,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var primevue_toast__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! primevue/toast */ "./node_modules/primevue/toast/toast.esm.js");
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Login',
+  components: {
+    Toast: primevue_toast__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       email: '',
       password: '',
       passwordFieldType: 'password',
-      isPasswordVisible: false
+      isPasswordVisible: false,
+      showToast: false
     };
   },
   computed: {
@@ -20354,13 +20362,31 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     login: function login() {
-      axios.post('/', {
+      var _this = this;
+      axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/', {
         email: this.email,
         password: this.password
       }).then(function (response) {
-        console.log(response.data);
+        if (response.data.success) {
+          window.location.href = response.data.redirect;
+        } else {
+          console.error("Login failed");
+          _this.$toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: response.data.message || 'Login failed. Please try again.',
+            life: 60000
+          });
+        }
       })["catch"](function (error) {
         console.error(error);
+        var errorMessage = error.response && error.response.data && error.response.data.message ? error.response.data.message : "An unknown error occurred";
+        _this.$toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: errorMessage,
+          life: 60000
+        });
       });
     }
   }
@@ -21623,6 +21649,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, "SIGN UP")], -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Toast = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toast");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: '/images/Button_backpack_logo.png',
     alt: "Invantry Logo",
@@ -21660,7 +21687,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.login && $options.login.apply($options, arguments);
     })
-  }, "Continue"), _hoisted_15]);
+  }, "Continue"), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast)]);
 }
 
 /***/ }),
@@ -22131,7 +22158,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Toast = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toast");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: '/images/Button_backpack_logo.png',
     alt: "Invantry Logo",
     "class": "mx-auto d-block centered-image"
@@ -22177,7 +22204,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.signUp && $options.signUp.apply($options, arguments);
     })
-  }, "Continue")]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast)]);
+  }, "Continue")]), _hoisted_16]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toast)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

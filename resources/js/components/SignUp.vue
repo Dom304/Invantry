@@ -29,10 +29,8 @@
             <button class="action-btn continue-btn" @click="signUp">Continue</button>
         </div>
         <div class="log-in">ALREADY HAVE AN ACCOUNT? <a href="/" class="log-in-link">LOG IN</a></div>
-
-        <Toast />
-
     </div>
+    <Toast />
 </template>
 
 <script>
