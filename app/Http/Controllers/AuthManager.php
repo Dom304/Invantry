@@ -39,8 +39,10 @@ class AuthManager extends Controller
                 return redirect()->intended(route('adminDashboard'));
             }
         }
-        return redirect(route('login'))->with("error", "Login Failed");
+
+        return redirect(route('home'))->with("error", "Login Failed"); 
     }
+
 
     function signUp()
     {
@@ -60,18 +62,19 @@ class AuthManager extends Controller
         $data['password'] = $request->password;
         $user = User::create($data);
         if (!$user) {
-            return redirect(route('signUp'))->with("error", "Registration Failed");
+            return response()->json(['message' => 'Registration Failed'], 422);
         }
-        return redirect(route('login'))->with("success", "Registration Successful, please log in");
+        return response()->json(['message' => 'Registration Successful, please log in']);
     }
 
     function logout()
     {
         Session::flush();
         Auth::logout();
-        return redirect(route('login'));
-    }
 
+        return redirect(route('login')); 
+    }
+    
     function authenticate_role()
     {
         $userRole = auth()->user()->user_role;
