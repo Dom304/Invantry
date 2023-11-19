@@ -145,18 +145,14 @@ $font-path: "fonts";
 .input-container {
     display: flex;
     flex-direction: column;
-    color: gray;
-    font-family: 'Panton-LightCaps', Arial, sans-serif;
-}
-
- .input-label {
-    margin-top: 5px;
-}
-
-.input-container {
     margin-top: 20px;
-}
+    color: gray;
 
+    .input-label {
+        margin-top: 5px;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
+    }
+}
     #signup-form {
         display: flex;
         flex-direction: column;

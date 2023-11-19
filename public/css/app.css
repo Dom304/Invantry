@@ -22419,16 +22419,12 @@ readers do not read off random characters that represent icons */
 .input-container {
   display: flex;
   flex-direction: column;
-  color: gray;
-  font-family: "Panton-LightCaps", Arial, sans-serif;
-}
-
-.input-label {
-  margin-top: 5px;
-}
-
-.input-container {
   margin-top: 20px;
+  color: gray;
+}
+.input-container .input-label {
+  margin-top: 5px;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
 #signup-form {
