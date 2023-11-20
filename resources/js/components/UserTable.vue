@@ -24,11 +24,17 @@
             aria-controls="my-table"></b-pagination>
     </div>
 
-    <Modal :show="showModal" :userId="selectedUser.id" :username="selectedUser.name" @close="showModal = false"
-        @user-deleted-successfully="refreshUsers">
+    <Modal :show="showModal" 
+        :type="'user'"
+        :entityData="selectedUser" 
+        @close="showModal = false"
+        @deleted-successfully="refreshUsers">
     </Modal>
 
-    <EditModal :show="showEditModal" @close="showEditModal = false" :userData="selectedUser" @user-updated="refreshUsers">
+    <EditModal :show="showEditModal" 
+        @close="showEditModal = false" 
+        :userData="selectedUser" 
+        @updated-successfully="refreshUsers">
     </EditModal>
 </template>
 
@@ -100,8 +106,6 @@ export default {
             return this.filteredUsers.slice(start, end);
         },
     },
-
-    emits: ['updateUser'],
     methods: {
         clickedDeleteUser(user) {
             this.selectedUser = user;

@@ -19901,7 +19901,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: "admin-dashboard",
   props: {
     initialUsers: Array,
-    users: Array,
     initialStores: Array,
     initialRequests: Array,
     loggedInUserId: Number
@@ -20126,7 +20125,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'edit-modal',
-  emits: ['close', 'userUpdated'],
+  emits: ['close', 'updated-successfully'],
   props: {
     show: {
       type: Boolean,
@@ -20167,7 +20166,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
                 email: _this.updateInfo.email,
                 role: _this.updateInfo.role
               }).then(function (response) {
-                _this.$emit('userUpdated');
+                _this.$emit('updated-successfully');
                 _this.close();
               })["catch"](function (error) {
                 console.error("There was an error updating the user:", error);
@@ -20481,7 +20480,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteEnity: function deleteEnity() {
       var _this = this;
-      console.log("clicked");
       axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/delete/".concat(this.type, "/").concat(this.entityData.id), {
         id: this.entityData.id,
         type: this.type
@@ -21051,15 +21049,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_vue_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue-3 */ "./node_modules/bootstrap-vue-3/dist/bootstrap-vue-3.es.js");
 /* harmony import */ var _Modal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.vue */ "./resources/js/components/Modal.vue");
 /* harmony import */ var _EditModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EditModal.vue */ "./resources/js/components/EditModal.vue");
-var _name$emits$props$com;
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_name$emits$props$com = {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'user-table',
   emits: ['refreshUsers'],
   props: {
@@ -21131,20 +21124,21 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       var end = start + this.rowsPerPage;
       return this.filteredUsers.slice(start, end);
     }
-  }
-}, _defineProperty(_name$emits$props$com, "emits", ['updateUser']), _defineProperty(_name$emits$props$com, "methods", {
-  clickedDeleteUser: function clickedDeleteUser(user) {
-    this.selectedUser = user;
-    this.showModal = true;
   },
-  editSelectedUser: function editSelectedUser(user) {
-    this.selectedUser = user;
-    this.showEditModal = true;
-  },
-  refreshUsers: function refreshUsers() {
-    this.$emit('refreshUsers');
+  methods: {
+    clickedDeleteUser: function clickedDeleteUser(user) {
+      this.selectedUser = user;
+      this.showModal = true;
+    },
+    editSelectedUser: function editSelectedUser(user) {
+      this.selectedUser = user;
+      this.showEditModal = true;
+    },
+    refreshUsers: function refreshUsers() {
+      this.$emit('refreshUsers');
+    }
   }
-}), _name$emits$props$com);
+});
 
 /***/ }),
 
@@ -22507,20 +22501,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-controls": "my-table"
   }, null, 8 /* PROPS */, ["modelValue", "total-rows", "per-page"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Modal, {
     show: $data.showModal,
-    userId: $data.selectedUser.id,
-    username: $data.selectedUser.name,
+    type: 'user',
+    entityData: $data.selectedUser,
     onClose: _cache[3] || (_cache[3] = function ($event) {
       return $data.showModal = false;
     }),
-    onUserDeletedSuccessfully: $options.refreshUsers
-  }, null, 8 /* PROPS */, ["show", "userId", "username", "onUserDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
+    onDeletedSuccessfully: $options.refreshUsers
+  }, null, 8 /* PROPS */, ["show", "entityData", "onDeletedSuccessfully"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_EditModal, {
     show: $data.showEditModal,
     onClose: _cache[4] || (_cache[4] = function ($event) {
       return $data.showEditModal = false;
     }),
     userData: $data.selectedUser,
-    onUserUpdated: $options.refreshUsers
-  }, null, 8 /* PROPS */, ["show", "userData", "onUserUpdated"])], 64 /* STABLE_FRAGMENT */);
+    onUpdatedSuccessfully: $options.refreshUsers
+  }, null, 8 /* PROPS */, ["show", "userData", "onUpdatedSuccessfully"])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

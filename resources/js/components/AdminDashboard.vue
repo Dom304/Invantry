@@ -34,8 +34,16 @@
                 ref="userTable"
                 :is-busy="isFetchingUsers"
                 @refresh-users="fetchUsers"></user-table>
-        <store-table v-else-if="currentwindow === 'store'" :stores="stores" :is-busy="isFetchingStore" @refresh-stores="fetchStores"></store-table>
-        <request-table v-else-if="currentwindow === 'request'" :manager-requests="managerRequests" :is-busy="isFetchingRequests" @refresh-requests="fetchRequests"></request-table>
+
+        <store-table v-else-if="currentwindow === 'store'" 
+            :stores="stores" 
+            :is-busy="isFetchingStore" 
+            @refresh-stores="fetchStores"></store-table>
+
+        <request-table v-else-if="currentwindow === 'request'" 
+            :manager-requests="managerRequests" 
+            :is-busy="isFetchingRequests" 
+            @refresh-requests="fetchRequests"></request-table>
     </div>
 </template>
 
@@ -49,7 +57,6 @@ export default {
     name: "admin-dashboard",
     props: {
         initialUsers: Array,
-        users: Array,
         initialStores: Array,
         initialRequests: Array,
         loggedInUserId: Number,

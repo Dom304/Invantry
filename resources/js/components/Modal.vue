@@ -45,7 +45,6 @@ export default {
     },
 
     deleteEnity() {
-      console.log(`clicked`);
       axios.post(`/delete/${this.type}/${this.entityData.id}`, {
         id: this.entityData.id,
         type: this.type,

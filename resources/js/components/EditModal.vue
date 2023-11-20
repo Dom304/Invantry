@@ -38,7 +38,7 @@ import axios from 'axios';
 
 export default {
   name: 'edit-modal',
-  emits: ['close', 'userUpdated'],
+  emits: ['close', 'updated-successfully'],
   props: {
     show: {
       type: Boolean,
@@ -77,7 +77,7 @@ export default {
           role: this.updateInfo.role,
       })
       .then(response => {
-        this.$emit('userUpdated');
+        this.$emit('updated-successfully');
         this.close();
       })
       .catch(error => {
