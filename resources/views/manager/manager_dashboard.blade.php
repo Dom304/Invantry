@@ -128,13 +128,14 @@
     <label for="store_logo">Update Store Picture:</label>
     <input type="file" id="store_logo" name="store_logo" accept="image/*">
 
-    <button type="submit">Update Store</button>
+    <button type="submit">Update Store Details</button>
 </form>
 
     <h3>Items in the Store:</h3>
     <table border="1">
         <thead>
             <tr>
+
                 <th>Item Name</th>
                 <th>Description</th>
                 <th>Quantity</th>
@@ -152,20 +153,29 @@
                     <td>${{ $item->item_price }}</td>
                     <td>${{ $item->item_logo }}</td>
                     <td>
+
+                    <div class="button-group">
+
                     <form action="{{ route('editItem', ['store' => $store->id, 'item' => $item->id]) }}" method="get">
                         @csrf
-                        <button type="submit">Edit</button>
+                        <button type="submit" class="edit-btn">Edit</button>
                     </form>
                     <form action="{{ route('deleteItem', ['store' => $store->id, 'item' => $item->id]) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                     </form>
+
+                    </div>
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <h3>Add Item to the Store:</h3>
+
 
     <form action="{{ route('addItem', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf

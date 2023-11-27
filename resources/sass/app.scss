@@ -1246,3 +1246,41 @@ $font-path: "fonts";
     background-color: #0056b3; /* Darker blue on hover */
 }
 
+/* Edit Button */
+.container .edit-btn {
+
+    padding: 5px 10px;
+    background-color: grey; /* Grey background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .edit-btn:hover {
+    background-color: darkgray; /* Red background on hover */
+}
+
+/* Delete Button */
+.container .delete-btn {
+    margin-bottom: 20px;
+    margin-left: 3px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: rgb(159, 5, 5); /* Dark red background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .delete-btn:hover {
+    background-color: red; /* Light red background on hover */
+}
+
+/* Button Group Style */
+.button-group {
+    display: flex; /* Aligns children (forms) in a row */
+    justify-content: space-between; /* Space between Edit and Delete buttons */
+}
+
+.action-form {
+    margin: 0; /* Removes default margin from forms */
+    display: inline; /* Inline display for compact alignment */
+}
