@@ -47,27 +47,32 @@ class StoreController extends Controller
     }
 
     public function updateStore(Request $request, Store $store)
-    {
-        $request->validate([
-            'store_name' => 'required|string|max:255',
-            'manager_id' => 'required|exists:users,id|exists:users,id,role,manager',
-            'store_description' => 'required|string',
-            'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        ]);
+{
+    $request->validate([
+        'store_name' => 'required|string|max:255',
+        'manager_id' => 'required|exists:users,id,role,manager',
+        'store_description' => 'required|string',
+        'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
 
-        $store->update([
-            'store_name' => $request->input('store_name'),
-            'manager_id' => $request->input('manager_id'),
-            'store_description' => $request->input('store_description'),
-        ]);
+    $store = Store::findOrFail($store->id);
+    
+    $data = [
+        'store_name' => $request->input('store_name'),
+        'manager_id' => $request->input('manager_id'),
+        'store_description' => $request->input('store_description'),
+    ];
 
-        if ($request->hasFile('store_logo')) {
-            $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
-            $store->update(['store_logo' => $storeLogoPath]);
-        }
-
-        return response()->json(['message' => 'Store updated successfully']);
+    if ($request->hasFile('store_logo')) {
+        $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
+        $data['store_logo'] = $storeLogoPath;
     }
+
+
+    $store->update($data);
+
+    return response()->json(['message' => 'Store updated successfully']);
+}
 
     public function addItem(Request $request, Store $store)
     {
@@ -89,7 +94,7 @@ class StoreController extends Controller
             'item_logo' => $itemLogoPath,
         ]);
 
-        return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');
+        return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');  
     }
 
     public function edit($store_id, $item_id)

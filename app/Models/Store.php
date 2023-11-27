@@ -12,8 +12,8 @@ class Store extends Model
     protected $table = 'store'; 
 
     protected $fillable = [
-        'manager_id',
         'store_name',
+        'manager_id',
         'store_description',
         'store_logo',
     ];
