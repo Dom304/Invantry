@@ -100,7 +100,7 @@
 
 <div class="top-toolbar">
         <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
-    <h1 class="app-name">Inventory</h1>
+    <h1 class="app-name">Invantry : Item Manager</h1>
     <div class="search-container">
         <h2>Store: {{ $store->store_name }}</h2>
     </div>
