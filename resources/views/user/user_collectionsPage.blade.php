@@ -242,7 +242,7 @@ function setSearchValueAndFilterRight(itemName) {
         @foreach($items as $item)
     <div class="colitem-card">
         <div class="store-logo">
-            <img src="{{$item->item_logo}}" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Store Logo">
         </div>
         <div class="store-info">
             <span class="colitem-name">{{ $item->item_name }}</span>
@@ -270,7 +270,7 @@ function setSearchValueAndFilterRight(itemName) {
     @foreach($allItems as $item)
     <div class="item-card2">
         <div class="store-logo">
-            <img src="{{$item->item_logo}}" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Store Logo">
         </div>
         <div class="item-info2">
             <span class="item-name2">{{ $item->item_name }}</span>
