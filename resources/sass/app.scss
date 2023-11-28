@@ -1327,3 +1327,107 @@ $font-path: "fonts";
         align-items: flex-start;
     }
 }
+
+
+
+// ============================= //
+//       MANAGER Page window     //
+// ============================= //
+
+.container {
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding around the contents */
+    background-color: #f8f8f8; /* Light grey background */
+    border: 1px solid #ddd; /* Border for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.container h1 {
+    color: #333; /* Dark text color for the heading */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.container img {
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add spacing below */
+}
+
+.container form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 10px; /* Consistent spacing between form elements */
+}
+
+.container label {
+    font-weight: bold; /* Make labels bold */
+}
+
+.container input[type="text"],
+.container textarea,
+.container input[type="file"] {
+    width: 100%; /* Full width inputs */
+    padding: 8px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.container textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.container button {
+    width: auto;
+    padding: 10px 15px;
+    background-color: #007bff; /* Blue background for the button */
+    color: white; /* White text for the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Cursor change to indicate button */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Edit Button */
+.container .edit-btn {
+
+    padding: 5px 10px;
+    background-color: grey; /* Grey background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .edit-btn:hover {
+    background-color: darkgray; /* Red background on hover */
+}
+
+/* Delete Button */
+.container .delete-btn {
+    margin-bottom: 20px;
+    margin-left: 3px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: rgb(159, 5, 5); /* Dark red background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .delete-btn:hover {
+    background-color: red; /* Light red background on hover */
+}
+
+/* Button Group Style */
+.button-group {
+    display: flex; /* Aligns children (forms) in a row */
+    justify-content: space-between; /* Space between Edit and Delete buttons */
+}
+
+.action-form {
+    margin: 0; /* Removes default margin from forms */
+    display: inline; /* Inline display for compact alignment */
+}

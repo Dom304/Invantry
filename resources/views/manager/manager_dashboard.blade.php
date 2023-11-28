@@ -2,7 +2,7 @@
 
 @section('content')
 
-<style>
+<!-- <style>
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f8f9fa;
@@ -96,11 +96,11 @@
     button:hover {
         background-color: #0056b3;
     }
-</style>
+</style> -->
 
-<!-- <div class="top-toolbar">
+<div class="top-toolbar">
         <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
-    <h1 class="app-name">Inventory</h1>
+    <h1 class="app-name">Invantry : Item Manager</h1>
     <div class="search-container">
         <h2>Store: {{ $store->store_name }}</h2>
     </div>
@@ -110,31 +110,32 @@
             <button type="submit">Logout</button>
         </form>
     </div>
-</div> -->
+</div>
 
 <div class="container">
     <h1>Welcome, {{ $user->name }}!</h1>
-    <img src="{{ asset('storage/' . $store->store_logo) }}" alt="Item Logo">
+    <img src="{{ asset('storage/' . $store->store_logo) }}" alt="Item Logo" style="max-width: 200px; max-height: 200px;">
     <form action="{{ route('updateStore', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
     <label for="store_name">Store Name:</label>
-    <input type="text" id="store_name" value="{{ $store->store_name }}" required>
+    <input type="text" id="store_name" name="store_name" value="{{ $store->store_name }}" required>
 
     <label for="store_description">Store Description:</label>
-    <textarea id="store_description" rows="3" required>{{ $store->store_description }}</textarea>
+    <textarea id="store_description" name="store_description" rows="3" required>{{ $store->store_description }}</textarea>
 
     <label for="store_logo">Update Store Picture:</label>
-    <input type="file" id="store_logo" accept="image/*">
+    <input type="file" id="store_logo" name="store_logo" accept="image/*">
 
-    <button type="submit">Update Store</button>
+    <button type="submit">Update Store Details</button>
 </form>
 
     <h3>Items in the Store:</h3>
     <table border="1">
         <thead>
             <tr>
+
                 <th>Item Name</th>
                 <th>Description</th>
                 <th>Quantity</th>
@@ -152,33 +153,46 @@
                     <td>${{ $item->item_price }}</td>
                     <td>${{ $item->item_logo }}</td>
                     <td>
+
+                    <div class="button-group">
+
+                    <form action="{{ route('editItem', ['store' => $store->id, 'item' => $item->id]) }}" method="get">
+                        @csrf
+                        <button type="submit" class="edit-btn">Edit</button>
+                    </form>
                     <form action="{{ route('deleteItem', ['store' => $store->id, 'item' => $item->id]) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                     </form>
+
+                    </div>
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
+    <h3>Add Item to the Store:</h3>
+
+
     <form action="{{ route('addItem', ['store' => $store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <label for="item_name">Item Name:</label>
-        <input type="text" id="item_name" required>
+        <input type="text" id="item_name" name="item_name" required>
 
         <label for="item_description">Item Description:</label>
-        <textarea id="item_description" rows="3" required></textarea>
+        <textarea id="item_description"  name="item_description" rows="3" required></textarea>
 
         <label for="item_quantity">Quantity:</label>
-        <input type="number" id="item_quantity" required>
+        <input type="number" id="item_quantity" name="item_quantity" required>
 
         <label for="item_price">Price:</label>
-        <input type="number" id="item_price" step="0.01" required>
+        <input type="number" id="item_price" name="item_price" step="0.01" required>
 
         <label for="item_logo">Item Logo</label>
-        <input type="file" name="item_logo" accept="image/*" required>
+        <input type="file" name="item_logo" name="item_logo" accept="image/*" required>
 
         <button type="submit">Add Item</button>
     </form>

@@ -47,27 +47,32 @@ class StoreController extends Controller
     }
 
     public function updateStore(Request $request, Store $store)
-    {
-        $request->validate([
-            'store_name' => 'required|string|max:255',
-            'manager_id' => 'required|exists:users,id|exists:users,id,role,manager',
-            'store_description' => 'required|string',
-            'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        ]);
+{
+    $request->validate([
+        'store_name' => 'required|string|max:255',
+        'manager_id' => 'required|exists:users,id,role,manager',
+        'store_description' => 'required|string',
+        'store_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
 
-        $store->update([
-            'store_name' => $request->input('store_name'),
-            'manager_id' => $request->input('manager_id'),
-            'store_description' => $request->input('store_description'),
-        ]);
+    $store = Store::findOrFail($store->id);
+    
+    $data = [
+        'store_name' => $request->input('store_name'),
+        'manager_id' => $request->input('manager_id'),
+        'store_description' => $request->input('store_description'),
+    ];
 
-        if ($request->hasFile('store_logo')) {
-            $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
-            $store->update(['store_logo' => $storeLogoPath]);
-        }
-
-        return response()->json(['message' => 'Store updated successfully']);
+    if ($request->hasFile('store_logo')) {
+        $storeLogoPath = $request->file('store_logo')->store('store_logos', 'public');
+        $data['store_logo'] = $storeLogoPath;
     }
+
+
+    $store->update($data);
+
+    return response()->json(['message' => 'Store updated successfully']);
+}
 
     public function addItem(Request $request, Store $store)
     {
@@ -89,8 +94,40 @@ class StoreController extends Controller
             'item_logo' => $itemLogoPath,
         ]);
 
-        return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');
+        return redirect()->route('managerDashboard')->with('success', 'Item added successfully!');  
     }
+
+    public function edit($store_id, $item_id)
+    {
+    $store = Store::findOrFail($store_id);
+    $item = Item::findOrFail($item_id);
+
+    return view('user.user_edit-item', ['store' => $store, 'item' => $item]);
+    }
+
+    public function update(Request $request, Store $store, Item $item)
+{
+    $request->validate([
+        'item_name' => 'required|string|max:255',
+        'item_description' => 'required|string',
+        'item_quantity' => 'required|integer|min:1',
+        'item_price' => 'required|numeric|min:0.01',
+        'item_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+    if ($request->hasFile('item_logo')) {
+        $itemLogoPath = $request->file('item_logo')->store('item_logos', 'public');
+        $item->update(['item_logo' => $itemLogoPath]);
+    }
+
+    $item->update([
+        'item_name' => $request->input('item_name'),
+        'item_description' => $request->input('item_description'),
+        'item_quantity' => $request->input('item_quantity'),
+        'item_price' => $request->input('item_price'),
+    ]);
+
+    return redirect()->route('managerDashboard')->with('success', 'Item updated successfully');
+}
 
     public function deleteUser($id)
     {
