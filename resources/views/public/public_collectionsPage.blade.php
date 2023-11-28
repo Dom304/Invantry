@@ -3,20 +3,7 @@
 @section('content')
 
 <script>
-    function filterCollections() {
-        const searchInput = document.getElementById('collection-search-bar-input').value.toLowerCase();
-        const collectionItems = document.querySelectorAll('.collection-btn');
-
-        collectionItems.forEach(item => {
-            const collectionName = item.getAttribute('data-collection-name').toLowerCase();
-            if (collectionName.includes(searchInput)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
+    
     function toggleActiveState(buttonId, viewName) {
         // Remove active class from all buttons
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
@@ -42,20 +29,6 @@
             // Optional: handle other cases or do nothing
         }
     }
-
-    function proceedToCheckout() {
-
-    window.location.href = '/checkout'
-    axios.post('/checkout')
-        .then(function (response) {
-            // handle success
-            console.log(response);
-        })
-        .catch(function (error) {
-            // handle error
-            console.error(error);
-        });
-}
 </script>
 
 <div class="top-toolbar">
@@ -145,42 +118,27 @@
 
     </div>
 
-    <div class="cart-middle-window">
-        <div class="cart-window" role="region" aria-label="Shopping Cart">
+    <div class="middle-window">
+    <h1>Collections</h1>
 
-    
-    <!-- Sample cart product #1 -->
-    @foreach($cartItems as $cartItem)
-    <div class="cart-product">
-        <div class="product-details">
-            <div class="product-name">{{ $cartItem->item->item_name }}</div>
-            <div class="product-description">{{ $cartItem->item->item_description }}</div>
-        </div>
-        <div class="product-quantity">Quantity: {{ $cartItem->quantity }}</div>
-        <div class="product-price">${{ number_format($cartItem->item->item_price, 2) }} each</div>
-        <form method="POST" action="{{ route('cart.remove', $cartItem->id) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="fas fa-trash-alt trash-icon" aria-label="Remove product" role="button" tabindex="0"></button>
-        </form>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Collection Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($allCollections as $collection)
+            <tr>
+            <td>
+                <a href="{{ route('collection', ['collName' => $collection->collection_name]) }}">
+                    {{ $collection->collection_name }}
+                </a>
+            </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
     </div>
-    @endforeach
-
-
-    <!-- Cart Total -->
-    @php
-    $totalPrice = $cartItems->sum(function ($cartItem) {
-        return $cartItem->quantity * $cartItem->item->item_price;
-    });
-    @endphp 
-
-    <div class="cart-total"> ${{ number_format($totalPrice, 2) }}</div>
-            <!-- Proceed to Checkout Button -->
-                <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
-            </div>
-    </div>
-
-    <div class="right-window"></div>
 </div>
-
 @endsection

@@ -12,9 +12,9 @@ class CollectionController extends Controller
     public function index()
     {
     $user = Auth::user();
-    $collections = Collection::all();
-
-    return view('user.user_viewStoresPage', compact('collections', 'user'));
+    $collections = $user->collections;
+    $allCollections = Collection::whereNotIn('id', $collections->pluck('id'))->get();
+    return view('public.public_collectionsPage', compact('collections', 'user', 'allCollections'));
     }
     
     public function createCollection(Request $request)

@@ -69,30 +69,34 @@ function setSearchValueAndFilterRight(itemName) {
             }
         });
     }
-
+    
     function toggleActiveState(buttonId, viewName) {
         // Remove active class from all buttons
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
-        
+
         // Add active class to the clicked button
         document.getElementById(buttonId).classList.add('active');
-        
+
         // Fetch and display the relevant view
         // Check the buttonId and take action accordingly
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
-            // Do something for manager-btn
+            window.location.href = '/ManagerDashboard';
         } else if (buttonId === 'admin-btn') {
-            // Do something for admin-btn
+            window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
-            // Do something for mod-btn
+            window.location.href = '/ModeratorDashboard';
+        } else if (buttonId === 'coll-btn') {
+            window.location.href = '/Public-collections';
         } else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
         } else {
             // Optional: handle other cases or do nothing
         }
     }
+
+
 
     function confirmDeletion(collectionId) {
         console.log(collectionId);
@@ -176,6 +180,8 @@ function setSearchValueAndFilterRight(itemName) {
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
 
+        <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button>
+        
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
 

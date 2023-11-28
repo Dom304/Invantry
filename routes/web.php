@@ -28,7 +28,7 @@ Route::get('/store/{storeName}', [ItemController::class, 'index'])->name('store'
 Route::post('/store/{storeName}', [CartController::class, 'insert'])->name('cart.add');
 //for inserting into collection from store page
 Route::post('/store/{storeName}/add-to-collection', [CartController::class, 'insertCol'])->name('store.collection.add');
-
+Route::get('/Public-collections', [CollectionController::class, 'index'])->name('public.collectionsPage');
 
 //for inserting into cart from right window
 Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');

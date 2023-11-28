@@ -51,6 +51,8 @@
             window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
             window.location.href = '/ModeratorDashboard';
+        } else if (buttonId === 'coll-btn') {
+            window.location.href = '/Public-collections';
         } else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
         } else {
@@ -103,6 +105,9 @@
         @if(auth()->user()->role == 'moderator')
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
+
+        <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button>
+    
 
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
