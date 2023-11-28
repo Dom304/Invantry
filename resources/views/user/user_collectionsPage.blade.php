@@ -248,7 +248,7 @@ function setSearchValueAndFilterRight(itemName) {
         <!-- <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button> -->
 
         @if (!$user->collections->contains('collection_name', $collName))
-    <form action="{{ route('collection.addUser', ['collName' => $collName]) }}" method="POST">
+    <form action="{{ route('collection.addUser', ['collName' => $collName, 'id' => $collection->id]) }}" method="POST">
         @csrf
         <button type="submit" class="window-btn">Add Collection</button>
     </form>
