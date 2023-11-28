@@ -23173,6 +23173,7 @@ readers do not read off random characters that represent icons */
 }
 
 .right-window2 {
+  display: none;
   width: 700px;
   height: calc(100vh - 4rem);
   overflow-y: scroll;
