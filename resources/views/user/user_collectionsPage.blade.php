@@ -48,6 +48,10 @@ function setSearchValueAndFilterRight(itemName) {
     // Set the search value in the right window search box
     document.getElementById('right-search-bar').value = itemName;
 
+    // Show the right window
+    const rightWindow = document.querySelector('.right-window2');
+    rightWindow.style.display = 'block';
+
     // Trigger the filtering for the right window
     filterItemsRight();
 }
@@ -218,7 +222,7 @@ function setSearchValueAndFilterRight(itemName) {
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
         <div style="margin-top: 20px; margin-bottom: 20px;">
-            <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">
+            <a href="/collection/{{ $col->collection_name }}/{{ $col->id }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">
                 {{ $col->collection_name }}
             </a>
             <!-- Styling the button to look like small red text -->
@@ -243,7 +247,12 @@ function setSearchValueAndFilterRight(itemName) {
         <h2>{{ $collName }}</h2>
         <!-- <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button> -->
 
-
+        @if (!$user->collections->contains('collection_name', $collName))
+    <form action="{{ route('collection.addUser', ['collName' => $collName]) }}" method="POST">
+        @csrf
+        <button type="submit" class="window-btn">Add Collection</button>
+    </form>
+        @endif
 
         @foreach($items as $item)
     <div class="colitem-card">
@@ -256,19 +265,18 @@ function setSearchValueAndFilterRight(itemName) {
         </div>
         <!-- Added a data attribute to the button for easy identification -->
         <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search</button>
-        <form method="post" action="{{ route('collection.item.delete', ['collName' => $collName, 'itemId' => $item->id]) }}">
-            @csrf
-            @method('DELETE')
-            
-            <button type="submit" button class="search-colitem-btn">Delete</button>
-        </form>
+        <form method="post" action="{{ route('collection.delete', ['id' => $collection->id]) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="search-colitem-btn">Delete Collection</button>
+</form>
     </div>
 @endforeach
     </div>
         
        
 
-    <div class="right-window2">
+    <div class="right-window2" style="display: none">
     <div class="search-container2">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
     </div>
@@ -288,14 +296,14 @@ function setSearchValueAndFilterRight(itemName) {
 
         <div class = "test1">
 
-        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
+        <form method="POST" action="{{ route('collection', ['collName' => $collName, 'id' => $id]) }}">
             @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
             <input type="hidden" name="quantity" value="1">
             <button type="submit" class="add-to-cart-btn">Add to Cart</button>
         </form>
 
-        <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
+        <form method="POST" action="{{ route('collection.add', ['collName' => $collName, 'id' => $id]) }}">
     @csrf
     <input type="hidden" name="item_id" value="{{ $item->id }}">
     <select name="collection_id" required>

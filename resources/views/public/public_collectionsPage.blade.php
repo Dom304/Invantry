@@ -110,7 +110,7 @@
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <a href="/collection/{{ $col->collection_name }}/{{ $col->id }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
         <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
@@ -131,7 +131,7 @@
         @foreach($allCollections as $collection)
             <tr>
             <td>
-                <a href="{{ route('collection', ['collName' => $collection->collection_name]) }}">
+                <a href="{{ route('collection', ['collName' => $collection->collection_name, 'id' => $collection->id]) }}">
                     {{ $collection->collection_name }}
                 </a>
             </td>

@@ -31,11 +31,12 @@ Route::post('/store/{storeName}/add-to-collection', [CartController::class, 'ins
 Route::get('/Public-collections', [CollectionController::class, 'index'])->name('public.collectionsPage');
 
 //for inserting into cart from right window
-Route::get('/collection/{collName}', [CollectionItemController::class, 'index'])->name('collection');
-Route::delete('/collection/{collName}/delete/{itemId}', [CollectionItemController::class, 'destroy'])->name('collection.item.delete');
-Route::post('/collection/{collName}', [CartController::class, 'insertRight'])->name('cart.add');
+Route::get('/collection/{collName}/{id}', [CollectionItemController::class, 'index'])->name('collection');
+Route::delete('/collection/{collName}/{id}/delete/{itemId}', [CollectionItemController::class, 'destroy'])->name('collection.item.delete');
+Route::post('/collection/{collName}/{id}', [CartController::class, 'insertRight'])->name('cart.add');
 //for inserting into collection from right window
-Route::post('/collection/{collName}/add-to-collection', [CartController::class, 'insertRightCol'])->name('collection.add');
+Route::post('/collection/{collName}/{id}/add-to-collection', [CartController::class, 'insertRightCol'])->name('collection.add');
+Route::post('/collection/{collName}/{id}/addUser', [CollectionItemController::class, 'addUser'])->name('collection.addUser');
 
 
 Route::get('/', [AuthManager::class, 'login'])->name('login');

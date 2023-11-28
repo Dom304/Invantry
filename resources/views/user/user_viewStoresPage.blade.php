@@ -144,7 +144,7 @@
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <a href="/collection/{{ $col->collection_name }}/{{ $col->id }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
         @if(auth()->user()->role == 'buyer')

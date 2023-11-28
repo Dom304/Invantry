@@ -13,7 +13,7 @@ class CollectionController extends Controller
     {
     $user = Auth::user();
     $collections = $user->collections;
-    $allCollections = Collection::whereNotIn('id', $collections->pluck('id'))->get();
+    $allCollections = Collection::whereNotIn('collection_name', $collections->pluck('collection_name'))->get();
     return view('public.public_collectionsPage', compact('collections', 'user', 'allCollections'));
     }
     

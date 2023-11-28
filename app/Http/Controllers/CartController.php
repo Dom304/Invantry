@@ -48,7 +48,7 @@ class CartController extends Controller
     }
 
     //for inserting item to cart from right window
-    public function insertRight(Request $request, $collName)
+    public function insertRight(Request $request, $collName, $id)
     {
         $itemData = $request->all();
         $collections = Collection::where('collection_name', $collName)->firstOrFail();
@@ -71,7 +71,7 @@ class CartController extends Controller
             ]);
         }
     
-        return redirect()->route('collection', ['collName' => $collName])
+        return redirect()->route('collection', ['collName' => $collName, 'id' => $collections->id])
             ->with('success', 'Item added to cart successfully');
     }
 
@@ -100,10 +100,11 @@ public function insertCol(Request $request, $storeName)
 }
 
     //for inserting item to collection from right window
-    public function insertRightCol(Request $request, $collName)
+    public function insertRightCol(Request $request, $collName, $id)
 {
     $itemData = $request->all();
     $selectedCollectionId = $request->input('collection_id');
+    $collections = Collection::where('collection_name', $collName)->firstOrFail();
 
     // Check if the item already exists in the selected collection
     $existingItemInCollection = CollectionItem::where('collection_id', $selectedCollectionId)
@@ -118,7 +119,7 @@ public function insertCol(Request $request, $storeName)
         ]);
     }
 
-    return redirect()->route('collection', ['collName' => $collName])
+    return redirect()->route('collection', ['collName' => $collName, 'id' => $collections->id])
         ->with('success', 'Item added to collection successfully');
 }
     
