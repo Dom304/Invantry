@@ -22323,6 +22323,7 @@ readers do not read off random characters that represent icons */
 }
 
 .app-name,
+.app-login-in-name,
 .description,
 .welcome-back,
 .sign-up {
@@ -22330,23 +22331,52 @@ readers do not read off random characters that represent icons */
   font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
-.app-name {
+.app-login-in-name {
+  text-align: center;
   font-size: 2em;
   font-weight: bold;
+  margin-top: -60px;
+  font-family: "Recharge", Arial, sans-serif;
 }
 
 .description {
-  font-size: 0.5em;
+  font-size: 10px;
   margin-top: 10px;
   color: gray;
 }
 
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .welcome-back {
+  text-align: center;
   font-size: 0.85em;
   font-weight: bold;
   margin-top: 60px;
   cursor: default;
   color: gray;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
+}
+
+.logo-app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in {
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-top: 30px;
+  cursor: default;
+  color: gray;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
 .sign-up {
@@ -22386,24 +22416,141 @@ readers do not read off random characters that represent icons */
   background-color: #0056b3;
 }
 
-.username-input,
-.password-input {
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  color: gray;
+}
+.input-container .input-label {
+  margin-top: 5px;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
+}
+
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.image-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-image {
+  margin-top: -10%;
+  transform: scale(0.33);
+}
+
+.app-name {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: -60px;
+  font-family: "Recharge", Arial, sans-serif;
+}
+
+.create-acc {
+  text-align: center;
+  font-size: 0.85em;
+  font-weight: bold;
+  margin-top: 60px;
+  cursor: default;
+  color: gray;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
+}
+
+.log-in {
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-top: 30px;
+  cursor: default;
+  color: gray;
+  font-family: "Panton-LightCaps", Arial, sans-serif;
+}
+
+.log-in-link {
+  color: #007BFF;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.log-in-link:hover {
+  text-decoration: underline;
+}
+
+.action-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 240px;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background-color: #0056b3;
+}
+
+.continue-btn {
+  margin-top: 40px;
+}
+
+.login-btn {
+  margin-top: 25px;
+}
+
+.username-input, .password-input {
   padding: 20px 20px;
   border-radius: 4px;
   border: 1px solid #ddd;
   font-size: 1em;
   width: 399px;
 }
+
+.password-input {
+  padding-right: 40px;
+}
+
 .username-input::-moz-placeholder, .password-input::-moz-placeholder {
   color: #aaa;
 }
-.username-input::placeholder,
-.password-input::placeholder {
+
+.username-input::placeholder, .password-input::placeholder {
   color: #aaa;
 }
 
-.username-input {
-  margin-top: 60px;
+.password-container {
+  position: relative;
+  margin-top: 5px;
+}
+
+.p-toast-message-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.continue-btn {
+  margin-top: 40px;
+}
+
+.username-input, .password-input {
+  padding: 20px 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1em;
+  width: 399px;
 }
 
 .password-input {
@@ -22422,7 +22569,10 @@ readers do not read off random characters that represent icons */
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 1.2em;
-  background-color: darkgrey;
+}
+.password-icon img {
+  width: 25px;
+  height: 25px;
 }
 
 .page-content {
@@ -22437,6 +22587,20 @@ readers do not read off random characters that represent icons */
   padding: 10px 30px;
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.top-toolbar .log-out-btn {
+  margin-left: 30px;
+  background-color: rgb(159, 5, 5); /* Dark red background */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.top-toolbar .log-out-btn:hover {
+  background-color: red; /* Light red background on hover */
 }
 .top-toolbar .logo,
 .top-toolbar .app-name,
@@ -22453,7 +22617,6 @@ readers do not read off random characters that represent icons */
 }
 .top-toolbar .app-name {
   margin-top: 10px;
-  margin-right: 74px;
   margin-left: 0%;
   font-size: 1.5em;
   font-family: "Recharge", Arial, sans-serif;
@@ -23391,4 +23554,58 @@ readers do not read off random characters that represent icons */
 .action-form {
   margin: 0; /* Removes default margin from forms */
   display: inline; /* Inline display for compact alignment */
+}
+
+.edit-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-container form {
+  display: grid;
+  grid-gap: 16px;
+}
+
+.edit-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-container input[type=text],
+.edit-container input[type=number],
+.edit-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.edit-container input[type=file] {
+  border: 1px solid #ddd;
+  display: block;
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.edit-container button {
+  background-color: #0cb300;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-container button:hover {
+  background-color: #1b9400;
 }
