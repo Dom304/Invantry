@@ -48,9 +48,14 @@ function setSearchValueAndFilterRight(itemName) {
     // Set the search value in the right window search box
     document.getElementById('right-search-bar').value = itemName;
 
+    // Show the right window
+    const rightWindow = document.querySelector('.right-window2');
+    rightWindow.style.display = 'block';
+
     // Trigger the filtering for the right window
     filterItemsRight();
 }
+
 
 
 
@@ -180,7 +185,7 @@ function setSearchValueAndFilterRight(itemName) {
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
 
-        <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button>
+        <!-- <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button> -->
         
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
@@ -268,7 +273,7 @@ function setSearchValueAndFilterRight(itemName) {
         
        
 
-    <div class="right-window2">
+    <div class="right-window2" style="display: none">
     <div class="search-container2">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
     </div>
