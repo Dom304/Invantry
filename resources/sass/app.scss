@@ -699,6 +699,10 @@ border-radius: 4px;
     }
 
     .item-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+            
             
         .item-name {
         font-size: 14px;
@@ -718,6 +722,10 @@ border-radius: 4px;
     .test{
         
         select {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
             width: 8.6rem;
             font-size: 12px;
             color: rgb(42, 42, 42);
@@ -821,6 +829,10 @@ border-radius: 4px;
         margin-left: 150px;
 
         select {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
             width: 8.6rem;
             font-size: 12px;
             color: rgb(42, 42, 42);
@@ -1505,4 +1517,75 @@ border-radius: 4px;
 
 .edit-container button:hover {
     background-color: #1b9400;
+}
+
+
+// ================================== //
+//       MANAGER request window     //
+// ================================== //
+.req-middle-window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+
+    form {
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 4px;
+        background: #fff;
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            &:focus {
+                outline: none;
+                border-color: #6200ee;
+                box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.2);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button[type="submit"] {
+            background-color: #6200ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #5f00db;
+            }
+        }
+    }
 }

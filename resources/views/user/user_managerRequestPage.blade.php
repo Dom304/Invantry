@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<div class="cart-middle-window">
+<div class="req-middle-window">
     <form method="POST" action="{{ route('manager.request.store') }}">
         @csrf
 
@@ -37,7 +37,10 @@
             <textarea name="description" id="description" required></textarea>
         </div>
         
-        <button type="submit">Submit Request</button>
+        <div class="button-container">
+            <button type="submit">Submit Request</button>
+        </div>
+
     </form>
 </div>
 

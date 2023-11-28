@@ -22915,6 +22915,11 @@ readers do not read off random characters that represent icons */
   transform: translateY(-0.25rem);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.item-card .item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .item-card .item-info .item-name {
   font-size: 14px;
   font-weight: 600;
@@ -22927,6 +22932,9 @@ readers do not read off random characters that represent icons */
   font-weight: bold;
 }
 .item-card .test select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 8.6rem;
   font-size: 12px;
   color: rgb(42, 42, 42);
@@ -23008,6 +23016,9 @@ readers do not read off random characters that represent icons */
   margin-left: 150px;
 }
 .item-card2 .test1 select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 8.6rem;
   font-size: 12px;
   color: rgb(42, 42, 42);
@@ -23608,4 +23619,64 @@ readers do not read off random characters that represent icons */
 
 .edit-container button:hover {
   background-color: #1b9400;
+}
+
+.req-middle-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+}
+.req-middle-window form {
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 4px;
+  background: #fff;
+}
+.req-middle-window form div {
+  margin-bottom: 20px;
+}
+.req-middle-window form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.req-middle-window form input[type=text],
+.req-middle-window form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.req-middle-window form input[type=text]:focus,
+.req-middle-window form textarea:focus {
+  outline: none;
+  border-color: #6200ee;
+  box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.2);
+}
+.req-middle-window form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.req-middle-window form .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.req-middle-window form button[type=submit] {
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.req-middle-window form button[type=submit]:hover {
+  background-color: #5f00db;
 }
