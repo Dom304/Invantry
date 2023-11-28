@@ -100,24 +100,34 @@ class CollectionItemController extends Controller
 public function addUser($collName, $id)
 {
     $user = Auth::user();
-    $collection = Collection::where('collection_name', $collName)->first();
+    $sourceCollection = Collection::where('collection_name', $collName)->first();
 
-    if (!$collection) {
-
+    if (!$sourceCollection) {
+        // Handle error or redirect as needed
     }
 
+    // Check if the user is not already associated with the target collection
     if (!$user->collections->contains('collection_name', $collName)) {
-        $collectionConn = new Collection();
-        $collectionConn->user_id = $user->id;
-        $collectionConn->collection_name = $collName;
-        $collectionConn->save();
+        $targetCollection = new Collection();
+        $targetCollection->user_id = $user->id;
+        $targetCollection->collection_name = $collName;
+        $targetCollection->save();
 
-        return redirect()->route('collection', ['collName' => $collName, 'id' => $collection->id])
+        // Copy items from source collection to target collection
+        foreach ($sourceCollection->items as $item) {
+            $collectionItem = new CollectionItem();
+            $collectionItem->collection_id = $targetCollection->id;
+            $collectionItem->item_id = $item->id;
+            $collectionItem->save();
+        }
+
+        return redirect()->route('collection', ['collName' => $collName, 'id' => $targetCollection->id])
             ->with('success', 'Collection added to user successfully');
     }
 
-    return redirect()->route('collection', ['collName' => $collName, 'id' => $collection->id])
+    return redirect()->route('collection', ['collName' => $collName, 'id' => $targetCollection->id])
         ->with('error', 'User is already associated with the collection');
 }
+
 
 }

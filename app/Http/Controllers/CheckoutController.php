@@ -14,7 +14,6 @@ class CheckoutController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $collections = Collection::all();
         $stores = Store::all();
         $collections = $user->collections;
         $purchasedItems = Cart::with('item')->where('user_id', $user->id)->get();
