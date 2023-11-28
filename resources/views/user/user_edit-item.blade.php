@@ -1,3 +1,22 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="top-toolbar">
+        <img src="/images/Button_backpack_logo.png" alt="Logo" class="logo" />
+    <h1 class="app-name">Invantry : Item Manager</h1>
+    <div class="search-container">
+        <h2>Store: {{ $store->store_name }}</h2>
+    </div>
+    <div>
+        <form method="GET" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="log-out-btn">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="edit-container">
 <form action="{{ route('updateItem', ['store' => $store->id, 'item' => $item->id]) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -19,3 +38,7 @@
 
     <button type="submit">Update Item</button>
 </form>
+</div>
+
+
+@endsection

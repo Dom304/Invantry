@@ -22588,6 +22588,20 @@ readers do not read off random characters that represent icons */
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
+.top-toolbar .log-out-btn {
+  margin-left: 30px;
+  background-color: rgb(159, 5, 5); /* Dark red background */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.top-toolbar .log-out-btn:hover {
+  background-color: red; /* Light red background on hover */
+}
 .top-toolbar .logo,
 .top-toolbar .app-name,
 .top-toolbar .search-container,
@@ -23540,4 +23554,58 @@ readers do not read off random characters that represent icons */
 .action-form {
   margin: 0; /* Removes default margin from forms */
   display: inline; /* Inline display for compact alignment */
+}
+
+.edit-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-container form {
+  display: grid;
+  grid-gap: 16px;
+}
+
+.edit-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-container input[type=text],
+.edit-container input[type=number],
+.edit-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.edit-container input[type=file] {
+  border: 1px solid #ddd;
+  display: block;
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.edit-container button {
+  background-color: #0cb300;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-container button:hover {
+  background-color: #1b9400;
 }
