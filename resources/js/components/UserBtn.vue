@@ -5,8 +5,8 @@
             <i :class="isDropdownOpen ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'"></i>
         </button>
         <div class="dropdown-content" v-show="isDropdownOpen">
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
+            <!-- <a href="#">Profile</a>
+            <a href="#">Settings</a> -->
             <div class="logout-form">
                 <form @submit.prevent="logout">
                     <button type="submit" class="logout-btn">Logout</button>
@@ -37,7 +37,7 @@ export default {
         logout() {
             axios.get('/logout')
                 .then(response => {
-                    window.location.href = '/login';
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.error('Logout failed:', error);
