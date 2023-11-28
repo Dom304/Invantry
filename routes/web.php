@@ -53,7 +53,11 @@ Route::put('/home', [StoreController::class, 'updateRole'])->name('updateRole');
 Route::get('/AdminDashboard', [StoreController::class, 'adminDashboard'])->name('adminDashboard');
 Route::get('/ModeratorDashboard', [StoreController::class, 'moderatorDashboard'])->name('moderatorDashboard');
 Route::get('/ManagerDashboard', [StoreController::class, 'managerDashboard'])->name('managerDashboard');
+
+//updating store for admin and moderator
 Route::put('/ManagerDashboard/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
+Route::put('/AdminDashboard/{store}', [StoreController::class, 'updateStore'])->name('updateStore');
+
 Route::post('/addItem/{store}', [StoreController::class, 'addItem'])->name('addItem');
 Route::delete('/deleteItem/{store}/{item}', [StoreController::class, 'deleteItem'])->name('deleteItem');
 Route::get('/store/{store}/item/{item}/edit', [StoreController::class, 'edit'])->name('editItem');

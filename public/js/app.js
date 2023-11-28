@@ -20266,7 +20266,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _this.close();
-              axios__WEBPACK_IMPORTED_MODULE_0__["default"].post("/updateStore/".concat(_this.updateInfo.id), {
+              axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/ManagerDashboard/".concat(_this.updateInfo.id), {
                 store_name: _this.updateInfo.store_name,
                 manager_id: _this.updateInfo.manager_id,
                 store_id: _this.updateInfo.id,
@@ -20274,7 +20274,6 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
               }).then(function (response) {
                 _this.$emit('storeUpdated');
               })["catch"](function (error) {
-                _this.close();
                 console.error("There was an error updating the store:", error);
               });
             case 2:
@@ -21374,58 +21373,69 @@ var _hoisted_1 = {
   "class": "modal-body"
 };
 var _hoisted_2 = {
-  "class": "model-head"
+  "class": "modal-head"
 };
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Edit User Details", -1 /* HOISTED */);
 });
 var _hoisted_4 = {
-  "class": "model-main-content"
+  "class": "modal-main-content"
 };
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_5 = {
+  "class": "form-group"
+};
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "username"
   }, "Name", -1 /* HOISTED */);
 });
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = {
+  "class": "form-group"
+};
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "email"
   }, "Email", -1 /* HOISTED */);
 });
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = {
+  "class": "form-group"
+};
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "role"
   }, "Role", -1 /* HOISTED */);
 });
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "admin"
   }, "Admin", -1 /* HOISTED */);
 });
-var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "moderator"
   }, "Moderator", -1 /* HOISTED */);
 });
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "buyer"
   }, "Buyer", -1 /* HOISTED */);
 });
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "manager"
   }, "Manager", -1 /* HOISTED */);
 });
-var _hoisted_12 = [_hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11];
-var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_15 = [_hoisted_11, _hoisted_12, _hoisted_13, _hoisted_14];
+var _hoisted_16 = {
+  "class": "modal-foot"
+};
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    type: "submit"
+    type: "submit",
+    "class": "submit-btn"
   }, "Save Changes", -1 /* HOISTED */);
 });
-var _hoisted_14 = {
-  "class": "model-foot"
-};
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -21438,31 +21448,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.close && $options.close.apply($options, arguments);
     })
   }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.editUser && $options.editUser.apply($options, arguments);
     }, ["prevent"]))
-  }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "username",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.updateInfo.name = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    }),
+    "class": "form-input"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "email",
     id: "email",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.updateInfo.email = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.email]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    }),
+    "class": "form-input"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "role",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.updateInfo.role = $event;
-    })
-  }, [].concat(_hoisted_12), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.updateInfo.role]]), _hoisted_13], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[5] || (_cache[5] = function () {
+    }),
+    "class": "form-select"
+  }, [].concat(_hoisted_15), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.updateInfo.role]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.close && $options.close.apply($options, arguments);
-    })
-  }, "Cancel")])])], 2 /* CLASS */);
+    }),
+    "class": "cancel-btn"
+  }, "Cancel")])], 32 /* HYDRATE_EVENTS */)])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -21487,37 +21501,48 @@ var _hoisted_1 = {
   "class": "modal-body"
 };
 var _hoisted_2 = {
-  "class": "model-head"
+  "class": "modal-head"
 };
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Edit Store", -1 /* HOISTED */);
 });
 var _hoisted_4 = {
-  "class": "model-main-content"
+  "class": "modal-main-content"
 };
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_5 = {
+  "class": "form-group"
+};
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "storename"
   }, "Store Name", -1 /* HOISTED */);
 });
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = {
+  "class": "form-group"
+};
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "description"
   }, "Description", -1 /* HOISTED */);
 });
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = {
+  "class": "form-group"
+};
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
     "for": "manager_id"
   }, "Manager ID", -1 /* HOISTED */);
 });
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_11 = {
+  "class": "modal-foot"
+};
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    type: "submit"
+    type: "submit",
+    "class": "submit-btn"
   }, "Save Changes", -1 /* HOISTED */);
 });
-var _hoisted_9 = {
-  "class": "model-foot"
-};
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
@@ -21530,34 +21555,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.close && $options.close.apply($options, arguments);
     })
   }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.editStore && $options.editStore.apply($options, arguments);
     }, ["prevent"]))
-  }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     id: "storename",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.updateInfo.store_name = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
+    }),
+    "class": "form-input"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     id: "description",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.updateInfo.store_description = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_description]]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    }),
+    "class": "form-textarea"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.store_description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "number",
     id: "manager_id",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.updateInfo.manager_id = $event;
-    })
+    }),
+    "class": "form-input"
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateInfo.manager_id, void 0, {
     number: true
-  }]]), _hoisted_8], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[5] || (_cache[5] = function () {
+  }]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[4] || (_cache[4] = function () {
       return $options.close && $options.close.apply($options, arguments);
-    })
-  }, "Cancel")])])], 2 /* CLASS */);
+    }),
+    "class": "cancel-btn"
+  }, "Cancel")])], 32 /* HYDRATE_EVENTS */)])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -21787,7 +21815,7 @@ var _hoisted_2 = {
   "class": "modal-head"
 };
 var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Deletion", -1 /* HOISTED */);
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Deletion Confirmation", -1 /* HOISTED */);
 });
 var _hoisted_4 = {
   "class": "modal-main-content"
@@ -21806,15 +21834,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Are you sure you want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.entityData.store_name) + "? ", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "×")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Are you sure you want to delete "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.entityData.store_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("? ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "delete-btn",
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.deleteEnity && $options.deleteEnity.apply($options, arguments);
     })
-  }, "Continue"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Delete"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "close-btn",
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
-  }, "Close")])])], 2 /* CLASS */);
+  }, "Cancel")])])], 2 /* CLASS */);
 }
 
 /***/ }),
@@ -36771,7 +36801,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0; /* Initially set the overlay to be invisible */\n  pointer-events: none; /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-04ac6368] {\n  opacity: 1;\n  pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-04ac6368] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%); /* Starts off the screen */\n  transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n  transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-04ac6368] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-04ac6368] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-04ac6368]:hover {\n  color: #888;\n}\n.model-main-content[data-v-04ac6368] {\n  padding: 20px;\n  justify-content: center;\n  padding: 20px 0;\nform[data-v-04ac6368] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n}\n.model-foot[data-v-04ac6368] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-04ac6368] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity 0.3s;\n}\n.modal-overlay.showing[data-v-04ac6368] {\n  opacity: 1;\n  pointer-events: auto;\n}\n.modal-body[data-v-04ac6368] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%);\n  transition: transform 0.3s ease-out;\n}\n.modal-overlay.showing .modal-body[data-v-04ac6368] {\n  transform: translateY(0);\n}\n.modal-head[data-v-04ac6368] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin-bottom: 20px;\n}\n.modal-head h5[data-v-04ac6368] {\n  margin: 0;\n  color: #333;\n  font-size: 1.25rem;\n}\n.modal-head span[data-v-04ac6368] {\n  cursor: pointer;\n  padding: 5px;\n}\n.modal-head span[data-v-04ac6368]:hover {\n  color: #f44336;\n}\n.modal-main-content[data-v-04ac6368] {\n  display: flex;\n  flex-direction: column;\n}\n.form-group[data-v-04ac6368] {\n  margin-bottom: 15px;\n}\n.form-input[data-v-04ac6368],\n.form-select[data-v-04ac6368] {\n  width: 100%;\n  padding: 8px 12px;\n  border: 1px solid #ddd;\n  border-radius: 4px;\n  margin-top: 5px;\n}\n.modal-foot[data-v-04ac6368] {\n  display: flex;\n  justify-content: space-between;\n  margin-top: 20px;\n}\n.submit-btn[data-v-04ac6368],\n.cancel-btn[data-v-04ac6368] {\n  padding: 10px 20px;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  font-weight: bold;\n}\n.submit-btn[data-v-04ac6368] {\n  background-color: #d9534f;\n  /* Red color for Save Changes button */\n  color: white;\n}\n.cancel-btn[data-v-04ac6368] {\n  background-color: #f0f0f0;\n  /* Light grey for Cancel button */\n  color: #333;\n}\n.submit-btn[data-v-04ac6368]:hover {\n  background-color: #c9302c;\n  /* Darker red on hover for Save Changes */\n}\n.cancel-btn[data-v-04ac6368]:hover {\n  background-color: #e0e0e0;\n  /* Lighter grey on hover for Cancel */\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36795,7 +36825,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-82a087be] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0;\n    pointer-events: none;\n    transition: opacity 0.3s;\n}\n.modal-overlay.showing[data-v-82a087be] {\n    opacity: 1;\n    pointer-events: auto;\n}\n.modal-body[data-v-82a087be] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%);\n    transition: transform 0.3s ease-out;\n}\n.modal-overlay.showing .modal-body[data-v-82a087be] {\n    transform: translateY(0);\n}\n.model-head[data-v-82a087be] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    border-bottom: 1px solid #e5e5e5;\n    text-align: center;\n}\n.model-head span[data-v-82a087be] {\n    cursor: pointer;\n    padding: 5px;\n    display: inline-block;\n}\n.model-head span[data-v-82a087be]:hover {\n    color: #888;\n}\n.model-main-content[data-v-82a087be] {\n    padding: 20px;\n    justify-content: center;\n    padding: 20px 0;\nform[data-v-82a087be] {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n}\n}\n.model-foot[data-v-82a087be] {\n    display: flex;\n    justify-content: space-between;\n    padding-top: 20px;\n    border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-82a087be] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: rgba(0, 0, 0, 0.5);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    opacity: 0;\n    pointer-events: none;\n    transition: opacity 0.3s;\n}\n.modal-overlay.showing[data-v-82a087be] {\n    opacity: 1;\n    pointer-events: auto;\n}\n.modal-body[data-v-82a087be] {\n    background: white;\n    width: 60%;\n    max-width: 600px;\n    padding: 20px;\n    border-radius: 5px;\n    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);\n    display: flex;\n    flex-direction: column;\n    transform: translateY(-100%);\n    transition: transform 0.3s ease-out;\n}\n.modal-overlay.showing .modal-body[data-v-82a087be] {\n    transform: translateY(0);\n}\n.modal-head[data-v-82a087be] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin-bottom: 20px;\n}\n.modal-head h5[data-v-82a087be] {\n    margin: 0;\n    color: #333;\n    font-size: 1.25rem;\n}\n.modal-head span[data-v-82a087be] {\n    cursor: pointer;\n    padding: 5px;\n}\n.modal-head span[data-v-82a087be]:hover {\n    color: #f44336;\n}\n.modal-main-content[data-v-82a087be] {\n    display: flex;\n    flex-direction: column;\n}\n.form-group[data-v-82a087be] {\n    margin-bottom: 15px;\n}\n.form-input[data-v-82a087be],\n.form-textarea[data-v-82a087be] {\n    width: 100%;\n    padding: 8px 12px;\n    border: 1px solid #ddd;\n    border-radius: 4px;\n    margin-top: 5px;\n}\n.form-textarea[data-v-82a087be] {\n    resize: vertical;\n    min-height: 80px;\n}\n.modal-foot[data-v-82a087be] {\n    display: flex;\n    justify-content: space-between;\n    margin-top: 20px;\n}\n.submit-btn[data-v-82a087be],\n.cancel-btn[data-v-82a087be] {\n    padding: 10px 20px;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n    font-weight: bold;\n}\n.submit-btn[data-v-82a087be] {\n    background-color: #d9534f;\n    /* Red color for Save Changes button */\n    color: white;\n}\n.cancel-btn[data-v-82a087be] {\n    background-color: #f0f0f0;\n    /* Light grey for Cancel button */\n    color: #333;\n}\n.submit-btn[data-v-82a087be]:hover {\n    background-color: #c9302c;\n    /* Darker red on hover for Save Changes */\n}\n.cancel-btn[data-v-82a087be]:hover {\n    background-color: #e0e0e0;\n    /* Lighter grey on hover for Cancel */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36843,7 +36873,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0; /* Initially set the overlay to be invisible */\n  pointer-events: none; /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s; /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n  opacity: 1;\n  pointer-events: auto; /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%); /* Starts off the screen */\n  transition: transform 0.3s ease-out; /* Transition effect for sliding in */\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n  transform: translateY(0); /* Modal slides into its natural position when opened */\n}\n.model-head[data-v-53ab54d2] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  text-align: center;\n}\n.model-head span[data-v-53ab54d2] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n}\n.model-head span[data-v-53ab54d2]:hover {\n  color: #888;\n}\n.model-main-content[data-v-53ab54d2] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.model-foot[data-v-53ab54d2] {\n  display: flex;\n  justify-content: space-between;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay[data-v-53ab54d2] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  /* Initially set the overlay to be invisible */\n  pointer-events: none;\n  /* Ensure it doesn't block anything when not shown */\n  transition: opacity 0.3s;\n  /* Transition effect for fade-in */\n}\n.modal-overlay.showing[data-v-53ab54d2] {\n  opacity: 1;\n  pointer-events: auto;\n  /* Restore pointer events when modal is shown */\n}\n.modal-body[data-v-53ab54d2] {\n  background: white;\n  width: 60%;\n  max-width: 600px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n  display: flex;\n  flex-direction: column;\n  transform: translateY(-100%);\n  transition: transform 0.3s ease-out;\n}\n.modal-overlay.showing .modal-body[data-v-53ab54d2] {\n  transform: translateY(0);\n  /* Modal slides into its natural position when opened */\n}\n.modal-head[data-v-53ab54d2] {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid #e5e5e5;\n  align-items: baseline;\n  padding-bottom: 20px;\n}\n.modal-head span[data-v-53ab54d2] {\n  cursor: pointer;\n  padding: 5px;\n  display: inline-block;\n  padding-bottom: 15px;\n  font-size: 20px;\n}\n.modal-head h5[data-v-53ab54d2] {\n  margin: 0;\n  color: #333;\n  font-size: 1.25rem;\n}\n.model-head span[data-v-53ab54d2]:hover {\n  color: #888;\n}\n.modal-main-content[data-v-53ab54d2] {\n  flex: 1;\n  padding: 20px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n}\n.modal-foot[data-v-53ab54d2] {\n  display: flex;\n  justify-content: space-evenly;\n  padding-top: 20px;\n  border-top: 1px solid #e5e5e5;\n  padding-top: 15px;\n}\n.delete-btn[data-v-53ab54d2],\n.close-btn[data-v-53ab54d2] {\n  padding: 10px 20px;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n  font-weight: bold;\n}\n.delete-btn[data-v-53ab54d2] {\n  background-color: #d9534f;\n  color: white;\n}\n.close-btn[data-v-53ab54d2] {\n  background-color: #f0f0f0;\n  color: #333;\n}\n.delete-btn[data-v-53ab54d2]:hover {\n  background-color: #c9302c;\n}\n.close-btn[data-v-53ab54d2]:hover {\n  background-color: #e0e0e0;\n}\n.modal-head span[data-v-53ab54d2]:hover {\n  color: #d9534f;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

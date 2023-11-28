@@ -1,28 +1,33 @@
 <template>
     <div :class="{ 'modal-overlay': true, 'showing': show }">
         <div class="modal-body">
-            <div class="model-head">
+            <div class="modal-head">
                 <h5>Edit Store</h5>
                 <span aria-hidden="true" @click="close">&times;</span>
             </div>
 
-            <div class="model-main-content">
+            <div class="modal-main-content">
                 <form @submit.prevent="editStore">
-                    <label for="storename">Store Name</label>
-                    <input type="text" id="storename" v-model="updateInfo.store_name">
+                    <div class="form-group">
+                        <label for="storename">Store Name</label>
+                        <input type="text" id="storename" v-model="updateInfo.store_name" class="form-input">
+                    </div>
 
-                    <label for="description">Description</label>
-                    <input type="text" id="description" v-model="updateInfo.store_description">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" v-model="updateInfo.store_description" class="form-textarea"></textarea>
+                    </div>
 
-                    <label for="manager_id">Manager ID</label>
-                    <input type="number" id="manager_id" v-model.number="updateInfo.manager_id">
+                    <div class="form-group">
+                        <label for="manager_id">Manager ID</label>
+                        <input type="number" id="manager_id" v-model.number="updateInfo.manager_id" class="form-input">
+                    </div>
 
-                    <button type="submit">Save Changes</button>
+                    <div class="modal-foot">
+                        <button type="submit" class="submit-btn">Save Changes</button>
+                        <button @click="close" class="cancel-btn">Cancel</button>
+                    </div>
                 </form>
-            </div>
-
-            <div class="model-foot">
-                <button @click="close">Cancel</button>
             </div>
         </div>
     </div>
@@ -66,20 +71,20 @@ export default {
 
         async editStore() {
             this.close();
-            axios.post(`/updateStore/${this.updateInfo.id}`, {
+            axios.put(`/ManagerDashboard/${this.updateInfo.id}`, {
                 store_name: this.updateInfo.store_name,
                 manager_id: this.updateInfo.manager_id,
                 store_id: this.updateInfo.id,
                 store_description: this.updateInfo.store_description,
             })
-            .then(response => {
-                this.$emit('storeUpdated');
-            })
-            .catch(error => {
-                this.close();
-                console.error("There was an error updating the store:", error);
-            });
+                .then(response => {
+                    this.$emit('storeUpdated');
+                })
+                .catch(error => {
+                    console.error("There was an error updating the store:", error);
+                });
         },
+
     }
 }
 </script>
@@ -111,7 +116,7 @@ export default {
     max-width: 600px;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     transform: translateY(-100%);
@@ -122,40 +127,85 @@ export default {
     transform: translateY(0);
 }
 
-.model-head {
+.modal-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #e5e5e5;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
-.model-head span {
+.modal-head h5 {
+    margin: 0;
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.modal-head span {
     cursor: pointer;
     padding: 5px;
-    display: inline-block;
 }
 
-.model-head span:hover {
-    color: #888;
+.modal-head span:hover {
+    color: #f44336;
 }
 
-.model-main-content {
-    padding: 20px;
-    justify-content: center;
-    padding: 20px 0;
-
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+.modal-main-content {
+    display: flex;
+    flex-direction: column;
 }
 
-.model-foot {
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-foot {
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
-    border-top: 1px solid #e5e5e5;
+    margin-top: 20px;
+}
+
+.submit-btn,
+.cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn {
+    background-color: #d9534f;
+    /* Red color for Save Changes button */
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f0f0f0;
+    /* Light grey for Cancel button */
+    color: #333;
+}
+
+.submit-btn:hover {
+    background-color: #c9302c;
+    /* Darker red on hover for Save Changes */
+}
+
+.cancel-btn:hover {
+    background-color: #e0e0e0;
+    /* Lighter grey on hover for Cancel */
 }
 </style>
