@@ -1,19 +1,12 @@
 <template>
   <div>
-    <!-- For testing toggleBusy state -->
-    <!-- <b-button @click="toggleBusy">Toggle Busy State</b-button> -->
-
     <b-form-group label="Search by:" class="mb-3">
       <b-row>
         <b-col cols="auto">
           <b-form-select v-model="searchColumn" :options="columnOptions"></b-form-select>
         </b-col>
         <b-col>
-          <b-form-input
-            v-model="searchQuery"
-            type="search"
-            :placeholder="`Search by ${searchColumn}`"
-          ></b-form-input>
+          <b-form-input v-model="searchQuery" type="search" :placeholder="`Search by ${searchColumn}`"></b-form-input>
         </b-col>
       </b-row>
     </b-form-group>
@@ -27,25 +20,24 @@
       </template>
 
       <template #cell(actions)="row">
-        <b-button size="sm" @click="acceptRequest(row.item)">Accept</b-button>
-        <b-button size="sm" variant="danger" @click="rejectUser(row.item)">Reject</b-button>
+        <b-button size="sm" style="margin-right: 5px;" @click="acceptRequest(row.item)">Accept</b-button>
+        <b-button size="sm" variant="danger" @click="rejectRequest(row.item)">Reject</b-button>
       </template>
     </b-table>
 
-    <b-pagination
-        v-model="currentPage"
-        :total-rows="filteredStores.length"
-        :per-page="rowsPerPage"
-        aria-controls="my-table"
-    ></b-pagination>
+    <b-pagination v-model="currentPage" :total-rows="filteredRequests.length" :per-page="rowsPerPage"
+      aria-controls="my-table"></b-pagination>
   </div>
-  <ManagerModal
-    :show="showModal"
-    :userId="selectedUser.id"
-    :username="selectedUser.name"
-    @close="showModal = false"
-    @user-deleted-successfully="refreshTable"
-  ></ManagerModal>
+  <ManagerModal :show="showModal" :request="selectedRequest" @close="showModal = false"
+    @request-accepted-successfully="refreshRequests">
+  </ManagerModal>
+
+  <Modal :show="showDeleteModal" 
+    :type="'request'"
+    :entityData="selectedRequest"
+    @close="showDeleteModal = false"
+    @deleted-successfully="refreshRequests">
+  </Modal>
 </template>
 
 <script>
@@ -61,12 +53,19 @@ import {
   BSpinner
 } from "bootstrap-vue-3";
 import ManagerModal from "./ManagerModal.vue";
+import Modal from "./Modal.vue";
 
 export default {
   name: "request-table",
-  props: ["manager_requests", "loggedInUserId"],
+  emits: ['refreshRequests'],
+  props: {
+    managerRequests: Array,
+    isBusy: Boolean,
+  },
+
   components: {
     ManagerModal,
+    Modal,
     BTable,
     BFormInput,
     BFormGroup,
@@ -77,57 +76,63 @@ export default {
     BButton,
     BSpinner
   },
+
   data() {
     return {
-      isBusy: false,
       currentPage: 1,
       rowsPerPage: 5,
-      searchColumn: "Store Name",
+      searchColumn: "User ID", // Set the default search column here
       searchQuery: "",
-      selectedUser: {},
+      selectedRequest: {},
       showModal: false,
+      showDeleteModal: false,
       fields: [
         { key: 'id', label: 'ID', searchable: true },
+        { key: 'user_id', label: 'User ID', searchable: true },
         { key: 'store_name', label: 'Store Name', searchable: true },
-        { key: 'actions', label: 'Actions', searchable: false }
+        { key: 'description', label: 'Description', searchable: true },
+        { key: 'actions', label: 'Actions' }
       ],
+      columns: [],
     };
   },
 
   computed: {
     columnOptions() {
-      return this.fields
-        .filter(f => f.searchable)
-        .map(f => f.label);
+      return this.fields.filter(f => f.searchable).map(f => f.label);
     },
-
-    filteredStores() {
+    filteredRequests() {
       if (!this.searchQuery) {
-        return this.manager_requests;
+        return this.managerRequests;
       }
       const searchKey = this.fields.find(f => f.label === this.searchColumn)?.key;
-      return this.manager_requests.filter(request => {
-        const value = String(request[searchKey]).toLowerCase();
+      return this.managerRequests.filter(request => {
+        const value = String(request[searchKey] ?? '').toLowerCase();
         return value.includes(this.searchQuery.toLowerCase());
       });
     },
-
     tablePagination() {
       const start = (this.currentPage - 1) * this.rowsPerPage;
-      const end = start + this.rowsPerPage;
-      return this.filteredStores.slice(start, end);
+      return this.filteredRequests.slice(start, start + this.rowsPerPage);
     },
   },
-
   methods: {
     acceptRequest(request) {
-      this.selectedUser = request;
+      this.selectedRequest = request;
       this.showModal = true;
     },
-    rejectUser(request) {
-      // Handle the reject action here
+    closeModal() {
+      this.showModal = false;
+      this.$emit("refreshRequests");
+    },
+    rejectRequest(request) {
+      this.selectedRequest = request;
+      this.showDeleteModal = true;
+    },
+    refreshRequests() {
+      this.showModal = false;
+      this.$emit("refreshRequests");
     },
   },
 };
 </script>
-

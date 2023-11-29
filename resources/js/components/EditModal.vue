@@ -1,44 +1,50 @@
 <template>
   <div :class="{ 'modal-overlay': true, 'showing': show }">
     <div class="modal-body">
-      <div class="model-head">
+      <div class="modal-head">
         <h5>Edit User Details</h5>
         <span aria-hidden="true" @click="close">&times;</span>
       </div>
 
-      <div class="model-main-content">
+      <div class="modal-main-content">
         <form @submit.prevent="editUser">
-          <label for="username">Name</label>
-          <input type="text" id="username" v-model="updateInfo.name">
+          <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" id="username" v-model="updateInfo.name" class="form-input">
+          </div>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" v-model="updateInfo.email">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" v-model="updateInfo.email" class="form-input">
+          </div>
 
-          <label for="role">Role</label>
-          <select id="role" v-model="updateInfo.role">
-            <option value="admin">Admin</option>
-            <option value="moderator">Moderator</option>
-            <option value="buyer">Buyer</option>
-            <option value="manager">Manager</option>
-          </select>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" v-model="updateInfo.role" class="form-select">
+              <option value="admin">Admin</option>
+              <option value="moderator">Moderator</option>
+              <option value="buyer">Buyer</option>
+              <option value="manager">Manager</option>
+            </select>
+          </div>
 
-          <button type="submit">Save Changes</button>
+          <div class="modal-foot">
+            <button type="submit" class="submit-btn">Save Changes</button>
+            <button @click="close" class="cancel-btn">Cancel</button>
+          </div>
         </form>
-      </div>
-
-      <div class="model-foot">
-        <button @click="close">Cancel</button>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
 
 export default {
   name: 'edit-modal',
-  emits: ['close', 'userUpdated'],
+  emits: ['close', 'updated-successfully'],
   props: {
     show: {
       type: Boolean,
@@ -70,19 +76,19 @@ export default {
     },
 
     async editUser() {
-      
+
       axios.put(`/user/${this.updateInfo.id}`, {
-          name: this.updateInfo.name,
-          email: this.updateInfo.email,
-          role: this.updateInfo.role,
+        name: this.updateInfo.name,
+        email: this.updateInfo.email,
+        role: this.updateInfo.role,
       })
-      .then(response => {
-        this.$emit('userUpdated');
-        this.close();
-      })
-      .catch(error => {
-        console.error("There was an error updating the user:", error);
-      });
+        .then(response => {
+          this.$emit('updated-successfully');
+          this.close();
+        })
+        .catch(error => {
+          console.error("There was an error updating the user:", error);
+        });
     },
   }
 }
@@ -99,14 +105,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0; /* Initially set the overlay to be invisible */
-  pointer-events: none; /* Ensure it doesn't block anything when not shown */
-  transition: opacity 0.3s; /* Transition effect for fade-in */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
 }
 
 .modal-overlay.showing {
   opacity: 1;
-  pointer-events: auto; /* Restore pointer events when modal is shown */
+  pointer-events: auto;
 }
 
 .modal-body {
@@ -115,51 +121,90 @@ export default {
   max-width: 600px;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  transform: translateY(-100%); /* Starts off the screen */
-  transition: transform 0.3s ease-out; /* Transition effect for sliding in */
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out;
 }
 
 .modal-overlay.showing .modal-body {
-  transform: translateY(0); /* Modal slides into its natural position when opened */
+  transform: translateY(0);
 }
 
-.model-head {
+.modal-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #e5e5e5;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
-.model-head span {
+.modal-head h5 {
+  margin: 0;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.modal-head span {
   cursor: pointer;
   padding: 5px;
-  display: inline-block;
 }
 
-.model-head span:hover {
-  color: #888;
+.modal-head span:hover {
+  color: #f44336;
 }
 
-.model-main-content {
-  padding: 20px;
-  justify-content: center;
-  padding: 20px 0;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.modal-main-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.model-foot {
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.modal-foot {
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
-  border-top: 1px solid #e5e5e5;
+  margin-top: 20px;
 }
-</style>
+
+.submit-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-btn {
+  background-color: #d9534f;
+  /* Red color for Save Changes button */
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  /* Light grey for Cancel button */
+  color: #333;
+}
+
+.submit-btn:hover {
+  background-color: #c9302c;
+  /* Darker red on hover for Save Changes */
+}
+
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+  /* Lighter grey on hover for Cancel */
+}</style>

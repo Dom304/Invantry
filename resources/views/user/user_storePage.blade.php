@@ -25,8 +25,8 @@
         const itemCards = document.querySelectorAll('.item-card');
 
         itemCards.forEach(card => {
-            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            const itemName = card.querySelector('.item-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.item-subtext').textContent.toLowerCase();
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
             } else {
@@ -71,7 +71,7 @@
     </a>
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
@@ -81,7 +81,7 @@
     <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="log-out-btn">Logout</button>
         </form>
     </div>
 </div>
@@ -161,30 +161,39 @@
         <!-- href="/stores/store-name" -->
         <a class="item-card">
             <div class="store-logo">
-                <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Item Logo">
             </div>
-            <div class="store-info">
-                <span class="store-name">{{ $item->item_name }}</span>
-                <span class="store-subtext">{{ $item->item_description }}</span>
-                <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
+            <div class="item-info">
+                <span class="item-name">{{ $item->item_name }}</span>
+                <span class="item-subtext">{{ $item->item_description }}</span>
+                <span class="item-price">${{ number_format($item->item_price, 2) }}</span>
             </div>
-            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
+
+
+     <div class = "test">
+     <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
                 @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="quantity" value="1">
                 <button type="submit" class="add-to-cart-btn">Add to Cart</button>
             </form>
-            <form method="POST" action="{{ route('store', ['storeName' => $storeName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <select name="collection_id" required>
+
+    <form method="POST" action="{{ route('store.collection.add', ['storeName' => $storeName]) }}">
+    @csrf
+    <input type="hidden" name="item_id" value="{{ $item->id }}">
+    <select name="collection_id" required>
         @foreach($collections as $collection)
             <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
         @endforeach
     </select>
     <button type="submit" class="add-to-collection-btn">Add to Collection</button>
-        </form>
+</form>
+
+
+            
+
+</div>
+            
         </a>
     @endforeach
     </div>

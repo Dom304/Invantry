@@ -9,8 +9,8 @@
         const itemCards = document.querySelectorAll('.colitem-card');
 
         itemCards.forEach(card => {
-            const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-            const itemDescription = card.querySelector('.store-subtext').textContent.toLowerCase();
+            const itemName = card.querySelector('.colitem-name').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.colitem-subtext').textContent.toLowerCase();
             if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
                 card.style.display = 'flex';
                 
@@ -20,28 +20,42 @@
         });
     }
      //For filtering store items in right window
-     function filterItemsRight() {
+function filterItemsRight() {
     const searchInput = document.querySelector('.right-search-input').value.toLowerCase();
     const itemCards = document.querySelectorAll('.item-card2');  // Corrected the selector
 
-    itemCards.forEach(card => {
-        const itemName = card.querySelector('.store-name').textContent.toLowerCase();
-        const itemDescription = card.querySelector('.store-info .store-subtext').textContent.toLowerCase();  // Corrected the selector
-        if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
-            card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
-        } else {
+    // Check if the search input is empty
+    if (searchInput === '') {
+        // If search input is empty, hide all cards
+        itemCards.forEach(card => {
             card.style.display = 'none';
-        }
-    });
+        });
+    } else {
+        // If search input is not empty, proceed with the existing filter logic
+        itemCards.forEach(card => {
+            const itemName = card.querySelector('.item-name2').textContent.toLowerCase();
+            const itemDescription = card.querySelector('.item-info2 .item-subtext2').textContent.toLowerCase();  // Corrected the selector
+            if (itemName.includes(searchInput) || itemDescription.includes(searchInput)) {
+                card.style.display = 'flex';  // Changed from 'flex' to 'block' to match the display style of the item cards
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 }
 
 function setSearchValueAndFilterRight(itemName) {
     // Set the search value in the right window search box
     document.getElementById('right-search-bar').value = itemName;
 
+    // Show the right window
+    const rightWindow = document.querySelector('.right-window2');
+    rightWindow.style.display = 'block';
+
     // Trigger the filtering for the right window
     filterItemsRight();
 }
+
 
 
 
@@ -60,24 +74,26 @@ function setSearchValueAndFilterRight(itemName) {
             }
         });
     }
-
+    
     function toggleActiveState(buttonId, viewName) {
         // Remove active class from all buttons
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
-        
+
         // Add active class to the clicked button
         document.getElementById(buttonId).classList.add('active');
-        
+
         // Fetch and display the relevant view
         // Check the buttonId and take action accordingly
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
-            // Do something for manager-btn
+            window.location.href = '/ManagerDashboard';
         } else if (buttonId === 'admin-btn') {
-            // Do something for admin-btn
+            window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
-            // Do something for mod-btn
+            window.location.href = '/ModeratorDashboard';
+        } else if (buttonId === 'coll-btn') {
+            window.location.href = '/Public-collections';
         } else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
         } else {
@@ -85,7 +101,10 @@ function setSearchValueAndFilterRight(itemName) {
         }
     }
 
+
+
     function confirmDeletion(collectionId) {
+        console.log(collectionId);
     if(confirm('Are you sure you want to delete this collection?')) {
         // If the user clicks "Yes", send a POST request to delete the collection
         fetch('/collection/delete/' + collectionId, {
@@ -126,7 +145,7 @@ function setSearchValueAndFilterRight(itemName) {
     </a>
     <h1 class="app-name">Invantry</h1>
     <div class="search-container">
-        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterStores()" />
+        <input type="text" placeholder="Search items, products, and stores" class="search-input" oninput="filterItems()" />
       </div>
       <div class="cart-container">
         <button class="cart-button" id="cart-btn" onclick="toggleActiveState('cart-btn', 'user.user_viewCartPage')" @click="onCartClick">
@@ -136,7 +155,7 @@ function setSearchValueAndFilterRight(itemName) {
     <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="log-out-btn">Logout</button>
         </form>
     </div>
 </div>
@@ -166,6 +185,8 @@ function setSearchValueAndFilterRight(itemName) {
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
 
+        <!-- <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button> -->
+        
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
 
@@ -201,8 +222,18 @@ function setSearchValueAndFilterRight(itemName) {
 
         <!-- Fetch Users collections -->
         @foreach($collections as $col)
-        <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
+        <div style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">
+                {{ $col->collection_name }}
+            </a>
+            <!-- Styling the button to look like small red text -->
+            <button onclick="confirmDeletion('{{ $col->id }}')" class="delete-collection-btn">
+                Delete this collection?
+            </button>
+        </div>
         @endforeach
+
+
 
         <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
 
@@ -215,61 +246,72 @@ function setSearchValueAndFilterRight(itemName) {
 
         {{--Displaying the collection name according to what current collections items are displaying--}}
         <h2>{{ $collName }}</h2>
-        <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button>
+        <!-- <button class="delete-collection-btn" onclick="confirmDeletion('{{ $col->id }}')">Delete Collection</button> -->
 
 
 
         @foreach($items as $item)
     <div class="colitem-card">
         <div class="store-logo">
-            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Store Logo">
         </div>
         <div class="store-info">
-            <span class="store-name">{{ $item->item_name }}</span>
-            <span class="store-subtext">{{ $item->item_description }}</span>
+            <span class="colitem-name">{{ $item->item_name }}</span>
+            <span class="colitem-subtext">{{ $item->item_description }}</span>
         </div>
         <!-- Added a data attribute to the button for easy identification -->
-        <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search for item</button>
+        <button class="search-colitem-btn" onclick="setSearchValueAndFilterRight('{{ $item->item_name }}')" data-item-name="{{ $item->item_name }}" data-item-description="{{ $item->item_description }}">Search</button>
+        <form method="post" action="{{ route('collection.item.delete', ['collName' => $collName, 'itemId' => $item->id]) }}">
+            @csrf
+            @method('DELETE')
+            
+            <button type="submit" button class="search-colitem-btn">Delete</button>
+        </form>
     </div>
 @endforeach
     </div>
         
        
 
-    <div class="right-window">
-    <div class="search-container">
+    <div class="right-window2" style="display: none">
+    <div class="search-container2">
         <input type="text" id="right-search-bar" placeholder="Search items, products, and stores" class="right-search-input" oninput="filterItemsRight()" />
     </div>
+    {{--If the right-search-bar is empty, dont display any cards, otherwise (meaning if there is text in the search box) go through with the following loop that displays the cards--}}
     @foreach($allItems as $item)
     <div class="item-card2">
         <div class="store-logo">
-            <img src="../images/store-logos/Lowes-logo.png" alt="Store Logo">
+            <img src="{{ asset('storage/' . $item->item_logo) }}" alt="Store Logo">
         </div>
-        <div class="store-info">
-            <span class="store-name">{{ $item->item_name }}</span>
-            <span class="store-subtext">{{ $item->item_description }}</span>
-            <span class="store-subtext">${{ number_format($item->item_price, 2) }}</span>
-            <span class="store-subtext">Store Name: {{ $item->store_id }}</span>
+        <div class="item-info2">
+            <span class="item-name2">{{ $item->item_name }}</span>
+            <span class="item-subtext2">{{ $item->item_description }}</span>
+            <span class="item-price2">${{ number_format($item->item_price, 2) }}</span>
+            <span class="item-subtext2">Available at <b>{{ $item->store->store_name }}</b></span>
         </div>
+        
+
+        <div class = "test1">
+
         <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
             @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
             <input type="hidden" name="quantity" value="1">
             <button type="submit" class="add-to-cart-btn">Add to Cart</button>
         </form>
-        <form method="POST" action="{{ route('collection', ['collName' => $collName]) }}">
-            @csrf
-            <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="1">
-            <select name="collection_id" required>
+
+        <form method="POST" action="{{ route('collection.add', ['collName' => $collName]) }}">
+    @csrf
+    <input type="hidden" name="item_id" value="{{ $item->id }}">
+    <select name="collection_id" required>
         @foreach($collections as $collection)
             <option value="{{ $collection->id }}">{{ $collection->collection_name }}</option>
         @endforeach
     </select>
     <button type="submit" class="add-to-collection-btn">Add to Collection</button>
-        </form>
+</form>
 
-        
+</div>
 
 
     </div>

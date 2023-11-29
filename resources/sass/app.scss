@@ -49,6 +49,7 @@ $font-path: "fonts";
 }
 
 .app-name,
+.app-login-in-name,
 .description,
 .welcome-back,
 .sign-up {
@@ -56,23 +57,52 @@ $font-path: "fonts";
     font-family: "Panton-LightCaps", Arial, sans-serif;
 }
 
-.app-name {
+.app-login-in-name {
+text-align: center;
     font-size: 2em;
     font-weight: bold;
+margin-top: -60px;
+    font-family: 'Recharge', Arial, sans-serif;
 }
 
 .description {
-    font-size: 0.5em;
+    font-size: 10px;
     margin-top: 10px;
     color: gray;
 }
 
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .welcome-back {
-    font-size: 0.85em;
+    text-align: center;
+  font-size: .85em;
     font-weight: bold;
     margin-top: 60px;
     cursor: default;
     color: gray;
+font-family: 'Panton-LightCaps', Arial, sans-serif;
+}
+
+.logo-app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.log-in {
+    text-align: center;
+  font-size: .75em;
+  font-weight: bold;
+  margin-top: 30px;
+  cursor: default;
+  color: gray;
+  font-family: 'Panton-LightCaps', Arial, sans-serif;
 }
 
 .sign-up {
@@ -112,21 +142,136 @@ $font-path: "fonts";
     }
 }
 
-.username-input,
-.password-input {
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    color: gray;
+
+    .input-label {
+        margin-top: 5px;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
+    }
+}
+    #signup-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .image-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;  
+    }
+
+    .centered-image {
+        margin-top: -10%;
+        transform: scale(0.33);
+    }
+
+    .app-name {
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: -60px;
+        font-family: 'Recharge', Arial, sans-serif;
+    }
+
+    .create-acc {
+        text-align: center;
+        font-size: .85em;
+        font-weight: bold;
+        margin-top: 60px;
+        cursor: default;
+        color: gray;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
+    }
+
+    .log-in {
+        text-align: center;
+        font-size: .75em;
+        font-weight: bold;
+        margin-top: 30px;
+        cursor: default;
+        color: gray;
+        font-family: 'Panton-LightCaps', Arial, sans-serif;
+    }
+
+    .log-in-link {
+        color: #007BFF; 
+        text-decoration: none; 
+        cursor: pointer;
+    }
+
+    .log-in-link:hover {
+        text-decoration: underline; 
+    }
+
+    .action-btn {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 16px 20px;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 240px; 
+        text-align: center;
+    }
+
+    .action-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .continue-btn {
+        margin-top: 40px;
+    }
+
+    .login-btn {
+        margin-top: 25px;
+    }
+
+    .username-input, .password-input {
     padding: 20px 20px;
     border-radius: 4px;
     border: 1px solid #ddd;
     font-size: 1em;
     width: 399px;
+}
+    .password-input {
+        padding-right: 40px; 
+    }
 
-    &::placeholder {
+    .username-input::placeholder, .password-input::placeholder {
         color: #aaa;
     }
+
+    .password-container {
+        position: relative;
+        margin-top: 5px;
+    }
+
+    .p-toast-message-icon {
+        width: 10px;
+        height: 10px;
+    }
+
+.continue-btn {
+    margin-top: 40px;
 }
 
-.username-input {
-    margin-top: 60px;
+.username-input, .password-input {
+    padding: 20px 20px;
+border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        width: 399px; 
 }
 
 .password-input {
@@ -146,7 +291,10 @@ $font-path: "fonts";
     cursor: pointer;
     font-size: 1.2em;
 
-    background-color: darkgrey;
+    img {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 // &.active {
@@ -174,6 +322,23 @@ $font-path: "fonts";
     background-color: #fff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
+    
+    .log-out-btn {
+        margin-left: 30px;
+        background-color: rgb(159, 5, 5); /* Dark red background */
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .log-out-btn:hover {
+        background-color: red; /* Light red background on hover */
+    }    
+
     .logo,
     .app-name,
     .search-container,
@@ -191,8 +356,7 @@ $font-path: "fonts";
 
     .app-name {
         margin-top: 10px;
-        margin-right: 74px;
-        margin-left: 0%;
+                margin-left: 0%;
         font-size: 1.5em;
         font-family: "Recharge", Arial, sans-serif;
     }
@@ -339,6 +503,153 @@ $font-path: "fonts";
     }
 }
 
+.delete-collection-btn {
+    background: none;
+    border: none;
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: small;
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+        color: darkred;
+    }
+}
+
+/* Checkout Window Styles */
+.checkout-window {
+    width: 60%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20%;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    .purchased-items {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+
+        li {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .item-detail {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    }
+
+    .price-details {
+        text-align: right;
+
+        p {
+            font-family: 'Courier New', monospace;
+            margin: 0 0 5px;
+        }
+    }
+
+    .delivery-info {
+        font-family: 'Nunito', sans-serif;
+        color: #444;
+        background-color: #f8f8f8;
+        border-left: 4px solid #ff1493;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        font-size: 12px;
+        line-height: 1.5;
+
+        p {
+            margin-bottom: 10px;
+        }
+    }
+
+    .important-notice {
+        color: #d7003d;
+        font-weight: bold;
+        font-size: 14.5px;
+    }
+    
+    .important-notice2 {
+        color: #00d74f;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .delivery-info2 {
+        font-family: 'Nunito', sans-serif;
+        color: #444;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+
+        p {
+            margin-bottom: 10px;
+        }
+    }
+
+    h1 {
+        font-size: 26px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+
+        li {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #0056b3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #003d82;
+        }
+    }
+}
+
+
 
 /* Middle Window */
 .middle-window {
@@ -373,10 +684,10 @@ $font-path: "fonts";
     justify-content: space-between; // Add this to space out content and the button
     align-items: center;
     width: calc(50% - 1rem);
-    height: 115px;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 1rem;
+    height: auto;
+    margin-top: .5rem; /* Adjusted to give space between stacked cards */
+    margin-bottom: .5rem; /* Adjusted to give space between stacked cards */
+    padding: .5rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -387,38 +698,96 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
+    .item-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+            
+            
+        .item-name {
+        font-size: 14px;
+        font-weight: 600;
+        }
+
+        .item-subtext {
+        font-size: 10px;
+        }
+
+        .item-price {
+        font-size: 12px;
         font-weight: bold;
-    }
-
-    .add-to-cart-btn {
-        // New styles for the button
-
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        color: white;
-        background-color: rgb(51, 51, 51); // Adjust to your preferred color
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: background-color 0.2s;
-
-        &:hover {
-            background-color: rgb(61, 189, 32); // Darken the button on hover
         }
     }
+
+    .test{
+        
+        select {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            width: 8.6rem;
+            font-size: 12px;
+            color: rgb(42, 42, 42);
+            background-color: rgb(226, 226, 226);
+            border: none;
+        }
+
+
+        .add-to-collection-btn {
+            margin-top: .2rem;
+ 
+             right: 60px;
+             height: auto;
+             width: 8.6rem;
+             padding: 0.5rem .5rem;
+             font-size: 12px;
+             color: white;
+             background-color: rgb(44, 124, 228);
+             border: none;
+             border-radius: 0.5rem;
+             cursor: pointer;
+             transition: background-color 0.2s;
+     
+             &:hover {
+                 background-color: rgb(22, 29, 128);
+             }
+         }
+
+
+        .add-to-cart-btn {
+            // New styles for the button
+    
+            padding: 0.5rem 1rem;
+            height: auto;
+            width: 8.6rem;
+            padding: 0.5rem .5rem;
+
+            font-size: 12px;
+            color: white;
+            background-color: rgb(80, 220, 48);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+    
+            &:hover {
+                background-color: rgb(38, 124, 18);
+            }
+        }
+    }
+
 }
 
 .item-card2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%; /* Adjusted to take up the full width of its container */
-    height: 115px;
-    margin-top: 1rem; /* Adjusted to give space between stacked cards */
-    margin-bottom: 1rem; /* Adjusted to give space between stacked cards */
-    padding: 1rem;
+    width: auto; /* Adjusted to take up the full width of its container */
+    height: auto;
+    margin-top: .5rem; /* Adjusted to give space between stacked cards */
+    margin-bottom: .5rem; /* Adjusted to give space between stacked cards */
+    padding: .5rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -429,25 +798,90 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
+    .item-info2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-    .add-to-cart-btn {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        color: white;
-        background-color: rgb(51, 51, 51);
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: background-color 0.2s;
-
-        &:hover {
-            background-color: rgb(61, 189, 32);
+        //margin-right: 200px;
+    
+        .item-name2 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    
+        .item-subtext2 {
+            font-size: 10px;
+        }
+    
+        .item-price2 {
+            font-size: 12px;
+            font-weight: bold;
         }
     }
+    
+    .test1{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        margin-left: 150px;
+
+        select {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            width: 8.6rem;
+            font-size: 12px;
+            color: rgb(42, 42, 42);
+            background-color: rgb(226, 226, 226);
+            border: none;
+        }
+    
+        .add-to-collection-btn {
+           margin-top: .2rem;
+
+            right: 60px;
+            height: auto;
+            width: 8.6rem;
+            padding: 0.5rem .5rem;
+            font-size: 12px;
+            color: white;
+            background-color: rgb(44, 124, 228);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+    
+            &:hover {
+                background-color: rgb(22, 29, 128);
+            }
+        }
+    
+        .add-to-cart-btn {
+            //margin-bottom: .5rem;
+            padding: 0.5rem 1rem;
+            height: auto;
+            width: 8.6rem;
+            padding: 0.5rem .5rem;
+            font-size: 12px;
+            color: white;
+            background-color: rgb(80, 220, 48);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+    
+            &:hover {
+                background-color: rgb(38, 124, 18);
+            }
+        }
+
+    }
+
+    
 }
 
 .colitem-card {
@@ -469,9 +903,13 @@ $font-path: "fonts";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .store-name {
-        font-size: 1.25rem;
-        font-weight: bold;
+    .colitem-name {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .colitem-subtext {
+        font-size: 12px;
     }
 
     .search-colitem-btn {
@@ -575,6 +1013,15 @@ $font-path: "fonts";
     overflow-y: scroll;
     padding: 1rem;
 }
+.right-window2 {
+    display: none;
+    width: 700px;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    padding: 1rem;
+}
+
+
 
 // ====================== //
 //   Header Styling        //
@@ -605,7 +1052,15 @@ $font-path: "fonts";
     flex-grow: 2;
     margin-right: 220px;
     display: flex;
+    align-items: center;    
+}
+
+.search-container2 {
+    flex-grow: 2;
+    margin-right: 220px;
+    display: flex;
     align-items: center;
+    width: auto;
 }
 
 .search-input {
@@ -900,5 +1355,238 @@ $font-path: "fonts";
     .cart-product {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+
+
+// ============================= //
+//       MANAGER Page window     //
+// ============================= //
+
+.container {
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding around the contents */
+    background-color: #f8f8f8; /* Light grey background */
+    border: 1px solid #ddd; /* Border for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.container h1 {
+    color: #333; /* Dark text color for the heading */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.container img {
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add spacing below */
+}
+
+.container form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 10px; /* Consistent spacing between form elements */
+}
+
+.container label {
+    font-weight: bold; /* Make labels bold */
+}
+
+.container input[type="text"],
+.container textarea,
+.container input[type="file"] {
+    width: 100%; /* Full width inputs */
+    padding: 8px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.container textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.container button {
+    width: auto;
+    padding: 10px 15px;
+    background-color: #007bff; /* Blue background for the button */
+    color: white; /* White text for the button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Cursor change to indicate button */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Edit Button */
+.container .edit-btn {
+
+    padding: 5px 10px;
+    background-color: grey; /* Grey background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .edit-btn:hover {
+    background-color: darkgray; /* Red background on hover */
+}
+
+/* Delete Button */
+.container .delete-btn {
+    margin-bottom: 20px;
+    margin-left: 3px;
+    padding: 5px 10px;
+    width: 70px;
+    background-color: rgb(159, 5, 5); /* Dark red background */
+    color: white; /* White text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.container .delete-btn:hover {
+    background-color: red; /* Light red background on hover */
+}
+
+/* Button Group Style */
+.button-group {
+    display: flex; /* Aligns children (forms) in a row */
+    justify-content: space-between; /* Space between Edit and Delete buttons */
+}
+
+.action-form {
+    margin: 0; /* Removes default margin from forms */
+    display: inline; /* Inline display for compact alignment */
+}
+
+// ================================== //
+//       MANAGER item edit window     //
+// ================================== //
+
+.edit-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-container form {
+    display: grid;
+    grid-gap: 16px;
+}
+
+.edit-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.edit-container input[type="text"],
+.edit-container input[type="number"],
+.edit-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.edit-container input[type="file"] {
+    border: 1px solid #ddd;
+    display: block;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.edit-container button {
+    background-color: #0cb300;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-container button:hover {
+    background-color: #1b9400;
+}
+
+
+// ================================== //
+//       MANAGER request window     //
+// ================================== //
+.req-middle-window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+
+    form {
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 4px;
+        background: #fff;
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            &:focus {
+                outline: none;
+                border-color: #6200ee;
+                box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.2);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button[type="submit"] {
+            background-color: #6200ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #5f00db;
+            }
+        }
     }
 }

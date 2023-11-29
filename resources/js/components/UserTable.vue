@@ -1,47 +1,41 @@
 <template>
     <div>
         <b-form-group label="Search by:" class="mb-3">
-        <b-row>
-            <b-col cols="auto">
-                <b-form-select v-model="searchColumn" :options="columnOptions"></b-form-select>
-            </b-col>
-            <b-col>
-                <b-form-input
-                    v-model="searchQuery"
-                    type="search"
-                    :placeholder="`Search by ${searchColumn}`"
-                ></b-form-input>
-            </b-col>
-        </b-row>
-    </b-form-group>
+            <b-row>
+                <b-col cols="auto">
+                    <b-form-select v-model="searchColumn" :options="columnOptions"></b-form-select>
+                </b-col>
+                <b-col>
+                    <b-form-input v-model="searchQuery" type="search"
+                        :placeholder="`Search by ${searchColumn}`"></b-form-input>
+                </b-col>
+            </b-row>
+        </b-form-group>
 
         <b-table striped hover :items="paginatedUsers" :busy="isBusy" :fields="fields">
             <template #cell(actions)="row">
-                <b-button size="sm" @click="editSelectedUser(row.item)">Edit</b-button>
-                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger" @click="clickedDeleteUser(row.item)">Delete</b-button>
+                <b-button size="sm" style="margin-right: 5px;" @click="editSelectedUser(row.item)">Edit</b-button>
+                <b-button v-if="row.item.id !== loggedInUserId" size="sm" variant="danger"
+                    @click="clickedDeleteUser(row.item)">Delete</b-button>
             </template>
         </b-table>
 
-        <b-pagination v-model="currentPage"
-            :total-rows="filteredUsers.length"
-            :per-page="rowsPerPage"
-            aria-controls="my-table"
-        ></b-pagination>
+        <b-pagination v-model="currentPage" :total-rows="filteredUsers.length" :per-page="rowsPerPage"
+            aria-controls="my-table"></b-pagination>
     </div>
 
     <Modal :show="showModal" 
-               :userId="selectedUser.id" 
-               :username="selectedUser.name" 
-               @close="showModal = false"
-               @user-deleted-successfully="refreshUsers">
-        </Modal>
+        :type="'user'"
+        :entityData="selectedUser" 
+        @close="showModal = false"
+        @deleted-successfully="refreshUsers">
+    </Modal>
 
-        <EditModal :show="showEditModal"
-                   @close="showEditModal = false"
-                   :userData="selectedUser"
-                   @user-updated="refreshUsers">
-        </EditModal>
-
+    <EditModal :show="showEditModal" 
+        @close="showEditModal = false" 
+        :userData="selectedUser" 
+        @updated-successfully="refreshUsers">
+    </EditModal>
 </template>
 
 <script>
@@ -51,10 +45,12 @@ import EditModal from './EditModal.vue'
 
 export default {
     name: 'user-table',
-    emits:['refresh-users'],
-    props: {'users' : Array,
-            'loggedInUserId' : Number,
-            },
+    emits: ['refreshUsers'],
+    props: {
+        users: Array,
+        loggedInUserId: Number,
+        isBusy: Boolean,
+    },
 
     components: {
         Modal,
@@ -67,11 +63,10 @@ export default {
         return {
             currentPage: 1,
             rowsPerPage: 5,
-            columns: ['id', 'name', 'role'], // column keys for searching
+            columns: ['id', 'name', 'role'],
             searchColumn: 'Name', // default column to search by
             searchQuery: '',
             selectedUser: {},
-            isBusy: false,
             showModal: false,
             showEditModal: false,
             fields: [
@@ -94,7 +89,7 @@ export default {
         },
 
         // Filter users based on the selected column and search query
-       filteredUsers() {
+        filteredUsers() {
             if (!this.searchQuery) {
                 return this.users;
             }
@@ -111,8 +106,6 @@ export default {
             return this.filteredUsers.slice(start, end);
         },
     },
-
-    emits: ['updateUser'],
     methods: {
         clickedDeleteUser(user) {
             this.selectedUser = user;
@@ -127,10 +120,6 @@ export default {
         refreshUsers() {
             this.$emit('refreshUsers');
         },
-
-        refreshTable() {
-            this.showModal = false;
-        }
     }
 }
 </script>

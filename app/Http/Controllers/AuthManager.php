@@ -25,22 +25,23 @@ class AuthManager extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $redirectRoute = route('home'); // default redirect
             if (auth()->user()->isBuyer()) {
-                return redirect()->intended(route('home'));
+                $redirectRoute = route('home');
+            } elseif (auth()->user()->isModerator()) {
+                $redirectRoute = route('moderatorDashboard');
+            } elseif (auth()->user()->isManager()) {
+                $redirectRoute = route('managerDashboard');
+            } elseif (auth()->user()->isAdmin()) {
+                $redirectRoute = route('adminDashboard');
             }
-            if (auth()->user()->isModerator()) {
-                return redirect()->intended(route('moderatorDashboard'));
-            }
-            if (auth()->user()->isManager()) {
-                // Change to manager page
-                return redirect()->intended(route('home'));
-            }
-            if (auth()->user()->isAdmin()) {
-                return redirect()->intended(route('adminDashboard'));
-            }
+    
+            return response()->json(['success' => true, 'redirect' => $redirectRoute]);
         }
-        return redirect(route('login'))->with("error", "Login Failed");
+    
+        return response()->json(['success' => false, 'message' => "Login Failed"], 401);
     }
+
 
     function signUp()
     {
@@ -60,18 +61,19 @@ class AuthManager extends Controller
         $data['password'] = $request->password;
         $user = User::create($data);
         if (!$user) {
-            return redirect(route('signUp'))->with("error", "Registration Failed");
+            return response()->json(['message' => 'Registration Failed'], 422);
         }
-        return redirect(route('login'))->with("success", "Registration Successful, please log in");
+        return response()->json(['message' => 'Registration Successful, please log in']);
     }
 
     function logout()
     {
         Session::flush();
         Auth::logout();
-        return redirect(route('login'));
-    }
 
+        return redirect(route('login')); 
+    }
+    
     function authenticate_role()
     {
         $userRole = auth()->user()->user_role;

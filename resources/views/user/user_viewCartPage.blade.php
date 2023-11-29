@@ -20,27 +20,42 @@
     function toggleActiveState(buttonId, viewName) {
         // Remove active class from all buttons
         document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
-        
+
         // Add active class to the clicked button
         document.getElementById(buttonId).classList.add('active');
-        
+
         // Fetch and display the relevant view
+        // Check the buttonId and take action accordingly
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
-            // Do something for manager-btn
+            window.location.href = '/ManagerDashboard';
         } else if (buttonId === 'admin-btn') {
-            // Do something for admin-btn
+            window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
-            // Do something for mod-btn
+            window.location.href = '/ModeratorDashboard';
+        } else if (buttonId === 'coll-btn') {
+            window.location.href = '/Public-collections';
         } else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
-        } else if (buttonId === 'checkout-btn'){
-            window.location.href = '/checkout'
-        }else {
+        } else {
             // Optional: handle other cases or do nothing
         }
     }
+
+    function proceedToCheckout() {
+
+    window.location.href = '/checkout'
+    axios.post('/checkout')
+        .then(function (response) {
+            // handle success
+            console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.error(error);
+        });
+}
 </script>
 
 <div class="top-toolbar">
@@ -59,7 +74,7 @@
     <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="log-out-btn">Logout</button>
         </form>
     </div>
 </div>
@@ -84,6 +99,8 @@
         @if(auth()->user()->role == 'moderator')
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
+
+        <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button>
 
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
@@ -158,11 +175,9 @@
     @endphp 
 
     <div class="cart-total"> ${{ number_format($totalPrice, 2) }}</div>
-    
-
             <!-- Proceed to Checkout Button -->
-            <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="toggleActiveState('checkout-btn', 'user.user_checkoutPage')">Proceed to Checkout</button>
-        </div>
+                <button class="proceed-checkout" aria-label="Proceed to checkout" id="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
     </div>
 
     <div class="right-window"></div>

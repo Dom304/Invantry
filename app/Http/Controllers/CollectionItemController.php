@@ -27,16 +27,24 @@ class CollectionItemController extends Controller
     
     return view('user.user_collectionsPage', compact('items', 'user', 'collections', 'collName', 'allItems'));
     }
-
-    public function store(Request $request)
+    
+    public function destroy($collName, $itemId)
     {
-        $request->validate([
-            'collection_id' => 'required|exists:collections,id',
-            'item_id' => 'required|exists:items,id',
-        ]);
+        $collection = Collection::where('collection_name', $collName)->first();
 
-        CollectionItem::create($request->all());
+        if (!$collection) {
+            // Handle error or redirect as needed
+        }
 
-        return redirect()->route('collection_items.index')->with('success', 'Collection item created successfully.');
+        $collectionItem = CollectionItem::where('collection_id', $collection->id)
+            ->where('item_id', $itemId)
+            ->first();
+
+        if ($collectionItem) {
+            $collectionItem->delete();
+        }
+
+        return redirect()->route('collection', ['collName' => $collName])
+            ->with('success', 'Item deleted successfully');
     }
 }

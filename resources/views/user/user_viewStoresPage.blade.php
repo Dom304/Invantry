@@ -46,12 +46,16 @@
         if (buttonId === 'user-btn') {
             window.location.href = '/home';
         } else if (buttonId === 'manager-btn') {
-            // Do something for manager-btn
+            window.location.href = '/ManagerDashboard';
         } else if (buttonId === 'admin-btn') {
             window.location.href = '/adminDashboard';
         } else if (buttonId === 'mod-btn') {
             window.location.href = '/ModeratorDashboard';
-        } else if (buttonId === 'cart-btn'){
+        } 
+        // else if (buttonId === 'coll-btn') {
+        //     window.location.href = '/Public-collections';
+        // }
+         else if (buttonId === 'cart-btn'){
             window.location.href = '/cart';
         } else {
             // Optional: handle other cases or do nothing
@@ -75,7 +79,7 @@
     <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="log-out-btn">Logout</button>
         </form>
     </div>
 </div>
@@ -103,6 +107,9 @@
         @if(auth()->user()->role == 'moderator')
         <button class="window-btn" id="mod-btn" onclick="toggleActiveState('mod-btn', 'moderator.moderator_dashboard')">Dashboard</button>
         @endif
+
+        <!-- <button class="window-btn" id="coll-btn" onclick="toggleActiveState('coll-btn', 'public.public_collectionsPage')">View Public Collections</button> -->
+    
 
         <form action="{{ route('collections.create') }}" method="POST">
         @csrf
@@ -142,8 +149,9 @@
         <a href="/collection/{{ $col->collection_name }}" class="collection-btn" data-collection-name="{{ $col->collection_name }}">{{ $col->collection_name }}</a>
         @endforeach
 
-        <a href="/manager-request" class="apply-btn">Store manager? Click here.</a>
-
+        @if(auth()->user()->role == 'buyer')
+        <a href="/manager-request" class="apply-btn"> Store manager? Click here.</a>
+        @endif
 
     </div>
 
@@ -152,7 +160,7 @@
         <!-- href="/stores/store-name" -->
         <a href="/store/{{ $store->store_name }}" class="store-card">
             <div class="store-logo">
-                <img src="{{ $store->store_logo }}" alt="Store Logo">
+            <img src="{{ asset('storage/' . $store->store_logo) }}" alt="Item Logo">
             </div>
 
             <div class="store-info">
@@ -162,7 +170,28 @@
 
         </a>
         @endforeach
-    </div>
+ 
+        <!-- <form method="POST" action="{{ route('updateRole') }}">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="role" value="manager">
+        <button type="submit">Manager Button</button>
+    </form>
+
+<form method="POST" action="{{ route('updateRole') }}">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="role" value="moderator">
+    <button type="submit">Mod Button</button>
+</form>
+
+<form method="POST" action="{{ route('updateRole') }}">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="role" value="admin">
+    <button type="submit">Admin Button</button>
+</form> -->
+    </div> 
 
 
 

@@ -18,12 +18,12 @@
     <div>
         <form method="GET" action="{{ route('logout') }}">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="log-out-btn">Logout</button>
         </form>
     </div>
 </div>
 
-<div class="cart-middle-window">
+<div class="req-middle-window">
     <form method="POST" action="{{ route('manager.request.store') }}">
         @csrf
 
@@ -37,7 +37,10 @@
             <textarea name="description" id="description" required></textarea>
         </div>
         
-        <button type="submit">Submit Request</button>
+        <div class="button-container">
+            <button type="submit">Submit Request</button>
+        </div>
+
     </form>
 </div>
 

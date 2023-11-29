@@ -1,10 +1,12 @@
+@extends('layouts.app')
 
-<div class="image-container">
+@section('content')
+<!-- <div class="image-container">
     <img src="{{ asset('images/Button_backpack_logo.png') }}" alt="Invantry Logo" class="mx-auto d-block centered-image">
     <div class="app-name">Invantry</div>
     <div class="description">PERSONAL BELONGINGS MANAGEMENT SYSTEM</div>
     <div class="create-acc">WELCOME BACK</div>
-    <form action="{{route('login')}}" method="POST">
+    <form id="login-form" action="{{route('login')}}" method="POST">
     @csrf
     <input type="email" class="username-input" placeholder="Email address" name="email">
     <div class="password-container">
@@ -12,10 +14,13 @@
     </div>
     <button class="action-btn login-btn">Continue</button>
     </form>
-    <div class="log-in">DON'T HAVE AN ACCOUNT? <a href="/" class="sign-up-link">SIGN UP</a></div>
-</div>
+    <div class="log-in">DON'T HAVE AN ACCOUNT? <a href="/signUp" class="sign-up-link">SIGN UP</a></div>
+</div> -->
 
-<style>
+<login></login>
+@endsection
+
+<!-- <style>
     @font-face {
         font-family: 'Recharge';
         src: url('{{ asset('fonts/recharge/recharge bd.otf') }}') format('opentype');
@@ -24,6 +29,13 @@
     @font-face {
         font-family: 'Panton-LightCaps';
         src: url('{{ asset('fonts/panton/Panton-LightCaps.otf') }}') format('opentype');
+    }
+
+    #login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-container {
@@ -148,9 +160,4 @@
     .password-icon.active {
         color: gray;
     }
-</style>
-
-@section('content')
-<example-component></example-component>
-<Login></Login>
-@endsection
+</style> -->
