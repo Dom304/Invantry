@@ -104,6 +104,6 @@ This repository is licensed under the [MIT](https://github.com/alsiam/web-projec
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/alsiam/web-projects/blob/master/LICENSE)
 
-## Acknownlegment
+## Acknowledgments
 
 This project was created created by Hector Rodriguez, Alec Droegemeier, Alexander Wesley and Dominique Simmons for the our Senior Capstone project at The University of North Carolina at Greensboro, 2023.
