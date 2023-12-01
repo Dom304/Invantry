@@ -31,6 +31,7 @@ Invantry is a web application designed to simplify online store management and s
 - Price Comparison
 - Collections Feature: Allows buyers to create themed collections of items, similar to playlists in music apps.
 
+https://www.youtube.com/watch?v=43g5D8z421w
 
 ## Getting Started
 
