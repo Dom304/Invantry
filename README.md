@@ -89,4 +89,4 @@ This repository is licensed under the [MIT](https://github.com/alsiam/web-projec
 
 ## Acknownlegment
 
-This project was created created by Hector Rodriguez, Alec Droegemeier, Alexander Wesley and Dominique Simmons for the our Senior Capsstone project at The University of North Carolina at Greensboro, 2023.
+This project was created created by Hector Rodriguez, Alec Droegemeier, Alexander Wesley and Dominique Simmons for the our Senior Capstone project at The University of North Carolina at Greensboro, 2023.
