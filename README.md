@@ -17,7 +17,7 @@ A one-stop e-commerce web application.
   - [About the Project](#about-the-project)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
-    - [Dependencies](#dependecies)
+    - [Dependencies](#Dependencies)
     - [Installation](#installation)
     - [Docker/Database Setup](#dockerdatabase-setup)
   - [License](#license)
