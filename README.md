@@ -78,9 +78,25 @@ docker-compose up -d
 ```
 
 4. To create the database tables use the following command:
+   
 ```bash
 php artisan migrate
 ```
+
+5. In the project directory, locate the `DatabaseSQL.txt` file. You can download this file from [here](https://github.com/Dom304/Invantry/blob/dev/invantry.sql) if needed. This file contains SQL commands to populate your database tables with initial data.
+
+6. Open phpMyAdmin and log in to your database.
+
+7. Select the database you created earlier (e.g., `invantry_db`).
+
+8. Navigate to the "Import" tab in phpMyAdmin.
+
+9. Under the `File to import:` section press the browse button.
+
+10. In your files select the `DatabaseSQL.txt`.
+
+Now, your database should be filled with the necessary data to get started with your Invantry project.
+
 
 ## License
 
